@@ -120,7 +120,8 @@ class format_grid_renderer extends format_section_renderer_base {
         echo html_writer::tag('div', '&nbsp;', array('class' => 'clearer'));
         echo html_writer::end_tag('div');
         if (!$editing || !$has_cap_update) {
-            echo html_writer::script('hide_sections();');
+            //echo html_writer::script('hide_sections();');
+			$PAGE->requires->js_init_call('M.format_grid.hide_sections', array());
         }
         echo html_writer::end_tag('div');
     }

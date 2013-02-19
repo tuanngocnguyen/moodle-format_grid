@@ -1,4 +1,4 @@
-GRID COURSE FORMAT
+Grid Course Format
 ============================
 Package tested in: Moodle version 2012062504.01 release 2.3.4+ (Build: 20130118)
 
@@ -19,12 +19,98 @@ and 'format_grid_summary' tables in the database before clicking on 'notificatio
 
 If upgrade fails, please perform the actions as detailed in the note above.
 
-ABOUT
+MyMobile alterations
+====================
+
+If you are using the MyMobile theme you need to change the files 'layout/general.php' and 'layout/embedded.php' in
+the theme as follows:
+
+At the bottom of 'general.php':
+
+        </div>
+    </div><!-- ends page -->
+
+    <!-- empty divs with info for the JS to use -->
+    <div id="<?php echo sesskey(); ?>" class="mobilesession"></div>
+    <div id="<?php p($CFG->wwwroot); ?>" class="mobilesiteurl"></div>
+    <div id="<?php echo $dtheme;?>" class="datatheme"></div>
+    <div id="<?php echo $dthemeb;?>" class="datathemeb"></div>
+    <div id="page-footer"><!-- empty page footer needed by moodle yui for embeds --></div>
+    <!-- end js divs -->
+
+    <?php echo $OUTPUT->standard_end_of_body_html() ?>
+</body>
+
+to:
+
+        </div>
+
+        <!-- empty divs with info for the JS to use -->
+        <div id="<?php echo sesskey(); ?>" class="mobilesession"></div>
+        <div id="<?php p($CFG->wwwroot); ?>" class="mobilesiteurl"></div>
+        <div id="<?php echo $dtheme;?>" class="datatheme"></div>
+        <div id="<?php echo $dthemeb;?>" class="datathemeb"></div>
+        <div id="page-footer"><!-- empty page footer needed by moodle yui for embeds --></div>
+        <!-- end js divs -->
+
+    <?php echo $OUTPUT->standard_end_of_body_html() ?>
+    </div><!-- ends page -->
+</body>
+
+In 'embedded.php':
+
+    <?php if ($mypagetype == 'mod-chat-gui_ajax-index') { ?>
+    <div data-role="page" id="chatpage" data-fullscreen="true" data-title="<?php p($SITE->shortname) ?>">
+        <?php echo $OUTPUT->main_content(); ?>
+        <input type="button" value="back" data-role="none" id="chatback" onClick="history.back()">
+    </div>
+    <?php } else { ?>
+    <div id="content2" data-role="page" data-title="<?php p($SITE->shortname) ?>" data-theme="<?php echo $datatheme;?>">
+        <div data-role="header" data-theme="<?php echo $datatheme;?>">
+            <h1><?php echo $PAGE->heading ?>&nbsp;</h1>
+            <?php if ($mypagetype != "help") { ?>
+                <a class="ui-btn-right" data-ajax="false" data-icon="home" href="<?php p($CFG->wwwroot) ?>" data-iconpos="notext"><?php p(get_string('home')); ?></a>
+            <?php } ?>
+        </div>
+        <div data-role="content" class="mymobilecontent" data-theme="<?php echo $databodytheme;?>">
+            <?php echo $OUTPUT->main_content(); ?>
+        </div>
+    </div>
+    <?php } ?>
+    <!-- START OF FOOTER -->
+    <?php echo $OUTPUT->standard_end_of_body_html() ?>
+</body>
+
+to:
+
+    <?php if ($mypagetype == 'mod-chat-gui_ajax-index') { ?>
+    <div data-role="page" id="chatpage" data-fullscreen="true" data-title="<?php p($SITE->shortname) ?>">
+        <?php echo $OUTPUT->main_content(); ?>
+        <input type="button" value="back" data-role="none" id="chatback" onClick="history.back()">
+    <?php } else { ?>
+    <div id="content2" data-role="page" data-title="<?php p($SITE->shortname) ?>" data-theme="<?php echo $datatheme;?>">
+        <div data-role="header" data-theme="<?php echo $datatheme;?>">
+            <h1><?php echo $PAGE->heading ?>&nbsp;</h1>
+            <?php if ($mypagetype != "help") { ?>
+                <a class="ui-btn-right" data-ajax="false" data-icon="home" href="<?php p($CFG->wwwroot) ?>" data-iconpos="notext"><?php p(get_string('home')); ?></a>
+            <?php } ?>
+        </div>
+        <div data-role="content" class="mymobilecontent" data-theme="<?php echo $databodytheme;?>">
+            <?php echo $OUTPUT->main_content(); ?>
+        </div>
+        <?php } ?>
+        <!-- START OF FOOTER -->
+        <?php echo $OUTPUT->standard_end_of_body_html() ?>
+    </div>
+</body>
+
+
+About
 =============
 Developed by:
 Information in: 
 
-FILES
+Files
 --------------
 
 * grid/format.php
@@ -72,14 +158,13 @@ FILES
   Backup and restore run automatically when backing up the course.
   You can't back up the course format data independently.
 
-ROADMAP
+Roadmap
 =============
 
-1. Working Moodle 2.4 version.
-2. Improved instructions.
-3. User definable grid row icon numbers - https://moodle.org/mod/forum/discuss.php?d=196716
+1. Improved instructions.
+2. User definable grid row icon numbers - https://moodle.org/mod/forum/discuss.php?d=196716
 
-HISTORY
+History
 =============
 
 13th July 2012 - Version 2.3
@@ -108,6 +193,11 @@ Change by G J Barnard
 21st January 2013 - Version 2.3.2.3 - Beta version, not for production servers.
 Change by G J Barnard
 1. Changes to 'renderer.php' because of MDL-36095 hence requiring Moodle version 2012062504.01 release 2.3.4+ (Build: 20130118) and above.
+
+19th February 2013 - Version 2.3.2.3 - Beta version, not for production servers.
+Change by G J Barnard
+1. Changes to 'format.php' and 'renderer.php' to use renamed 'lib.php' -> 'module.js' to use the page requirements manager
+   such that interaction with the MyMobile theme is reliable when 'MyMobile alterations' above implemented.
 
 Authors
 -------

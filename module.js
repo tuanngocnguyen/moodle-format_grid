@@ -1,6 +1,36 @@
-var selected_topic = null;
+/**
+ * Grid Information
+ *
+ * @package    course/format
+ * @subpackage grid
+ * @version    See the value of '$plugin->version' in version.php.
+ * @copyright  &copy; 2012 G J Barnard in respect to modifications of standard topics format.
+ * @author     G J Barnard - gjbarnard at gmail dot com and {@link http://moodle.org/user/profile.php?id=442195}
+ * @author     Based on code originally written by Dan Poltawski.
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU Public License
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
 
-function hide_sections() {
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
+ var selected_topic = null;
+
+/**
+ * @namespace
+ */
+M.format_grid = M.format_grid || {};
+
+M.format_grid.hide_sections = function() {
     //Have to hide the div's using javascript so they are visible if javascript is disabled.
     var grid_sections = getElementsByClassName(document.getElementById("middle-column"), "li", "grid_section");
     for(var i = 0; i < grid_sections.length; i++) {
@@ -139,6 +169,4 @@ function update_shadebox() {
     var overlay = document.getElementById("shadebox_overlay");
     var pagesize = get_page_size();
     overlay.style.height = pagesize[1] + "px";
-
-
 }
