@@ -216,7 +216,7 @@ class format_grid_renderer extends format_section_renderer_base {
      */
     private function make_block_icon_topics($context, $modinfo, $course, $editing, $has_cap_update, $has_cap_vishidsect,
             $url_pic_edit) {
-        global $USER;
+        global $USER, $CFG;
 
         $currentlanguage = current_language();
         if ( !file_exists("$CFG->dirroot/course/format/grid/pix/new_activity_".$currentlanguage.".png") ) {
