@@ -558,26 +558,24 @@ class format_grid_renderer extends format_section_renderer_base {
         global $CFG, $USER, $DB;
 
         $sections_edited = array();
-
         if (isset($USER->lastcourseaccess[$course->id])) {
             $course->lastaccess = $USER->lastcourseaccess[$course->id];
         } else {
             $course->lastaccess = 0;
         }
 
-        $sql = "SELECT id, url FROM {$CFG->prefix}log " .
-                "WHERE course = :courseid AND time > :lastaccess AND action = 'editsection'";
+        $sql = "SELECT id, section FROM {$CFG->prefix}course_modules " .
+                "WHERE course = :courseid AND added > :lastaccess";
 
         $params = array(
             'courseid' => $course->id,
             'lastaccess' => $course->lastaccess);
 
         $activity = $DB->get_records_sql($sql, $params);
-        foreach ($activity as $url_obj) {
-            $list = explode('=', $url_obj->url);
-
-            $sections_edited[$list[1]] = true;
+        foreach ($activity as $record) {
+            $sections_edited[$record->section] = true;
         }
+
         return $sections_edited;
     }
 }
