@@ -229,6 +229,9 @@ class format_grid_renderer extends format_section_renderer_base {
             $str_edit_image_alt = get_string('editimage_alt', 'format_grid');
         }
 
+        // Get all the section information about which items should be marked with the NEW picture.
+        $section_updated = $this->new_activity($course);
+
         // Start at 1 to skip the summary block or include the summary block if it's in the grid display.
         for ($section = $this->topic0_at_top ? 1 : 0; $section <= $course->numsections; $section++) {
             $thissection = $modinfo->get_section_info($section);
@@ -248,7 +251,8 @@ class format_grid_renderer extends format_section_renderer_base {
 
                     echo html_writer::tag('p', get_section_name($course, $thissection), array('class' => 'icon_content'));
 
-                    if ($this->new_activity($thissection, $course)) {
+                    if (isset($section_updated[$thissection->id])) {
+                        // The section has been updated since the user last visited this course, add NEW label.
                         echo html_writer::empty_tag('img', array(
                             'class' => 'new_activity',
                             'src' => $url_pic_new_activity,
@@ -550,8 +554,10 @@ class format_grid_renderer extends format_section_renderer_base {
     /**
      * Checks whether there has been new activity in section $section.
      */
-    private function new_activity($section, $course) {
+    private function new_activity($course) {
         global $CFG, $USER, $DB;
+
+        $sections_edited = array();
 
         if (isset($USER->lastcourseaccess[$course->id])) {
             $course->lastaccess = $USER->lastcourseaccess[$course->id];
@@ -560,21 +566,18 @@ class format_grid_renderer extends format_section_renderer_base {
         }
 
         $sql = "SELECT id, url FROM {$CFG->prefix}log " .
-                'WHERE course = :courseid AND time > :lastaccess AND action = :edit';
+                "WHERE course = :courseid AND time > :lastaccess AND action = 'editsection'";
 
         $params = array(
             'courseid' => $course->id,
-            'lastaccess' => $course->lastaccess,
-            'edit' => 'editsection');
+            'lastaccess' => $course->lastaccess);
 
         $activity = $DB->get_records_sql($sql, $params);
         foreach ($activity as $url_obj) {
             $list = explode('=', $url_obj->url);
 
-            if ($section->id == $list[1]) {
-                return true;
-            }
+            $sections_edited[$list[1]] = true;
         }
-        return false;
+        return $sections_edited;
     }
 }
