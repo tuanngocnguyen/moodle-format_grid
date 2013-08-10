@@ -114,6 +114,11 @@ Roadmap
 
 History
 =============
+10th August 2013 Version 2.5.3.1 - Stable
+  1.  Fixed CONTRIB-4216 - Error importing quizzes with grid course format.
+  2.  Fixed CONTRIB-4253 - mdl_log queried too often to generate New Activity tag.  This has been fixed by using the 'course_sections'
+      table instead to spot when a new activity / resource has been added since last login.
+
 4th August 2013 Version 2.5.3 - Stable
 Change by G J Barnard
   1.  Fixed scroll to top when clicking on an icon.  Thanks to Javier Dorfsman for reporting this.
