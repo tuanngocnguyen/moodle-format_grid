@@ -73,11 +73,11 @@ div#middle-column ul {
 }
 
 .course-content ul.icons li {
-    width: 220px;
+    width: 212px;
     overflow: hidden;
     float: left;
-    margin: 5px 5px;
-    padding: 3px;
+    margin: 2px 2px;
+    padding: 0px;
     background-color: white;
     color: black;
     font-size: 12px;
@@ -89,8 +89,8 @@ div#middle-column ul {
 }
 .course-content ul.icons img.new_activity {
     position: absolute;
-    margin-top: 90px;
-    margin-left: 128px;
+    margin-top: 86px;
+    margin-left: 116px;
 }
 .course-content .icon_link {
     cursor: pointer;
@@ -98,15 +98,15 @@ div#middle-column ul {
 .course-content ul.icons li p.icon_content {
     font-size: 14px;
     font-weight: bold;
-    margin: 0 0 3px 0;
-    width: 220px;
+    margin: 0;
+    width: 212px;
     white-space: nowrap;
     overflow: hidden;
     color: black;
     height: 20px;
 }
 .course-content ul.icons li .image_holder {
-    width: 218px;
+    width: 210px;
     height: 140px;
     overflow: hidden;
     border: 1px solid #ddd;

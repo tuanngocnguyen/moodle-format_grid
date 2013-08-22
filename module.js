@@ -88,10 +88,10 @@ function initialize_shadebox() {
 
     var content = document.getElementById('shadebox_content');
     content.style.position = 'absolute';
-    content.style.width = '800px';
+    content.style.width = '90%';
     content.style.top = '50px';
-    content.style.left = '50%';
-    content.style.marginLeft = '-400px';
+    content.style.left = '5%';
+    //content.style.marginLeft = '-400px';
     content.style.zIndex = '9000001';
 }
 
