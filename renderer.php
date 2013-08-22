@@ -149,15 +149,15 @@ class format_grid_renderer extends format_section_renderer_base {
         $modinfo = get_fast_modinfo($course);
         $sections = $modinfo->get_section_info_all();
 
-        //start at 1 to skip the summary block
-        //or include the summary block if it's in the grid display
+        /* Start at 1 to skip the summary block
+           or include the summary block if it's in the grid display. */
         $this->topic0_at_top = $summary_status->showsummary == 1;
         if ($this->topic0_at_top) {
             $this->topic0_at_top = $this->make_block_topic0($course, $sections, $modinfo, $editing, $has_cap_update, $url_pic_edit, $str_edit_summary, false);
         }
         echo html_writer::start_tag('div', array('id' => 'iconContainer'));
         echo html_writer::start_tag('ul', array('class' => 'icons'));
-        /// Print all of the icons. 
+        // Print all of the icons. 
         $this->make_block_icon_topics($context, $modinfo, $course, $editing, $has_cap_update, $has_cap_vishidsect, $url_pic_edit);
         echo html_writer::end_tag('ul');
         echo html_writer::end_tag('div');
@@ -167,16 +167,16 @@ class format_grid_renderer extends format_section_renderer_base {
 
         echo html_writer::tag('img', '', array('id' => 'shadebox_close', 'style' => 'display:none;', 'src' => $this->output->pix_url('close', 'format_grid'), 'onclick' => 'toggle_shadebox();'));
         echo $this->start_section_list();
-        /// If currently moving a file then show the current clipboard
+        // If currently moving a file then show the current clipboard.
         $this->make_block_show_clipboard_if_file_moving($course);
 
-        /// Print Section 0 with general activities
+        // Print Section 0 with general activities.
         if (!$this->topic0_at_top) {
             $this->make_block_topic0($course, $sections, $modinfo, $editing, $has_cap_update, $url_pic_edit, $str_edit_summary, false);
         }
 
-        /// Now all the normal modules by topic
-        /// Everything below uses "section" terminology - each "section" is a topic/module.
+        // Now all the normal modules by topic.
+        // Everything below uses "section" terminology - each "section" is a topic/module.
         $this->make_block_topics($course, $sections, $modinfo, $editing, $has_cap_update, $has_cap_vishidsect, $str_edit_summary, $url_pic_edit, false);
 
         echo html_writer::end_tag('div');
@@ -184,16 +184,14 @@ class format_grid_renderer extends format_section_renderer_base {
         echo html_writer::tag('div', '&nbsp;', array('class' => 'clearer'));
         echo html_writer::end_tag('div');
 
-        //echo html_writer::script('', $CFG->wwwroot . '/course/format/grid/module.js');
         $PAGE->requires->js('/course/format/grid/module.js');
         if (!$editing || !$has_cap_update) {
-            //echo html_writer::script('hide_sections();');
             $PAGE->requires->js_init_call('M.format_grid.hide_sections', array());
         }
         echo html_writer::end_tag('div');
     }
 
-    // Grid format specific code
+    // Grid format specific code...
     private function make_block_topic0($course, $sections, $modinfo, $editing, $has_cap_update, $url_pic_edit, $str_edit_summary, $onsectionpage) {
         $section = 0;
         if (!array_key_exists($section, $sections))
@@ -205,7 +203,6 @@ class format_grid_renderer extends format_section_renderer_base {
 
         if ($this->topic0_at_top) {
             echo html_writer::start_tag('ul', array('class' => 'gtopics-0'));
-            //echo $this->start_section_list();
         }
         echo html_writer::start_tag('li', array(
             'id' => 'section-0',
@@ -233,8 +230,6 @@ class format_grid_renderer extends format_section_renderer_base {
         }
         echo html_writer::end_tag('div');
 
-        //$this->section_header($thissection, $course, $onsectionpage);
-
         print_section($course, $thissection, null, null, true, "100%", false, 0);
 
         if ($editing) {
@@ -258,7 +253,6 @@ class format_grid_renderer extends format_section_renderer_base {
 
         if ($this->topic0_at_top) {
             echo html_writer::end_tag('ul');
-            //echo $this->end_section_list();
         }
         return true;
     }
@@ -273,8 +267,11 @@ class format_grid_renderer extends format_section_renderer_base {
             $str_edit_image_alt = get_string('editimage_alt', 'format_grid');
         }
 
-        //start at 1 to skip the summary block
-        //or include the summary block if it's in the grid display
+        // Get all the section information about which items should be marked with the NEW picture.
+        $section_updated = $this->new_activity($course);
+
+        /* Start at 1 to skip the summary block
+           or include the summary block if it's in the grid display. */
         for ($section = $this->topic0_at_top ? 1 : 0; $section <= $course->numsections; $section++) {
             $thissection = $modinfo->get_section_info($section);
 
@@ -282,6 +279,7 @@ class format_grid_renderer extends format_section_renderer_base {
             $showsection = $has_cap_vishidsect || ($thissection->visible && ($thissection->available || $thissection->showavailability || !$course->hiddensections));
 
             if ($showsection) {
+                $section_name = get_section_name($course, $thissection);
                 if ($course->coursedisplay != COURSE_DISPLAY_MULTIPAGE) {
                     //Get the module icon
                     if ($editing && $has_cap_update) {
@@ -296,10 +294,9 @@ class format_grid_renderer extends format_section_renderer_base {
                         'class' => 'icon_link',
                         'onclick' => $onclickevent));
 
-                    //echo html_writer::tag('p', $this->section_title($thissection, $course), array('class' => 'icon_content'));
-                    echo html_writer::tag('p', get_section_name($course, $thissection), array('class' => 'icon_content'));
+                    echo html_writer::tag('p', $section_name, array('class' => 'icon_content'));
 
-                    if ($this->new_activity($thissection, $course)) {
+                    if (isset($section_updated[$thissection->id])) {
                         echo html_writer::empty_tag('img', array(
                             'class' => 'new_activity',
                             'src' => $url_pic_new_activity,
@@ -314,11 +311,11 @@ class format_grid_renderer extends format_section_renderer_base {
                     if (is_object($sectionicon) && !empty($sectionicon->imagepath)) {
                         echo html_writer::empty_tag('img', array(
                             'src' => moodle_url::make_pluginfile_url(
-                                    $context->id, 'course', 'section', $thissection->id, '/', $sectionicon->imagepath), 'alt' => ''));
+                                    $context->id, 'course', 'section', $thissection->id, '/', $sectionicon->imagepath), 'alt' => $section_name));
                     } else if ($section == 0) {
                         echo html_writer::empty_tag('img', array(
                             'src' => $this->output->pix_url('info', 'format_grid'),
-                            'alt' => ''));
+                            'alt' => $section_name));
                     }
 
                     echo html_writer::end_tag('div');
@@ -352,7 +349,7 @@ class format_grid_renderer extends format_section_renderer_base {
 
                     $title = html_writer::tag('p', get_section_name($course, $thissection), array('class' => 'icon_content'));
 
-                    if ($this->new_activity($thissection, $course)) {
+                    if (isset($section_updated[$thissection->id])) {
                         $title .= html_writer::empty_tag('img', array(
                                     'class' => 'new_activity',
                                     'src' => $url_pic_new_activity,
@@ -367,11 +364,11 @@ class format_grid_renderer extends format_section_renderer_base {
                     if (is_object($sectionicon) && !empty($sectionicon->imagepath)) {
                         $title .= html_writer::empty_tag('img', array(
                                     'src' => moodle_url::make_pluginfile_url(
-                                            $context->id, 'course', 'section', $thissection->id, '/', $sectionicon->imagepath), 'alt' => ''));
+                                            $context->id, 'course', 'section', $thissection->id, '/', $sectionicon->imagepath), 'alt' => $section_name));
                     } else if ($section == 0) {
                         $title .= html_writer::empty_tag('img', array(
                                     'src' => $this->output->pix_url('info', 'format_grid'),
-                                    'alt' => ''));
+                                    'alt' => $section_name));
                     }
 
                     $title .= html_writer::end_tag('div');
@@ -585,32 +582,31 @@ class format_grid_renderer extends format_section_renderer_base {
         return $text;
     }
 
-//Checks whether there has been new activity in section $section
-    private function new_activity($section, $course) {
+    /**
+     * Checks whether there has been new activity.
+     */
+    private function new_activity($course) {
         global $CFG, $USER, $DB;
 
+        $sections_edited = array();
         if (isset($USER->lastcourseaccess[$course->id])) {
             $course->lastaccess = $USER->lastcourseaccess[$course->id];
         } else {
             $course->lastaccess = 0;
         }
 
-        $sql = "SELECT id, url FROM {$CFG->prefix}log " .
-                'WHERE course = :courseid AND time > :lastaccess AND action = :edit';
+        $sql = "SELECT id, section FROM {$CFG->prefix}course_modules " .
+                "WHERE course = :courseid AND added > :lastaccess";
 
         $params = array(
             'courseid' => $course->id,
-            'lastaccess' => $course->lastaccess,
-            'edit' => 'editsection');
+            'lastaccess' => $course->lastaccess);
 
         $activity = $DB->get_records_sql($sql, $params);
-        foreach ($activity as $url_obj) {
-            $list = explode('=', $url_obj->url);
-
-            if ($section->id == $list[1])
-                return true;
+        foreach ($activity as $record) {
+            $sections_edited[$record->section] = true;
         }
-        return false;
-    }
 
+        return $sections_edited;
+    }
 }

@@ -1,21 +1,60 @@
-GRID COURSE FORMAT
+
+Grid Course Format
 ============================
-Package tested in: Moodle version 2012120301.02 release 2.4.1+ (Build: 20130118)
 
-QUICK INSTALL
+Required version of Moodle
+==========================
+Requires Moodle version 2012120301.02 release 2.4.1+ (Build: 20130118).
+
+Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
+'docs.moodle.org/24/en/Installing_Moodle'.
+
+Installation
+============
+1. Ensure you have the version of Moodle as stated above in 'Required version of Moodle'.  This is essential as the
+   format relies on underlying core code that is out of my control.
+2. Put Moodle in 'Maintenance Mode' (docs.moodle.org/en/admin/setting/maintenancemode) so that there are no
+   users using it bar you as the administrator - if you have not already done so.
+3. Copy 'grid' to '/course/format/' if you have not already done so.
+4. Login as an administrator and follow standard the 'plugin' update notification.  If needed, go to
+   'Site administration' -> 'Notifications' if this does not happen.
+5. Put Moodle out of Maintenance Mode.
+
+Uninstallation
 ==============
-Download zip package, extract the grid folder and upload this folder into course/format/.
+1. Put Moodle in 'Maintenance Mode' so that there are no users using it bar you as the administrator.
+2. It is recommended but not essential to change all of the courses that use the format to another.  If this is
+   not done Moodle will pick the last format in your list of formats to use but display in 'Edit settings' of the
+   course the first format in the list.  You can then set the desired format.
+3. In '/course/format/' remove the folder 'grid'.
+4. In the database, remove the row with the 'plugin' of 'format_grid' in the 'config_plugins' table and drop the
+   'format_grid_icon' and 'format_grid_summary' tables.
+5. Put Moodle out of Maintenance Mode.
 
-NOTE: If you have previously installed a development version and get the latest code you MUST:
-Remove the row with the 'plugin' of 'format_grid' in the 'config_plugins' table and drop the 'format_grid_icon'
-and 'format_grid_summary' tables in the database before clicking on 'notifications'.
+Reporting Issues
+================
+Before reporting an issue, please ensure that you are running the latest version for your release of Moodle.  The primary
+release area is located on https://moodle.org/plugins/view.php?plugin=format_grid.  It is also essential that you are
+operating the required version of Moodle as stated at the top - this is because the format relies on core functionality that
+is out of its control.
 
-If upgrade fails, please perform the actions as detailed in the note above.
+All 'Grid format' does is integrate with the course page and control it's layout, therefore what may appear to be an issue
+with the format is in fact to do with a theme or core component.  Please be confident that it is an issue with 'Grid format'
+but if in doubt, ask.
 
-ABOUT
-=============
-Developed by:
-Information in: 
+We operate a policy that we will fix all genuine issues for free.  Improvements are at our discretion.  We are happy to make bespoke
+customisations / improvements for a negotiated fee.  We will endeavour to respond to all requests for support as quickly as possible,
+if you require a faster service then offering payment for the service will expedite the response.
+
+It takes time and effort to maintain the format, therefore donations are appreciated.
+
+When reporting an issue you can post in the course format's forum on Moodle.org (currently 'moodle.org/mod/forum/view.php?id=47'), 
+on Moodle tracker 'tracker.moodle.org' ensuring that you chose the 'Non-core contributed modules' and 'Course Format: Grid'
+for the component or contact us direct (details at the bottom).
+
+It is essential that you provide as much information as possible, the critical information being the contents of the format's 
+version.php file.  Other version information such as specific Moodle version, theme name and version also helps.  A screen shot
+can be really useful in visualising the issue along with any files you consider to be relevant.
 
 FILES
 --------------
@@ -104,6 +143,15 @@ Change by G J Barnard
   2. Invisible section fix for Tim Wilde - https://moodle.org/mod/forum/discuss.php?d=218505#p959249.
   3. This version considered 'Stable' from feedback of Theo Konings on CONTRIB-3534.
 
+22nd August 2013 Version 2.4.2 - Stable
+Change by G J Barnard
+  1.  Fixed icon container size relative to icon size.
+  2.  Added 'alt' image attribute information being that of the section name.
+  3.  Fixed CONTRIB-4216 - Error importing quizzes with grid course format.
+  4.  Fixed CONTRIB-4253 - mdl_log queried too often to generate New Activity tag.  This has been fixed by using the 'course_sections'
+      table instead to spot when a new activity / resource has been added since last login.
+  5.  Adapted the width of the shade box such that it is dynamic against the size of the window.
+  
 Authors
 -------
 J Ridden - Moodle profile: https://moodle.org/user/profile.php?id=39680 - Web: http://www.moodleman.net
