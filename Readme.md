@@ -114,7 +114,14 @@ Roadmap
 
 History
 =============
+22nd August 2013 Version 2.5.3.2 - Stable
+Change by G J Barnard
+  1.  Fixed icon container size relative to icon size.
+  2.  Added 'alt' image attribute information being that of the section name.
+  3.  Tidied up more styles such that to pre-empt conflicts.
+
 10th August 2013 Version 2.5.3.1 - Stable
+Change by G J Barnard
   1.  Fixed CONTRIB-4216 - Error importing quizzes with grid course format.
   2.  Fixed CONTRIB-4253 - mdl_log queried too often to generate New Activity tag.  This has been fixed by using the 'course_sections'
       table instead to spot when a new activity / resource has been added since last login.

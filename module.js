@@ -44,11 +44,11 @@ M.format_grid.init = function(Y, the_editing_on, the_update_capability) {
 
     Y.delegate('click', this.icon_click, Y.config.doc, 'ul.gridicons a.gridicon_link', this);
 
-    var shadeboxtoggleone = Y.one("#shadebox_overlay");
+    var shadeboxtoggleone = Y.one("#gridshadebox_overlay");
     if (shadeboxtoggleone) {
         shadeboxtoggleone.on('click', this.shadebox.toggle_shadebox, this.shadebox);
     }
-    var shadeboxtoggletwo = Y.one("#shadebox_close");
+    var shadeboxtoggletwo = Y.one("#gridshadebox_close");
     if (shadeboxtoggletwo) {
         shadeboxtoggletwo.on('click', this.shadebox.toggle_shadebox, this.shadebox);
     }
@@ -57,16 +57,16 @@ M.format_grid.init = function(Y, the_editing_on, the_update_capability) {
 M.format_grid.hide_sections = function () {
     "use strict";
     // Have to hide the div's using javascript so they are visible if javascript is disabled.
-    var grid_sections = getElementsByClassName(document.getElementById("middle-column"), "li", "grid_section");
+    var grid_sections = getElementsByClassName(document.getElementById("gridmiddle-column"), "li", "grid_section");
     for(var i = 0; i < grid_sections.length; i++) {
         grid_sections[i].style.display = 'none';
     }
     // Remove href link from icon anchors so they don't compete with javascript onlick calls.
-    var icon_links = getElementsByClassName(document.getElementById("iconContainer"), "a", "icon_link");
+    var icon_links = getElementsByClassName(document.getElementById("gridiconcontainer"), "a", "icon_link");
     for(var i = 0; i < icon_links.length; i++) {
         icon_links[i].href = "#";
     }
-    document.getElementById("shadebox_close").style.display = "";
+    document.getElementById("gridshadebox_close").style.display = "";
 
     M.format_grid.shadebox.initialize_shadebox();
     M.format_grid.shadebox.update_shadebox();
@@ -111,10 +111,10 @@ M.format_grid.shadebox.initialize_shadebox = function() {
     this.shadebox_open = false;
     this.hide_shadebox();
 
-    document.getElementById('shadebox_overlay').style.display="";
-    document.body.appendChild(document.getElementById('shadebox'));
+    document.getElementById('gridshadebox_overlay').style.display="";
+    document.body.appendChild(document.getElementById('gridshadebox'));
 
-    var content = document.getElementById('shadebox_content');
+    var content = document.getElementById('gridshadebox_content');
     content.style.position = 'absolute';
     content.style.width = '90%';
     content.style.top = '50px';
@@ -138,13 +138,13 @@ M.format_grid.shadebox.toggle_shadebox = function() {
 M.format_grid.shadebox.show_shadebox = function() {
     "use strict";
     this.update_shadebox();
-    document.getElementById("shadebox").style.display = "";
+    document.getElementById("gridshadebox").style.display = "";
     this.update_shadebox();
 }
 
 M.format_grid.shadebox.hide_shadebox = function() {
     "use strict";
-    document.getElementById("shadebox").style.display = "none";
+    document.getElementById("gridshadebox").style.display = "none";
 }
 
 // Code from quirksmode.org.
@@ -197,7 +197,7 @@ M.format_grid.shadebox.get_page_size = function() {
 M.format_grid.shadebox.update_shadebox = function() {
     "use strict";
     // Make the overlay fullscreen (width happens automatically, so just update the height).
-    var overlay = document.getElementById("shadebox_overlay");
+    var overlay = document.getElementById("gridshadebox_overlay");
     var pagesize = this.get_page_size();
     overlay.style.height = pagesize[1] + "px";
 }

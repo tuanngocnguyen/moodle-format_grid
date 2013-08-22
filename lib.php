@@ -272,7 +272,7 @@ class format_grid extends format_base {
     }
 
     /**
-     * Get section icon, if it doesnt exist create it.
+     * Get section icon, if it doesn't exist create it.
      */
     public function get_summary_visibility($course) {
         global $CFG, $DB;
