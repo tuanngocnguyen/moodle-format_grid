@@ -239,6 +239,9 @@ Change by G J Barnard
       table instead to spot when a new activity / resource has been added since last login.
   5.  Adapted the width of the shade box such that it is dynamic against the size of the window.
 
+29th August 2013 Version 2.3.3.1 - Stable
+  1.  Fixed CONTRIB-4252.
+
 Authors
 -------
 J Ridden - Moodle profile: https://moodle.org/user/profile.php?id=39680 - Web: http://www.moodleman.net
