@@ -137,6 +137,50 @@ class format_grid_renderer extends format_section_renderer_base {
         echo html_writer::end_tag('div');
     }
 
+    /**
+     * Generate the edit controls of a section
+     *
+     * @param stdClass $course The course entry from DB
+     * @param stdClass $section The course_section entry from DB
+     * @param bool $onsectionpage true if being printed on a section page
+     * @return array of links with edit controls
+     */
+    protected function section_edit_controls($course, $section, $onsectionpage = false) {
+        global $PAGE;
+
+        if (!$PAGE->user_is_editing()) {
+            return array();
+        }
+
+        $coursecontext = context_course::instance($course->id);
+
+        if ($onsectionpage) {
+            $url = course_get_url($course, $section->section);
+        } else {
+            $url = course_get_url($course);
+        }
+        $url->param('sesskey', sesskey());
+
+        $controls = array();
+        if (has_capability('moodle/course:setcurrentsection', $coursecontext)) {
+            if ($course->marker == $section->section) {  // Show the "light globe" on/off.
+                $url->param('marker', 0);
+                $controls[] = html_writer::link($url,
+                                    html_writer::empty_tag('img', array('src' => $this->output->pix_url('i/marked'),
+                                        'class' => 'icon ', 'alt' => get_string('markedthistopic'))),
+                                    array('title' => get_string('markedthistopic'), 'class' => 'editing_highlight'));
+            } else {
+                $url->param('marker', $section->section);
+                $controls[] = html_writer::link($url,
+                                html_writer::empty_tag('img', array('src' => $this->output->pix_url('i/marker'),
+                                    'class' => 'icon', 'alt' => get_string('markthistopic'))),
+                                array('title' => get_string('markthistopic'), 'class' => 'editing_highlight'));
+            }
+        }
+
+        return array_merge($controls, parent::section_edit_controls($course, $section, $onsectionpage));
+    }
+
     // Grid format specific code.
     /**
      * Makes section zero.
@@ -244,7 +288,12 @@ class format_grid_renderer extends format_section_renderer_base {
                 $section_name = $this->courseformat->get_section_name($thissection);
                 if ($course->coursedisplay != COURSE_DISPLAY_MULTIPAGE) {
 
-                    echo html_writer::start_tag('li');
+                    if ($this->courseformat->is_section_current($section)) {
+                        $sectionstyle = array('class' => 'current');
+                    } else {
+                        $sectionstyle = null;
+                    }
+                    echo html_writer::start_tag('li', $sectionstyle);
                     echo html_writer::start_tag('a', array(
                         'href' => '#',
                         'id' => 'gridsection-' . $thissection->section,
@@ -408,6 +457,9 @@ class format_grid_renderer extends format_section_renderer_base {
             $sectionstyle = 'section main';
             if (!$thissection->visible) {
                 $sectionstyle .= ' hidden';
+            }
+            if ($this->courseformat->is_section_current($section)) {
+                $sectionstyle .= ' current';
             }
             $sectionstyle .= ' grid_section';
 

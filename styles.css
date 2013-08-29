@@ -70,11 +70,10 @@ div#gridmiddle-column ul {
 
 .course-content ul.gridicons li {
     width: 212px;
-    overflow: hidden;
     float: left;
+    overflow: hidden;
     margin: 2px 2px;
     padding: 0px;
-    background-color: white;
     color: black;
     font-size: 12px;
     display: block;
@@ -82,6 +81,9 @@ div#gridmiddle-column ul {
 .course-content ul.gridicons li:hover {
     background-color: #f1f2f2;
     color: #333;
+}
+.course-content ul.gridicons li.current {
+    background-color: #d9edf7;
 }
 .course-content ul.gridicons img.new_activity {
     position: absolute;
@@ -111,7 +113,7 @@ div#gridmiddle-column ul {
     vertical-align: middle;
 }
 .course-content ul.gridicons li:hover .image_holder {
-    border: 1px solid #dededf;
+    border: 2px solid #dededf;
 }
 .course-content ul.gridicons li img {
     margin-top: 0;

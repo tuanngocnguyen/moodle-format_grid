@@ -114,6 +114,9 @@ Roadmap
 
 History
 =============
+29th August 2013 Version 2.5.3.3 - Stable
+  1.  Implemented CONTRIB-4580.
+
 22nd August 2013 Version 2.5.3.2 - Stable
 Change by G J Barnard
   1.  Fixed icon container size relative to icon size.
