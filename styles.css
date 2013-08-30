@@ -22,6 +22,10 @@
     width: 28px;
 }
 
+body.jsenabled  ul.gtopics {
+    display: none;
+}
+
 div#gridmiddle-column ul {
     list-style-type: none;
 }
@@ -113,7 +117,7 @@ div#gridmiddle-column ul {
     vertical-align: middle;
 }
 .course-content ul.gridicons li:hover .image_holder {
-    border: 2px solid #dededf;
+    border: 1px dashed #dededf;
 }
 .course-content ul.gridicons li img {
     margin-top: 0;

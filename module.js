@@ -27,13 +27,13 @@
  /**
  * @namespace
  */
-M.format_grid = M.format_grid || {};
-M.format_grid.shadebox = M.format_grid.shadebox || {
+M.format_grid = M.format_grid || {
     ourYUI: null,
     editing_on: null,
     update_capability: null,
     selected_topic: null
 };
+M.format_grid.shadebox = M.format_grid.shadebox || {};
 
 M.format_grid.init = function(Y, the_editing_on, the_update_capability) {
     "use strict";
@@ -54,24 +54,31 @@ M.format_grid.init = function(Y, the_editing_on, the_update_capability) {
     }
 };
 
-M.format_grid.hide_sections = function () {
+M.format_grid.hide_sections = function (Y, the_editing_on, the_update_capability) {
     "use strict";
-    // Have to hide the div's using javascript so they are visible if javascript is disabled.
-    var grid_sections = getElementsByClassName(document.getElementById("gridmiddle-column"), "li", "grid_section");
-    for(var i = 0; i < grid_sections.length; i++) {
-        grid_sections[i].style.display = 'none';
-    }
-    // Remove href link from icon anchors so they don't compete with javascript onlick calls.
-    var icon_links = getElementsByClassName(document.getElementById("gridiconcontainer"), "a", "icon_link");
-    for(var i = 0; i < icon_links.length; i++) {
-        icon_links[i].href = "#";
-    }
-    document.getElementById("gridshadebox_close").style.display = "";
+    // Have to show the column when editing / capability to update.
+    if (the_editing_on && the_update_capability) {
+        var grid_column = getElementsByClassName(document.getElementById("gridmiddle-column"), "ul", "gtopics");
+        for(var i = 0; i < grid_column.length; i++) {
+            grid_column[i].style.display = 'block';
+        }
+    } else {
+        var grid_sections = getElementsByClassName(document.getElementById("gridmiddle-column"), "li", "grid_section");
+        for(var i = 0; i < grid_sections.length; i++) {
+            grid_sections[i].style.display = 'none';
+        }
+        // Remove href link from icon anchors so they don't compete with javascript onlick calls.
+        var icon_links = getElementsByClassName(document.getElementById("gridiconcontainer"), "a", "icon_link");
+        for(var i = 0; i < icon_links.length; i++) {
+            icon_links[i].href = "#";
+        }
+        document.getElementById("gridshadebox_close").style.display = "";
 
-    M.format_grid.shadebox.initialize_shadebox();
-    M.format_grid.shadebox.update_shadebox();
-    window.onresize = function() {
+        M.format_grid.shadebox.initialize_shadebox();
         M.format_grid.shadebox.update_shadebox();
+        window.onresize = function() {
+            M.format_grid.shadebox.update_shadebox();
+        }
     }
 }
 
