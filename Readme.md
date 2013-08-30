@@ -16,9 +16,10 @@ Installation
 2. Put Moodle in 'Maintenance Mode' (docs.moodle.org/en/admin/setting/maintenancemode) so that there are no
    users using it bar you as the administrator - if you have not already done so.
 3. Copy 'grid' to '/course/format/' if you have not already done so.
-4. Login as an administrator and follow standard the 'plugin' update notification.  If needed, go to
+4. Go back in as an administrator and follow standard the 'plugin' update notification.  If needed, go to
    'Site administration' -> 'Notifications' if this does not happen.
 5. Put Moodle out of Maintenance Mode.
+6. You may need to check that the permissions within the 'grid' folder are 755 for folders and 644 for files.
 
 Uninstallation
 ==============
@@ -27,9 +28,25 @@ Uninstallation
    not done Moodle will pick the last format in your list of formats to use but display in 'Edit settings' of the
    course the first format in the list.  You can then set the desired format.
 3. In '/course/format/' remove the folder 'grid'.
-4. In the database, remove the row with the 'plugin' of 'format_grid' in the 'config_plugins' table and drop the
-   'format_grid_icon' and 'format_grid_summary' tables.
+4. In the database, remove the row with the 'plugin' of 'format_grid' and 'name' of 'version' in the 'config_plugins' table
+   and drop the 'format_grid_icon' and 'format_grid_summary' tables.
 5. Put Moodle out of Maintenance Mode.
+
+Downgrading
+===========
+If for any reason you need to downgrade to a previous version of the format then the procedure will inform you how to
+do so:
+1.  Put Moodle in 'Maintenance Mode' so that there are no users using it bar you as the administrator.
+2.  In '/course/format/' remove the folder 'grid' i.e. ALL it's contents - this is VITAL.
+3.  Put in the replacement 'grid' folder into '/course/format/'.
+4.  This step depends on if you are downgrading to a version prior to 15th July 2012, this should therefore only be for
+    Moodle 2.3.x and below versions.  If you are, perform step 4.1 otherwise, perform step 4.2.
+4.1 In the database, remove the row with the 'plugin' of 'format_grid' and 'name' of 'version' in the 'config_plugins' table
+    and drop the 'format_grid_icon' and 'format_grid_summary' tables.
+4.2 In the database, remove the row with the 'plugin' of 'format_grid' and 'name' of 'version' in the 'config_plugins' table.
+5.  Go back in as an administrator and follow standard the 'plugin' update notification.  If needed, go to
+    'Site administration' -> 'Notifications' if this does not happen.
+6.  Put Moodle out of Maintenance Mode.
 
 Reporting Issues
 ================
@@ -56,53 +73,41 @@ It is essential that you provide as much information as possible, the critical i
 version.php file.  Other version information such as specific Moodle version, theme name and version also helps.  A screen shot
 can be really useful in visualising the issue along with any files you consider to be relevant.
 
-Files
---------------
+File information
+================
 
-* grid/format.php
-
-  Code that actually displays the course view page.
-
-* grid/config.php
-
-  Configuration file, mainly controlling default blocks for the format.
+Languages
+---------
+The grid/lang folder contains the language files for the format, such as:
 
 * grid/lang/en/format_grid.php
 * grid/lang/ru/format_grid.php
 * grid/lang/es/format_grid.php
 * grid/lang/fr/format_grid.php
 
-  Language file containing language strings for grid format.
+Note that existing formats store their language strings in the main
+moodle.php, which you can also do, but this separate file is recommended
+for contributed formats.
 
-  Note that existing formats store their language strings in the main
-  moodle.php, which you can also do, but this separate file is recommended
-  for contributed formats.
+Of course you can have other folders as well as English etc. if you want to
+provide multiple languages.
 
-  Of course you can have other folders as well as just English and Russian
-  if you want to provide multiple languages.
+Styles
+------
+The file grid/styles.css contains the CSS styles for the format which can
+be overridden by the theme.
 
-* grid/db/install.xml
+Backup
+------
+The files:
 
-  Database table definitions.
+grid/backup/moodle2/backup_format_grid_plugin.class.php
+grid/backup/moodle2/restore_format_grid_plugin.class.php
 
-* grid/db/upgrade.php
+are responsible for backup and restore.
 
-  Database upgrade script.
-
-* grid/version.php
-
-  Required for using database tables. The file provides information 
-  about plugin version (update when tables change) and required Moodle version.
-
-* grid/styles.css
-
-  The file include in the CSS Moodle generates.
-
-* grid/backup/moodle2/backup_format_grid_plugin.class.php
-  grid/backup/moodle2/restore_format_grid_plugin.class.php
-
-  Backup and restore run automatically when backing up the course.
-  You can't back up the course format data independently.
+Backup and restore run automatically when backing up the course.
+You can't back up the course format data independently.
 
 Roadmap
 =============
@@ -111,14 +116,17 @@ Roadmap
 3. CONTRIB-3500 - Gridview course format more accessible.
 4. CONTRIB-4099 - Grid format does not allow the user to set the size of the image / box.
 5. Use of crowd funding facility to support development.
+6. Continued maintenance of issues: https://tracker.moodle.org/browse/CONTRIB/component/11231.
 
 History
 =============
 30th August 2013 Version 2.5.3.3 - Stable
+Change by G J Barnard
   1.  Implemented CONTRIB-4580.
   2.  Implemented CONTRIB-4579, thanks to all who helped on https://moodle.org/mod/forum/discuss.php?d=236075.
   3.  At the request of Tim St.Clair I've changed the code such that the sections underneath the icons are hidden
       by CSS when JavaScript is enabled so that there is no 'flash' as previously JS would perform the hiding.
+  4.  Added 'Downgrading' instructions above.
 
 22nd August 2013 Version 2.5.3.2 - Stable
 Change by G J Barnard
