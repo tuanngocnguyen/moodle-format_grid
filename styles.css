@@ -22,7 +22,8 @@
     width: 28px;
 }
 
-body.jsenabled  ul.gtopics {
+/* Change of logic such that topics are hidden by default and then shown to prevent 'flash' whilst JavaScript kicks in. */
+body.jsenabled ul.gtopics {
     display: none;
 }
 

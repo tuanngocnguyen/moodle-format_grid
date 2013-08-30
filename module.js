@@ -57,12 +57,27 @@ M.format_grid.init = function(Y, the_editing_on, the_update_capability) {
 M.format_grid.hide_sections = function (Y, the_editing_on, the_update_capability) {
     "use strict";
     // Have to show the column when editing / capability to update.
+    /*
+     * Note: I did contemplate removing the rule 'body.jsenabled ul.gtopics' from the stylesheet but as always IE makes this
+     * complex... http://www.w3.org/wiki/Dynamic_style_-_manipulating_CSS_with_JavaScript.
+     *
+     * In both cases this needs to be done to negate 'body.jsenabled ul.gtopics' as JavaScript is working.  The
+     * rule only applied if JS is there and as such first hides all of the 'li.grid_section's then we need to show
+     * the list when editing.  When not editing then we still need to show the whole list but then hide the individual
+     * list items with their own display attribute such that the shade box code will work.
+     */
+    var grid_column = getElementsByClassName(document.getElementById("gridmiddle-column"), "ul", "gtopics");
+    for(var i = 0; i < grid_column.length; i++) {
+        grid_column[i].style.display = 'block';
+    }
     if (the_editing_on && the_update_capability) {
-        var grid_column = getElementsByClassName(document.getElementById("gridmiddle-column"), "ul", "gtopics");
-        for(var i = 0; i < grid_column.length; i++) {
-            grid_column[i].style.display = 'block';
+        // Show the sections when editing.
+        var grid_sections = getElementsByClassName(document.getElementById("gridmiddle-column"), "li", "grid_section");
+        for(var i = 0; i < grid_sections.length; i++) {
+            grid_sections[i].style.display = 'block';
         }
     } else {
+        // Prepare the sections for display within the shade box.
         var grid_sections = getElementsByClassName(document.getElementById("gridmiddle-column"), "li", "grid_section");
         for(var i = 0; i < grid_sections.length; i++) {
             grid_sections[i].style.display = 'none';
