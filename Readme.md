@@ -114,8 +114,11 @@ Roadmap
 
 History
 =============
-29th August 2013 Version 2.5.3.3 - Stable
+30th August 2013 Version 2.5.3.3 - Stable
   1.  Implemented CONTRIB-4580.
+  2.  Implemented CONTRIB-4579, thanks to all who helped on https://moodle.org/mod/forum/discuss.php?d=236075.
+  3.  At the request of Tim St.Clair I've changed the code such that the sections underneath the icons are hidden
+      by CSS when JavaScript is enabled so that there is no 'flash' as previously JS would perform the hiding.
 
 22nd August 2013 Version 2.5.3.2 - Stable
 Change by G J Barnard
