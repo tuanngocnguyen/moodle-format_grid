@@ -55,36 +55,24 @@ div#gridmiddle-column ul {
 }
 
 /* @group Topic Icons */
-#gridicon-container {
-    width: 90%;
+#gridiconcontainer {
+    width: 100%;
     margin: 20px auto;
     padding: 10px;
     text-align: center;
     height: auto;
 }
-#gridicon-container ul.gridicons {
+#gridiconcontainer ul.gridicons {
     width: 100%;
     margin: 0 auto;
     padding: 0;
 }
-#gridicon-container ul.gridicons li {
+#gridiconcontainer ul.gridicons li {
     height: auto;
-    max-height: 250px;
     padding: 10px;
     margin: 5px;
-    width: 29%;
     text-align: left;
-    display: inline-block;
-}
-@media screen and (max-width:768px) {
-    #gridicon-container ul.gridicons li {
-           width:44%
-    }
-}
-@media screen and (min-width:240px) and (max-width:480px) {
-    #gridicon-container ul.gridicons li {
-        width: 90%;
-    }
+    display: inline-table;
 }
 .course-content ul.gridicons li:hover {
     background-color: #f1f2f2;
