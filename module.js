@@ -57,31 +57,10 @@ M.format_grid.init = function(Y, the_editing_on, the_update_capability) {
 M.format_grid.hide_sections = function (Y, the_editing_on, the_update_capability) {
     "use strict";
     // Have to show the column when editing / capability to update.
-    /*
-     * Note: I did contemplate removing the rule 'body.jsenabled ul.gtopics' from the stylesheet but as always IE makes this
-     * complex... http://www.w3.org/wiki/Dynamic_style_-_manipulating_CSS_with_JavaScript.
-     *
-     * In both cases this needs to be done to negate 'body.jsenabled ul.gtopics' as JavaScript is working.  The
-     * rule only applied if JS is there and as such first hides all of the 'li.grid_section's then we need to show
-     * the list when editing.  When not editing then we still need to show the whole list but then hide the individual
-     * list items with their own display attribute such that the shade box code will work.
-     */
-    var grid_column = getElementsByClassName(document.getElementById("gridmiddle-column"), "ul", "gtopics");
-    for(var i = 0; i < grid_column.length; i++) {
-        grid_column[i].style.display = 'block';
-    }
     if (the_editing_on && the_update_capability) {
         // Show the sections when editing.
-        var grid_sections = getElementsByClassName(document.getElementById("gridmiddle-column"), "li", "grid_section");
-        for(var i = 0; i < grid_sections.length; i++) {
-            grid_sections[i].style.display = 'block';
-        }
+        Y.all(".grid_section").removeClass('hide_section');
     } else {
-        // Prepare the sections for display within the shade box.
-        var grid_sections = getElementsByClassName(document.getElementById("gridmiddle-column"), "li", "grid_section");
-        for(var i = 0; i < grid_sections.length; i++) {
-            grid_sections[i].style.display = 'none';
-        }
         // Remove href link from icon anchors so they don't compete with javascript onlick calls.
         var icon_links = getElementsByClassName(document.getElementById("gridiconcontainer"), "a", "icon_link");
         for(var i = 0; i < icon_links.length; i++) {
@@ -99,31 +78,23 @@ M.format_grid.hide_sections = function (Y, the_editing_on, the_update_capability
 
 M.format_grid.icon_click = function(e) {
     "use strict";
-    var iconIndex = parseInt(e.currentTarget.get('id').replace("gridsection-", ""));
     e.preventDefault();
-    this.select_topic(iconIndex);
-};
-
-
-M.format_grid.select_topic = function(topic_no) {
-    "use strict";
+    var iconIndex = parseInt(e.currentTarget.get('id').replace("gridsection-", ""));
+    //console.log(iconIndex);
     if ((this.editing_on == true) && (this.update_capability == true)) {
-        console.log(topic_no);
-        document.getElementById("section-"+topic_no).style.display = "";
-        window.scroll(0,document.getElementById("section-"+topic_no).offsetTop);
+        window.scroll(0,document.getElementById("section-"+iconIndex).offsetTop);
     } else {
         // Make the selected topic visible, scroll to it and hide all other topics.
         if(this.selected_topic != null) {
-            document.getElementById("section-" + this.selected_topic).style.display = "none";
+            this.selected_topic.addClass('hide_section');
         }
-        this.selected_topic = topic_no;
+        this.selected_topic = this.ourYUI.one("#section-" + iconIndex);
 
-        document.getElementById("section-" + topic_no).style.display = "";
+        this.selected_topic.removeClass('hide_section');
         // window.scroll(0,document.getElementById("section-"+topic_no).offsetTop);
         this.shadebox.toggle_shadebox();
     }
-    return true;
-}
+};
 
 /** Below is shadebox code **/
 M.format_grid.shadebox.shadebox_open;

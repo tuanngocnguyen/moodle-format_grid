@@ -462,7 +462,7 @@ class format_grid_renderer extends format_section_renderer_base {
             if ($this->courseformat->is_section_current($section)) {
                 $sectionstyle .= ' current';
             }
-            $sectionstyle .= ' grid_section';
+            $sectionstyle .= ' grid_section hide_section';
 
             echo html_writer::start_tag('li', array(
                 'id' => 'section-' . $section,

@@ -32,6 +32,19 @@ Uninstallation
    and drop the 'format_grid_icon' and 'format_grid_summary' tables.
 5. Put Moodle out of Maintenance Mode.
 
+Upgrade Instructions
+====================
+1. Ensure you have the version of Moodle as stated above in 'Required version of Moodle'.  This is essential as the
+   format relies on underlying core code that is out of my control.
+2. Put Moodle in 'Maintenance Mode' so that there are no users using it bar you as the administrator.
+3. In '/course/format/' move old 'grid' directory to a backup folder outside of Moodle.
+4. Copy new 'grid' to '/course/format/'.
+5. Go back in as an administrator and follow standard the 'plugin' update notification.  If needed, go to
+   'Site administration' -> 'Notifications' if this does not happen.
+6. If automatic 'Purge all caches' appears not to work by lack of display etc. then perform a manual 'Purge all caches'
+   under 'Home -> Site administration -> Development -> Purge all caches'.
+7. Put Moodle out of Maintenance Mode.
+
 Downgrading
 ===========
 If for any reason you need to downgrade to a previous version of the format then the procedure will inform you how to
@@ -42,8 +55,12 @@ do so:
 4.  This step depends on if you are downgrading to a version prior to 15th July 2012, this should therefore only be for
     Moodle 2.3.x and below versions.  If you are, perform step 4.1 otherwise, perform step 4.2.
 4.1 In the database, remove the row with the 'plugin' of 'format_grid' and 'name' of 'version' in the 'config_plugins' table
-    and drop the 'format_grid_icon' and 'format_grid_summary' tables.
-4.2 In the database, remove the row with the 'plugin' of 'format_grid' and 'name' of 'version' in the 'config_plugins' table.
+    and drop the 'format_grid_icon' and 'format_grid_summary' tables.  If automatic 'Purge all caches' appears not to work by
+    lack of display etc. then perform a manual 'Purge all caches' under 'Home -> Site administration -> Development ->
+    Purge all caches'.
+4.2 In the database, change the row with the 'plugin' of 'format_grid' and 'name' of 'version' in the 'config_plugins' table
+    to have the same 'value' as '$plugin->version' in the 'grid/version.php' file i.e. like '2013083000'.  Then perform a manual
+    'Purge all caches' under 'Home -> Site administration -> Development -> Purge all caches'.
 5.  Go back in as an administrator and follow standard the 'plugin' update notification.  If needed, go to
     'Site administration' -> 'Notifications' if this does not happen.
 6.  Put Moodle out of Maintenance Mode.
@@ -118,6 +135,11 @@ Roadmap
 5. Use of crowd funding facility to support development.
 6. Continued maintenance of issues: https://tracker.moodle.org/browse/CONTRIB/component/11231.
 
+Known Issues
+=============
+Currently the key press events to facilitate accessibility are proving difficult to implement.  If you know
+how to do this then please contact me to assist with it.
+
 History
 =============
 30th August 2013 Version 2.5.3.3 - Stable
@@ -127,6 +149,8 @@ Change by G J Barnard
   3.  At the request of Tim St.Clair I've changed the code such that the sections underneath the icons are hidden
       by CSS when JavaScript is enabled so that there is no 'flash' as previously JS would perform the hiding.
   4.  Added 'Downgrading' instructions above.
+  5.  Added 'Upgrading' instructions above.
+  6.  Added 'Known Issues' above.
 
 22nd August 2013 Version 2.5.3.2 - Stable
 Change by G J Barnard

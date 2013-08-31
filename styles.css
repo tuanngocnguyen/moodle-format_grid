@@ -23,7 +23,7 @@
 }
 
 /* Change of logic such that topics are hidden by default and then shown to prevent 'flash' whilst JavaScript kicks in. */
-body.jsenabled ul.gtopics {
+body.jsenabled li.grid_section.hide_section {
     display: none;
 }
 
