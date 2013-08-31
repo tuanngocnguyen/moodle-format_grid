@@ -287,14 +287,15 @@ class format_grid_renderer extends format_section_renderer_base {
 
             if ($showsection) {
                 $section_name = $this->courseformat->get_section_name($thissection);
-                if ($course->coursedisplay != COURSE_DISPLAY_MULTIPAGE) {
 
-                    if ($this->courseformat->is_section_current($section)) {
-                        $sectionstyle = array('class' => 'current');
-                    } else {
-                        $sectionstyle = null;
-                    }
-                    echo html_writer::start_tag('li', $sectionstyle);
+                if ($this->courseformat->is_section_current($section)) {
+                    $sectionstyle = array('class' => 'current');
+                } else {
+                    $sectionstyle = null;
+                }
+                echo html_writer::start_tag('li', $sectionstyle);
+
+                if ($course->coursedisplay != COURSE_DISPLAY_MULTIPAGE) {
                     echo html_writer::start_tag('a', array(
                         'href' => '#',
                         'id' => 'gridsection-' . $thissection->section,
@@ -355,8 +356,6 @@ class format_grid_renderer extends format_section_renderer_base {
                     }
                     echo html_writer::end_tag('li');
                 } else {
-                    echo html_writer::start_tag('li');
-
                     $title = html_writer::tag('p', $section_name, array('class' => 'icon_content'));
 
                     if (isset($section_updated[$thissection->id])) {
