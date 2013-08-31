@@ -103,6 +103,7 @@ div#gridmiddle-column ul {
     overflow: hidden;
     color: black;
     height: 20px;
+    text-align: center;
 }
 .course-content ul.gridicons li .image_holder {
     width: 210px;
