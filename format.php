@@ -74,6 +74,7 @@ if (!empty($displaysection)) {
 $PAGE->requires->js_init_call('M.format_grid.init', array(
     $PAGE->user_is_editing(),
     has_capability('moodle/course:update', $context)));
+$PAGE->requires->js('/course/format/grid/javascript/gridkeys.js');
 
 // Include course format js module.
 $PAGE->requires->js('/course/format/grid/format.js');
