@@ -86,7 +86,6 @@ class format_grid_renderer extends format_section_renderer_base {
             $str_edit_summary = '';
         }
 
-        echo html_writer::start_tag('div', array('class' => 'topicscss-format'));
         echo html_writer::start_tag('div', array('id' => 'gridmiddle-column'));
         echo $this->output->skip_link_target();
 
@@ -132,7 +131,6 @@ class format_grid_renderer extends format_section_renderer_base {
         echo html_writer::end_tag('div');
         echo html_writer::end_tag('div');
         echo html_writer::tag('div', '&nbsp;', array('class' => 'clearer'));
-        echo html_writer::end_tag('div');
         echo html_writer::end_tag('div');
 
         // Initialise the shade box functionality:...
