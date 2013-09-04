@@ -33,17 +33,21 @@ M.format_grid = M.format_grid || {
     update_capability: null,
     selected_section: null,
     num_sections: null,
-    selected_section_no: 0
+    selected_section_no: 0,
+    shadebox_shown_array: null
 };
 M.format_grid.shadebox = M.format_grid.shadebox || {};
 
-M.format_grid.init = function(Y, the_editing_on, the_update_capability, the_num_sections) {
+M.format_grid.init = function(Y, the_editing_on, the_update_capability, the_num_sections, the_shadebox_shown_array) {
     "use strict";
     this.ourYUI = Y;
     this.editing_on = the_editing_on;
     this.update_capability = the_update_capability;
     this.selected_section = null;
     this.num_sections = parseInt(the_num_sections);
+    console.log("SSA parameter: " + the_shadebox_shown_array);
+    this.shadebox_shown_array = JSON.parse(the_shadebox_shown_array);
+    console.log("SSA var: " + the_shadebox_shown_array);
 
     if (this.num_sections > 0) {
         this.selected_section_no = 1;

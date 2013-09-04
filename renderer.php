@@ -32,6 +32,7 @@ class format_grid_renderer extends format_section_renderer_base {
 
     private $topic0_at_top; // Boolean to state if section zero is at the top (true) or in the grid (false).
     private $courseformat; // Our course format object as defined in lib.php.
+    private $shadeboxshownarray = array(); // Value of 1 = not shown, value of 2 = shown - to reduce ambiguity in JS.
 
     /**
      * Generate the starting container html for a list of sections
@@ -97,6 +98,8 @@ class format_grid_renderer extends format_section_renderer_base {
         if ($this->topic0_at_top) {
             $this->topic0_at_top = $this->make_block_topic0($course, $sections, $modinfo, $editing, $has_cap_update,
                     $url_pic_edit, $str_edit_summary, false);
+            // For the purpose of the grid shade box shown array topic 0 is not shown.
+            $this->shadeboxshownarray[0] = 1;
         }
         echo html_writer::start_tag('div', array('id' => 'gridiconcontainer'));
         echo html_writer::start_tag('ul', array('class' => 'gridicons'));
@@ -131,6 +134,15 @@ class format_grid_renderer extends format_section_renderer_base {
         echo html_writer::tag('div', '&nbsp;', array('class' => 'clearer'));
         echo html_writer::end_tag('div');
         echo html_writer::end_tag('div');
+
+        // Initialise the shade box functionality:...
+        $PAGE->requires->js_init_call('M.format_grid.init', array(
+            $PAGE->user_is_editing(),
+            has_capability('moodle/course:update', $context),
+            $course->numsections,
+            json_encode($this->shadeboxshownarray)));
+        // Initialise the key control functionality...
+        $PAGE->requires->js('/course/format/grid/javascript/gridkeys.js');
     }
 
     /**
@@ -281,6 +293,9 @@ class format_grid_renderer extends format_section_renderer_base {
                            $thissection->showavailability || !$course->hiddensections));
 
             if ($showsection) {
+                // We now know the value for the grid shade box shown array.
+                $this->shadeboxshownarray[$section] = 2;
+
                 $section_name = $this->courseformat->get_section_name($thissection);
 
                 if ($this->courseformat->is_section_current($section)) {
@@ -410,6 +425,9 @@ class format_grid_renderer extends format_section_renderer_base {
                     }
                     echo html_writer::end_tag('li');
                 }
+            } else {
+                // We now know the value for the grid shade box shown array.
+                $this->shadeboxshownarray[$section] = 1;
             }
         }
     }

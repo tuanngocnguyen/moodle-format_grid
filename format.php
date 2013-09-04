@@ -70,12 +70,5 @@ if (!empty($displaysection)) {
     $renderer->print_multiple_section_page($course, null, null, null, null);
 }
 
-// Initialise the functionality:...
-$PAGE->requires->js_init_call('M.format_grid.init', array(
-    $PAGE->user_is_editing(),
-    has_capability('moodle/course:update', $context),
-    $course->numsections));
-$PAGE->requires->js('/course/format/grid/javascript/gridkeys.js');
-
 // Include course format js module.
 $PAGE->requires->js('/course/format/grid/format.js');
