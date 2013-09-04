@@ -1,4 +1,6 @@
-YUI.add('gallery-event-nav-keys', function(Y) {
+// Code from https://github.com/lsmith/yui3-gallery/tree/master/build/gallery-event-nav-keys
+// Licensed under: http://yuilibrary.com/license/ - https://github.com/lsmith/yui3-gallery/blob/master/README
+YUI.add('moodle-format_grid-galleryeventnavkeys', function(Y) {
 
 var keys = {
         enter    : 13,

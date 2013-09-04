@@ -130,11 +130,6 @@ class format_grid_renderer extends format_section_renderer_base {
         echo html_writer::end_tag('div');
         echo html_writer::tag('div', '&nbsp;', array('class' => 'clearer'));
         echo html_writer::end_tag('div');
-
-        $PAGE->requires->js_init_call('M.format_grid.hide_sections', array(
-            $PAGE->user_is_editing(),
-            has_capability('moodle/course:update', $context)));
-
         echo html_writer::end_tag('div');
     }
 

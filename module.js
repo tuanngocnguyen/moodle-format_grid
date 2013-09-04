@@ -31,16 +31,25 @@ M.format_grid = M.format_grid || {
     ourYUI: null,
     editing_on: null,
     update_capability: null,
-    selected_topic: null
+    selected_section: null,
+    num_sections: null,
+    selected_section_no: 0
 };
 M.format_grid.shadebox = M.format_grid.shadebox || {};
 
-M.format_grid.init = function(Y, the_editing_on, the_update_capability) {
+M.format_grid.init = function(Y, the_editing_on, the_update_capability, the_num_sections) {
     "use strict";
     this.ourYUI = Y;
     this.editing_on = the_editing_on;
     this.update_capability = the_update_capability;
-    this.selected_topic = null;
+    this.selected_section = null;
+    this.num_sections = parseInt(the_num_sections);
+
+    if (this.num_sections > 0) {
+        this.selected_section_no = 1;
+    } else {
+        this.selected_section_no = 0;
+    }
 
     Y.delegate('click', this.icon_click, Y.config.doc, 'ul.gridicons a.gridicon_link', this);
 
@@ -52,10 +61,7 @@ M.format_grid.init = function(Y, the_editing_on, the_update_capability) {
     if (shadeboxtoggletwo) {
         shadeboxtoggletwo.on('click', this.shadebox.toggle_shadebox, this.shadebox);
     }
-};
 
-M.format_grid.hide_sections = function (Y, the_editing_on, the_update_capability) {
-    "use strict";
     // Have to show the column when editing / capability to update.
     if (the_editing_on && the_update_capability) {
         // Show the sections when editing.
@@ -79,22 +85,29 @@ M.format_grid.hide_sections = function (Y, the_editing_on, the_update_capability
 M.format_grid.icon_click = function(e) {
     "use strict";
     e.preventDefault();
-    var iconIndex = parseInt(e.currentTarget.get('id').replace("gridsection-", ""));
-    //console.log(iconIndex);
-    if ((this.editing_on == true) && (this.update_capability == true)) {
-        window.scroll(0,document.getElementById("section-"+iconIndex).offsetTop);
-    } else {
-        // Make the selected topic visible, scroll to it and hide all other topics.
-        if(this.selected_topic != null) {
-            this.selected_topic.addClass('hide_section');
-        }
-        this.selected_topic = this.ourYUI.one("#section-" + iconIndex);
+    var icon_index = parseInt(e.currentTarget.get('id').replace("gridsection-", ""));
+    //console.log(icon_index);
+    this.icon_toggle(icon_index);
+};
 
-        this.selected_topic.removeClass('hide_section');
-        // window.scroll(0,document.getElementById("section-"+topic_no).offsetTop);
+M.format_grid.icon_toggle = function(icon_index) {
+    "use strict";
+    //console.log(icon_index);
+    if ((this.editing_on == true) && (this.update_capability == true)) {
+        window.scroll(0,document.getElementById("section-" + icon_index).offsetTop);
+    } else {
+        // Make the selected section visible, scroll to it and hide all other sections.
+        if(this.selected_section != null) {
+            this.selected_section.addClass('hide_section');
+        }
+        this.selected_section = this.ourYUI.one("#section-" + icon_index);
+        this.selected_section_no = icon_index;
+
+        this.selected_section.removeClass('hide_section');
         this.shadebox.toggle_shadebox();
     }
 };
+
 
 /** Below is shadebox code **/
 M.format_grid.shadebox.shadebox_open;
