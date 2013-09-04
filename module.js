@@ -50,7 +50,7 @@ M.format_grid.init = function(Y, the_editing_on, the_update_capability, the_num_
     console.log("SSA var: " + the_shadebox_shown_array);
 
     if (this.num_sections > 0) {
-        this.selected_section_no = 1;
+        this.selected_section_no = this.find_next_shown_section(this.num_sections, true);  // Section 0 can be in the grid.
     } else {
         this.selected_section_no = -1;
     }
@@ -125,19 +125,43 @@ M.format_grid.icon_change_shown = function() {
     this.selected_section.removeClass('hide_section');
 };
 
-/** Below is key pressing code **/
-M.format_grid.change_selected_section = function(increase_section) {
-    if (increase_section == true) {
-        this.selected_section_no++;
-        if (this.selected_section_no > this.num_sections){
-            this.selected_section_no = 1;
+/**
+ * Returns the next shown section from the given starting point and direction.
+ * If not found, returns -1.
+ */
+M.format_grid.find_next_shown_section = function(starting_point, increase_section) {
+    var found = false;
+    var current = starting_point;
+    var next = -1;
+
+    while(found == false) {
+        if (increase_section == true) {
+            current++;
+            if (current > this.num_sections) {
+                current = 0;
+            }
+        } else {
+            current--;
+            if (current < 0) {
+                current = this.num_sections;
+            }
         }
-    } else {
-        this.selected_section_no--;
-        if (this.selected_section_no < 1){
-            this.selected_section_no = this.num_sections;
+
+        // Guard against repeated looping code...
+        if (current == starting_point) {
+            found = true; // Exit loop and 'next' will be '-1'.
+        } else if (this.shadebox_shown_array[current] == 2) { // This section can be shown.
+            next = current;
+            found = true; // Exit loop and 'next' will be 'current'.
         }
     }
+
+    return next;
+};
+
+/** Below is key pressing code **/
+M.format_grid.change_selected_section = function(increase_section) {
+    this.selected_section_no = this.find_next_shown_section(this.selected_section_no, increase_section);
     console.log("Selected section no is now: " + this.selected_section_no);
     if (M.format_grid.shadebox.shadebox_open == true) {
         this.icon_change_shown();
