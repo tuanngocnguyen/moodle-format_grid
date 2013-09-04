@@ -95,7 +95,11 @@ M.format_grid.icon_toggle = function(icon_index) {
     //console.log(icon_index);
     if ((this.editing_on == true) && (this.update_capability == true)) {
         window.scroll(0,document.getElementById("section-" + icon_index).offsetTop);
+    } else if (M.format_grid.shadebox.shadebox_open) {
+        console.log("Shadebox was open");
+        this.shadebox.toggle_shadebox();
     } else {
+        console.log("Shadebox was closed");
         // Make the selected section visible, scroll to it and hide all other sections.
         if(this.selected_section != null) {
             this.selected_section.addClass('hide_section');
@@ -106,6 +110,22 @@ M.format_grid.icon_toggle = function(icon_index) {
         this.selected_section.removeClass('hide_section');
         this.shadebox.toggle_shadebox();
     }
+};
+
+/** Below is key pressing code **/
+M.format_grid.change_selected_section = function(increase_section) {
+    if (increase_section == true) {
+        this.selected_section_no++;
+        if (this.selected_section_no > this.num_sections){
+            this.selected_section_no = 1;
+        }
+    } else {
+        this.selected_section_no--;
+        if (this.selected_section_no < 1){
+            this.selected_section_no = this.num_sections;
+        }
+    }
+    console.log("Selected section no is now: " + this.selected_section_no);
 };
 
 

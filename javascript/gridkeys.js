@@ -8,8 +8,10 @@ YUI().use('moodle-format_grid-galleryeventnavkeys', function(Y) {
     });
     Y.on('left', function (e) {
         console.log("Left pressed");
+        M.format_grid.change_selected_section(false);
     });
     Y.on('right', function (e) {
         console.log("Right pressed");
+        M.format_grid.change_selected_section(true);
     });
 });
