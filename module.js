@@ -95,21 +95,26 @@ M.format_grid.icon_toggle = function(icon_index) {
     //console.log(icon_index);
     if ((this.editing_on == true) && (this.update_capability == true)) {
         window.scroll(0,document.getElementById("section-" + icon_index).offsetTop);
-    } else if (M.format_grid.shadebox.shadebox_open) {
+    } else if (M.format_grid.shadebox.shadebox_open == true) {
         console.log("Shadebox was open");
         this.shadebox.toggle_shadebox();
     } else {
         console.log("Shadebox was closed");
-        // Make the selected section visible, scroll to it and hide all other sections.
-        if(this.selected_section != null) {
-            this.selected_section.addClass('hide_section');
-        }
-        this.selected_section = this.ourYUI.one("#section-" + icon_index);
-        this.selected_section_no = icon_index;
-
-        this.selected_section.removeClass('hide_section');
+        this.icon_change_shown(icon_index);
         this.shadebox.toggle_shadebox();
     }
+};
+
+M.format_grid.icon_change_shown = function(icon_index) {
+    "use strict";
+    // Make the selected section visible, scroll to it and hide all other sections.
+    if(this.selected_section != null) {
+        this.selected_section.addClass('hide_section');
+    }
+    this.selected_section = this.ourYUI.one("#section-" + icon_index);
+    this.selected_section_no = icon_index;
+
+    this.selected_section.removeClass('hide_section');
 };
 
 /** Below is key pressing code **/
@@ -126,6 +131,9 @@ M.format_grid.change_selected_section = function(increase_section) {
         }
     }
     console.log("Selected section no is now: " + this.selected_section_no);
+    if (M.format_grid.shadebox.shadebox_open == true) {
+        this.icon_change_shown(this.selected_section_no);
+    }
 };
 
 
