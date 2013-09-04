@@ -4,7 +4,7 @@ YUI().use('moodle-format_grid-galleryeventnavkeys', function(Y) {
     Y.on('esc', function (e) {
         console.log("Esc pressed");
         console.log("Selected section no: " + M.format_grid.selected_section_no);
-        M.format_grid.icon_toggle(M.format_grid.selected_section_no);
+        M.format_grid.icon_toggle();
     });
     Y.on('left', function (e) {
         console.log("Left pressed");
