@@ -83,9 +83,20 @@ div#gridmiddle-column ul {
     background-color: #f1f2f2;
     color: #333;
 }
+
+/* Over ride in theme CSS if you want a different colour. */
 .course-content ul.gridicons li.current {
     background-color: #d9edf7;
 }
+
+/* Over ride in theme CSS if you want a different colour. */
+.course-content ul.gridicons li.currentselected {
+    background: #0C0;
+    filter:alpha(opacity=70); /* IE */
+    -moz-opacity:0.7; /* Mozilla */
+    opacity: 0.7; /* CSS3 */
+}
+
 .course-content ul.gridicons img.new_activity {
     position: absolute;
     margin-top: 86px;

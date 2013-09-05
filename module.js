@@ -50,7 +50,8 @@ M.format_grid.init = function(Y, the_editing_on, the_update_capability, the_num_
     console.log("SSA var: " + the_shadebox_shown_array);
 
     if (this.num_sections > 0) {
-        this.selected_section_no = this.find_next_shown_section(this.num_sections, true);  // Section 0 can be in the grid.
+        this.set_selected_section(this.num_sections, true, true);  // Section 0 can be in the grid.
+        console.log("init() - selected section no: " + this.selected_section_no);
     } else {
         this.selected_section_no = -1;
     }
@@ -110,7 +111,7 @@ M.format_grid.icon_toggle = function() {
             this.shadebox.toggle_shadebox();
         }
     } else {
-        console.log("Grid format - no selected section to show.");
+        console.log("Grid format:icon_toggle() - no selected section to show.");
     }
 };
 
@@ -159,17 +160,34 @@ M.format_grid.find_next_shown_section = function(starting_point, increase_sectio
     return next;
 };
 
-/** Below is key pressing code **/
 M.format_grid.change_selected_section = function(increase_section) {
-    this.selected_section_no = this.find_next_shown_section(this.selected_section_no, increase_section);
-    console.log("Selected section no is now: " + this.selected_section_no);
-    if (M.format_grid.shadebox.shadebox_open == true) {
-        this.icon_change_shown();
+    if (this.selected_section_no != -1) { // Then a valid shown section has been selected.
+        this.set_selected_section(this.selected_section_no, increase_section, false);
+        console.log("Selected section no is now: " + this.selected_section_no);
+        if (M.format_grid.shadebox.shadebox_open == true) {
+            this.icon_change_shown();
+        }
+    } else {
+        console.log("Grid format:change_selected_section() - no selected section to show.");
     }
 };
 
+M.format_grid.set_selected_section = function(starting_point, increase_section, initialise) {
+    if ((this.selected_section_no != -1) || (initialise == true)) {
+        var previous_no = this.selected_section_no;
+        this.selected_section_no = this.find_next_shown_section(starting_point, increase_section);
+        if (this.selected_section_no != -1) {
+            var selected_section = this.ourYUI.one("#gridsection-" + this.selected_section_no);
+            selected_section.get('parentNode').addClass('currentselected');
+        }
+        if (previous_no != -1) {
+            var previous_section = this.ourYUI.one("#gridsection-" + previous_no);
+            previous_section.get('parentNode').removeClass('currentselected');
+        }
+    }
+};
 
-/** Below is shadebox code **/
+/** Below is shade box code **/
 M.format_grid.shadebox.shadebox_open;
 
 M.format_grid.shadebox.initialize_shadebox = function() {
@@ -205,7 +223,6 @@ M.format_grid.shadebox.show_shadebox = function() {
     "use strict";
     this.update_shadebox();
     document.getElementById("gridshadebox").style.display = "";
-    this.update_shadebox();
 }
 
 M.format_grid.shadebox.hide_shadebox = function() {
@@ -217,27 +234,21 @@ M.format_grid.shadebox.hide_shadebox = function() {
 // Author unknown.
 M.format_grid.shadebox.get_page_size = function() {
     "use strict";
-    var xScroll, yScroll;
+    var yScroll;
     if(window.innerHeight && window.scrollMaxY) {
-        xScroll = document.body.scrollWidth;
         yScroll = window.innerHeight + window.scrollMaxY;
     } else if(document.body.scrollHeight > document.body.offsetHeight) { // All but Explorer Mac.
-        xScroll = document.body.scrollWidth;
         yScroll = document.body.scrollHeight;
     } else { // Explorer Mac ... also works in Explorer 6 strict and safari.
-        xScroll = document.body.offsetWidth;
         yScroll = document.body.offsetHeight;
     }
 
-    var windowWidth, windowHeight;
+    var windowHeight;
     if(self.innerHeight) { // All except Explorer.
-        windowWidth = self.innerWidth;
         windowHeight = self.innerHeight;
     } else if(document.documentElement && document.documentElement.clientHeight) { // Explorer 6 strict mode.
-        windowWidth = document.documentElement.clientWidth;
         windowHeight = document.documentElement.clientHeight;
     } else if(document.body) { //other Explorers
-        windowWidth = document.body.clientWidth;
         windowHeight = document.body.clientHeight;
     }
 
@@ -249,21 +260,13 @@ M.format_grid.shadebox.get_page_size = function() {
         pageHeight = yScroll;
     }
 
-    // For small pages with total width less than width of the viewport.
-    var pageWidth;
-    if(xScroll < windowWidth) {
-        pageWidth = windowWidth;
-    } else {
-        pageWidth = xScroll;
-    }
-
-    return new Array(pageWidth, pageHeight, windowWidth, windowHeight);
+    return pageHeight;
 }
 
 M.format_grid.shadebox.update_shadebox = function() {
     "use strict";
-    // Make the overlay fullscreen (width happens automatically, so just update the height).
+    // Make the overlay full screen (width happens automatically, so just update the height).
     var overlay = document.getElementById("gridshadebox_overlay");
     var pagesize = this.get_page_size();
-    overlay.style.height = pagesize[1] + "px";
+    overlay.style.height = pagesize + "px";
 }
