@@ -191,7 +191,7 @@ M.format_grid.arrow_left = function() {
 
 M.format_grid.arrow_right = function() {
     "use strict";
-    this.change_selected_section(false);
+    this.change_selected_section(true);
 };
 
 M.format_grid.change_selected_section = function(increase_section) {

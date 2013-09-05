@@ -482,12 +482,14 @@ class format_grid_renderer extends format_section_renderer_base {
                 'id' => 'section-' . $section,
                 'class' => $sectionstyle));
 
-            // Note, 'left side' is BEFORE content.
-            $leftcontent = $this->section_left_content($thissection, $course, $onsectionpage);
-            echo html_writer::tag('div', $leftcontent, array('class' => 'left side'));
-            // Note, 'right side' is BEFORE content.
-            $rightcontent = $this->section_right_content($thissection, $course, $onsectionpage);
-            echo html_writer::tag('div', $rightcontent, array('class' => 'right side'));
+            if ($editing && $has_cap_update) {
+                // Note, 'left side' is BEFORE content.
+                $leftcontent = $this->section_left_content($thissection, $course, $onsectionpage);
+                echo html_writer::tag('div', $leftcontent, array('class' => 'left side'));
+                // Note, 'right side' is BEFORE content.
+                $rightcontent = $this->section_right_content($thissection, $course, $onsectionpage);
+                echo html_writer::tag('div', $rightcontent, array('class' => 'right side'));
+            }
 
             echo html_writer::start_tag('div', array('class' => 'content'));
             if ($has_cap_vishidsect || ($thissection->visible && $thissection->available)) {
