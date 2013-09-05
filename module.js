@@ -102,7 +102,9 @@ M.format_grid.icon_click = function(e) {
     e.preventDefault();
     var icon_index = parseInt(e.currentTarget.get('id').replace("gridsection-", ""));
     //console.log(icon_index);
+    var previous_no = this.selected_section_no;
     this.selected_section_no = icon_index;
+    this.update_selected_background(previous_no);
     this.icon_toggle(icon_index);
 };
 
@@ -213,14 +215,18 @@ M.format_grid.set_selected_section = function(starting_point, increase_section, 
     if ((this.selected_section_no != -1) || (initialise == true)) {
         var previous_no = this.selected_section_no;
         this.selected_section_no = this.find_next_shown_section(starting_point, increase_section);
-        if (this.selected_section_no != -1) {
-            var selected_section = this.ourYUI.one("#gridsection-" + this.selected_section_no);
-            selected_section.get('parentNode').addClass('currentselected');
-        }
-        if (previous_no != -1) {
-            var previous_section = this.ourYUI.one("#gridsection-" + previous_no);
-            previous_section.get('parentNode').removeClass('currentselected');
-        }
+        this.update_selected_background(previous_no);
+    }
+};
+M.format_grid.update_selected_background = function(previous_no) {
+    "use strict";
+    if (this.selected_section_no != -1) {
+        var selected_section = this.ourYUI.one("#gridsection-" + this.selected_section_no);
+        selected_section.get('parentNode').addClass('currentselected');
+    }
+    if (previous_no != -1) {
+        var previous_section = this.ourYUI.one("#gridsection-" + previous_no);
+        previous_section.get('parentNode').removeClass('currentselected');
     }
 };
 
