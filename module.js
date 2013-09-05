@@ -66,6 +66,14 @@ M.format_grid.init = function(Y, the_editing_on, the_update_capability, the_num_
     if (shadeboxtoggletwo) {
         shadeboxtoggletwo.on('click', this.shadebox.toggle_shadebox, this.shadebox);
     }
+    var shadeboxarrowleft = Y.one("#gridshadebox_left");
+    if (shadeboxarrowleft) {
+        shadeboxarrowleft.on('click', this.arrow_left, this);
+    }
+    var shadeboxarrowright = Y.one("#gridshadebox_right");
+    if (shadeboxarrowright) {
+        shadeboxarrowright.on('click', this.arrow_right, this);
+    }
 
     // Have to show the column when editing / capability to update.
     if (the_editing_on && the_update_capability) {
@@ -78,6 +86,8 @@ M.format_grid.init = function(Y, the_editing_on, the_update_capability, the_num_
             icon_links[i].href = "#";
         }
         document.getElementById("gridshadebox_close").style.display = "";
+        document.getElementById("gridshadebox_left").style.display = "";
+        document.getElementById("gridshadebox_right").style.display = "";
 
         M.format_grid.shadebox.initialize_shadebox();
         M.format_grid.shadebox.update_shadebox();
@@ -109,6 +119,7 @@ M.format_grid.icon_toggle = function() {
             console.log("Shadebox was closed");
             this.icon_change_shown();
             this.shadebox.toggle_shadebox();
+            this.update_arrows();
         }
     } else {
         console.log("Grid format:icon_toggle() - no selected section to show.");
@@ -126,11 +137,24 @@ M.format_grid.icon_change_shown = function() {
     this.selected_section.removeClass('hide_section');
 };
 
+M.format_grid.update_arrows = function() {
+    "use strict";
+    var content = M.format_grid.ourYUI.one("#gridshadebox_content");
+    var arrow_l = document.getElementById("gridshadebox_left");
+    var arrow_r = document.getElementById("gridshadebox_right");
+    var computed_height = ((content.get('clientHeight') / 2) - 8);
+    console.log(content.getComputedStyle('height'));
+    console.log(content.get('clientHeight'));
+    arrow_l.style.top = computed_height + "px";
+    arrow_r.style.top = computed_height + "px";
+};
+
 /**
  * Returns the next shown section from the given starting point and direction.
  * If not found, returns -1.
  */
 M.format_grid.find_next_shown_section = function(starting_point, increase_section) {
+    "use strict";
     var found = false;
     var current = starting_point;
     var next = -1;
@@ -160,12 +184,24 @@ M.format_grid.find_next_shown_section = function(starting_point, increase_sectio
     return next;
 };
 
+M.format_grid.arrow_left = function() {
+    "use strict";
+    this.change_selected_section(false);
+};
+
+M.format_grid.arrow_right = function() {
+    "use strict";
+    this.change_selected_section(false);
+};
+
 M.format_grid.change_selected_section = function(increase_section) {
+    "use strict";
     if (this.selected_section_no != -1) { // Then a valid shown section has been selected.
         this.set_selected_section(this.selected_section_no, increase_section, false);
         console.log("Selected section no is now: " + this.selected_section_no);
         if (M.format_grid.shadebox.shadebox_open == true) {
             this.icon_change_shown();
+            this.update_arrows();
         }
     } else {
         console.log("Grid format:change_selected_section() - no selected section to show.");
@@ -173,6 +209,7 @@ M.format_grid.change_selected_section = function(increase_section) {
 };
 
 M.format_grid.set_selected_section = function(starting_point, increase_section, initialise) {
+    "use strict";
     if ((this.selected_section_no != -1) || (initialise == true)) {
         var previous_no = this.selected_section_no;
         this.selected_section_no = this.find_next_shown_section(starting_point, increase_section);

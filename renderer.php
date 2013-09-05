@@ -113,6 +113,10 @@ class format_grid_renderer extends format_section_renderer_base {
 
         echo html_writer::tag('img', '', array('id' => 'gridshadebox_close', 'style' => 'display:none;',
             'src' => $this->output->pix_url('close', 'format_grid')));
+        echo html_writer::tag('img', '', array('id' => 'gridshadebox_left', 'class' => 'gridshadebox_arrow', 'style' => 'display:none;',
+            'src' => $this->output->pix_url('arrow_l', 'format_grid')));
+        echo html_writer::tag('img', '', array('id' => 'gridshadebox_right', 'class' => 'gridshadebox_arrow', 'style' => 'display:none;',
+            'src' => $this->output->pix_url('arrow_r', 'format_grid')));
         echo $this->start_section_list();
         // If currently moving a file then show the current clipboard.
         $this->make_block_show_clipboard_if_file_moving($course);

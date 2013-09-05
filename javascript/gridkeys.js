@@ -10,12 +10,12 @@ YUI().use('moodle-format_grid-galleryeventnavkeys', function(Y) {
     Y.on('left', function (e) {
         e.preventDefault();
         console.log("Left pressed");
-        M.format_grid.change_selected_section(false);
+        M.format_grid.arrow_left();
     });
     Y.on('right', function (e) {
         e.preventDefault();
         console.log("Right pressed");
-        M.format_grid.change_selected_section(true);
+        M.format_grid.arrow_right();
     });
     Y.on('enter', function (e) {
         e.preventDefault();
@@ -27,10 +27,10 @@ YUI().use('moodle-format_grid-galleryeventnavkeys', function(Y) {
         e.preventDefault();
         if (e.shiftKey) {
             console.log("Shift Tab pressed");
-            M.format_grid.change_selected_section(false);
+            M.format_grid.arrow_left();
         } else {
             console.log("Tab pressed");
-            M.format_grid.change_selected_section(true);
+            M.format_grid.arrow_right();
         }
     });
 });

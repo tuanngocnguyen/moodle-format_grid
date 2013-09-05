@@ -154,6 +154,7 @@ div#gridshadebox_overlay {
 }
 #gridshadebox_content {
     background: #fff;
+    min-height: 200px;
     border: solid 2px #a71e38;
 }
 #gridshadebox_content .activity {
@@ -171,11 +172,32 @@ div#gridshadebox_overlay {
     padding-bottom: 4px;
     padding-top: 2px;
 }
+
 #gridshadebox_close {
     position: absolute;
     top: -10px;
     right: -10px;
     cursor: pointer;
+}
+
+.gridshadebox_arrow {
+    position: absolute;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;
+}
+.gridshadebox_arrow:hover {
+    opacity: 0.8;
+}
+#gridshadebox_left {
+    top: 92px;
+    left: -32px;
+}
+#gridshadebox_right {
+    top: 92px;
+    right: -32px;
 }
 
 #gridshadebox_content ul.gtopics {
