@@ -157,6 +157,9 @@ div#gridshadebox_overlay {
     min-height: 200px;
     border: solid 2px #a71e38;
 }
+body.jsenabled #gridshadebox_content.hide_content {
+    display: none;
+}
 #gridshadebox_content .activity {
     list-style: none;
     border-bottom: 1px dashed #ccc;
@@ -193,11 +196,11 @@ div#gridshadebox_overlay {
 }
 #gridshadebox_left {
     top: 92px;
-    left: -32px;
+    left: -24px;
 }
 #gridshadebox_right {
     top: 92px;
-    right: -32px;
+    right: -24px;
 }
 
 #gridshadebox_content ul.gtopics {

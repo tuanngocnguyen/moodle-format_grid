@@ -38,6 +38,15 @@ M.format_grid = M.format_grid || {
 };
 M.format_grid.shadebox = M.format_grid.shadebox || {};
 
+/**
+ * Initialise with the information supplied from the course format so we can operate.
+ * @param {Object} Y YUI instance
+ * @param {Boolean} the_editing_on If editing is on.
+ * @param {Boolean} the_update_capability If the calling user can update the course.
+ * @param {Integer} the_num_sections the number of sections in the course.
+ * @param {Array} the_shadebox_shown_array States what sections are not shown (value of 1) and which are (value of 2)
+ *                                         index is the section no.
+ */
 M.format_grid.init = function(Y, the_editing_on, the_update_capability, the_num_sections, the_shadebox_shown_array) {
     "use strict";
     this.ourYUI = Y;
@@ -60,11 +69,11 @@ M.format_grid.init = function(Y, the_editing_on, the_update_capability, the_num_
 
     var shadeboxtoggleone = Y.one("#gridshadebox_overlay");
     if (shadeboxtoggleone) {
-        shadeboxtoggleone.on('click', this.shadebox.toggle_shadebox, this.shadebox);
+        shadeboxtoggleone.on('click', this.icon_toggle, this);
     }
     var shadeboxtoggletwo = Y.one("#gridshadebox_close");
     if (shadeboxtoggletwo) {
-        shadeboxtoggletwo.on('click', this.shadebox.toggle_shadebox, this.shadebox);
+        shadeboxtoggletwo.on('click', this.icon_toggle, this);
     }
     var shadeboxarrowleft = Y.one("#gridshadebox_left");
     if (shadeboxarrowleft) {
@@ -95,8 +104,12 @@ M.format_grid.init = function(Y, the_editing_on, the_update_capability, the_num_
             M.format_grid.shadebox.update_shadebox();
         }
     }
+    Y.one("#gridshadebox_content").removeClass('hide_content'); // Content 'flash' prevention.
 }
 
+/**
+ * Called when the user clicks on the grid icon, set up in the init() method.
+ */
 M.format_grid.icon_click = function(e) {
     "use strict";
     e.preventDefault();
@@ -105,11 +118,39 @@ M.format_grid.icon_click = function(e) {
     var previous_no = this.selected_section_no;
     this.selected_section_no = icon_index;
     this.update_selected_background(previous_no);
-    this.icon_toggle(icon_index);
+    this.icon_toggle(e);
 };
 
-M.format_grid.icon_toggle = function() {
+/**
+ * Called when the user clicks on the left arrow on the shade box or when they press the left
+ * cursor key or Shift-TAB on the keyboard - see 'gridkeys.js'.
+ * Moves to the previous visible section - looping to the last if the current is the first.
+ * @param {Object} e Event object.
+ */
+M.format_grid.arrow_left = function(e) {
     "use strict";
+    this.change_selected_section(false);
+};
+
+/**
+ * Called when the user clicks on the right arrow on the shade box or when they press the right
+ * cursor key or TAB on the keyboard - see 'gridkeys.js'.
+ * Moves to the next visible section - looping to the first if the current is the last.
+ * @param {Object} e Event object.
+ */
+M.format_grid.arrow_right = function(e) {
+    "use strict";
+    this.change_selected_section(true);
+};
+
+/**
+ * Toggles the shade box on / off.
+ * Called when the user clicks on a grid icon or presses the Esc or Enter keys - see 'gridkeys.js'.
+ * @param {Object} e Event object.
+ */
+M.format_grid.icon_toggle = function(e) {
+    "use strict";
+    e.preventDefault();
     //console.log(this.selected_section_no);
     if (this.selected_section_no != -1) { // Then a valid shown section has been selected.
         if ((this.editing_on == true) && (this.update_capability == true)) {
@@ -128,6 +169,27 @@ M.format_grid.icon_toggle = function() {
     }
 };
 
+/**
+ * Changes the current section in response to user input either arrows or keys.
+ * @param {Boolean} increase_section If 'true' to to the next section, if 'false' go to the previous.
+ */
+M.format_grid.change_selected_section = function(increase_section) {
+    "use strict";
+    if (this.selected_section_no != -1) { // Then a valid shown section has been selected.
+        this.set_selected_section(this.selected_section_no, increase_section, false);
+        console.log("Selected section no is now: " + this.selected_section_no);
+        if (M.format_grid.shadebox.shadebox_open == true) {
+            this.icon_change_shown();
+            this.update_arrows();
+        }
+    } else {
+        console.log("Grid format:change_selected_section() - no selected section to show.");
+    }
+};
+
+/**
+ * Changes the shown section within the shade box to the new one defined in 'selected_section_no'.
+ */
 M.format_grid.icon_change_shown = function() {
     "use strict";
     // Make the selected section visible, scroll to it and hide all other sections.
@@ -139,6 +201,9 @@ M.format_grid.icon_change_shown = function() {
     this.selected_section.removeClass('hide_section');
 };
 
+/**
+ * Changes the position of the shade box arrows to be in the centre when the section changes.
+ */
 M.format_grid.update_arrows = function() {
     "use strict";
     var content = M.format_grid.ourYUI.one("#gridshadebox_content");
@@ -152,8 +217,43 @@ M.format_grid.update_arrows = function() {
 };
 
 /**
+ * Works out what the 'next' section should be given the starting point and direction.  If called from
+ * init() then will ignore that there is no current section upon which to 'un-select' before we select
+ * the new one.  The result is placed in 'selected_section_no'.
+ * @param {Integer} starting_point The starting point upon which to start the search.
+ * @param {Boolean} increase_section If 'true' to to the next section, if 'false' go to the previous.
+ * @param {Boolean} initialise If 'true' we are initialising and therefore no current section.
+ */
+M.format_grid.set_selected_section = function(starting_point, increase_section, initialise) {
+    "use strict";
+    if ((this.selected_section_no != -1) || (initialise == true)) {
+        var previous_no = this.selected_section_no;
+        this.selected_section_no = this.find_next_shown_section(starting_point, increase_section);
+        this.update_selected_background(previous_no);
+    }
+};
+
+/**
+ * Updates the selected icon background.
+ * @param {Integer} previous_no The number of the previous section.
+ */
+M.format_grid.update_selected_background = function(previous_no) {
+    "use strict";
+    if (this.selected_section_no != -1) {
+        var selected_section = this.ourYUI.one("#gridsection-" + this.selected_section_no);
+        selected_section.get('parentNode').addClass('currentselected');
+    }
+    if ((previous_no != -1) && (previous_no != this.selected_section_no)) { // Do not un-select if we are the current section.
+        var previous_section = this.ourYUI.one("#gridsection-" + previous_no);
+        previous_section.get('parentNode').removeClass('currentselected');
+    }
+};
+
+/**
  * Returns the next shown section from the given starting point and direction.
- * If not found, returns -1.
+ * @param {Integer} starting_point The starting point upon which to start the search.
+ * @param {Boolean} increase_section If 'true' to to the next section, if 'false' go to the previous.
+ * @returns {Integer} The next section number or '-1' if not found.
  */
 M.format_grid.find_next_shown_section = function(starting_point, increase_section) {
     "use strict";
@@ -186,53 +286,12 @@ M.format_grid.find_next_shown_section = function(starting_point, increase_sectio
     return next;
 };
 
-M.format_grid.arrow_left = function() {
-    "use strict";
-    this.change_selected_section(false);
-};
-
-M.format_grid.arrow_right = function() {
-    "use strict";
-    this.change_selected_section(true);
-};
-
-M.format_grid.change_selected_section = function(increase_section) {
-    "use strict";
-    if (this.selected_section_no != -1) { // Then a valid shown section has been selected.
-        this.set_selected_section(this.selected_section_no, increase_section, false);
-        console.log("Selected section no is now: " + this.selected_section_no);
-        if (M.format_grid.shadebox.shadebox_open == true) {
-            this.icon_change_shown();
-            this.update_arrows();
-        }
-    } else {
-        console.log("Grid format:change_selected_section() - no selected section to show.");
-    }
-};
-
-M.format_grid.set_selected_section = function(starting_point, increase_section, initialise) {
-    "use strict";
-    if ((this.selected_section_no != -1) || (initialise == true)) {
-        var previous_no = this.selected_section_no;
-        this.selected_section_no = this.find_next_shown_section(starting_point, increase_section);
-        this.update_selected_background(previous_no);
-    }
-};
-M.format_grid.update_selected_background = function(previous_no) {
-    "use strict";
-    if (this.selected_section_no != -1) {
-        var selected_section = this.ourYUI.one("#gridsection-" + this.selected_section_no);
-        selected_section.get('parentNode').addClass('currentselected');
-    }
-    if (previous_no != -1) {
-        var previous_section = this.ourYUI.one("#gridsection-" + previous_no);
-        previous_section.get('parentNode').removeClass('currentselected');
-    }
-};
-
 /** Below is shade box code **/
-M.format_grid.shadebox.shadebox_open;
+M.format_grid.shadebox.shadebox_open; // Boolean stating if the shade box is open or not.
 
+/**
+ * Initialises the shade box.
+ */
 M.format_grid.shadebox.initialize_shadebox = function() {
     "use strict";
     this.shadebox_open = false;
@@ -250,6 +309,9 @@ M.format_grid.shadebox.initialize_shadebox = function() {
     content.style.zIndex = '9000001';
 }
 
+/**
+ * Toggles the shade box open / closed.
+ */
 M.format_grid.shadebox.toggle_shadebox = function() {
     "use strict";
     if (this.shadebox_open) {
@@ -262,20 +324,40 @@ M.format_grid.shadebox.toggle_shadebox = function() {
     }
 }
 
+/**
+ * Shows the shade box.
+ */
 M.format_grid.shadebox.show_shadebox = function() {
     "use strict";
     this.update_shadebox();
     document.getElementById("gridshadebox").style.display = "";
 }
 
+/**
+ * Hides the shade box.
+ */
 M.format_grid.shadebox.hide_shadebox = function() {
     "use strict";
     document.getElementById("gridshadebox").style.display = "none";
 }
 
-// Code from quirksmode.org.
-// Author unknown.
-M.format_grid.shadebox.get_page_size = function() {
+/**
+ * Adjusts the size of the shade box every time it's shown as the browser window could have changed.
+ */
+M.format_grid.shadebox.update_shadebox = function() {
+    "use strict";
+    // Make the overlay full screen (width happens automatically, so just update the height).
+    var overlay = document.getElementById("gridshadebox_overlay");
+    var pagesize = this.get_page_height();
+    overlay.style.height = pagesize + "px";
+}
+
+/**
+ * Gets the page height.
+ * Code from quirksmode.org.
+ * Author unknown.
+ */
+M.format_grid.shadebox.get_page_height = function() {
     "use strict";
     var yScroll;
     if(window.innerHeight && window.scrollMaxY) {
@@ -304,12 +386,4 @@ M.format_grid.shadebox.get_page_size = function() {
     }
 
     return pageHeight;
-}
-
-M.format_grid.shadebox.update_shadebox = function() {
-    "use strict";
-    // Make the overlay full screen (width happens automatically, so just update the height).
-    var overlay = document.getElementById("gridshadebox_overlay");
-    var pagesize = this.get_page_size();
-    overlay.style.height = pagesize + "px";
 }

@@ -109,7 +109,7 @@ class format_grid_renderer extends format_section_renderer_base {
         echo html_writer::end_tag('div');
         echo html_writer::start_tag('div', array('id' => 'gridshadebox'));
         echo html_writer::tag('div', '', array('id' => 'gridshadebox_overlay', 'style' => 'display:none;'));
-        echo html_writer::start_tag('div', array('id' => 'gridshadebox_content'));
+        echo html_writer::start_tag('div', array('id' => 'gridshadebox_content', 'class' => 'hide_content'));
 
         echo html_writer::tag('img', '', array('id' => 'gridshadebox_close', 'style' => 'display:none;',
             'src' => $this->output->pix_url('close', 'format_grid')));
