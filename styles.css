@@ -195,11 +195,11 @@ body.jsenabled #gridshadebox_content.hide_content {
     opacity: 0.8;
 }
 #gridshadebox_left {
-    top: 92px;
+    top: 92px;  /* Done here so that JS can change it. */
     left: -24px;
 }
 #gridshadebox_right {
-    top: 92px;
+    top: 92px;  /* Done here so that JS can change it. */
     right: -24px;
 }
 

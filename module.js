@@ -28,15 +28,28 @@
  * @namespace
  */
 M.format_grid = M.format_grid || {
+    // The YUI Object thang.
     ourYUI: null,
+    // Boolean - states if editing is on.
     editing_on: null,
+    // Boolean - states if the user can update.
     update_capability: null,
+    // YUI Node object for the grid icon element.
     selected_section: null,
+    // Integer - number of sections in the course.
     num_sections: null,
+    // Integer - current selected section number or '-1' if unknown.
     selected_section_no: -1,
-    shadebox_shown_array: null
+    /* Array - Index is section number (Integer) and value is either '1' for not section not shown or '2' for shown
+       helps to work out the next / previous section in 'find_next_shown_section'. */
+    shadebox_shown_array: null,
+    // DOM reference to the #gridshadebox_content element.
+    shadebox_content: null,
+    // DOM reference to the #gridshadebox_left element.
+    shadebox_arrow_l: null,
+    // DOM reference to the #gridshadebox_right element.
+    shadebox_arrow_r: null
 };
-M.format_grid.shadebox = M.format_grid.shadebox || {};
 
 /**
  * Initialise with the information supplied from the course format so we can operate.
@@ -104,7 +117,12 @@ M.format_grid.init = function(Y, the_editing_on, the_update_capability, the_num_
             M.format_grid.shadebox.update_shadebox();
         }
     }
-    Y.one("#gridshadebox_content").removeClass('hide_content'); // Content 'flash' prevention.
+
+    this.shadebox_content = Y.one("#gridshadebox_content");
+    this.shadebox_content.removeClass('hide_content'); // Content 'flash' prevention.
+    // Arrows.
+    this.shadebox_arrow_l = document.getElementById("gridshadebox_left");
+    this.shadebox_arrow_r = document.getElementById("gridshadebox_right");
 }
 
 /**
@@ -206,14 +224,11 @@ M.format_grid.icon_change_shown = function() {
  */
 M.format_grid.update_arrows = function() {
     "use strict";
-    var content = M.format_grid.ourYUI.one("#gridshadebox_content");
-    var arrow_l = document.getElementById("gridshadebox_left");
-    var arrow_r = document.getElementById("gridshadebox_right");
-    var computed_height = ((content.get('clientHeight') / 2) - 8);
-    console.log(content.getComputedStyle('height'));
-    console.log(content.get('clientHeight'));
-    arrow_l.style.top = computed_height + "px";
-    arrow_r.style.top = computed_height + "px";
+    var computed_height = ((this.shadebox_content.get('clientHeight') / 2) - 8);
+    console.log(this.shadebox_content.getComputedStyle('height'));
+    console.log(this.shadebox_content.get('clientHeight'));
+    this.shadebox_arrow_l.style.top = computed_height + "px";
+    this.shadebox_arrow_r.style.top = computed_height + "px";
 };
 
 /**
@@ -287,7 +302,14 @@ M.format_grid.find_next_shown_section = function(starting_point, increase_sectio
 };
 
 /** Below is shade box code **/
-M.format_grid.shadebox.shadebox_open; // Boolean stating if the shade box is open or not.
+M.format_grid.shadebox = M.format_grid.shadebox || {
+    // Boolean stating if the shade box is open or not.
+    shadebox_open: null,
+    // DOM reference to the shade box overlay element.
+    shadebox_overlay: null,
+    // DOM reference to the 'gridshadebox' element.
+    grid_shadebox: null
+};
 
 /**
  * Initialises the shade box.
@@ -295,11 +317,16 @@ M.format_grid.shadebox.shadebox_open; // Boolean stating if the shade box is ope
 M.format_grid.shadebox.initialize_shadebox = function() {
     "use strict";
     this.shadebox_open = false;
+
+    this.shadebox_overlay = document.getElementById('gridshadebox_overlay');
+    this.shadebox_overlay.style.display="";
+    this.grid_shadebox = document.getElementById('gridshadebox');
+    document.body.appendChild(this.grid_shadebox); // Adds the shade box to the document.
+
     this.hide_shadebox();
 
-    document.getElementById('gridshadebox_overlay').style.display="";
-    document.body.appendChild(document.getElementById('gridshadebox'));
-
+    /* This is added here as not editing and JS is on to move the content from
+       below the grid icons and into the shade box. */
     var content = document.getElementById('gridshadebox_content');
     content.style.position = 'absolute';
     content.style.width = '90%';
@@ -330,7 +357,7 @@ M.format_grid.shadebox.toggle_shadebox = function() {
 M.format_grid.shadebox.show_shadebox = function() {
     "use strict";
     this.update_shadebox();
-    document.getElementById("gridshadebox").style.display = "";
+    this.grid_shadebox.style.display = "";
 }
 
 /**
@@ -338,7 +365,7 @@ M.format_grid.shadebox.show_shadebox = function() {
  */
 M.format_grid.shadebox.hide_shadebox = function() {
     "use strict";
-    document.getElementById("gridshadebox").style.display = "none";
+    this.grid_shadebox.style.display = "none";
 }
 
 /**
@@ -347,9 +374,8 @@ M.format_grid.shadebox.hide_shadebox = function() {
 M.format_grid.shadebox.update_shadebox = function() {
     "use strict";
     // Make the overlay full screen (width happens automatically, so just update the height).
-    var overlay = document.getElementById("gridshadebox_overlay");
     var pagesize = this.get_page_height();
-    overlay.style.height = pagesize + "px";
+    this.shadebox_overlay.style.height = pagesize + "px";
 }
 
 /**
