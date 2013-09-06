@@ -18,7 +18,7 @@
  *
  * @package    course/format
  * @subpackage grid
- * @copyright  &copy; 2012 G J Barnard in respect to modifications of standard topics format.
+ * @copyright  &copy; 2012 onwards G J Barnard in respect to modifications of standard topics format.
  * @author     G J Barnard - gjbarnard at gmail dot com and {@link http://moodle.org/user/profile.php?id=442195}
  * @author     Based on code originally written by Paul Krix and Julian Ridden.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -140,28 +140,6 @@ M.format_grid.icon_click = function(e) {
 };
 
 /**
- * Called when the user clicks on the left arrow on the shade box or when they press the left
- * cursor key or Shift-TAB on the keyboard - see 'gridkeys.js'.
- * Moves to the previous visible section - looping to the last if the current is the first.
- * @param {Object} e Event object.
- */
-M.format_grid.arrow_left = function(e) {
-    "use strict";
-    this.change_selected_section(false);
-};
-
-/**
- * Called when the user clicks on the right arrow on the shade box or when they press the right
- * cursor key or TAB on the keyboard - see 'gridkeys.js'.
- * Moves to the next visible section - looping to the first if the current is the last.
- * @param {Object} e Event object.
- */
-M.format_grid.arrow_right = function(e) {
-    "use strict";
-    this.change_selected_section(true);
-};
-
-/**
  * Toggles the shade box on / off.
  * Called when the user clicks on a grid icon or presses the Esc or Enter keys - see 'gridkeys.js'.
  * @param {Object} e Event object.
@@ -185,6 +163,28 @@ M.format_grid.icon_toggle = function(e) {
     } else {
         console.log("Grid format:icon_toggle() - no selected section to show.");
     }
+};
+
+/**
+ * Called when the user clicks on the left arrow on the shade box or when they press the left
+ * cursor key or Shift-TAB on the keyboard - see 'gridkeys.js'.
+ * Moves to the previous visible section - looping to the last if the current is the first.
+ * @param {Object} e Event object.
+ */
+M.format_grid.arrow_left = function(e) {
+    "use strict";
+    this.change_selected_section(false);
+};
+
+/**
+ * Called when the user clicks on the right arrow on the shade box or when they press the right
+ * cursor key or TAB on the keyboard - see 'gridkeys.js'.
+ * Moves to the next visible section - looping to the first if the current is the last.
+ * @param {Object} e Event object.
+ */
+M.format_grid.arrow_right = function(e) {
+    "use strict";
+    this.change_selected_section(true);
 };
 
 /**
