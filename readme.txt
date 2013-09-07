@@ -31,6 +31,19 @@ Uninstallation
    'format_grid_icon' and 'format_grid_summary' tables.
 5. Put Moodle out of Maintenance Mode.
 
+Upgrade Instructions
+====================
+1. Ensure you have the version of Moodle as stated above in 'Required version of Moodle'.  This is essential as the
+   format relies on underlying core code that is out of my control.
+2. Put Moodle in 'Maintenance Mode' so that there are no users using it bar you as the administrator.
+3. In '/course/format/' move old 'grid' directory to a backup folder outside of Moodle.
+4. Copy new 'grid' to '/course/format/'.
+5. Go back in as an administrator and follow standard the 'plugin' update notification.  If needed, go to
+   'Site administration' -> 'Notifications' if this does not happen.
+6. If automatic 'Purge all caches' appears not to work by lack of display etc. then perform a manual 'Purge all caches'
+   under 'Home -> Site administration -> Development -> Purge all caches'.
+7. Put Moodle out of Maintenance Mode.
+
 Reporting Issues
 ================
 Before reporting an issue, please ensure that you are running the latest version for your release of Moodle.  The primary
@@ -241,6 +254,16 @@ Change by G J Barnard
 
 29th August 2013 Version 2.3.3.1 - Stable
   1.  Fixed CONTRIB-4252.
+
+7th September 2013 Version 2.3.4 - Stable
+  1.  Back ported CONTRIB-3240.
+  1.  Back ported CONTRIB-4580.
+  2.  Back ported CONTRIB-4579, thanks to all who helped on https://moodle.org/mod/forum/discuss.php?d=236075.
+  3.  At the request of Tim St.Clair I've changed the code such that the sections underneath the icons are hidden
+      by CSS when JavaScript is enabled so that there is no 'flash' as previously JS would perform the hiding.
+  5.  Added 'Upgrading' instructions above.
+  2.  Added in code developed by Nadav Kavalerchik to facilitate multi-lingual support for the 'new activity' icon.  Thank
+      you Nadav :).
 
 Authors
 -------

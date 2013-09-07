@@ -73,7 +73,7 @@ function xmldb_format_grid_upgrade($oldversion = 0) {
     }
 
     // Automatic 'Purge all caches'....
-    if ($oldversion < 2012082201) {
+    if ($oldversion < 2012082203) {
         purge_all_caches();
     }
 
