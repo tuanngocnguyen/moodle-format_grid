@@ -137,8 +137,7 @@ Roadmap
 
 Known Issues
 =============
-Currently the key press events to facilitate accessibility are proving difficult to implement.  If you know
-how to do this then please contact me to assist with it.
+All listed on https://tracker.moodle.org/browse/CONTRIB/component/11231
 
 History
 =============
