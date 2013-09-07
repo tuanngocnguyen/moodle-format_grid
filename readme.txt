@@ -253,16 +253,18 @@ Change by G J Barnard
   5.  Adapted the width of the shade box such that it is dynamic against the size of the window.
 
 29th August 2013 Version 2.3.3.1 - Stable
+Change by G J Barnard
   1.  Fixed CONTRIB-4252.
 
-7th September 2013 Version 2.3.4 - Stable
+7th September 2013 Version 2.3.4 - BETA
+Change by G J Barnard
   1.  Back ported CONTRIB-3240.
-  1.  Back ported CONTRIB-4580.
-  2.  Back ported CONTRIB-4579, thanks to all who helped on https://moodle.org/mod/forum/discuss.php?d=236075.
-  3.  At the request of Tim St.Clair I've changed the code such that the sections underneath the icons are hidden
+  2.  Back ported CONTRIB-4580.
+  3.  Back ported CONTRIB-4579, thanks to all who helped on https://moodle.org/mod/forum/discuss.php?d=236075.
+  4.  At the request of Tim St.Clair I've changed the code such that the sections underneath the icons are hidden
       by CSS when JavaScript is enabled so that there is no 'flash' as previously JS would perform the hiding.
   5.  Added 'Upgrading' instructions above.
-  2.  Added in code developed by Nadav Kavalerchik to facilitate multi-lingual support for the 'new activity' icon.  Thank
+  6.  Added in code developed by Nadav Kavalerchik to facilitate multi-lingual support for the 'new activity' icon.  Thank
       you Nadav :).
 
 Authors
