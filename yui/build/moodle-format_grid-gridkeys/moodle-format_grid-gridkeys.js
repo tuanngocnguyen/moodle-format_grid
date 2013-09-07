@@ -26,7 +26,7 @@ YUI.add('moodle-format_grid-gridkeys', function (Y, NAME) {
  */
 
 M.format_grid.gridkeys = M.format_grid.gridkeys || {};
-M.format_grid.gridkeys.init = function(Y) {
+M.format_grid.gridkeys.init = function() {
     Y().use('gallery-event-nav-keys', function(Y) {
         Y.on('esc', function (e) {
             e.preventDefault();
@@ -64,4 +64,4 @@ M.format_grid.gridkeys.init = function(Y) {
 };
 
 
-}, '@VERSION@', {"requires": ["gallery-event-nav-keys"]});
+}, '@VERSION@', {"use": ["gallery-event-nav-keys"]});
