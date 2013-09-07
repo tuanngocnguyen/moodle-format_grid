@@ -1,6 +1,6 @@
 {
   "moodle-format_grid-gridkeys": {
-    "use": [
+    "requires": [
         "gallery-event-nav-keys"
     ]
   }

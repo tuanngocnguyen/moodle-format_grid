@@ -1,3 +1,48 @@
+YUI.add('gallery-event-nav-keys', function(Y) {
+
+var keys = {
+        enter    : 13,
+        esc      : 27,
+        backspace: 8,
+        tab      : 9,
+        pageUp   : 33,
+        pageDown : 34,
+        left     : 37,
+        up       : 38,
+        right    : 39,
+        down     : 40
+    };
+
+Y.Object.each(keys, function (keyCode, name) {
+    Y.Event.define({
+        type: name,
+
+        on: function (node, sub, notifier, filter) {
+            var method = (filter) ? 'delegate' : 'on';
+
+            sub._handle = node[method]('keydown', function (e) {
+                if (e.keyCode === keyCode) {
+                    notifier.fire(e);
+                }
+            }, filter);
+        },
+
+        delegate: function () {
+            this.on.apply(this, arguments);
+        },
+
+        detach: function (node, sub) {
+            sub._handle.detach();
+        },
+
+        detachDelegate: function () {
+            this.detach.apply(this, arguments);
+        }
+    });
+});
+
+
+}, 'gallery-2011.02.02-21-07' ,{requires:['event-synthetic']});
 YUI.add('moodle-format_grid-gridkeys', function (Y, NAME) {
 
 // This file is part of Moodle - http://moodle.org/
@@ -29,7 +74,7 @@ M.format_grid = M.format_grid || {};
 M.format_grid.gridkeys = M.format_grid.gridkeys || {};
 M.format_grid.gridkeys = {
     init: function() {
-        Y().use('gallery-event-nav-keys', function(Y) {
+        YUI().use('gallery-event-nav-keys', function(Y) {
             Y.on('esc', function (e) {
                 e.preventDefault();
                 console.log("Esc pressed");
@@ -66,5 +111,4 @@ M.format_grid.gridkeys = {
     }
 };
 
-
-}, '@VERSION@', {"use": ["gallery-event-nav-keys"]});
+}, '@VERSION@', {"requires": ["gallery-event-nav-keys"]});

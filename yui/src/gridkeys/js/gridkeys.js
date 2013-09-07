@@ -27,7 +27,7 @@ M.format_grid = M.format_grid || {};
 M.format_grid.gridkeys = M.format_grid.gridkeys || {};
 M.format_grid.gridkeys = {
     init: function() {
-        Y().use('gallery-event-nav-keys', function(Y) {
+        YUI().use('gallery-event-nav-keys', function(Y) {
             Y.on('esc', function (e) {
                 e.preventDefault();
                 console.log("Esc pressed");
