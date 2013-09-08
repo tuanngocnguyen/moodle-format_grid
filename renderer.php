@@ -37,7 +37,7 @@ class format_grid_renderer extends format_section_renderer_base {
      * @return string HTML to output.
      */
     protected function start_section_list() {
-        return html_writer::start_tag('ul', array('class' => 'gtopics'));
+        return html_writer::start_tag('ul', array('class' => 'gtopics', 'id' => 'gtopics'));
     }
 
     /**
@@ -131,7 +131,7 @@ class format_grid_renderer extends format_section_renderer_base {
             $course->numsections,
             json_encode($this->shadeboxshownarray)));
         // Initialise the key control functionality...
-        $PAGE->requires->js('/course/format/grid/javascript/gridkeys.js');
+        $PAGE->requires->yui_module('moodle-format_grid-gridkeys', 'M.format_grid.gridkeys.init', null, null, true);
     }
 
     /**

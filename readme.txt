@@ -9,6 +9,24 @@ Requires Moodle version 2012062504.01 release 2.3.4+ (Build: 20130118) because o
 Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
 'docs.moodle.org/23/en/Installing_Moodle'.
 
+Free Software
+=============
+The Grid format is 'free' software under the terms of the GNU GPLv3 License, please see 'COPYING.txt'.
+
+It can be obtained for free from:
+https://moodle.org/plugins/view.php?plugin=format_grid
+and
+https://github.com/gjb2048/moodle-courseformat_grid/releases
+
+You have all the rights granted to you by the GPLv3 license.  If you are unsure about anything, then the
+FAQ - http://www.gnu.org/licenses/gpl-faq.html - is a good place to look.
+
+If you reuse any of the code then I kindly ask that you make reference to the format.
+
+If you make improvements or bug fixes then I would appreciate if you would send them back to me by forking from
+https://github.com/gjb2048/moodle-courseformat_grid and doing a 'Pull Request' so that the rest of the
+Moodle community benefits.
+
 Installation
 ============
 1. Ensure you have the version of Moodle as stated above in 'Required version of Moodle'.  This is essential as the
