@@ -74,39 +74,48 @@ M.format_grid = M.format_grid || {};
 M.format_grid.gridkeys = M.format_grid.gridkeys || {};
 M.format_grid.gridkeys = {
     init: function() {
-        YUI().use('gallery-event-nav-keys', function(Y) {
-            Y.on('esc', function (e) {
-                e.preventDefault();
-                console.log("Esc pressed");
-                console.log("Selected section no: " + M.format_grid.selected_section_no);
-                M.format_grid.icon_toggle(e);
-            });
-            Y.on('left', function (e) {
-                e.preventDefault();
-                console.log("Left pressed");
-                M.format_grid.arrow_left(e);
-            });
-            Y.on('right', function (e) {
-                e.preventDefault();
-                console.log("Right pressed");
-                M.format_grid.arrow_right(e);
-            });
-            Y.on('enter', function (e) {
+        Y.on('esc', function (e) {
             e.preventDefault();
-                console.log("Enter pressed");
-                console.log("Selected section no: " + M.format_grid.selected_section_no);
+            Y.log("Esc pressed");
+            Y.log("Selected section no: " + M.format_grid.selected_section_no);
+            M.format_grid.icon_toggle(e);
+        });
+        Y.on('left', function (e) {
+            e.preventDefault();
+            Y.log("Left pressed");
+            M.format_grid.arrow_left(e);
+        });
+        Y.on('right', function (e) {
+            e.preventDefault();
+            Y.log("Right pressed");
+            M.format_grid.arrow_right(e);
+        });
+        Y.on('enter', function (e) {
+            //var ae = document.activeElement;
+            if (M.format_grid.shadebox.shadebox_open == false) {
+                e.preventDefault();
+                Y.log("Enter pressed");
+                Y.log("Selected section no: " + M.format_grid.selected_section_no);
                 M.format_grid.icon_toggle(e);
-            });
-            Y.on('tab', function (e) {
+            } else if (e.shiftKey) {
+                e.preventDefault();
+                Y.log("Shift Enter pressed");
+                Y.log("Selected section no: " + M.format_grid.selected_section_no);
+                M.format_grid.icon_toggle(e);
+            }
+        });
+        Y.on('tab', function (e) {
+            //var ae = document.activeElement;
+            if (M.format_grid.shadebox.shadebox_open == false) {
                 e.preventDefault();
                 if (e.shiftKey) {
-                    console.log("Shift Tab pressed");
+                    Y.log("Shift Tab pressed");
                     M.format_grid.arrow_left(e);
                 } else {
-                console.log("Tab pressed");
+                    Y.log("Tab pressed");
                     M.format_grid.arrow_right(e);
                 }
-            });
+            }
         });
     }
 };

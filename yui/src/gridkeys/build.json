@@ -7,6 +7,9 @@
         ],
         "jsfiles": [
             "gridkeys.js"
+        ],
+        "postexec": [
+            "./scripts/backport.js moodle-format_grid-gridkeys"
         ]
     }
   }

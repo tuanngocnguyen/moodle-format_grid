@@ -1,3 +1,0 @@
-// Code from https://github.com/lsmith/yui3-gallery/tree/master/build/gallery-event-nav-keys
-// Licensed under: http://yuilibrary.com/license/ - https://github.com/lsmith/yui3-gallery/blob/master/README
-YUI.add("moodle-format_grid-galleryeventnavkeys",function(b){var a={enter:13,esc:27,backspace:8,tab:9,pageUp:33,pageDown:34,left:37,up:38,right:39,down:40};b.Object.each(a,function(d,c){b.Event.define({type:c,on:function(h,f,g,e){var i=(e)?"delegate":"on";f._handle=h[i]("keydown",function(j){if(j.keyCode===d){g.fire(j);}},e);},delegate:function(){this.on.apply(this,arguments);},detach:function(f,e){e._handle.detach();},detachDelegate:function(){this.detach.apply(this,arguments);}});});},"gallery-2011.02.02-21-07",{requires:["event-synthetic"]});
