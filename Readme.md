@@ -1,6 +1,6 @@
 Grid Course Format
 ============================
-A topics based format that uses a grid of user selectable images to popup a light box of the section.
+A topics based format that uses a grid of user selectable images to pop up a light box of the section.
 
 Required version of Moodle
 ==========================
@@ -159,6 +159,33 @@ All listed on https://tracker.moodle.org/browse/CONTRIB/component/11231
 
 History
 =============
+10th September 2013 Version 2.5.4 - Stable.
+  1.  Partial implementation of CONTRIB-3240.  Thanks to Andrew Nicols for helping with the YUI module code
+      on: https://moodle.org/mod/forum/discuss.php?d=237275.
+      This means that it is now possible to navigate using the keyboard with the 'left' / 'right' cursor keys
+      being used to perform previous section / next section respectively and the 'esc' key to toggle open / closed
+      the shade box.  As a bonus of this change I've added in navigation arrows to the shade box which appear when
+      you hover over the middle of the sides - cool eh?
+      Initially I also added Shift-TAB (previous section) / TAB (next section) / Enter (open shade box) /
+      Shift-Enter (close shade box) keys to but after much deliberation (and logic issues) I have decided that until
+      WIA-ARIA is fully understood I'll leave them out.  Once much more information is known I'll put them back in.
+      Also thanks to Enrico Canale and Darren Britten of La Trobe University for their support and information.
+
+      Ok, if you intend to change the 'gridkeys.js' code then you'll firstly need to read: http://docs.moodle.org/dev/YUI/Shifter
+      it is used to build the source in '/yui/src/gridkeys/js/gridkeys.js' and bring in the 'gallery-event-nav-keys' to build
+      the YUI module into 'yui/build/moodle-format_grid-gridkeys' and place a back port minified version in '/yui/gridkeys' for
+      use in Moodle 2.3 and 2.4 versions - so even if you have those versions you will need this Moodle 2.5 version to
+      make changes.  The compiled YUI module is then loaded in all versions (2.3, 2.4 and 2.5) in 'renderer.php' by the line:
+      $PAGE->requires->yui_module('moodle-format_grid-gridkeys', 'M.format_grid.gridkeys.init', null, null, true);
+      So even though the location is different for M2.3 / M2.4 than M2.5 it's the same - that's a M2.5+ thing.  There is no
+      rocket science to using / learning Shifter, I did so late on a Saturday night whilst half asleep - admittedly with Andrew's
+      on-line assistance.
+
+      Note:  If you're wondering where the M2.3 and M2.4 versions are, well I intend to release them a few days after
+             this M2.5 version so that any bugs that have not been found can be fixed once without having to re-release
+             three versions.
+  2.  'modules.js' has been completely reworked so that it is efficient and documented.
+
 30th August 2013 Version 2.5.3.3 - Stable
 Change by G J Barnard
   1.  Implemented CONTRIB-4580.
