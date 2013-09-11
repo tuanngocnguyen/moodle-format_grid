@@ -86,6 +86,7 @@ M.format_grid.gridkeys = {
             e.preventDefault();
             M.format_grid.arrow_right(e);
         });
+        /* Deferred functionality - see CONTRIB-3240...
         Y.on('enter', function (e) {
             //var ae = document.activeElement;
             if (M.format_grid.shadebox.shadebox_open == false) {
@@ -107,6 +108,7 @@ M.format_grid.gridkeys = {
                 }
             }
         });
+        */
     }
 };
 

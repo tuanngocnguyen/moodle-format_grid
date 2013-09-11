@@ -85,10 +85,10 @@ do so:
 
 Reporting Issues
 ================
-Before reporting an issue, please ensure that you are running the latest version for your release of Moodle.  The primary
-release area is located on https://moodle.org/plugins/view.php?plugin=format_grid.  It is also essential that you are
-operating the required version of Moodle as stated at the top - this is because the format relies on core functionality that
-is out of its control.
+Before reporting an issue, please ensure that you are running the latest version for your release of Moodle.  Major version numbers
+are always the same, so for Moodle 2.5.x there will be a Grid format 2.5.x.  The primary release area is located on
+https://moodle.org/plugins/view.php?plugin=format_grid.  It is also essential that you are operating the required version of Moodle
+as stated at the top - this is because the format relies on core functionality that is out of its control.
 
 All 'Grid format' does is integrate with the course page and control it's layout, therefore what may appear to be an issue
 with the format is in fact to do with a theme or core component.  Please be confident that it is an issue with 'Grid format'
@@ -107,6 +107,57 @@ for the component or contact us direct (details at the bottom).
 It is essential that you provide as much information as possible, the critical information being the contents of the format's 
 version.php file.  Other version information such as specific Moodle version, theme name and version also helps.  A screen shot
 can be really useful in visualising the issue along with any files you consider to be relevant.
+
+Usage
+=====
+
+Viewing
+-------
+Click on a grid icon or use 'esc' to open the current selected icon which will then display the shade box containing the section
+content.  Click on the 'X' or use 'esc' to close.
+
+Use the 'left' / 'right' cursor keys to select the previous / next section when the shade box is and is not displayed.
+
+Use the 'left' / 'right' arrows that appear when hovering over the middle of the border when the shade box is shown to navigate to
+the previous / next section.
+
+When the 'Course layout' course setting are set to 'Show all sections on one page' the shade box will operate.  When set to
+'Show one section per page' the shade box will not show but instead the icons will act like links as they do with the
+'Topics' format and take you to a single section page.
+
+Editing
+-------
+Use the 'Change image' link underneath each icon to change the icon's image.
+
+Edit the sections underneath the icons in the normal way.  Note: Some things like current section colour will not update until page
+refresh.
+
+The shade box is not shown in this mode.
+
+Making Changes
+==============
+
+Changing the keyboard control code
+----------------------------------
+To change the 'gridkeys.js' code then you'll firstly need to read: http://docs.moodle.org/dev/YUI/Shifter
+it is used to build the source in '/yui/src/gridkeys/js/gridkeys.js' and bring in the 'gallery-event-nav-keys' to build
+the YUI module into 'yui/build/moodle-format_grid-gridkeys' and place a back port minified version in '/yui/gridkeys' for
+use in Moodle 2.3 and 2.4 versions - so even if you have those versions you will need this Moodle 2.5 version to
+make changes.  The compiled YUI module is then loaded in all versions (2.3, 2.4 and 2.5) in 'renderer.php' by the line:
+$PAGE->requires->yui_module('moodle-format_grid-gridkeys', 'M.format_grid.gridkeys.init', null, null, true);
+So even though the location is different for M2.3 / M2.4 than M2.5 it's the same - that's a M2.5+ thing.  There is no
+rocket science to using / learning Shifter, I did so late on a Saturday night whilst half asleep - admittedly with Andrew's
+on-line assistance.
+
+Current selected colour
+-----------------------
+Edit 'styles.css', change the value in the '.course-content ul.gridicons li.currentselected' selector and perform a 'Purge all caches'
+or override in your theme.
+
+Current section
+---------------
+Edit 'styles.css', change the value in the '.course-content ul.gridicons li.current' selector and perform a 'Purge all caches' or
+override in your theme.
 
 File information
 ================
@@ -148,14 +199,16 @@ Roadmap
 =============
 1. Improved instructions including Moodle docs.
 2. User definable grid row icon numbers - https://moodle.org/mod/forum/discuss.php?d=196716
-3. CONTRIB-3500 - Gridview course format more accessible.
+3. CONTRIB-3240 - Gridview course format more accessible.
 4. CONTRIB-4099 - Grid format does not allow the user to set the size of the image / box.
 5. Use of crowd funding facility to support development.
 6. Continued maintenance of issues: https://tracker.moodle.org/browse/CONTRIB/component/11231.
+7. Add in grid format specific capabilities to change things.
 
 Known Issues
 =============
-All listed on https://tracker.moodle.org/browse/CONTRIB/component/11231
+1. All listed on https://tracker.moodle.org/browse/CONTRIB/component/11231.
+2. Unable to delete a grid icon image.
 
 History
 =============
@@ -171,24 +224,15 @@ History
       WIA-ARIA is fully understood I'll leave them out.  Once much more information is known I'll put them back in.
       Also thanks to Enrico Canale and Darren Britten of La Trobe University for their support and information.
 
-      Ok, if you intend to change the 'gridkeys.js' code then you'll firstly need to read: http://docs.moodle.org/dev/YUI/Shifter
-      it is used to build the source in '/yui/src/gridkeys/js/gridkeys.js' and bring in the 'gallery-event-nav-keys' to build
-      the YUI module into 'yui/build/moodle-format_grid-gridkeys' and place a back port minified version in '/yui/gridkeys' for
-      use in Moodle 2.3 and 2.4 versions - so even if you have those versions you will need this Moodle 2.5 version to
-      make changes.  The compiled YUI module is then loaded in all versions (2.3, 2.4 and 2.5) in 'renderer.php' by the line:
-      $PAGE->requires->yui_module('moodle-format_grid-gridkeys', 'M.format_grid.gridkeys.init', null, null, true);
-      So even though the location is different for M2.3 / M2.4 than M2.5 it's the same - that's a M2.5+ thing.  There is no
-      rocket science to using / learning Shifter, I did so late on a Saturday night whilst half asleep - admittedly with Andrew's
-      on-line assistance.
-
       Note:  If you're wondering where the M2.3 and M2.4 versions are, well I intend to release them a few days after
              this M2.5 version so that any bugs that have not been found can be fixed once without having to re-release
              three versions.
   2.  'modules.js' has been completely reworked so that it is efficient and documented.
+  3.  Added Pirate language.
 
 30th August 2013 Version 2.5.3.3 - Stable
 Change by G J Barnard
-  1.  Implemented CONTRIB-4580.
+  1.  Implemented CONTRIB-4580 - Highlight current section.
   2.  Implemented CONTRIB-4579, thanks to all who helped on https://moodle.org/mod/forum/discuss.php?d=236075.
   3.  At the request of Tim St.Clair I've changed the code such that the sections underneath the icons are hidden
       by CSS when JavaScript is enabled so that there is no 'flash' as previously JS would perform the hiding.
