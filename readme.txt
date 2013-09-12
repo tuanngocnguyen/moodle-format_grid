@@ -172,6 +172,31 @@ to:
     </div>
 </body>
 
+Making Changes
+==============
+
+Changing the keyboard control code
+----------------------------------
+To change the 'gridkeys.js' code then you'll firstly need to read: http://docs.moodle.org/dev/YUI/Shifter
+it is used to build the source in '/yui/src/gridkeys/js/gridkeys.js' and bring in the 'gallery-event-nav-keys' to build
+the YUI module into 'yui/build/moodle-format_grid-gridkeys' and place a back port minified version in '/yui/gridkeys' for
+use in Moodle 2.3 and 2.4 versions - so even if you have those versions you will need this Moodle 2.5 version to
+make changes.  The compiled YUI module is then loaded in all versions (2.3, 2.4 and 2.5) in 'renderer.php' by the line:
+$PAGE->requires->yui_module('moodle-format_grid-gridkeys', 'M.format_grid.gridkeys.init', null, null, true);
+So even though the location is different for M2.3 / M2.4 than M2.5 it's the same - that's a M2.5+ thing.  There is no
+rocket science to using / learning Shifter, I did so late on a Saturday night whilst half asleep - admittedly with Andrew's
+on-line assistance.
+
+Current selected colour
+-----------------------
+Edit 'styles.css', change the value in the '.course-content ul.gridicons li.currentselected' selector and perform a 'Purge all caches'
+or override in your theme.
+
+Current section
+---------------
+Edit 'styles.css', change the value in the '.course-content ul.gridicons li.current' selector and perform a 'Purge all caches' or
+override in your theme.
+
 Files
 --------------
 
@@ -222,9 +247,19 @@ Files
 
 Roadmap
 =============
-
-1. Improved instructions.
+1. Improved instructions including Moodle docs.
 2. User definable grid row icon numbers - https://moodle.org/mod/forum/discuss.php?d=196716
+3. CONTRIB-3240 - Gridview course format more accessible.
+4. CONTRIB-4099 - Grid format does not allow the user to set the size of the image / box.
+5. Use of crowd funding facility to support development.
+6. Continued maintenance of issues: https://tracker.moodle.org/browse/CONTRIB/component/11231.
+7. Add in grid format specific capabilities to change things.
+
+Known Issues
+=============
+1. All listed on https://tracker.moodle.org/browse/CONTRIB/component/11231.
+2. Unable to delete a grid icon image.
+
 
 History
 =============
@@ -274,16 +309,27 @@ Change by G J Barnard
 Change by G J Barnard
   1.  Fixed CONTRIB-4252.
 
-7th September 2013 Version 2.3.4 - BETA
+12th September 2013 Version 2.3.4 - Stable
 Change by G J Barnard
-  1.  Back ported CONTRIB-3240.
-  2.  Back ported CONTRIB-4580.
-  3.  Back ported CONTRIB-4579, thanks to all who helped on https://moodle.org/mod/forum/discuss.php?d=236075.
-  4.  At the request of Tim St.Clair I've changed the code such that the sections underneath the icons are hidden
+  1.  Back ported CONTRIB-4580.
+  2.  Back ported CONTRIB-4579, thanks to all who helped on https://moodle.org/mod/forum/discuss.php?d=236075.
+  3.  At the request of Tim St.Clair I've changed the code such that the sections underneath the icons are hidden
       by CSS when JavaScript is enabled so that there is no 'flash' as previously JS would perform the hiding.
-  5.  Added 'Upgrading' instructions above.
-  6.  Added in code developed by Nadav Kavalerchik to facilitate multi-lingual support for the 'new activity' icon.  Thank
+  4.  Added 'Upgrading' instructions above.
+  5.  Added in code developed by Nadav Kavalerchik to facilitate multi-lingual support for the 'new activity' icon.  Thank
       you Nadav :).
+  6.  Partial implementation of CONTRIB-3240 (back port).  Thanks to Andrew Nicols for helping with the YUI module code
+      on: https://moodle.org/mod/forum/discuss.php?d=237275.
+      This means that it is now possible to navigate using the keyboard with the 'left' / 'right' cursor keys
+      being used to perform previous section / next section respectively and the 'esc' key to toggle open / closed
+      the shade box.  As a bonus of this change I've added in navigation arrows to the shade box which appear when
+      you hover over the middle of the sides - cool eh?
+      Initially I also added Shift-TAB (previous section) / TAB (next section) / Enter (open shade box) /
+      Shift-Enter (close shade box) keys to but after much deliberation (and logic issues) I have decided that until
+      WIA-ARIA is fully understood I'll leave them out.  Once much more information is known I'll put them back in.
+      Also thanks to Enrico Canale and Darren Britten of La Trobe University for their support and information.
+  7.  'module.js' has been completely reworked so that it is efficient and documented.
+  8.  Added Pirate language.
 
 Authors
 -------
