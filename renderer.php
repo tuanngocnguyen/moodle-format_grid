@@ -120,8 +120,8 @@ class format_grid_renderer extends format_section_renderer_base {
         $this->make_block_topics($course, $sections, $editing, $has_cap_update, $has_cap_vishidsect, $mods, $modnames, $modnamesused, $str_edit_summary, $url_pic_edit, false);
 
         echo html_writer::end_tag('div');
-        echo html_writer::tag('div', '&nbsp;', array('class' => 'clearer'));
         echo html_writer::end_tag('div');
+        echo html_writer::tag('div', '&nbsp;', array('class' => 'clearer'));
         echo html_writer::end_tag('div');
 
         // Initialise the shade box functionality:...
