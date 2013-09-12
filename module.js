@@ -67,13 +67,13 @@ M.format_grid.init = function(Y, the_editing_on, the_update_capability, the_num_
     this.update_capability = the_update_capability;
     this.selected_section = null;
     this.num_sections = parseInt(the_num_sections);
-    console.log("SSA parameter: " + the_shadebox_shown_array);
+    //console.log("SSA parameter: " + the_shadebox_shown_array);
     this.shadebox_shown_array = JSON.parse(the_shadebox_shown_array);
-    console.log("SSA var: " + the_shadebox_shown_array);
+    //console.log("SSA var: " + the_shadebox_shown_array);
 
     if (this.num_sections > 0) {
         this.set_selected_section(this.num_sections, true, true);  // Section 0 can be in the grid.
-        console.log("init() - selected section no: " + this.selected_section_no);
+        //console.log("init() - selected section no: " + this.selected_section_no);
     } else {
         this.selected_section_no = -1;
     }
@@ -152,17 +152,17 @@ M.format_grid.icon_toggle = function(e) {
         if ((this.editing_on == true) && (this.update_capability == true)) {
             window.scroll(0,document.getElementById("section-" + this.selected_section_no).offsetTop);
         } else if (M.format_grid.shadebox.shadebox_open == true) {
-            console.log("Shadebox was open");
+            //console.log("Shadebox was open");
             this.shadebox.toggle_shadebox();
         } else {
-            console.log("Shadebox was closed");
+            //console.log("Shadebox was closed");
             this.icon_change_shown();
             this.shadebox.toggle_shadebox();
             this.update_arrows();
         }
-    } else {
-        console.log("Grid format:icon_toggle() - no selected section to show.");
-    }
+    } //else {
+        //console.log("Grid format:icon_toggle() - no selected section to show.");
+    //}
 };
 
 /**
@@ -195,14 +195,14 @@ M.format_grid.change_selected_section = function(increase_section) {
     "use strict";
     if (this.selected_section_no != -1) { // Then a valid shown section has been selected.
         this.set_selected_section(this.selected_section_no, increase_section, false);
-        console.log("Selected section no is now: " + this.selected_section_no);
+        //console.log("Selected section no is now: " + this.selected_section_no);
         if (M.format_grid.shadebox.shadebox_open == true) {
             this.icon_change_shown();
             this.update_arrows();
         }
-    } else {
-        console.log("Grid format:change_selected_section() - no selected section to show.");
-    }
+    } //else {
+        //console.log("Grid format:change_selected_section() - no selected section to show.");
+    //}
 };
 
 /**
@@ -225,8 +225,8 @@ M.format_grid.icon_change_shown = function() {
 M.format_grid.update_arrows = function() {
     "use strict";
     var computed_height = ((this.shadebox_content.get('clientHeight') / 2) - 8);
-    console.log(this.shadebox_content.getComputedStyle('height'));
-    console.log(this.shadebox_content.get('clientHeight'));
+    //console.log(this.shadebox_content.getComputedStyle('height'));
+    //console.log(this.shadebox_content.get('clientHeight'));
     this.shadebox_arrow_l.style.top = computed_height + "px";
     this.shadebox_arrow_r.style.top = computed_height + "px";
 };

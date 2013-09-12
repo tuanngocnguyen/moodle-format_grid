@@ -212,7 +212,14 @@ Known Issues
 
 History
 =============
+12th September 2013 Version 2.5.4.1 - Stable.
+Change by G J Barnard
+  1.  Commented out 'console.log' code in 'module.js'.
+  2.  Removed old 'gridkeys.js' from 'javascript' folder.
+Note: If you have already installed V2.5.4 then this is not an essential upgrade.
+
 10th September 2013 Version 2.5.4 - Stable.
+Change by G J Barnard
   1.  Partial implementation of CONTRIB-3240.  Thanks to Andrew Nicols for helping with the YUI module code
       on: https://moodle.org/mod/forum/discuss.php?d=237275.
       This means that it is now possible to navigate using the keyboard with the 'left' / 'right' cursor keys
@@ -227,7 +234,7 @@ History
       Note:  If you're wondering where the M2.3 and M2.4 versions are, well I intend to release them a few days after
              this M2.5 version so that any bugs that have not been found can be fixed once without having to re-release
              three versions.
-  2.  'modules.js' has been completely reworked so that it is efficient and documented.
+  2.  'module.js' has been completely reworked so that it is efficient and documented.
   3.  Added Pirate language.
 
 30th August 2013 Version 2.5.3.3 - Stable
