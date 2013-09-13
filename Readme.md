@@ -7,7 +7,7 @@ Required version of Moodle
 This version works with Moodle version 2013051400.00 release 2.5 (Build: 20130514) and above until the next release.
 
 Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
-'docs.moodle.org/25/en/Installing_Moodle'.
+'docs.moodle.org/25/en/Installing_Moodle' / 'docs.moodle.org/dev/Moodle_2.5_release_notes'.
 
 Free Software
 =============
@@ -212,6 +212,13 @@ Known Issues
 
 History
 =============
+12th September 2013 Version 2.5.4.2 - Stable.
+Change by G J Barnard
+  1.  Changed 'JSON' code in 'module.js' to use the YUI library for JSON to support situations where the 'JSON'
+      library is not built into the browser.  Thanks to Colin Taylor for providing information of a situation I
+      could not have possibly tested.
+Note: If you have already installed V2.5.4 or V2.5.4.1 then this is not an essential upgrade.
+
 12th September 2013 Version 2.5.4.1 - Stable.
 Change by G J Barnard
   1.  Commented out 'console.log' code in 'module.js'.
