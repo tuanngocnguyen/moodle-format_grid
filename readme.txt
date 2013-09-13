@@ -7,7 +7,7 @@ Required version of Moodle
 Requires Moodle version 2012120301.02 release 2.4.1+ (Build: 20130118).
 
 Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
-'docs.moodle.org/24/en/Installing_Moodle'.
+'docs.moodle.org/24/en/Installing_Moodle' / 'docs.moodle.org/dev/Moodle_2.4_release_notes'.
 
 Free Software
 =============
@@ -240,6 +240,10 @@ Change by G J Barnard
       Also thanks to Enrico Canale and Darren Britten of La Trobe University for their support and information.
   7.  'module.js' has been completely reworked so that it is efficient and documented.
   8.  Added Pirate language.
+  9.  Changed 'JSON' code in 'module.js' to use the YUI library for JSON to support situations where the 'JSON'
+      library is not built into the browser.  Thanks to Colin Taylor for providing information of a situation I
+      could not have possibly tested.
+ 10.  Commented out 'console.log' code in 'module.js'.
 
 Authors
 -------

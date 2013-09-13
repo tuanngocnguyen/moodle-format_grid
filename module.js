@@ -68,8 +68,12 @@ M.format_grid.init = function(Y, the_editing_on, the_update_capability, the_num_
     this.selected_section = null;
     this.num_sections = parseInt(the_num_sections);
     //console.log("SSA parameter: " + the_shadebox_shown_array);
-    this.shadebox_shown_array = JSON.parse(the_shadebox_shown_array);
-    //console.log("SSA var: " + the_shadebox_shown_array);
+    //this.shadebox_shown_array = JSON.parse(the_shadebox_shown_array);
+    this.shadebox_shown_array = the_shadebox_shown_array;
+    Y.use('json-parse', function (Y) {
+        M.format_grid.shadebox_shown_array = Y.JSON.parse(M.format_grid.shadebox_shown_array);
+    });
+    //console.log("SSA var: " + this.shadebox_shown_array);
 
     if (this.num_sections > 0) {
         this.set_selected_section(this.num_sections, true, true);  // Section 0 can be in the grid.
@@ -123,7 +127,7 @@ M.format_grid.init = function(Y, the_editing_on, the_update_capability, the_num_
     // Arrows.
     this.shadebox_arrow_l = document.getElementById("gridshadebox_left");
     this.shadebox_arrow_r = document.getElementById("gridshadebox_right");
-}
+};
 
 /**
  * Called when the user clicks on the grid icon, set up in the init() method.
@@ -334,7 +338,7 @@ M.format_grid.shadebox.initialize_shadebox = function() {
     content.style.left = '5%';
     //content.style.marginLeft = '-400px';
     content.style.zIndex = '9000001';
-}
+};
 
 /**
  * Toggles the shade box open / closed.
@@ -349,7 +353,7 @@ M.format_grid.shadebox.toggle_shadebox = function() {
         this.show_shadebox();
         this.shadebox_open = true;
     }
-}
+};
 
 /**
  * Shows the shade box.
@@ -358,7 +362,7 @@ M.format_grid.shadebox.show_shadebox = function() {
     "use strict";
     this.update_shadebox();
     this.grid_shadebox.style.display = "";
-}
+};
 
 /**
  * Hides the shade box.
@@ -366,7 +370,7 @@ M.format_grid.shadebox.show_shadebox = function() {
 M.format_grid.shadebox.hide_shadebox = function() {
     "use strict";
     this.grid_shadebox.style.display = "none";
-}
+};
 
 /**
  * Adjusts the size of the shade box every time it's shown as the browser window could have changed.
@@ -376,7 +380,7 @@ M.format_grid.shadebox.update_shadebox = function() {
     // Make the overlay full screen (width happens automatically, so just update the height).
     var pagesize = this.get_page_height();
     this.shadebox_overlay.style.height = pagesize + "px";
-}
+};
 
 /**
  * Gets the page height.
@@ -412,4 +416,4 @@ M.format_grid.shadebox.get_page_height = function() {
     }
 
     return pageHeight;
-}
+};
