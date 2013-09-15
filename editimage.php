@@ -87,7 +87,13 @@ if ($mform->is_cancelled()) {
 
     if ($newfilename = $mform->get_new_filename('icon_file')) {
         // We have a new file so can delete the old....
-        $fs->delete_area_files($context->id, 'course', 'section', $sectionid);
+        $sectionicon = course_get_format($course)->grid_get_icon($course->id, $sectionid);
+        if ($sectionicon) {
+            if ($file = $fs->get_file($context->id, 'course', 'section', $sectionid, '/', $sectionicon->imagepath)) {
+                $file->delete();
+            }
+        }
+
         // Resize the new image and save it...
         $created = time();
         $storedfile_record = array(
