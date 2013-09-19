@@ -212,6 +212,13 @@ Known Issues
 
 History
 =============
+19th September 2013 Version 2.5.4.3 - Stable.
+Change by G J Barnard
+  1.  Fixed sections not being shown when in 'Show one section per page' mode and editing.  Thanks to
+      Zdravko Stoimenov for reporting this.
+  2.  Changed 'editimage.php' to ensure that only the icon is removed when changing it.  No specific
+      issue just refactoring the code as a preventative measure.
+
 12th September 2013 Version 2.5.4.2 - Stable.
 Change by G J Barnard
   1.  Changed 'JSON' code in 'module.js' to use the YUI library for JSON to support situations where the 'JSON'
