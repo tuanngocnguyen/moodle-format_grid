@@ -396,7 +396,7 @@ class format_grid_renderer extends format_section_renderer_base {
 
                     $title .= html_writer::end_tag('div');
 
-                    $url = course_get_url($course, $thissection->section, array('navigation' => true));
+                    $url = course_get_url($course, $thissection->section);
                     if ($url) {
                         $title = html_writer::link($url, $title, array('id' => 'gridsection-' . $thissection->section));
                     }
