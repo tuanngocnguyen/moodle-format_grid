@@ -213,7 +213,7 @@ class format_grid_renderer extends format_section_renderer_base {
         }
         echo html_writer::start_tag('li', array(
             'id' => 'section-0',
-            'class' => 'section main' . ($this->topic0_at_top ? '' : ' grid_section')));
+            'class' => 'section main' . ($this->topic0_at_top ? '' : ' grid_section hide_section')));
 
         echo html_writer::tag('div', '&nbsp;', array('class' => 'right side'));
 
@@ -396,9 +396,9 @@ class format_grid_renderer extends format_section_renderer_base {
 
                     $title .= html_writer::end_tag('div');
 
-                    $url = course_get_url($course, $thissection->section, array('navigation' => true));
+                    $url = course_get_url($course, $thissection->section);
                     if ($url) {
-                        $title = html_writer::link($url, $title);
+                        $title = html_writer::link($url, $title, array('id' => 'gridsection-' . $thissection->section));
                     }
                     echo $title;
 
