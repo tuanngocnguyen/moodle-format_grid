@@ -94,9 +94,11 @@ All 'Grid format' does is integrate with the course page and control it's layout
 with the format is in fact to do with a theme or core component.  Please be confident that it is an issue with 'Grid format'
 but if in doubt, ask.
 
-We operate a policy that we will fix all genuine issues for free.  Improvements are at our discretion.  We are happy to make bespoke
-customisations / improvements for a negotiated fee.  We will endeavour to respond to all requests for support as quickly as possible,
-if you require a faster service then offering payment for the service will expedite the response.
+We operate a policy that we will fix all genuine issues for free (this only applies to the code as supplied from the sources listed
+in 'Free Software' above.  Any changes / improvements you make are not covered and invalidate this policy for all of the code).
+Improvements are at our discretion.  We are happy to make bespoke customisations / improvements for a negotiated fee.  We will
+endeavour to respond to all requests for support as quickly as possible, if you require a faster service then offering payment for
+the service will expedite the response.
 
 It takes time and effort to maintain the format, therefore donations are appreciated.
 
