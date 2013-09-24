@@ -1,10 +1,36 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Grid Format - A topics based format that uses a grid of user selectable images to popup a light box of the section.
+ *
+ * @package    course/format
+ * @subpackage grid
+ * @copyright  &copy; 2012 G J Barnard in respect to modifications of standard topics format.
+ * @author     G J Barnard - gjbarnard at gmail dot com and {@link http://moodle.org/user/profile.php?id=442195}
+ * @author     Based on code originally written by Paul Krix and Julian Ridden.
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 /* Imports */
 require_once("../../../config.php");
 require_once($CFG->dirroot . '/repository/lib.php');
 require_once('./editimage_form.php');
 require_once($CFG->libdir . '/gdlib.php');
+require_once($CFG->dirroot . '/course/format/grid/lib.php');
 
 /* Script settings */
 define('GRID_ITEM_IMAGE_WIDTH', 210);
@@ -62,7 +88,12 @@ if ($mform->is_cancelled()) {
 
     if ($newfilename = $mform->get_new_filename('icon_file')) {
         // We have a new file so can delete the old....
-        $fs->delete_area_files($context->id, 'course', 'section', $sectionid);
+        $sectionicon = _grid_get_icon($course->id, $sectionid);
+        if ($sectionicon) {
+            if ($file = $fs->get_file($context->id, 'course', 'section', $sectionid, '/', $sectionicon->imagepath)) {
+                $file->delete();
+            }
+        }
         // Resize the new image and save it...
         $created = time();
         $storedfile_record = array(

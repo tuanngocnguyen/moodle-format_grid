@@ -81,7 +81,7 @@ class format_grid_renderer extends format_section_renderer_base {
             $url_pic_edit = false;
             $str_edit_summary = '';
         }
-        echo html_writer::start_tag('div', array('id' => 'middle-column'));
+        echo html_writer::start_tag('div', array('id' => 'gridmiddle-column'));
         echo $this->output->skip_link_target();
 
         /* Start at 1 to skip the summary block.
@@ -249,11 +249,10 @@ class format_grid_renderer extends format_section_renderer_base {
 
         if ($this->topic0_at_top) {
             echo html_writer::start_tag('ul', array('class' => 'gtopics-0'));
-            //echo $this->start_section_list();
         }
         echo html_writer::start_tag('li', array(
             'id' => 'section-0',
-            'class' => 'section main' . ($this->topic0_at_top ? '' : ' grid_section')));
+            'class' => 'section main' . ($this->topic0_at_top ? '' : ' grid_section hide_section')));
 
         echo html_writer::tag('div', '&nbsp;', array('class' => 'right side'));
 
