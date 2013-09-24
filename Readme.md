@@ -212,12 +212,14 @@ Known Issues
 
 History
 =============
-19th September 2013 Version 2.5.4.3 - Stable.
+24th September 2013 Version 2.5.4.3 - Stable.
 Change by G J Barnard
   1.  Fixed sections not being shown when in 'Show one section per page' mode and editing.  Thanks to
       Zdravko Stoimenov for reporting this.
   2.  Changed 'editimage.php' to ensure that only the icon is removed when changing it.  No specific
       issue just refactoring the code as a preventative measure.
+  3.  Fixed section 0 content displaying when it's in the grid, you first load a page and click on another
+      section.  Thanks to Llywelyn Morgan for reporting this.
 
 12th September 2013 Version 2.5.4.2 - Stable.
 Change by G J Barnard
