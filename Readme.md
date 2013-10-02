@@ -214,7 +214,7 @@ Known Issues
 
 History
 =============
-24th September 2013 Version 2.5.4.3 - Stable.
+2nd October 2013 Version 2.5.4.3 - Stable.
 Change by G J Barnard
   1.  Fixed sections not being shown when in 'Show one section per page' mode and editing.  Thanks to
       Zdravko Stoimenov for reporting this.
