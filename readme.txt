@@ -336,15 +336,16 @@ Change by G J Barnard
       could not have possibly tested.
  10.  Commented out 'console.log' code in 'module.js'.
 
-24th September 2013 Version 2.3.4.1 - Stable.
+2nd October 2013 Version 2.3.4.1 - Stable.
 Change by G J Barnard
   1.  Changed 'editimage.php' to ensure that only the icon is removed when changing it.  No specific
       issue just refactoring the code as a preventative measure.
   2.  Fixed section 0 content displaying when it's in the grid, you first load a page and click on another
       section.  Thanks to Llywelyn Morgan for reporting this.
-  3.  Fixed need to have 'new_activity_en.png' named as 'new_activity_en.png' for '5' in version 2.3.4 - see
+  3.  Fixed 'new_activity_en.png' being incorrectly named as 'new_activity_blue.png' for '5' in version 2.3.4 - see
       CONTRIB-4653.  Thanks to Niall Fleming for reporting this.
   4.  Fixed unordered list disc icon showing on section 0 when at the top.
+  5.  Fixed clicking on icon issue to bring up section page when in 'One section per page' course layout.
 
 Authors
 -------

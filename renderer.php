@@ -352,12 +352,18 @@ class format_grid_renderer extends format_section_renderer_base {
                     $sectionstyle = null;
                 }
                 echo html_writer::start_tag('li', $sectionstyle);
-                echo html_writer::start_tag('a', array(
-                    'href' => '#',
-                    'id' => 'gridsection-' . $thissection->section,
-                    'class' => 'gridicon_link'));
+                if ($course->coursedisplay != COURSE_DISPLAY_MULTIPAGE) {
+                    echo html_writer::start_tag('a', array(
+                        'href' => '#',
+                        'id' => 'gridsection-' . $thissection->section,
+                        'class' => 'gridicon_link'));
+                } else {
+                    echo html_writer::start_tag('a', array(
+                        'href' => course_get_url($course, $thissection->section),
+                        'id' => 'gridsection-' . $thissection->section));
+                }
 
-                $section_name = $this->section_title($thissection, $course);
+                $section_name = get_section_name($course, $thissection);
                 echo html_writer::tag('p', $section_name, array('class' => 'icon_content'));
 
                 if (isset($section_updated[$thissection->id])) {
