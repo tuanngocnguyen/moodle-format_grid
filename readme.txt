@@ -1,10 +1,9 @@
-
 Grid Course Format
 ============================
 
 Required version of Moodle
 ==========================
-Requires Moodle version 2012120301.02 release 2.4.1+ (Build: 20130118).
+This version works with Moodle version 2012120301.02 release 2.4.1+ (Build: 20130118) and above until the next release.
 
 Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
 'docs.moodle.org/24/en/Installing_Moodle' / 'docs.moodle.org/dev/Moodle_2.4_release_notes'.
@@ -247,7 +246,7 @@ Change by G J Barnard
       could not have possibly tested.
  10.  Commented out 'console.log' code in 'module.js'.
 
-24th September 2013 Version 2.4.3.1 - Stable.
+2nd October 2013 Version 2.4.3.1 - Stable.
 Change by G J Barnard
   1.  Fixed sections not being shown when in 'Show one section per page' mode and editing.  Thanks to
       Zdravko Stoimenov for reporting this.
@@ -255,7 +254,7 @@ Change by G J Barnard
       issue just refactoring the code as a preventative measure.
   3.  Fixed section 0 content displaying when it's in the grid, you first load a page and click on another
       section.  Thanks to Llywelyn Morgan for reporting this.
-  4.  Fixed need to have 'new_activity_en.png' named as 'new_activity_en.png' for '5' in version 2.4.3 - see
+  4.  Fixed 'new_activity_en.png' being incorrectly named as 'new_activity_blue.png' for '5' in version 2.4.3 - see
       CONTRIB-4653.  Thanks to Niall Fleming for reporting this.
   5.  Fixed 'Call to undefined function _get_summary_visibility() in format\grid\mod_summary.php on line 11'.
 
