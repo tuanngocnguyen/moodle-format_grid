@@ -258,6 +258,10 @@ Change by G J Barnard
       CONTRIB-4653.  Thanks to Niall Fleming for reporting this.
   5.  Fixed 'Call to undefined function _get_summary_visibility() in format\grid\mod_summary.php on line 11'.
 
+3rd October 2013 Version 2.4.3.2 - Stable.
+Change by G J Barnard
+  1.  Fix broken call to '_is_empty_text' as reported on CONTRIB-4589.
+
 Authors
 -------
 J Ridden - Moodle profile: https://moodle.org/user/profile.php?id=39680 - Web: http://www.moodleman.net
