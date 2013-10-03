@@ -591,7 +591,7 @@ class format_grid_renderer extends format_section_renderer_base {
             // Finds first header content. If it is not found, then try to find the first paragraph.
             foreach (array('h[1-6]', 'p') as $tag) {
                 if (preg_match('#<(' . $tag . ')\b[^>]*>(?P<text>.*?)</\1>#si', $title, $m)) {
-                    if (!_is_empty_text($m['text'])) {
+                    if (!$this->courseformat->is_empty_text($m['text'])) {
                         $title = $m['text'];
                         break;
                     }
