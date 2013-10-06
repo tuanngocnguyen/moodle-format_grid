@@ -293,6 +293,34 @@ class format_grid extends format_base {
     }
 
     /**
+     * Gets the grid icon entry for the given course and section.
+     * @param int $courseid The course id to use.
+     * @param int $sectionid The section id to use.
+     * @returns bool|array The record or false if the course id is 0 or section id is 0 or the request failed.
+     */
+    public function grid_get_icon($courseid, $sectionid) {
+        global $CFG, $DB;
+
+        if ((!$courseid) || (!$sectionid)) {
+            return false;
+        }
+
+        if (!$sectionicon = $DB->get_record('format_grid_icon', array('sectionid' => $sectionid))) {
+
+            $newicon = new stdClass();
+            $newicon->sectionid = $sectionid;
+            $newicon->courseid = $courseid;
+
+            if (!$newicon->id = $DB->insert_record('format_grid_icon', $newicon, true)) {
+                throw new moodle_exception('invalidrecordid', 'format_grid', '',
+                        'Could not create icon. Grid format database is not ready. An admin must visit the notifications section.');
+            }
+            $sectionicon = false;
+        }
+        return $sectionicon;
+    }
+
+    /**
      * Get section icon, if it doesn't exist create it.
      */
     public function get_summary_visibility($course) {
