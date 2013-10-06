@@ -249,33 +249,54 @@ class format_grid extends format_base {
                 preg_match('/^(?:\s|&nbsp;)*$/si', htmlentities($text, 0 /* ENT_HTML401 */, 'UTF-8', true));
     }
 
-    public function grid_get_icon($courseid, $sectionid) {
-        global $CFG, $DB;
+    /**
+     * Gets the grid icon entries for the given course.
+     * @param int $courseid The course id to use.
+     * @returns bool|array The records or false if the course id is 0 or the request failed.
+     */
+    public function grid_get_icons($courseid) {
+        global $DB;
+
+        if (!$courseid) {
+            return false;
+        }
+
+        if (!$sectionicons = $DB->get_records('format_grid_icon', array('courseid' => $courseid),'','sectionid, imagepath, displayimagepath')) {
+            $sectionicons = false;
+        }
+        return $sectionicons;
+    }
+
+    /**
+     * Create an entry for the icon in the database if 'grid_get_icons' reports it does not exist.
+     * @param int $courseid The course id to use.
+     * @param int $sectionid The section id to use.
+     * @returns bool|class The new record or false if the course id / section id are 0.
+     * @throws moodle_exception If the table 'format_grid_icon' does not exist or the record cannot be created.
+     */
+    public function create_get_icon($courseid, $sectionid) {
+        global $DB;
 
         if ((!$courseid) || (!$sectionid)) {
             return false;
         }
 
-        if (!$sectionicon = $DB->get_record('format_grid_icon', array('sectionid' => $sectionid))) {
+        $newicon = new stdClass();
+        $newicon->sectionid = $sectionid;
+        $newicon->courseid = $courseid;
 
-            $newicon = new stdClass();
-            $newicon->sectionid = $sectionid;
-            $newicon->courseid = $courseid;
-
-            if (!$newicon->id = $DB->insert_record('format_grid_icon', $newicon, true)) {
-                throw new moodle_exception('invalidrecordid', 'format_grid', '',
-                        'Could not create icon. Grid format database is not ready. An admin must visit the notifications section.');
-            }
-            $sectionicon = false;
+        if (!$newicon->id = $DB->insert_record('format_grid_icon', $newicon, true)) {
+            throw new moodle_exception('invalidrecordid', 'format_grid', '',
+                    'Could not create icon. Grid format database is not ready. An admin must visit the notifications section.');
         }
-        return $sectionicon;
+        return $newicon;
     }
 
     /**
      * Get section icon, if it doesn't exist create it.
      */
     public function get_summary_visibility($course) {
-        global $CFG, $DB;
+        global $DB;
         if (!$summary_status = $DB->get_record('format_grid_summary', array('courseid' => $course))) {
             $new_status = new stdClass();
             $new_status->courseid = $course;
