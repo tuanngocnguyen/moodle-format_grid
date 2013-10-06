@@ -97,8 +97,13 @@ function xmldb_format_grid_upgrade($oldversion = 0) {
         upgrade_plugin_savepoint(true, '2012071500', 'format', 'grid');
     }
 
+    if ($oldversion < 2012100500) {
+        $table = new xmldb_table('format_grid_icon');
+        $table->add_field('displayimagepath', XMLDB_TYPE_TEXT, null, null, null, null, null);
+    }
+
     // Automatic 'Purge all caches'....
-    if ($oldversion < 2013100300) {
+    if ($oldversion < 2013100500) {
         purge_all_caches();
     }
 
