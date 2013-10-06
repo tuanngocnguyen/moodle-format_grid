@@ -287,6 +287,9 @@ class format_grid_renderer extends format_section_renderer_base {
         // Get all the section information about which items should be marked with the NEW picture.
         $section_updated = $this->new_activity($course);
 
+        // Get the section icons for the course.
+        $sectionicons = $this->courseformat->grid_get_icons($course->id);
+
         // Start at 1 to skip the summary block or include the summary block if it's in the grid display.
         for ($section = $this->topic0_at_top ? 1 : 0; $section <= $course->numsections; $section++) {
             $thissection = $modinfo->get_section_info($section);
@@ -308,6 +311,13 @@ class format_grid_renderer extends format_section_renderer_base {
                 }
                 echo html_writer::start_tag('li', $sectionstyle);
 
+                if (empty($sectionicons[$thissection->id])) {
+                    $sectionicon = $this->courseformat->create_get_icon(
+                            $course->id, $thissection->id);
+                } else {
+                    $sectionicon = $sectionicons[$thissection->id];
+                }
+
                 if ($course->coursedisplay != COURSE_DISPLAY_MULTIPAGE) {
                     echo html_writer::start_tag('a', array(
                         'href' => '#',
@@ -325,9 +335,6 @@ class format_grid_renderer extends format_section_renderer_base {
                     }
 
                     echo html_writer::start_tag('div', array('class' => 'image_holder'));
-
-                    $sectionicon = $this->courseformat->grid_get_icon(
-                            $course->id, $thissection->id);
 
                     if (is_object($sectionicon) && !empty($sectionicon->imagepath)) {
                         echo html_writer::empty_tag('img', array(
@@ -379,9 +386,6 @@ class format_grid_renderer extends format_section_renderer_base {
                     }
 
                     $title .= html_writer::start_tag('div', array('class' => 'image_holder'));
-
-                    $sectionicon = $this->courseformat->grid_get_icon(
-                            $course->id, $thissection->id);
 
                     if (is_object($sectionicon) && !empty($sectionicon->imagepath)) {
                         $title .= html_writer::empty_tag('img', array(
