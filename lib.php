@@ -261,7 +261,7 @@ class format_grid extends format_base {
             return false;
         }
 
-        if (!$sectionicons = $DB->get_records('format_grid_icon', array('courseid' => $courseid),'','sectionid, imagepath, displayimagepath')) {
+        if (!$sectionicons = $DB->get_records('format_grid_icon', array('courseid' => $courseid),'','sectionid, iconpath, displayediconpath')) {
             $sectionicons = false;
         }
         return $sectionicons;

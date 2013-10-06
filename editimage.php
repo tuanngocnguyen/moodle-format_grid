@@ -89,7 +89,7 @@ if ($mform->is_cancelled()) {
         // We have a new file so can delete the old....
         $sectionicon = course_get_format($course)->grid_get_icon($course->id, $sectionid);
         if ($sectionicon) {
-            if ($file = $fs->get_file($context->id, 'course', 'section', $sectionid, '/', $sectionicon->imagepath)) {
+            if ($file = $fs->get_file($context->id, 'course', 'section', $sectionid, '/', $sectionicon->iconpath)) {
                 $file->delete();
             }
         }
@@ -119,7 +119,7 @@ if ($mform->is_cancelled()) {
             $storedfile_record['mimetype'] = $mime;
 
             if ($mime != 'image/gif') {
-                $tmproot = make_temp_directory('gridformatimage');
+                $tmproot = make_temp_directory('gridformaticon');
                 $tmpfilepath = $tmproot . '/' . $temp_file->get_contenthash();
                 $temp_file->copy_content_to($tmpfilepath);
 
@@ -143,7 +143,7 @@ if ($mform->is_cancelled()) {
             unset($temp_file);
 
             if ($convert_success == true) {
-                $DB->set_field('format_grid_icon', 'imagepath', $newfilename, array('sectionid' => $sectionid));
+                $DB->set_field('format_grid_icon', 'iconpath', $newfilename, array('sectionid' => $sectionid));
             } else {
                 print_error('imagecannotbeusedasanicon', 'format_grid', $CFG->wwwroot . "/course/view.php?id=" . $course->id);
             }

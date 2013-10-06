@@ -322,12 +322,12 @@ class format_grid_renderer extends format_section_renderer_base {
                     $sectionicon = $sectionicons[$thissection->id];
                 }
 
-                // If the imagepath is set then check that displayimagepath exists and is the same.
+                // If the iconpath is set then check that displayediconpath exists and is the same.
                 // TODO: The logic of this will change when CONTRIB-4099 fully implemented.
-                if (isset($sectionicon->imagepath)) {
+                if (isset($sectionicon->iconpath)) {
                     $updatedisplay = false;
-                    if (isset($sectionicon->displayimagepath)) {
-                        if ($sectionicon->imagepath !== $sectionicon->displayimagepath) {
+                    if (isset($sectionicon->displayediconpath)) {
+                        if ($sectionicon->iconpath !== $sectionicon->displayediconpath) {
                             $updatedisplay = true;
                         }
                     } else {
@@ -337,15 +337,15 @@ class format_grid_renderer extends format_section_renderer_base {
 
                     if ($updatedisplay) {
                         // Set it.
-                        $sectionicon->displayimagepath = $sectionicon->imagepath;
+                        $sectionicon->displayediconpath = $sectionicon->iconpath;
                         // TODO: Temporary here until move to lib.php...
                         global $DB;
-                        $DB->set_field('format_grid_icon', 'displayimagepath', $sectionicon->displayimagepath, array('sectionid' => $thissection->id));
+                        $DB->set_field('format_grid_icon', 'displayediconpath', $sectionicon->displayediconpath, array('sectionid' => $thissection->id));
                     }
                 }
                 // TODO: Temporary info:...
-                if (isset($sectionicon->imagepath)) {
-                    $file = $fs->get_file($context->id, 'course', 'section', $thissection->id, '/', $sectionicon->imagepath);
+                if (isset($sectionicon->iconpath)) {
+                    $file = $fs->get_file($context->id, 'course', 'section', $thissection->id, '/', $sectionicon->iconpath);
                     if ($file) {
                         print_object($file);
                     }
@@ -369,10 +369,10 @@ class format_grid_renderer extends format_section_renderer_base {
 
                     echo html_writer::start_tag('div', array('class' => 'image_holder'));
 
-                    if (is_object($sectionicon) && !empty($sectionicon->displayimagepath)) {
+                    if (is_object($sectionicon) && !empty($sectionicon->displayediconpath)) {
                         echo html_writer::empty_tag('img', array(
                             'src' => moodle_url::make_pluginfile_url(
-                                    $context->id, 'course', 'section', $thissection->id, '/', $sectionicon->displayimagepath),
+                                    $context->id, 'course', 'section', $thissection->id, '/', $sectionicon->displayediconpath),
                                     'alt' => $section_name));
                     } else if ($section == 0) {
                         echo html_writer::empty_tag('img', array(
@@ -420,10 +420,10 @@ class format_grid_renderer extends format_section_renderer_base {
 
                     $title .= html_writer::start_tag('div', array('class' => 'image_holder'));
 
-                    if (is_object($sectionicon) && !empty($sectionicon->displayimagepath)) {
+                    if (is_object($sectionicon) && !empty($sectionicon->displayediconpath)) {
                         $title .= html_writer::empty_tag('img', array(
                                     'src' => moodle_url::make_pluginfile_url(
-                                            $context->id, 'course', 'section', $thissection->id, '/', $sectionicon->displayimagepath),
+                                            $context->id, 'course', 'section', $thissection->id, '/', $sectionicon->displayediconpath),
                                                 'alt' => $section_name));
                     } else if ($section == 0) {
                         $title .= html_writer::empty_tag('img', array(
