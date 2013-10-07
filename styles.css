@@ -125,7 +125,7 @@ div#gridmiddle-column ul {
 
 .course-content ul.gridicons img.new_activity {
     position: absolute;
-    margin-top: 86px;
+    margin-top: 85px;
     margin-left: 116px;
 }
 .course-content .gridicon_link {
@@ -152,7 +152,8 @@ div#gridmiddle-column ul {
     vertical-align: middle;
 }
 .course-content ul.gridicons li:hover .image_holder {
-    border: 1px dashed #dededf;
+    border-style: dashed;
+    border-color: #dededf;
 }
 .course-content ul.gridicons li img {
     margin-top: 0;
