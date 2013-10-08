@@ -79,8 +79,8 @@ $string['defaultcoursedisplay_desc'] = "Either show all the sections on a single
 
 $string['seticonwidth'] = 'Set the icon width';
 $string['seticonwidth_help'] = 'Set the icon width to one of: 128, 192, 210, 256, 320, 384, 448, 512, 576, 640, 704 or 768';
-$string['seticonratio'] = 'Set the icon ration relative to the width';
-$string['seticonratio_help'] = 'Set the icon ration to one of: 3-2, 3-1, 3-3, 2-3, 1-3, 4-3 or 3-4.';
+$string['seticonratio'] = 'Set the icon ratio relative to the width';
+$string['seticonratio_help'] = 'Set the icon ratio to one of: 3-2, 3-1, 3-3, 2-3, 1-3, 4-3 or 3-4.';
 $string['setbordercolour'] = 'Set the border colour';
 $string['setbordercolour_help'] = 'Set the border colour in hexidecimal RGB.';
 $string['setborderwidth'] = 'Set the border width';
