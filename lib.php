@@ -20,7 +20,7 @@
  * @package    course/format
  * @subpackage grid
  * @copyright  &copy; 2012 G J Barnard in respect to modifications of standard topics format.
- * @author     G J Barnard - gjbarnard at gmail dot com and {@link http://moodle.org/user/profile.php?id=442195}
+ * @author     G J Barnard - gjbarnard at gmail dot com, about.me/gjbarnard and {@link http://moodle.org/user/profile.php?id=442195}
  * @author     Based on code originally written by Paul Krix and Julian Ridden.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -30,6 +30,78 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot . '/course/format/lib.php'); // For format_base.
 
 class format_grid extends format_base {
+
+    // CONTRIB-4099:....
+    // Width constants - 128, 192, 210, 256, 320, 384, 448, 512, 576, 640, 704 and 768:...
+    private static $iconwidths = array(128 => '128', 192 => '192', 210 => '210', 256 => '256', 320 => '320', 384 => '384',
+                                       448 => '448', 512 => '512', 576 => '576', 640 => '640', 704 => '704', 768 => '768');
+    // Ratio constants - 3-2, 3-1, 3-3, 2-3, 1-3, 4-3 and 3-4:...
+    private static $iconratios = array(1 => '3-2', 2 => '3-1', 3 => '3-3', 4 => '2-3', 5 => '1-3', 6 => '4-3', 7 => '3-4');
+    //private $fliped_iconratios;
+    // Border width constants - 1 to 10:....
+    private static $borderwidths = array(1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '5', 6 => '6', 7 => '7', 8 => '8', 9 => '9', 10 => '10');
+
+    /**
+     * Creates a new instance of class
+     *
+     * Please use {@link course_get_format($courseorid)} to get an instance of the format class
+     *
+     * @param string $format
+     * @param int $courseid
+     * @return format_grid
+     */
+    protected function __construct($format, $courseid) {
+        parent::__construct($format, $courseid);
+        //$fliped_iconratios = array_flip(self::$iconratios);
+    }
+
+    /**
+     * Prevents ability to change a static variable outside of the class.
+     * @return array Array of icon widths.
+     */
+    public static function get_icon_widths() {
+        return self::$iconwidths;
+    }
+
+    /**
+     * Gets the default icon width.
+     * @return int Default icon width.
+     */
+    public static function get_default_icon_width() {
+        return 210;
+    }
+
+    /**
+     * Prevents ability to change a static variable outside of the class.
+     * @return array Array of icon ratios.
+     */
+    public static function get_icon_ratios() {
+        return self::$iconratios;
+    }
+
+    /**
+     * Gets the default icon ratio.
+     * @return int Default icon ratio.
+     */
+    public static function get_default_icon_ratio() {
+        return 1; // '3-2'.
+    }
+
+    /**
+     * Prevents ability to change a static variable outside of the class.
+     * @return array Array of border widths.
+     */
+    public static function get_border_widths() {
+        return self::$borderwidths;
+    }
+
+    /**
+     * Gets the default border width.
+     * @return int Default border width.
+     */
+    public static function get_default_border_width() {
+        return 3; // '3'.
+    }
 
     /**
      * Returns the format's settings and gets them if they do not exist.
@@ -193,11 +265,41 @@ class format_grid extends format_base {
                 'coursedisplay' => array(
                     'default' => $courseconfig->coursedisplay,
                     'type' => PARAM_INT,
+                ),
+                'iconwidth' => array(
+                    'default' => get_config('format_grid', 'defaulticonwidth'),
+                    'type' => PARAM_INT,
+                ),
+                'iconratio' => array(
+                    'default' => get_config('format_grid', 'defaulticonratio'),
+                    'type' => PARAM_ALPHANUM,
+                ),
+                'bordercolour' => array(
+                    'default' => get_config('format_grid', 'defaultbordercolour'),
+                    'type' => PARAM_ALPHANUM,
+                ),
+                'borderwidth' => array(
+                    'default' => get_config('format_grid', 'defaultborderwidth'),
+                    'type' => PARAM_INT,
+                ),
+                'iconbackgroundcolour' => array(
+                    'default' => get_config('format_grid', 'defaulticonbackgroundcolour'),
+                    'type' => PARAM_ALPHANUM,
+                ),
+                'currentselectedsectioncolour' => array(
+                    'default' => get_config('format_grid', 'defaultcurrentselectedsectioncolour'),
+                    'type' => PARAM_ALPHANUM,
+                ),
+                'currentselectediconcolour' => array(
+                    'default' => get_config('format_grid', 'defaultcurrentselectediconcolour'),
+                    'type' => PARAM_ALPHANUM,
                 )
             );
         }
         if ($foreditform && !isset($courseformatoptions['coursedisplay']['label'])) {
-            global $USER;
+            global $COURSE;
+            $coursecontext = context_course::instance($COURSE->id);
+
             $courseconfig = get_config('moodlecourse');
             $sectionmenu = array();
             for ($i = 0; $i <= $courseconfig->maxsections; $i++) {
@@ -234,9 +336,166 @@ class format_grid extends format_base {
                     'help_component' => 'moodle',
                 )
             );
+            if (true /* has_capability('format/grid:changeiconsize', $coursecontext)*/) {
+                $courseformatoptionsedit['iconwidth'] = array(
+                    'label' => new lang_string('seticonwidth', 'format_grid'),
+                    'help' => 'seticonwidth',
+                    'help_component' => 'format_grid',
+                    'element_type' => 'select',
+                    'element_attributes' => array( self::$iconwidths )
+                );
+                $courseformatoptionsedit['iconratio'] = array(
+                    'label' => new lang_string('seticonratio', 'format_grid'),
+                    'help' => 'seticonratio',
+                    'help_component' => 'format_grid',
+                    'element_type' => 'select',
+                    'element_attributes' => array( self::$iconratios )
+                );
+            } else {
+                $courseformatoptionsedit['iconwidth'] =
+                    array('label' => new lang_string('seticonwidth', 'format_grid'), 'element_type' => 'hidden');
+                $courseformatoptionsedit['iconratio'] =
+                    array('label' => new lang_string('seticonratio', 'format_grid'), 'element_type' => 'hidden');
+            }
+
+            if (true /* has_capability('format/grid:changeiconstyle', $coursecontext)*/) {
+                $courseformatoptionsedit['bordercolour'] = array(
+                    'label' => new lang_string('setbordercolour', 'format_grid'),
+                    'help' => 'setbordercolour',
+                    'help_component' => 'format_grid',
+                    'element_type' => 'gfcolourpopup',
+                    'element_attributes' => array(
+                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultbordercolour'))
+                    )
+                );
+
+                $courseformatoptionsedit['borderwidth'] = array(
+                    'label' => new lang_string('seticonwidth', 'format_grid'),
+                    'help' => 'setborderwidth',
+                    'help_component' => 'format_grid',
+                    'element_type' => 'select',
+                    'element_attributes' => array( self::$borderwidths )
+                );
+
+                $courseformatoptionsedit['iconbackgroundcolour'] = array(
+                    'label' => new lang_string('seticonbackgroundcolour', 'format_grid'),
+                    'help' => 'seticonbackgroundcolour',
+                    'help_component' => 'format_grid',
+                    'element_type' => 'gfcolourpopup',
+                    'element_attributes' => array(
+                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaulticonbackgroundcolour'))
+                    )
+                );
+
+                $courseformatoptionsedit['currentselectedsectioncolour'] = array(
+                    'label' => new lang_string('setcurrentselectedsectioncolour', 'format_grid'),
+                    'help' => 'setcurrentselectedsectioncolour',
+                    'help_component' => 'format_grid',
+                    'element_type' => 'gfcolourpopup',
+                    'element_attributes' => array(
+                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultcurrentselectedsectioncolour'))
+                    )
+                );
+
+                $courseformatoptionsedit['currentselectediconcolour'] = array(
+                    'label' => new lang_string('setcurrentselectediconcolour', 'format_grid'),
+                    'help' => 'setcurrentselectediconcolour',
+                    'help_component' => 'format_grid',
+                    'element_type' => 'gfcolourpopup',
+                    'element_attributes' => array(
+                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultcurrentselectediconcolour'))
+                    )
+                );
+            } else {
+                $courseformatoptionsedit['bordercolour'] =
+                    array('label' => new lang_string('setbordercolour', 'format_grid'), 'element_type' => 'hidden');
+                $courseformatoptionsedit['borderwidth'] =
+                    array('label' => new lang_string('setborderwidth', 'format_grid'), 'element_type' => 'hidden');
+                $courseformatoptionsedit['iconbackgroundcolour'] =
+                    array('label' => new lang_string('seticonbackgroundcolour', 'format_grid'), 'element_type' => 'hidden');
+                $courseformatoptionsedit['currentselectedsectioncolour'] =
+                    array('label' => new lang_string('setcurrentselectedsectioncolour', 'format_grid'), 'element_type' => 'hidden');
+                $courseformatoptionsedit['currentselectediconcolour'] =
+                    array('label' => new lang_string('setcurrentselectediconcolour', 'format_grid'), 'element_type' => 'hidden');
+            }
             $courseformatoptions = array_merge_recursive($courseformatoptions, $courseformatoptionsedit);
         }
         return $courseformatoptions;
+    }
+
+    /**
+     * Adds format options elements to the course/section edit form
+     *
+     * This function is called from {@link course_edit_form::definition_after_data()}
+     *
+     * @param MoodleQuickForm $mform form the elements are added to
+     * @param bool $forsection 'true' if this is a section edit form, 'false' if this is course edit form
+     * @return array array of references to the added form elements
+     */
+    public function create_edit_form_elements(&$mform, $forsection = false) {
+        global $CFG, $OUTPUT;
+        MoodleQuickForm::registerElementType('gfcolourpopup', "$CFG->dirroot/course/format/grid/js/gf_colourpopup.php",
+                                             'MoodleQuickForm_gfcolourpopup');
+
+        $elements = parent::create_edit_form_elements($mform, $forsection);
+        if ($forsection == false) {
+            global $COURSE, $USER;
+            /*
+             Increase the number of sections combo box values if the user has increased the number of sections
+             using the icon on the course page beyond course 'maxsections' or course 'maxsections' has been
+             reduced below the number of sections already set for the course on the site administration course
+             defaults page.  This is so that the number of sections is not reduced leaving unintended orphaned
+             activities / resources.
+             */
+            $maxsections = get_config('moodlecourse', 'maxsections');
+            $numsections = $mform->getElementValue('numsections');
+            $numsections = $numsections[0];
+            if ($numsections > $maxsections) {
+                $element = $mform->getElement('numsections');
+                for ($i = $maxsections+1; $i <= $numsections; $i++) {
+                    $element->addOption("$i", $i);
+                }
+            }
+
+            $coursecontext = context_course::instance($COURSE->id);
+
+            //$changeiconsize = has_capability('format/grid:changeiconsize', $coursecontext);
+            $changeiconsize = true;
+            //$changeiconstyle = has_capability('format/grid:changeiconstyle', $coursecontext);
+            $changeiconstyle = true;
+            $resetall = is_siteadmin($USER); // Site admins only.
+
+            $elements[] = $mform->addElement('header', 'gfreset', get_string('gfreset', 'format_grid'));
+            $mform->addHelpButton('gfreset', 'gfreset', 'format_grid', '', true);
+
+            $resetelements = array();
+
+            if ($changeiconsize) {
+                $checkboxname = get_string('reseticonsize', 'format_grid').$OUTPUT->help_icon('reseticonsize', 'format_grid');
+                $resetelements[] =& $mform->createElement('checkbox', 'reseticonsize', '', $checkboxname);
+            }
+
+            if ($changeiconstyle) {
+                $checkboxname = get_string('reseticonstyle', 'format_grid').$OUTPUT->help_icon('reseticonstyle', 'format_grid');
+                $resetelements[] =& $mform->createElement('checkbox', 'iconstyle', '', $checkboxname);
+            }
+
+            $elements[] = $mform->addGroup($resetelements, 'resetgroup', get_string('resetgrp', 'format_grid'), null, false);
+
+            if ($resetall) {
+                $resetallelements = array();
+
+                $checkboxname = get_string('resetalliconsize', 'format_grid').$OUTPUT->help_icon('resetalliconsize', 'format_grid');
+                $resetallelements[] =& $mform->createElement('checkbox', 'resetalliconsize', '', $checkboxname);
+
+                $checkboxname = get_string('resetalliconstyle', 'format_grid').$OUTPUT->help_icon('resetalliconstyle', 'format_grid');
+                $resetallelements[] =& $mform->createElement('checkbox', 'resetalliconstyle', '', $checkboxname);
+
+                $elements[] = $mform->addGroup($resetallelements, 'resetallgroup', get_string('resetallgrp', 'format_grid'), null, false);
+            }
+        }
+
+        return $elements;
     }
 
     // Grid specific methods...

@@ -20,7 +20,7 @@
  * @package    course/format
  * @subpackage grid
  * @copyright  &copy; 2012 G J Barnard in respect to modifications of standard topics format.
- * @author     G J Barnard - gjbarnard at gmail dot com and {@link http://moodle.org/user/profile.php?id=442195}
+ * @author     G J Barnard - gjbarnard at gmail dot com, about.me/gjbarnard and {@link http://moodle.org/user/profile.php?id=442195}
  * @author     Based on code originally written by Paul Krix and Julian Ridden.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -55,3 +55,50 @@ $string['numbersections'] = 'Number of sections';
 
 // Image did not convert.
 $string['imagecannotbeusedasanicon'] = 'Image cannot be used as an icon, must be a Gif, Jpg or Png and the GD PHP library installed.';
+
+// CONTRIB-4099 Icon size change improvement.
+$string['gfreset'] = 'Grid reset options';
+$string['gfreset_help'] = 'Reset to Grid defaults.';
+$string['defaulticonwidth'] = 'Default width of the icon.';
+$string['defaulticonwidth_desc'] = 'The default width of the icon.';
+$string['defaulticonratio'] = 'Default ratio of the icon relative to the width.';
+$string['defaulticonratio_desc'] = 'The default ratio of the icon relative to the width.';
+$string['defaultbordercolour'] = 'Default icon border colour.';
+$string['defaultborderwidth'] = 'Default border width.';
+$string['defaulticonbackgroundcolour'] = 'Default icon background colour.';
+$string['defaultcurrentselectedsectioncolour'] = 'Default current selected section colour.';
+$string['defaultcurrentselectediconcolour'] = 'Default current selected icon colour.';
+
+$string['defaultcoursedisplay'] = 'Course display default';
+$string['defaultcoursedisplay_desc'] = "Either show all the sections on a single page or section zero and the chosen section on page.";
+
+$string['seticonwidth'] = 'Set the icon width';
+$string['seticonwidth_help'] = 'Set the icon width to one of: 128, 192, 210, 256, 320, 384, 448, 512, 576, 640, 704 or 768';
+$string['seticonratio'] = 'Set the icon ration relative to the width';
+$string['seticonratio_help'] = 'Set the icon ration to one of: 3-2, 3-1, 3-3, 2-3, 1-3, 4-3 or 3-4.';
+$string['setbordercolour'] = 'Set the border colour';
+$string['setbordercolour_help'] = 'Set the border colour in hexidecimal RGB.';
+$string['setborderwidth'] = 'Set the border width';
+$string['setborderwidth_help'] = 'Set the border width between 1 and 10.';
+$string['seticonbackgroundcolour'] = 'Set the icon background colour';
+$string['seticonbackgroundcolour_help'] = 'Set the icon background colour in hexidecimal RGB.';
+$string['setcurrentselectedsectioncolour'] = 'Set the current selected section colour';
+$string['setcurrentselectedsectioncolour_help'] = 'Set the current selected section colour in hexidecimal RGB.';
+$string['setcurrentselectediconcolour'] = 'Set the current selected icon colour';
+$string['setcurrentselectediconcolour_help'] = 'Set the current selected icon colour in hexidecimal RGB.';
+
+// Reset
+$string['resetgrp'] = 'Reset:';
+$string['resetallgrp'] = 'Reset all:';
+$string['reseticonsize'] = 'Icon size';
+$string['reseticonsize_help'] = 'Resets the icon size to the default value so it will be the same as a course the first time it is in the Grid format.';
+$string['resetalliconsize'] = 'Icon sizes';
+$string['resetalliconsize_help'] = 'Resets the icon sizes to the default value for all courses so it will be the same as a course the first time it is in the Grid format.';
+$string['reseticonstyle'] = 'Icon style';
+$string['reseticonstyle_help'] = 'Resets the icon style to the default value so it will be the same as a course the first time it is in the Grid format.';
+$string['resetalliconstyle'] = 'Icon styles';
+$string['resetalliconstyle_help'] = 'Resets the icon styles to the default value for all courses so it will be the same as a course the first time it is in the Grid format.';
+
+// Capabilities.
+$string['grid:changeiconsize'] = 'Change or reset the icon size';
+$string['grid:changeiconstyle'] = 'Change or reset the icon style';
