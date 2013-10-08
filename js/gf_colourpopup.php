@@ -42,7 +42,6 @@ class MoodleQuickForm_gfcolourpopup extends HTML_QuickForm_text {
     var $_hiddenLabel = false;
 
     public function MoodleQuickForm_gfcolourpopup($elementName = null, $elementLabel = null, $attributes = null, $options = null) {
-        global $CFG;
         parent::HTML_QuickForm_text($elementName, $elementLabel, $attributes);
     }
 

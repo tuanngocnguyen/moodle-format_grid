@@ -45,7 +45,6 @@ if ($ADMIN->fulltree) {
     );
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
-
     /* Icon width. */
     $name = 'format_grid/defaulticonwidth';
     $title = get_string('defaulticonwidth', 'format_grid');
@@ -62,12 +61,43 @@ if ($ADMIN->fulltree) {
     $choices = format_grid::get_icon_ratios();
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
-    // Default toggle foreground colour in hexidecimal RGB without preceeding '#'.
-    $name = 'format_topcoll/defaulttgfgcolour';
-    $title = get_string('defaulttgfgcolour', 'format_topcoll');
-    $description = get_string('defaulttgfgcolour_desc', 'format_topcoll');
-    $default = '#000000';
+    // Default border colour in hexidecimal RGB without preceeding '#'.
+    $name = 'format_grid/defaultbordercolour';
+    $title = get_string('defaultbordercolour', 'format_grid');
+    $description = get_string('defaultbordercolour_desc', 'format_grid');
+    $default = format_grid::get_default_border_colour();
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
     $settings->add($setting);
 
+    /* Border width. */
+    $name = 'format_grid/defaultborderwidth';
+    $title = get_string('defaultborderwidth', 'format_grid');
+    $description = get_string('defaultborderwidth_desc', 'format_grid');
+    $default = format_grid::get_default_border_width();
+    $choices = format_grid::get_border_widths();
+    $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
+
+    // Default icon background colour in hexidecimal RGB without preceeding '#'.
+    $name = 'format_grid/defaulticonbackgroundcolour';
+    $title = get_string('defaulticonbackgroundcolour', 'format_grid');
+    $description = get_string('defaulticonbackgroundcolour', 'format_grid');
+    $default = format_grid::get_default_icon_background_colour();
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
+    $settings->add($setting);
+
+    // Default current selected section colour in hexidecimal RGB without preceeding '#'.
+    $name = 'format_grid/defaultcurrentselectedsectioncolour';
+    $title = get_string('defaultcurrentselectedsectioncolour', 'format_grid');
+    $description = get_string('defaultcurrentselectedsectioncolour', 'format_grid');
+    $default = format_grid::get_default_current_selected_section_colour();
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
+    $settings->add($setting);
+
+    // Default current selected icon colour in hexidecimal RGB without preceeding '#'.
+    $name = 'format_grid/defaultcurrentselectediconcolour';
+    $title = get_string('defaultcurrentselectediconcolour', 'format_grid');
+    $description = get_string('defaultcurrentselectediconcolour', 'format_grid');
+    $default = format_grid::get_default_current_selected_icon_colour();
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
+    $settings->add($setting);
 }

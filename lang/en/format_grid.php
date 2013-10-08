@@ -59,15 +59,20 @@ $string['imagecannotbeusedasanicon'] = 'Image cannot be used as an icon, must be
 // CONTRIB-4099 Icon size change improvement.
 $string['gfreset'] = 'Grid reset options';
 $string['gfreset_help'] = 'Reset to Grid defaults.';
-$string['defaulticonwidth'] = 'Default width of the icon.';
+$string['defaulticonwidth'] = 'Default width of the icon';
 $string['defaulticonwidth_desc'] = 'The default width of the icon.';
-$string['defaulticonratio'] = 'Default ratio of the icon relative to the width.';
+$string['defaulticonratio'] = 'Default ratio of the icon relative to the width';
 $string['defaulticonratio_desc'] = 'The default ratio of the icon relative to the width.';
-$string['defaultbordercolour'] = 'Default icon border colour.';
-$string['defaultborderwidth'] = 'Default border width.';
-$string['defaulticonbackgroundcolour'] = 'Default icon background colour.';
-$string['defaultcurrentselectedsectioncolour'] = 'Default current selected section colour.';
-$string['defaultcurrentselectediconcolour'] = 'Default current selected icon colour.';
+$string['defaultbordercolour'] = 'Default icon border colour';
+$string['defaultbordercolour_desc'] = 'The default icon border colour.';
+$string['defaultborderwidth'] = 'Default border width';
+$string['defaultborderwidth_desc'] = 'The default border width.';
+$string['defaulticonbackgroundcolour'] = 'Default icon background colour';
+$string['defaulticonbackgroundcolour_desc'] = 'The default icon background colour.';
+$string['defaultcurrentselectedsectioncolour'] = 'Default current selected section colour';
+$string['defaultcurrentselectedsectioncolour_desc'] = 'The default current selected section colour.';
+$string['defaultcurrentselectediconcolour'] = 'Default current selected icon colour';
+$string['defaultcurrentselectediconcolour_desc'] = 'The default current selected icon colour.';
 
 $string['defaultcoursedisplay'] = 'Course display default';
 $string['defaultcoursedisplay_desc'] = "Either show all the sections on a single page or section zero and the chosen section on page.";

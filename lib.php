@@ -88,6 +88,14 @@ class format_grid extends format_base {
     }
 
     /**
+     * Gets the default border colour.
+     * @return string Default border colour.
+     */
+    public static function get_default_border_colour() {
+        return '#dddddd';
+    }
+
+    /**
      * Prevents ability to change a static variable outside of the class.
      * @return array Array of border widths.
      */
@@ -101,6 +109,30 @@ class format_grid extends format_base {
      */
     public static function get_default_border_width() {
         return 3; // '3'.
+    }
+
+    /**
+     * Gets the default icon background colour.
+     * @return string Default icon background colour.
+     */
+    public static function get_default_icon_background_colour() {
+        return '#f1f2f2';
+    }
+
+    /**
+     * Gets the default current selected section colour.
+     * @return string Default current selected section colour.
+     */
+    public static function get_default_current_selected_section_colour() {
+        return '#d9edf7';
+    }
+
+    /**
+     * Gets the default current selected icon colour.
+     * @return string Default current selected icon colour.
+     */
+    public static function get_default_current_selected_icon_colour() {
+        return '#00CC00';
     }
 
     /**
@@ -370,7 +402,7 @@ class format_grid extends format_base {
                 );
 
                 $courseformatoptionsedit['borderwidth'] = array(
-                    'label' => new lang_string('seticonwidth', 'format_grid'),
+                    'label' => new lang_string('setborderwidth', 'format_grid'),
                     'help' => 'setborderwidth',
                     'help_component' => 'format_grid',
                     'element_type' => 'select',

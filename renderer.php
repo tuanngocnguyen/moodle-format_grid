@@ -347,7 +347,7 @@ class format_grid_renderer extends format_section_renderer_base {
                 if (isset($sectionicon->iconpath)) {
                     $file = $fs->get_file($context->id, 'course', 'section', $thissection->id, '/', $sectionicon->iconpath);
                     if ($file) {
-                        print_object($file);
+                        //print_object($file);
                     }
                 }
 
