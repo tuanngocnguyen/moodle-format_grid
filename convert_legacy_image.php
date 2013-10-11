@@ -34,10 +34,23 @@ require_once('gdlib_m25.php');
 define('GRID_ITEM_IMAGE_WIDTH', 210);
 define('GRID_ITEM_IMAGE_HEIGHT', 140);
 
-function grid_get_icons() {
+function grid_get_courseids() {
     global $DB;
 
-    if (!$sectionicons = $DB->get_records('format_grid_icon', null, '', 'sectionid, imagepath')) {
+    if (!$courseids = $DB->get_records('format_grid_icon', null, '', 'courseid')) {
+        $courseids = false;
+    }
+    return $courseids;
+}
+
+function grid_get_icons($courseid) {
+    global $DB;
+
+    if (!$courseid) {
+        return false;
+    }
+
+    if (!$sectionicons = $DB->get_records('format_grid_icon', array('courseid' => $courseid), '', 'sectionid, imagepath')) {
         $sectionicons = false;
     }
     return $sectionicons;
@@ -52,108 +65,121 @@ function grid_files() {
     return $sectionicons;
 }
 
-/* Page parameters */
-$contextid = required_param('contextid', PARAM_INT);
+$courseids = grid_get_courseids();
+echo('<p>Course ids ' . print_r($courseids, true) . '.</p>');
 
-if ($contextid) {
+if ($courseids) {
 
     $fs = get_file_storage();
 
-    $sectionicons = grid_get_icons();
-    $sectionfiles = grid_files();
-    if ($sectionfiles) {
-        echo('<p>Files table before ' . print_r($sectionfiles, true) . '.</p>');
-        error_log('Files table before ' . print_r($sectionfiles, true) . '.');
-    }
+    foreach ($courseids as $course) {
+        $courseid = $course->courseid;
+        $sectionicons = grid_get_icons($courseid);
+        $context = get_context_instance(CONTEXT_COURSE, $courseid);
+        $contextid = $context->id;
 
-    if ($sectionicons) {
-        echo('<p>Converting legacy images ' . print_r($sectionicons, true) . ".</p>");
-        error_log('Converting legacy images ' . print_r($sectionicons, true) . '.');
+        if (($sectionicons) && ($contextid)) {
+            echo('<p>Section icons ' . print_r($sectionicons, true) . '.</p>');
 
-        foreach ($sectionicons as $sectionicon) {
-
-            if (isset($sectionicon->imagepath)) {
-                echo('<p>Converting legacy image ' . $sectionicon->imagepath . ".</p>");
-                error_log('Converting legacy image ' . $sectionicon->imagepath . '.');
-
-                if ($temp_file = $fs->get_file($contextid, 'course', 'legacy', 0, '/icons/', $sectionicon->imagepath)) {
-
-                    echo('<p> Stored file:' . print_r($temp_file, true) . '</p>');
-                    error_log(print_r($temp_file, true));
-                    // Resize the image and save it...
-                    $created = time();
-                    $storedfile_record = array(
-                        'contextid' => $contextid,
-                        'component' => 'course',
-                        'filearea' => 'section',
-                        'itemid' => $sectionicon->sectionid,
-                        'filepath' => '/',
-                        'filename' => $sectionicon->imagepath,
-                        'timecreated' => $created,
-                        'timemodified' => $created);
-
-                    try {
-                        $convert_success = true;
-                        $mime = $temp_file->get_mimetype();
-
-                        $storedfile_record['mimetype'] = $mime;
-
-                        if ($mime != 'image/gif') {
-                            $tmproot = make_temp_directory('gridformaticon');
-                            $tmpfilepath = $tmproot . '/' . $temp_file->get_contenthash();
-                            $temp_file->copy_content_to($tmpfilepath);
-
-                            $data = generate_image_thumbnail($tmpfilepath, GRID_ITEM_IMAGE_WIDTH, GRID_ITEM_IMAGE_HEIGHT);
-                            if (!empty($data)) {
-                                $fs->create_file_from_string($storedfile_record, $data);
-                            } else {
-                                $convert_success = false;
-                            }
-                            unlink($tmpfilepath);
-                        } else {
-                            $fr = $fs->convert_image($storedfile_record, $temp_file, GRID_ITEM_IMAGE_WIDTH, GRID_ITEM_IMAGE_HEIGHT, true, null);
-                        }
-
-                        if ($convert_success == false) {
-                            print('<p>Image ' . $sectionicon->imagepath . ' failed to convert.</p>');
-                            error_log('Image ' . $sectionicon->imagepath . ' failed to convert.');
-                        } else {
-                            print('<p>Image ' . $sectionicon->imagepath . ' converted.</p>');
-                            error_log('Image ' . $sectionicon->imagepath . ' converted.');
-
-                            // Clean up and remove the old thumbnail too.
-                            $temp_file->delete();
-                            unset($temp_file);
-                            if ($temp_file = $fs->get_file($contextid, 'course', 'legacy', 0, '/icons/', 'tn_' . $sectionicon->imagepath)) {
-                                // Remove thumbnail.
-                                $temp_file->delete();
-                                unset($temp_file);
-                            }
-                        }
-                    } catch (Exception $e) {
-                        if (isset($temp_file)) {
-                            $temp_file->delete();
-                            unset($temp_file);
-                        }
-                        print('Grid Format Convert Image Exception:...');
-                        debugging($e->getMessage());
-                    }
-                } else {
-                    echo('<p>Image ' . $sectionicon->imagepath . ' could not be found in the legacy files.</p>');
-                    error_log('Image ' . $sectionicon->imagepath . ' could not be found in the legacy files.');
-                }
+            $sectionfiles = grid_files();
+            if ($sectionfiles) {
+                echo('<p>Files table before ' . print_r($sectionfiles, true) . '.</p>');
+                error_log('Files table before ' . print_r($sectionfiles, true) . '.');
             }
+
+            if ($sectionicons) {
+                echo('<p>Converting legacy images ' . print_r($sectionicons, true) . ".</p>");
+                error_log('Converting legacy images ' . print_r($sectionicons, true) . '.');
+
+                foreach ($sectionicons as $sectionicon) {
+
+                    if (isset($sectionicon->imagepath)) {
+                        echo('<p>Converting legacy image ' . $sectionicon->imagepath . ".</p>");
+                        error_log('Converting legacy image ' . $sectionicon->imagepath . '.');
+
+                        if ($temp_file = $fs->get_file($contextid, 'course', 'legacy', 0, '/icons/', $sectionicon->imagepath)) {
+
+                            echo('<p> Stored file:' . print_r($temp_file, true) . '</p>');
+                            error_log(print_r($temp_file, true));
+                            // Resize the image and save it...
+                            $created = time();
+                            $storedfile_record = array(
+                                'contextid' => $contextid,
+                                'component' => 'course',
+                                'filearea' => 'section',
+                                'itemid' => $sectionicon->sectionid,
+                                'filepath' => '/',
+                                'filename' => $sectionicon->imagepath,
+                                'timecreated' => $created,
+                                'timemodified' => $created);
+
+                            try {
+                                $convert_success = true;
+                                $mime = $temp_file->get_mimetype();
+
+                                $storedfile_record['mimetype'] = $mime;
+
+                                if ($mime != 'image/gif') {
+                                    $tmproot = make_temp_directory('gridformaticon');
+                                    $tmpfilepath = $tmproot . '/' . $temp_file->get_contenthash();
+                                    $temp_file->copy_content_to($tmpfilepath);
+
+                                    $data = generate_image_thumbnail($tmpfilepath, GRID_ITEM_IMAGE_WIDTH, GRID_ITEM_IMAGE_HEIGHT);
+                                    if (!empty($data)) {
+                                        $fs->create_file_from_string($storedfile_record, $data);
+                                    } else {
+                                        $convert_success = false;
+                                    }
+                                    unlink($tmpfilepath);
+                                } else {
+                                    $fr = $fs->convert_image($storedfile_record, $temp_file, GRID_ITEM_IMAGE_WIDTH, GRID_ITEM_IMAGE_HEIGHT, true, null);
+                                }
+
+                                if ($convert_success == false) {
+                                    print('<p>Image ' . $sectionicon->imagepath . ' failed to convert.</p>');
+                                    error_log('Image ' . $sectionicon->imagepath . ' failed to convert.');
+                                } else {
+                                    print('<p>Image ' . $sectionicon->imagepath . ' converted.</p>');
+                                    error_log('Image ' . $sectionicon->imagepath . ' converted.');
+
+                                    // Clean up and remove the old thumbnail too.
+                                    $temp_file->delete();
+                                    unset($temp_file);
+                                    if ($temp_file = $fs->get_file($contextid, 'course', 'legacy', 0, '/icons/', 'tn_' . $sectionicon->imagepath)) {
+                                        // Remove thumbnail.
+                                        $temp_file->delete();
+                                        unset($temp_file);
+                                    }
+                                }
+                            } catch (Exception $e) {
+                                if (isset($temp_file)) {
+                                    $temp_file->delete();
+                                    unset($temp_file);
+                                }
+                                print('Grid Format Convert Image Exception:...');
+                                debugging($e->getMessage());
+                            }
+                        } else {
+                            echo('<p>Image ' . $sectionicon->imagepath . ' could not be found in the legacy files.</p>');
+                            error_log('Image ' . $sectionicon->imagepath . ' could not be found in the legacy files.');
+                        }
+                    }
+                }
+                $sectionfiles = grid_files();
+                if ($sectionfiles) {
+                    echo('<p>Files table after ' . print_r($sectionfiles, true) . '.</p>');
+                    error_log('Files table after ' . print_r($sectionfiles, true) . '.');
+                }
+            } else {
+                echo('<p>No section icons found.</p>');
+                error_log('No section icons found.');
+            }
+        } else {
+            echo('<p>Cannot get context id and / or sections for course ' . $courseid . '.</p>');
+            error_log('Cannot get context id and / or sections for course ' . $courseid . '.');
         }
-        $sectionfiles = grid_files();
-        if ($sectionfiles) {
-            echo('<p>Files table after ' . print_r($sectionfiles, true) . '.</p>');
-            error_log('Files table after ' . print_r($sectionfiles, true) . '.');
-        }
-    } else {
-        echo('<p>No section icons found.</p>');
-        error_log('No section icons found.');
     }
 } else {
-    echo('<p>Context id not supplied.</p>');
-    error_log('Context id not supplied.');
+    echo('<p>Cannot get list of course ids from format_grid_icon table.</p>');
+    error_log('Cannot get list of course ids from format_grid_icon table.');
 }

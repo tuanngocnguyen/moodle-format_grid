@@ -63,11 +63,17 @@ When upgrading from Moodle 1.9 the grid icon images are moved to a 'legacy' file
 view the course as the format can no longer find them.  Therefore AFTER upgrading to Moodle 2.2 but before proceeding any
 further please run the script 'convert_legacy_image.php' as follows:
 
-1. Go to any grid format course, turn editing on and click on 'Change image'.  In the URL note down the integer value of 'contextid'.
-2. Change the url to have from the root of your Moodle installation: /course/format/grid/convert_legacy_image.php?contextid=x
-   where 'x' is the number you wrote down in step 1.  I.e:
-   http://www.mysite.com/moodle/course/format/grid/convert_legacy_image.php?contextid=8
-3. Observe the output of the script which is also replicated in the PHP log file.
-4. Go back to the grid format course and confirm that the images are there.  It is possible that some old legacy files remain from
+1. Ensure you have updated fully to Moodle 2.2.
+2. Ensure you have updated properly to the Moodle 2.2 version of the Grid format by clicking on 'Notifications' if you had
+   not replaced the folder before performing the Moodle 2.2 upgarde/
+3. Change the url to have from the root of your Moodle installation: /course/format/grid/convert_legacy_image.php -
+   i.e: http://www.mysite.com/moodle/course/format/grid/convert_legacy_image.php
+   Ignore any "Did you remember to make the first column something unique in your call to get_records? Duplicate value '3' found in column 'courseid'."
+   type messages.
+4. Observe the output of the script which is also replicated in the PHP log file.
+5. Go back to the grid format course and confirm that the images are there.  It is possible that some old legacy files remain from
    old images that were replaced.  At the present moment in time I have no way of detecting them (to be certain that they are
    from the Grid format) in code.
+6. Note: It is entirely possible that courses sharing identical image file names will result in one course showing the image and
+         the other not.  There is nothing I can do about this due to the way that the Moodle 1.9 version worked, but you are in a
+         position to save and re-upload the working image to the course with the issue.
