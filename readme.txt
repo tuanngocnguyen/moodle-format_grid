@@ -65,15 +65,15 @@ further please run the script 'convert_legacy_image.php' as follows:
 
 1. Ensure you have updated fully to Moodle 2.2.
 2. Ensure you have updated properly to the Moodle 2.2 version of the Grid format by clicking on 'Notifications' if you had
-   not replaced the folder before performing the Moodle 2.2 upgarde/
+   not replaced the folder before performing the Moodle 2.2 upgrade/
 3. Change the url to have from the root of your Moodle installation: /course/format/grid/convert_legacy_image.php -
    i.e: http://www.mysite.com/moodle/course/format/grid/convert_legacy_image.php
-   Ignore any "Did you remember to make the first column something unique in your call to get_records? Duplicate value '3' found in column 'courseid'."
-   type messages.
+   If you wish to get the full log output then append '?logverbose=1' to the end of the URL like so:
+   http://www.mysite.com/moodle/course/format/grid/convert_legacy_image.php?logverbose=1
+   But keep in mind that with lots of records in the 'files' table this can cause the script to fail.
 4. Observe the output of the script which is also replicated in the PHP log file.
 5. Go back to the grid format course and confirm that the images are there.  It is possible that some old legacy files remain from
    old images that were replaced.  At the present moment in time I have no way of detecting them (to be certain that they are
    from the Grid format) in code.
-6. Note: It is entirely possible that courses sharing identical image file names will result in one course showing the image and
-         the other not.  There is nothing I can do about this due to the way that the Moodle 1.9 version worked, but you are in a
-         position to save and re-upload the working image to the course with the issue.
+6. I'm not sure of the security vulnerabilities of the script on the server so after you have used it and are confident of the
+   results then move it and 'gdlib_m25.php' from the '/course/format/grid/' folder to a safe non-served folder.
