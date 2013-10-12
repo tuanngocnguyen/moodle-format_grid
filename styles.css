@@ -142,17 +142,11 @@ div#gridmiddle-column ul {
     width: 210px;
     height: 140px;
     overflow: hidden;
-    border-radius: 3px;
-    border-width: 3px;
     border-style: solid;
-    border-color: #ddd;
-    background-color: #f1f2f2;
     text-align: center;
     vertical-align: middle;
 }
-.course-content ul.gridicons li:hover .image_holder {
-    box-shadow: 0px 0px 0px 3px rgba(0,0,0,0.3);
-}
+
 .course-content ul.gridicons li img {
     margin-top: 0;
 }

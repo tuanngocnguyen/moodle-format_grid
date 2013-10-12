@@ -24,7 +24,6 @@
  * @author     Based on code originally written by Paul Krix and Julian Ridden.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 require_once($CFG->libdir . '/filelib.php');
 require_once($CFG->libdir . '/completionlib.php');
@@ -69,41 +68,36 @@ $gfsettings = $courseformat->get_settings();
 <style type="text/css" media="screen">
     /* <![CDATA[ */
 
-    .course-content ul.ctopics li.section .content .toggle {
-        background-color: <?php
-                            if ($tcsettings['togglebackgroundcolour'][0] != '#') {
-                                echo '#';
-                            }
-                            echo $tcsettings['togglebackgroundcolour'];
-                          ?>;
+    .course-content ul.gridicons li .image_holder {
+        border-color: 
+        <?php
+        if ($gfsettings['bordercolour'][0] != '#') {
+            echo '#';
+        }
+        echo $gfsettings['bordercolour'];
+        ?>;
+        background-color:
+        <?php
+        if ($gfsettings['iconbackgroundcolour'][0] != '#') {
+            echo '#';
+        }
+        echo $gfsettings['iconbackgroundcolour'];
+        ?>;
+        border-width: <?php echo $gfsettings['borderwidth']; ?>px;
+        <?php
+        if ($gfsettings['borderradius'] == 2) { // On.
+            echo 'border-radius: ' . $gfsettings['borderwidth'] . 'px;';
+        }
+        ?>;
     }
 
-    /* -- Toggle text -- */
-    .course-content ul.ctopics li.section .content .toggle a {
-        color: <?php
-                if ($tcsettings['toggleforegroundcolour'][0] != '#') {
-                    echo '#';
-                }
-                echo $tcsettings['toggleforegroundcolour'];
-               ?>;
-        text-align: <?php
-    switch ($tcsettings['togglealignment']) {
-        case 1:
-            echo 'left';
-            break;
-        case 3:
-            echo 'right';
-            break;
-        default:
-            echo 'center';
-}
-?>;
-}
-/* ]]> */
+    .course-content ul.gridicons li:hover .image_holder {
+        box-shadow: 0px 0px 0px <?php echo $gfsettings['borderwidth']; ?>px rgba(0,0,0,0.3);       
+    }
+    /* ]]> */
 </style>
 <?php
-
-    if (!empty($displaysection)) {
+if (!empty($displaysection)) {
     $renderer->print_single_section_page($course, null, null, null, null, $displaysection);
 } else {
     $renderer->print_multiple_section_page($course, null, null, null, null);
