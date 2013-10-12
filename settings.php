@@ -77,6 +77,17 @@ if ($ADMIN->fulltree) {
     $choices = format_grid::get_border_widths();
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
+    /* Border radius on / off. */
+    $name = 'format_grid/defaultborderradius';
+    $title = get_string('defaultborderradius', 'format_grid');
+    $description = get_string('defaultborderradius_desc', 'format_grid');
+    $default = format_grid::get_default_border_radius();
+    $choices = array(
+        1 => new lang_string('off', 'format_grid'),   // Off.
+        2 => new lang_string('on', 'format_grid')   // On.
+    );
+    $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
+
     // Default icon background colour in hexidecimal RGB without preceeding '#'.
     $name = 'format_grid/defaulticonbackgroundcolour';
     $title = get_string('defaulticonbackgroundcolour', 'format_grid');

@@ -64,7 +64,46 @@ course_create_sections_if_missing($course, range(0, $course->numsections));
 
 $renderer = $PAGE->get_renderer('format_grid');
 
-if (!empty($displaysection)) {
+$gfsettings = $courseformat->get_settings();
+?>
+<style type="text/css" media="screen">
+    /* <![CDATA[ */
+
+    .course-content ul.ctopics li.section .content .toggle {
+        background-color: <?php
+                            if ($tcsettings['togglebackgroundcolour'][0] != '#') {
+                                echo '#';
+                            }
+                            echo $tcsettings['togglebackgroundcolour'];
+                          ?>;
+    }
+
+    /* -- Toggle text -- */
+    .course-content ul.ctopics li.section .content .toggle a {
+        color: <?php
+                if ($tcsettings['toggleforegroundcolour'][0] != '#') {
+                    echo '#';
+                }
+                echo $tcsettings['toggleforegroundcolour'];
+               ?>;
+        text-align: <?php
+    switch ($tcsettings['togglealignment']) {
+        case 1:
+            echo 'left';
+            break;
+        case 3:
+            echo 'right';
+            break;
+        default:
+            echo 'center';
+}
+?>;
+}
+/* ]]> */
+</style>
+<?php
+
+    if (!empty($displaysection)) {
     $renderer->print_single_section_page($course, null, null, null, null, $displaysection);
 } else {
     $renderer->print_multiple_section_page($course, null, null, null, null);

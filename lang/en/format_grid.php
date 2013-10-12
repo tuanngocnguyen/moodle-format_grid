@@ -57,6 +57,8 @@ $string['numbersections'] = 'Number of sections';
 $string['imagecannotbeusedasanicon'] = 'Image cannot be used as an icon, must be a Gif, Jpg or Png and the GD PHP library installed.';
 
 // CONTRIB-4099 Icon size change improvement.
+$string['off'] = 'Off';
+$string['on'] = 'On';
 $string['gfreset'] = 'Grid reset options';
 $string['gfreset_help'] = 'Reset to Grid defaults.';
 $string['defaulticonwidth'] = 'Default width of the icon';
@@ -65,6 +67,8 @@ $string['defaulticonratio'] = 'Default ratio of the icon relative to the width';
 $string['defaulticonratio_desc'] = 'The default ratio of the icon relative to the width.';
 $string['defaultbordercolour'] = 'Default icon border colour';
 $string['defaultbordercolour_desc'] = 'The default icon border colour.';
+$string['defaultborderradius'] = 'Default border radius';
+$string['defaultborderradius_desc'] = 'The default border radius on / off.';
 $string['defaultborderwidth'] = 'Default border width';
 $string['defaultborderwidth_desc'] = 'The default border width.';
 $string['defaulticonbackgroundcolour'] = 'Default icon background colour';
@@ -83,6 +87,8 @@ $string['seticonratio'] = 'Set the icon ratio relative to the width';
 $string['seticonratio_help'] = 'Set the icon ratio to one of: 3-2, 3-1, 3-3, 2-3, 1-3, 4-3 or 3-4.';
 $string['setbordercolour'] = 'Set the border colour';
 $string['setbordercolour_help'] = 'Set the border colour in hexidecimal RGB.';
+$string['setborderradius'] = 'Set the border radius on / off';
+$string['setborderradius_help'] = 'Set the border radius on or off.';
 $string['setborderwidth'] = 'Set the border width';
 $string['setborderwidth_help'] = 'Set the border width between 1 and 10.';
 $string['seticonbackgroundcolour'] = 'Set the icon background colour';

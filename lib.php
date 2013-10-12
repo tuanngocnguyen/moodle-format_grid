@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -24,7 +25,6 @@
  * @author     Based on code originally written by Paul Krix and Julian Ridden.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/course/format/lib.php'); // For format_base.
@@ -34,12 +34,13 @@ class format_grid extends format_base {
     // CONTRIB-4099:....
     // Width constants - 128, 192, 210, 256, 320, 384, 448, 512, 576, 640, 704 and 768:...
     private static $iconwidths = array(128 => '128', 192 => '192', 210 => '210', 256 => '256', 320 => '320', 384 => '384',
-                                       448 => '448', 512 => '512', 576 => '576', 640 => '640', 704 => '704', 768 => '768');
+        448 => '448', 512 => '512', 576 => '576', 640 => '640', 704 => '704', 768 => '768');
     // Ratio constants - 3-2, 3-1, 3-3, 2-3, 1-3, 4-3 and 3-4:...
     private static $iconratios = array(1 => '3-2', 2 => '3-1', 3 => '3-3', 4 => '2-3', 5 => '1-3', 6 => '4-3', 7 => '3-4');
-    //private $fliped_iconratios;
     // Border width constants - 1 to 10:....
     private static $borderwidths = array(1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '5', 6 => '6', 7 => '7', 8 => '8', 9 => '9', 10 => '10');
+
+    private $settings;
 
     /**
      * Creates a new instance of class
@@ -52,7 +53,6 @@ class format_grid extends format_base {
      */
     protected function __construct($format, $courseid) {
         parent::__construct($format, $courseid);
-        //$fliped_iconratios = array_flip(self::$iconratios);
     }
 
     /**
@@ -109,6 +109,14 @@ class format_grid extends format_base {
      */
     public static function get_default_border_width() {
         return 3; // '3'.
+    }
+
+    /**
+     * Gets the default border width.
+     * @return int Default border width.
+     */
+    public static function get_default_border_radius() {
+        return 2; // On.
     }
 
     /**
@@ -314,6 +322,10 @@ class format_grid extends format_base {
                     'default' => get_config('format_grid', 'defaultborderwidth'),
                     'type' => PARAM_INT,
                 ),
+                'borderradius' => array(
+                    'default' => get_config('format_grid', 'defaultborderradius'),
+                    'type' => PARAM_INT,
+                ),
                 'iconbackgroundcolour' => array(
                     'default' => get_config('format_grid', 'defaulticonbackgroundcolour'),
                     'type' => PARAM_ALPHANUM,
@@ -368,29 +380,29 @@ class format_grid extends format_base {
                     'help_component' => 'moodle',
                 )
             );
-            if (true /* has_capability('format/grid:changeiconsize', $coursecontext)*/) {
+            if (true /* has_capability('format/grid:changeiconsize', $coursecontext) */) {
                 $courseformatoptionsedit['iconwidth'] = array(
                     'label' => new lang_string('seticonwidth', 'format_grid'),
                     'help' => 'seticonwidth',
                     'help_component' => 'format_grid',
                     'element_type' => 'select',
-                    'element_attributes' => array( self::$iconwidths )
+                    'element_attributes' => array(self::$iconwidths)
                 );
                 $courseformatoptionsedit['iconratio'] = array(
                     'label' => new lang_string('seticonratio', 'format_grid'),
                     'help' => 'seticonratio',
                     'help_component' => 'format_grid',
                     'element_type' => 'select',
-                    'element_attributes' => array( self::$iconratios )
+                    'element_attributes' => array(self::$iconratios)
                 );
             } else {
                 $courseformatoptionsedit['iconwidth'] =
-                    array('label' => new lang_string('seticonwidth', 'format_grid'), 'element_type' => 'hidden');
+                        array('label' => new lang_string('seticonwidth', 'format_grid'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['iconratio'] =
-                    array('label' => new lang_string('seticonratio', 'format_grid'), 'element_type' => 'hidden');
+                        array('label' => new lang_string('seticonratio', 'format_grid'), 'element_type' => 'hidden');
             }
 
-            if (true /* has_capability('format/grid:changeiconstyle', $coursecontext)*/) {
+            if (true /* has_capability('format/grid:changeiconstyle', $coursecontext) */) {
                 $courseformatoptionsedit['bordercolour'] = array(
                     'label' => new lang_string('setbordercolour', 'format_grid'),
                     'help' => 'setbordercolour',
@@ -406,7 +418,18 @@ class format_grid extends format_base {
                     'help' => 'setborderwidth',
                     'help_component' => 'format_grid',
                     'element_type' => 'select',
-                    'element_attributes' => array( self::$borderwidths )
+                    'element_attributes' => array(self::$borderwidths)
+                );
+
+                $courseformatoptionsedit['borderradius'] = array(
+                    'label' => new lang_string('setborderradius', 'format_grid'),
+                    'help' => 'setborderradius',
+                    'help_component' => 'format_grid',
+                    'element_type' => 'select',
+                    'element_attributes' => array(
+                        array(1 => new lang_string('off', 'format_grid'),
+                            2 => new lang_string('on', 'format_grid'))
+                    )
                 );
 
                 $courseformatoptionsedit['iconbackgroundcolour'] = array(
@@ -440,15 +463,15 @@ class format_grid extends format_base {
                 );
             } else {
                 $courseformatoptionsedit['bordercolour'] =
-                    array('label' => new lang_string('setbordercolour', 'format_grid'), 'element_type' => 'hidden');
+                        array('label' => new lang_string('setbordercolour', 'format_grid'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['borderwidth'] =
-                    array('label' => new lang_string('setborderwidth', 'format_grid'), 'element_type' => 'hidden');
+                        array('label' => new lang_string('setborderwidth', 'format_grid'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['iconbackgroundcolour'] =
-                    array('label' => new lang_string('seticonbackgroundcolour', 'format_grid'), 'element_type' => 'hidden');
+                        array('label' => new lang_string('seticonbackgroundcolour', 'format_grid'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['currentselectedsectioncolour'] =
-                    array('label' => new lang_string('setcurrentselectedsectioncolour', 'format_grid'), 'element_type' => 'hidden');
+                        array('label' => new lang_string('setcurrentselectedsectioncolour', 'format_grid'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['currentselectediconcolour'] =
-                    array('label' => new lang_string('setcurrentselectediconcolour', 'format_grid'), 'element_type' => 'hidden');
+                        array('label' => new lang_string('setcurrentselectediconcolour', 'format_grid'), 'element_type' => 'hidden');
             }
             $courseformatoptions = array_merge_recursive($courseformatoptions, $courseformatoptionsedit);
         }
@@ -466,25 +489,24 @@ class format_grid extends format_base {
      */
     public function create_edit_form_elements(&$mform, $forsection = false) {
         global $CFG, $OUTPUT;
-        MoodleQuickForm::registerElementType('gfcolourpopup', "$CFG->dirroot/course/format/grid/js/gf_colourpopup.php",
-                                             'MoodleQuickForm_gfcolourpopup');
+        MoodleQuickForm::registerElementType('gfcolourpopup', "$CFG->dirroot/course/format/grid/js/gf_colourpopup.php", 'MoodleQuickForm_gfcolourpopup');
 
         $elements = parent::create_edit_form_elements($mform, $forsection);
         if ($forsection == false) {
             global $COURSE, $USER;
             /*
-             Increase the number of sections combo box values if the user has increased the number of sections
-             using the icon on the course page beyond course 'maxsections' or course 'maxsections' has been
-             reduced below the number of sections already set for the course on the site administration course
-             defaults page.  This is so that the number of sections is not reduced leaving unintended orphaned
-             activities / resources.
+              Increase the number of sections combo box values if the user has increased the number of sections
+              using the icon on the course page beyond course 'maxsections' or course 'maxsections' has been
+              reduced below the number of sections already set for the course on the site administration course
+              defaults page.  This is so that the number of sections is not reduced leaving unintended orphaned
+              activities / resources.
              */
             $maxsections = get_config('moodlecourse', 'maxsections');
             $numsections = $mform->getElementValue('numsections');
             $numsections = $numsections[0];
             if ($numsections > $maxsections) {
                 $element = $mform->getElement('numsections');
-                for ($i = $maxsections+1; $i <= $numsections; $i++) {
+                for ($i = $maxsections + 1; $i <= $numsections; $i++) {
                     $element->addOption("$i", $i);
                 }
             }
@@ -503,13 +525,13 @@ class format_grid extends format_base {
             $resetelements = array();
 
             if ($changeiconsize) {
-                $checkboxname = get_string('reseticonsize', 'format_grid').$OUTPUT->help_icon('reseticonsize', 'format_grid');
-                $resetelements[] =& $mform->createElement('checkbox', 'reseticonsize', '', $checkboxname);
+                $checkboxname = get_string('reseticonsize', 'format_grid') . $OUTPUT->help_icon('reseticonsize', 'format_grid');
+                $resetelements[] = & $mform->createElement('checkbox', 'reseticonsize', '', $checkboxname);
             }
 
             if ($changeiconstyle) {
-                $checkboxname = get_string('reseticonstyle', 'format_grid').$OUTPUT->help_icon('reseticonstyle', 'format_grid');
-                $resetelements[] =& $mform->createElement('checkbox', 'iconstyle', '', $checkboxname);
+                $checkboxname = get_string('reseticonstyle', 'format_grid') . $OUTPUT->help_icon('reseticonstyle', 'format_grid');
+                $resetelements[] = & $mform->createElement('checkbox', 'iconstyle', '', $checkboxname);
             }
 
             $elements[] = $mform->addGroup($resetelements, 'resetgroup', get_string('resetgrp', 'format_grid'), null, false);
@@ -517,11 +539,11 @@ class format_grid extends format_base {
             if ($resetall) {
                 $resetallelements = array();
 
-                $checkboxname = get_string('resetalliconsize', 'format_grid').$OUTPUT->help_icon('resetalliconsize', 'format_grid');
-                $resetallelements[] =& $mform->createElement('checkbox', 'resetalliconsize', '', $checkboxname);
+                $checkboxname = get_string('resetalliconsize', 'format_grid') . $OUTPUT->help_icon('resetalliconsize', 'format_grid');
+                $resetallelements[] = & $mform->createElement('checkbox', 'resetalliconsize', '', $checkboxname);
 
-                $checkboxname = get_string('resetalliconstyle', 'format_grid').$OUTPUT->help_icon('resetalliconstyle', 'format_grid');
-                $resetallelements[] =& $mform->createElement('checkbox', 'resetalliconstyle', '', $checkboxname);
+                $checkboxname = get_string('resetalliconstyle', 'format_grid') . $OUTPUT->help_icon('resetalliconstyle', 'format_grid');
+                $resetallelements[] = & $mform->createElement('checkbox', 'resetalliconstyle', '', $checkboxname);
 
                 $elements[] = $mform->addGroup($resetallelements, 'resetallgroup', get_string('resetallgrp', 'format_grid'), null, false);
             }
@@ -552,7 +574,7 @@ class format_grid extends format_base {
             return false;
         }
 
-        if (!$sectionicons = $DB->get_records('format_grid_icon', array('courseid' => $courseid),'','sectionid, iconpath, displayediconpath')) {
+        if (!$sectionicons = $DB->get_records('format_grid_icon', array('courseid' => $courseid), '', 'sectionid, iconpath, displayediconpath')) {
             $sectionicons = false;
         }
         return $sectionicons;
@@ -577,8 +599,7 @@ class format_grid extends format_base {
         $newicon->courseid = $courseid;
 
         if (!$newicon->id = $DB->insert_record('format_grid_icon', $newicon, true)) {
-            throw new moodle_exception('invalidrecordid', 'format_grid', '',
-                    'Could not create icon. Grid format database is not ready. An admin must visit the notifications section.');
+            throw new moodle_exception('invalidrecordid', 'format_grid', '', 'Could not create icon. Grid format database is not ready. An admin must visit the notifications section.');
         }
         return $newicon;
     }
@@ -603,8 +624,7 @@ class format_grid extends format_base {
             $newicon->courseid = $courseid;
 
             if (!$newicon->id = $DB->insert_record('format_grid_icon', $newicon, true)) {
-                throw new moodle_exception('invalidrecordid', 'format_grid', '',
-                        'Could not create icon. Grid format database is not ready. An admin must visit the notifications section.');
+                throw new moodle_exception('invalidrecordid', 'format_grid', '', 'Could not create icon. Grid format database is not ready. An admin must visit the notifications section.');
             }
             $sectionicon = false;
         }
@@ -622,13 +642,13 @@ class format_grid extends format_base {
             $new_status->showsummary = 1;
 
             if (!$new_status->id = $DB->insert_record('format_grid_summary', $new_status)) {
-                throw new moodle_exception('invalidrecordid', 'format_grid', '',
-                    'Could not set summary status. Grid format database is not ready. An admin must visit the notifications section.');
+                throw new moodle_exception('invalidrecordid', 'format_grid', '', 'Could not set summary status. Grid format database is not ready. An admin must visit the notifications section.');
             }
             $summary_status = $new_status;
         }
         return $summary_status;
     }
+
 }
 
 /**
