@@ -23,7 +23,6 @@
  * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 
 /**
@@ -49,12 +48,11 @@ function imagecopybicubic($dst_img, $src_img, $dst_x, $dst_y, $src_x, $src_y, $d
     global $CFG;
 
     if (function_exists('imagecopyresampled')) {
-       return imagecopyresampled($dst_img, $src_img, $dst_x, $dst_y, $src_x, $src_y,
-                                 $dst_w, $dst_h, $src_w, $src_h);
+        return imagecopyresampled($dst_img, $src_img, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
     }
 
     $totalcolors = imagecolorstotal($src_img);
-    for ($i=0; $i<$totalcolors; $i++) {
+    for ($i = 0; $i < $totalcolors; $i++) {
         if ($colors = imagecolorsforindex($src_img, $i)) {
             imagecolorallocate($dst_img, $colors['red'], $colors['green'], $colors['blue']);
         }
@@ -72,10 +70,10 @@ function imagecopybicubic($dst_img, $src_img, $dst_x, $dst_y, $src_x, $src_y, $d
         for ($i = 0; $i < $dst_w; $i++) {
             $sx = $i * $scalex;
 
-            $c1 = imagecolorsforindex($src_img, imagecolorat($src_img, (int)$sx, (int)$sy + $scaley2));
-            $c2 = imagecolorsforindex($src_img, imagecolorat($src_img, (int)$sx, (int)$sy));
-            $c3 = imagecolorsforindex($src_img, imagecolorat($src_img, (int)$sx + $scalex2, (int)$sy + $scaley2));
-            $c4 = imagecolorsforindex($src_img, imagecolorat($src_img, (int)$sx + $scalex2, (int)$sy));
+            $c1 = imagecolorsforindex($src_img, imagecolorat($src_img, (int) $sx, (int) $sy + $scaley2));
+            $c2 = imagecolorsforindex($src_img, imagecolorat($src_img, (int) $sx, (int) $sy));
+            $c3 = imagecolorsforindex($src_img, imagecolorat($src_img, (int) $sx + $scalex2, (int) $sy + $scaley2));
+            $c4 = imagecolorsforindex($src_img, imagecolorat($src_img, (int) $sx + $scalex2, (int) $sy));
 
             $red = (int) (($c1['red'] + $c2['red'] + $c3['red'] + $c4['red']) / 4);
             $green = (int) (($c1['green'] + $c2['green'] + $c3['green'] + $c4['green']) / 4);
@@ -111,9 +109,9 @@ function process_new_icon($context, $component, $filearea, $itemid, $originalfil
     }
 
     $image = new stdClass();
-    $image->width  = $imageinfo[0];
+    $image->width = $imageinfo[0];
     $image->height = $imageinfo[1];
-    $image->type   = $imageinfo[2];
+    $image->type = $imageinfo[2];
 
     $t = null;
     switch ($image->type) {
@@ -172,27 +170,27 @@ function process_new_icon($context, $component, $filearea, $itemid, $originalfil
         if ($image->type != IMAGETYPE_JPEG and $imagefnc === 'imagepng') {
             if ($t) {
                 // Transparent GIF hacking...
-                $transparentcolour = imagecolorallocate($im1 , $t['red'] , $t['green'] , $t['blue']);
-                imagecolortransparent($im1 , $transparentcolour);
-                $transparentcolour = imagecolorallocate($im2 , $t['red'] , $t['green'] , $t['blue']);
-                imagecolortransparent($im2 , $transparentcolour);
-                $transparentcolour = imagecolorallocate($im3 , $t['red'] , $t['green'] , $t['blue']);
-                imagecolortransparent($im3 , $transparentcolour);
+                $transparentcolour = imagecolorallocate($im1, $t['red'], $t['green'], $t['blue']);
+                imagecolortransparent($im1, $transparentcolour);
+                $transparentcolour = imagecolorallocate($im2, $t['red'], $t['green'], $t['blue']);
+                imagecolortransparent($im2, $transparentcolour);
+                $transparentcolour = imagecolorallocate($im3, $t['red'], $t['green'], $t['blue']);
+                imagecolortransparent($im3, $transparentcolour);
             }
 
             imagealphablending($im1, false);
-            $color = imagecolorallocatealpha($im1, 0, 0,  0, 127);
-            imagefill($im1, 0, 0,  $color);
+            $color = imagecolorallocatealpha($im1, 0, 0, 0, 127);
+            imagefill($im1, 0, 0, $color);
             imagesavealpha($im1, true);
 
             imagealphablending($im2, false);
-            $color = imagecolorallocatealpha($im2, 0, 0,  0, 127);
-            imagefill($im2, 0, 0,  $color);
+            $color = imagecolorallocatealpha($im2, 0, 0, 0, 127);
+            imagefill($im2, 0, 0, $color);
             imagesavealpha($im2, true);
 
             imagealphablending($im3, false);
-            $color = imagecolorallocatealpha($im3, 0, 0,  0, 127);
-            imagefill($im3, 0, 0,  $color);
+            $color = imagecolorallocatealpha($im3, 0, 0, 0, 127);
+            imagefill($im3, 0, 0, $color);
             imagesavealpha($im3, true);
         }
     } else {
@@ -216,7 +214,7 @@ function process_new_icon($context, $component, $filearea, $itemid, $originalfil
 
     $fs = get_file_storage();
 
-    $icon = array('contextid'=>$context->id, 'component'=>$component, 'filearea'=>$filearea, 'itemid'=>$itemid, 'filepath'=>'/');
+    $icon = array('contextid' => $context->id, 'component' => $component, 'filearea' => $filearea, 'itemid' => $itemid, 'filepath' => '/');
 
     ob_start();
     if (!$imagefnc($im1, NULL, $quality, $filters)) {
@@ -226,7 +224,7 @@ function process_new_icon($context, $component, $filearea, $itemid, $originalfil
     }
     $data = ob_get_clean();
     imagedestroy($im1);
-    $icon['filename'] = 'f1'.$imageext;
+    $icon['filename'] = 'f1' . $imageext;
     $fs->delete_area_files($context->id, $component, $filearea, $itemid);
     $file1 = $fs->create_file_from_string($icon, $data);
 
@@ -238,7 +236,7 @@ function process_new_icon($context, $component, $filearea, $itemid, $originalfil
     }
     $data = ob_get_clean();
     imagedestroy($im2);
-    $icon['filename'] = 'f2'.$imageext;
+    $icon['filename'] = 'f2' . $imageext;
     $fs->create_file_from_string($icon, $data);
 
     ob_start();
@@ -249,7 +247,7 @@ function process_new_icon($context, $component, $filearea, $itemid, $originalfil
     }
     $data = ob_get_clean();
     imagedestroy($im3);
-    $icon['filename'] = 'f3'.$imageext;
+    $icon['filename'] = 'f3' . $imageext;
     $fs->create_file_from_string($icon, $data);
 
     return $file1->get_id();
@@ -337,6 +335,154 @@ function generate_image_thumbnail($filepath, $width, $height) {
     $data = ob_get_clean();
     imagedestroy($original);
     imagedestroy($thumbnail);
+
+    return $data;
+}
+
+/**
+ * Generates a thumbnail for the given image
+ *
+ * If the GD library has at least version 2 and PNG support is available, the returned data
+ * is the content of a transparent PNG file containing the thumbnail. Otherwise, the function
+ * returns contents of a JPEG file with black background containing the thumbnail.
+ *
+ * @param string $filepath the full path to the original image file
+ * @param int $requestedwidth the width of the requested image.
+ * @param int $requestedheight the height of the requested image.
+ * @param bool false = scale, true = crop.
+ * @return string|bool false if a problem occurs or the image data.
+ */
+function generate_image($filepath, $requestedwidth, $requestedheight, $crop) {
+    if (empty($filepath) or empty($requestedwidth) or empty($requestedheight)) {
+        return false;
+    }
+
+    $imageinfo = getimagesize($filepath);
+
+    if (empty($imageinfo)) {
+        return false;
+    }
+
+    $originalwidth = $imageinfo[0];
+    $originalheight = $imageinfo[1];
+
+    if (empty($originalwidth) or empty($originalheight)) {
+        return false;
+    }
+
+    $original = imagecreatefromstring(file_get_contents($filepath));
+
+    if (function_exists('imagepng')) {
+        $imagefnc = 'imagepng';
+        $filters = PNG_NO_FILTER;
+        $quality = 1;
+    } else if (function_exists('imagejpeg')) {
+        $imagefnc = 'imagejpeg';
+        $filters = null;
+        $quality = 90;
+    } else {
+        debugging('Neither JPEG nor PNG are supported at this server, please fix the system configuration to have the GD PHP extension installed.');
+        return false;
+    }
+
+    $width = $requestedwidth;
+    $height = $requestedheight;
+
+    // Note: Code transformed from original 'resizeAndCrop' in 'imagelib.php' in the Moodle 1.9 version.
+    if ($crop) {
+        $ratio = $width / $height;
+        $originalratio = $originalwidth / $originalheight;
+        if ($originalratio < $ratio) {
+            // Change the supplied height - 'resizeToWidth'.
+            $ratio = $width / $originalwidth;
+            $height = $originalheight * $ratio;
+            $cropheight = true;
+        } else {
+            // Change the supplied width - 'resizeToHeight'.
+            $ratio = $height / $originalheight;
+            $width = $originalwidth * $ratio;
+            $cropheight = false;
+        }
+    }
+
+    if (function_exists('imagecreatetruecolor')) {
+        $tempimage = imagecreatetruecolor($width, $height);
+        if ($imagefnc === 'imagepng') {
+            imagealphablending($tempimage, false);
+            imagefill($tempimage, 0, 0, imagecolorallocatealpha($tempimage, 0, 0, 0, 127));
+            imagesavealpha($tempimage, true);
+        }
+    } else {
+        $tempimage = imagecreate($width, $height);
+    }
+
+    if ($crop) {
+        // First step, resize.
+        imagecopybicubic($tempimage, $original, 0, 0, 0, 0, $width, $height, $originalwidth, $originalheight);
+        imagedestroy($original);
+        $original = $tempimage;
+
+        // Second step, crop.
+        if ($cropheight) {
+            // Reset after change for resizeToWidth.
+            $height = $requestedheight;
+            // 'cropCenterHeight'.
+            $width = imagesx($original);
+            $srcoffset = (imagesy($original) / 2) - ($height / 2);
+        } else {
+            // Reset after change for resizeToHeight.
+            $width = $requestedwidth;
+            // 'cropCenterWidth'.
+            $height = imagesy($original);
+            $srcoffset = (imagesx($original) / 2) - ($width / 2);
+        }
+
+        if (function_exists('imagecreatetruecolor')) {
+            $finalimage = imagecreatetruecolor($width, $height);
+            if ($imagefnc === 'imagepng') {
+                imagealphablending($finalimage, false);
+                imagefill($finalimage, 0, 0, imagecolorallocatealpha($tempimage, 0, 0, 0, 127));
+                imagesavealpha($finalimage, true);
+            }
+        } else {
+            $finalimage = imagecreate($width, $height);
+        }
+
+        if ($cropheight) {
+            // 'cropCenterHeight'.
+            imagecopybicubic($finalimage, $original, 0, 0, 0, $srcoffset, $width, $height, $width, $height);
+        } else {
+            // 'cropCenterWidth'.
+            imagecopybicubic($finalimage, $original, 0, 0, $srcoffset, 0, $width, $height, $width, $height);
+        }
+    } else {
+        $finalimage = $tempimage;
+        $ratio = min($width / $originalwidth, $height / $originalheight);
+
+        if ($ratio < 1) {
+            $targetwidth = floor($originalwidth * $ratio);
+            $targetheight = floor($originalheight * $ratio);
+        } else {
+            // do not enlarge the original file if it is smaller than the requested thumbnail size
+            $targetwidth = $originalwidth;
+            $targetheight = $originalheight;
+        }
+
+        $dstx = floor(($width - $targetwidth) / 2);
+        $dsty = floor(($height - $targetheight) / 2);
+
+        imagecopybicubic($finalimage, $original, $dstx, $dsty, 0, 0, $targetwidth, $targetheight, $originalwidth, $originalheight);
+    }
+
+    ob_start();
+    if (!$imagefnc($finalimage, null, $quality, $filters)) {
+        ob_end_clean();
+        return false;
+    }
+    $data = ob_get_clean();
+
+    imagedestroy($original);
+    imagedestroy($finalimage);
 
     return $data;
 }

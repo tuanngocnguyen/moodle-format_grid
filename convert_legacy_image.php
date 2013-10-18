@@ -31,6 +31,7 @@ require_once($CFG->dirroot . '/repository/lib.php');
 require_once('gdlib_m25.php');
 
 $logverbose = optional_param('logverbose', 0, PARAM_INT);  // Set to 1 to have verbose logging.
+$crop = optional_param('crop', 0, PARAM_INT);  // Set to 1 to have cropped images.
 
 /* Script settings */
 define('GRID_ITEM_IMAGE_WIDTH', 210);
@@ -143,21 +144,17 @@ if ($courseids) {
 
                                     $storedfile_record['mimetype'] = $mime;
 
-                                    if ($mime != 'image/gif') {
-                                        $tmproot = make_temp_directory('gridformaticon');
-                                        $tmpfilepath = $tmproot . '/' . $temp_file->get_contenthash();
-                                        $temp_file->copy_content_to($tmpfilepath);
+                                    $tmproot = make_temp_directory('gridformaticon');
+                                    $tmpfilepath = $tmproot . '/' . $temp_file->get_contenthash();
+                                    $temp_file->copy_content_to($tmpfilepath);
 
-                                        $data = generate_image_thumbnail($tmpfilepath, GRID_ITEM_IMAGE_WIDTH, GRID_ITEM_IMAGE_HEIGHT);
-                                        if (!empty($data)) {
-                                            $fs->create_file_from_string($storedfile_record, $data);
-                                        } else {
-                                            $convert_success = false;
-                                        }
-                                        unlink($tmpfilepath);
+                                    $data = generate_image($tmpfilepath, GRID_ITEM_IMAGE_WIDTH, GRID_ITEM_IMAGE_HEIGHT, $crop);
+                                    if (!empty($data)) {
+                                        $fs->create_file_from_string($storedfile_record, $data);
                                     } else {
-                                        $fr = $fs->convert_image($storedfile_record, $temp_file, GRID_ITEM_IMAGE_WIDTH, GRID_ITEM_IMAGE_HEIGHT, true, null);
+                                        $convert_success = false;
                                     }
+                                    unlink($tmpfilepath);
 
                                     if ($convert_success == false) {
                                         print('<p>Image ' . $sectionicon->imagepath . ' failed to convert.</p>');
