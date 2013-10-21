@@ -137,9 +137,16 @@ class format_grid_renderer extends format_section_renderer_base {
         echo html_writer::tag('div', '&nbsp;', array('class' => 'clearer'));
         echo html_writer::end_tag('div');
 
+        $section_redirect = null;
+        if ($course->coursedisplay == COURSE_DISPLAY_MULTIPAGE) {
+            // Get the redirect URL prefix for keyboard control with the 'Show one section per page' layout.
+            $section_redirect = $this->courseformat->get_view_url(null)->out(true);
+        }
+
         // Initialise the shade box functionality:...
         $PAGE->requires->js_init_call('M.format_grid.init', array(
             $PAGE->user_is_editing(),
+            $section_redirect,
             has_capability('moodle/course:update', $context),
             $course->numsections,
             json_encode($this->shadeboxshownarray)));
