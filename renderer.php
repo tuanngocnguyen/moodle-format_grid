@@ -183,16 +183,18 @@ class format_grid_renderer extends format_section_renderer_base {
         if (has_capability('moodle/course:setcurrentsection', $coursecontext)) {
             if ($course->marker == $section->section) {  // Show the "light globe" on/off.
                 $url->param('marker', 0);
+                $strmarkedthissection = get_string('markedthissection', 'format_grid');
                 $controls[] = html_writer::link($url,
                                     html_writer::empty_tag('img', array('src' => $this->output->pix_url('i/marked'),
-                                        'class' => 'icon ', 'alt' => get_string('markedthistopic'))),
-                                    array('title' => get_string('markedthistopic'), 'class' => 'editing_highlight'));
+                                        'class' => 'icon ', 'alt' => $strmarkedthissection)),
+                                    array('title' => $strmarkedthissection, 'class' => 'editing_highlight'));
             } else {
+                $strmarkthissection = get_string('markthissection', 'format_grid');
                 $url->param('marker', $section->section);
                 $controls[] = html_writer::link($url,
                                 html_writer::empty_tag('img', array('src' => $this->output->pix_url('i/marker'),
-                                    'class' => 'icon', 'alt' => get_string('markthistopic'))),
-                                array('title' => get_string('markthistopic'), 'class' => 'editing_highlight'));
+                                    'class' => 'icon', 'alt' => $strmarkthissection)),
+                                array('title' => $strmarkthissection, 'class' => 'editing_highlight'));
             }
         }
 

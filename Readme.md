@@ -215,12 +215,13 @@ Known Issues
 
 History
 =============
-21st October 2013 Version 2.5.4.4 - Stable.
+23rd October 2013 Version 2.5.4.4 - Stable.
 Change by G J Barnard
   1.  Fix broken call to '_is_empty_text' as reported on CONTRIB-4589.
   2.  Optimised fetching of icon data from database to one call instead of one call per shown section.
   3.  Changed icon border size and radius to provide greater definition to the icon.
   4.  Fixed shade box showing when pressing the 'Esc' key in 'Show one section per page' course layout - CONTRIB-4709.
+  5.  Fixed highlight this section text referring to 'topics'.
 
 2nd October 2013 Version 2.5.4.3 - Stable.
 Change by G J Barnard

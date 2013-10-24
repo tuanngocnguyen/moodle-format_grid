@@ -42,13 +42,15 @@ $string['topic0'] = 'General';
 $string['topicoutline'] = 'Section';  // No longer used kept for legacy versions.
 
 // MDL-26105.
-$string['page-course-view-topcoll'] = 'Any course main page in the grid format';
-$string['page-course-view-topcoll-x'] = 'Any course page in the grid format';
+$string['page-course-view-grid'] = 'Any course main page in the grid format';
+$string['page-course-view-grid-x'] = 'Any course page in the grid format';
 
 // Moodle 2.3 Enhancement.
 $string['hidefromothers'] = 'Hide section'; // No longer used kept for legacy versions.
 $string['showfromothers'] = 'Show section'; // No longer used kept for legacy versions.
 $string['currentsection'] = 'This section'; // No longer used kept for legacy versions.
+$string['markedthissection'] = 'This section is highlighted as the current section';
+$string['markthissection'] = 'Highlight this section as the current section';
 
 // Moodle 2.4 Course format refactoring - MDL-35218.
 $string['numbersections'] = 'Number of sections';
