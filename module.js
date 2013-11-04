@@ -330,7 +330,7 @@ M.format_grid.shadebox.initialize_shadebox = function() {
     this.shadebox_open = false;
 
     this.shadebox_overlay = document.getElementById('gridshadebox_overlay');
-    this.shadebox_overlay.style.display="";
+    this.shadebox_overlay.style.display = "";
     this.grid_shadebox = document.getElementById('gridshadebox');
     document.body.appendChild(this.grid_shadebox); // Adds the shade box to the document.
 
