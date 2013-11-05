@@ -246,6 +246,7 @@ History
   1.  Fixed issue over prefixed '#' in colour picker.
   2.  Added validation to HEX RGB colour codes.
   3.  Added US English language file.
+  4.  Implemented MDL-21097.
 
 4th November 2013 Version 2.5.5 - CONTRIB-4099 - BETA
 Improvement by G J Barnard
