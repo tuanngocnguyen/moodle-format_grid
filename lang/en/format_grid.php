@@ -85,7 +85,7 @@ $string['defaultimagecontainerratio'] = 'Default ratio of the image container re
 $string['defaultimagecontainerratio_desc'] = 'The default ratio of the image container relative to the width.';
 $string['defaultimageresizemethod'] = 'Default image resize method';
 $string['defaultimageresizemethod_desc'] = 'The default method of resizing the image to fit the container.';
-$string['defaultbordercolour'] = 'Default imagecontainer border colour';
+$string['defaultbordercolour'] = 'Default image container border colour';
 $string['defaultbordercolour_desc'] = 'The default image container border colour.';
 $string['defaultborderradius'] = 'Default border radius';
 $string['defaultborderradius_desc'] = 'The default border radius on / off.';
@@ -119,6 +119,8 @@ $string['setcurrentselectedsectioncolour'] = 'Set the current selected section c
 $string['setcurrentselectedsectioncolour_help'] = 'Set the current selected section colour in hexidecimal RGB.';
 $string['setcurrentselectedimagecontainercolour'] = 'Set the current selected image container colour';
 $string['setcurrentselectedimagecontainercolour_help'] = 'Set the current selected image container colour in hexidecimal RGB.';
+
+$string['colourrule'] = "Please enter a valid RGB colour, six hexadecimal digits.";
 
 // Reset.
 $string['resetgrp'] = 'Reset:';

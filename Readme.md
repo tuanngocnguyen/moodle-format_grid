@@ -242,6 +242,11 @@ Known Issues
 
 History
 =============
+5th November 2013 Version 2.5.5
+  1.  Fixed issue over prefixed '#' in colour picker.
+  2.  Added validation to HEX RGB colour codes.
+  3.  Added US English language file.
+
 4th November 2013 Version 2.5.5 - CONTRIB-4099 - BETA
 Improvement by G J Barnard
   1.  Implemented CONTRIB-4099 to add image icon size and colour changes.
