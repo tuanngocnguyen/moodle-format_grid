@@ -238,15 +238,18 @@ Roadmap
 Known Issues
 =============
 1. All listed on https://tracker.moodle.org/browse/CONTRIB/component/11231.
-2. Unable to delete a grid icon image.
 
 History
 =============
-5th November 2013 Version 2.5.5
+9th November 2013 Version 2.5.5
   1.  Fixed issue over prefixed '#' in colour picker.
   2.  Added validation to HEX RGB colour codes.
   3.  Added US English language file.
   4.  Implemented MDL-21097.
+  5.  Fixed an issue when deleting a course that was not in the grid format where
+      the function 'format_grid_delete_course' in 'lib.php' was being called even
+      though the course is not in the format and the wrong format object was being
+      retrieved.  This then resulted in a method call on a non-existent method.
 
 4th November 2013 Version 2.5.5 - CONTRIB-4099 - BETA
 Improvement by G J Barnard
