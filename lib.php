@@ -1624,6 +1624,14 @@ class format_grid extends format_base {
         return $retr;
     }
 
+    /**
+     * Returns a new instance of us so that specialised methods can be called.
+     * @param int $courseid The course id of the course.
+     * @return format_grid object.
+     */
+    public static function get_instance($courseid) {
+        return new format_grid('grid', $courseid);
+    }
 }
 
 /**
@@ -1665,9 +1673,13 @@ function callback_grid_definition() {
 function format_grid_delete_course($courseid) {
     global $DB;
 
-    // Delete any images associated with the course....
-    $courseformat = course_get_format($courseid);
+    /* Delete any images associated with the course.
+       Done this way so will work if the course has
+       been a grid format course in the past even if
+       it is not now. */
+    $courseformat = format_grid::get_instance($courseid); // 
     $courseformat->delete_images();
+    unset($courseformat);  // Destruct.
 
     $DB->delete_records("format_grid_summary", array("courseid" => $courseid));
 }
