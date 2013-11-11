@@ -242,10 +242,10 @@ Known Issues
 
 History
 =============
-9th November 2013 Version 2.6.0.1
+11th November 2013 Version 2.6.0.1
   1.  Initial BETA code for Moodle 2.6.
 
-5th November 2013 Version 2.5.5
+11th November 2013 Version 2.5.5
   1.  Fixed issue over prefixed '#' in colour picker.
   2.  Added validation to HEX RGB colour codes.
   3.  Added US English language file.
