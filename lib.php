@@ -902,7 +902,7 @@ class format_grid extends format_base {
 
     /**
      * Restores the course settings when restoring a pre CONTRIB-4099 course and sets the settings when upgrading
-     * from a prevous version.
+     * from a previous version.
      */
     public function restore_grid_setting($courseid, $imagecontainerwidth, $imagecontainerratio, $imageresizemethod, $bordercolour,
             $borderwidth, $borderradius, $imagecontainerbackgroundcolour, $currentselectedsectioncolour,
