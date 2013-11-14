@@ -192,7 +192,7 @@ class format_grid extends format_base {
     public function get_section_name($section) {
         $section = $this->get_section($section);
         if (!empty($section->name)) {
-            return format_string($section->name, true, array('context' => get_context_instance(CONTEXT_COURSE, $this->courseid)));
+            return format_string($section->name, true, array('context' => context_course::instance($this->courseid)));
         } if ($section->section == 0) {
             return get_string('topic0', 'format_grid');
         } else {
