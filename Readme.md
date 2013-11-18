@@ -4,7 +4,7 @@ A topics based format that uses a grid of user selectable images to pop up a lig
 
 Required version of Moodle
 ==========================
-This version works with Moodle version 2013110600.00 release 2.6beta+ (Build: 20131106) and above within the 2.6 branch until the
+This version works with Moodle version 2013111800.00 release 2.6 (Build: 20131118) and above within the 2.6 branch until the
 next release.
 
 Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
@@ -242,10 +242,17 @@ Known Issues
 
 History
 =============
+18th November 2013 Version 2.6.1
+Change by G J Barnard
+  1.  Stable release for Moodle 2.6.
+  2.  Fixed slight issue with lack of prefixing '#' for colour settings in default settings.
+
 14th November 2013 Version 2.6.0.1
+Change by G J Barnard
   1.  Initial BETA code for Moodle 2.6.
 
 14th November 2013 Version 2.5.5
+Change by G J Barnard
   1.  Fixed issue over prefixed '#' in colour picker.
   2.  Added validation to HEX RGB colour codes.
   3.  Added US English language file.

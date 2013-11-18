@@ -109,7 +109,7 @@ class format_grid extends format_base {
      * @return string Default border colour.
      */
     public static function get_default_border_colour() {
-        return 'dddddd';
+        return '#dddddd';
     }
 
     /**
@@ -141,7 +141,7 @@ class format_grid extends format_base {
      * @return string Default image container background colour.
      */
     public static function get_default_image_container_background_colour() {
-        return 'f1f2f2';
+        return '#f1f2f2';
     }
 
     /**
@@ -149,7 +149,7 @@ class format_grid extends format_base {
      * @return string Default current selected section colour.
      */
     public static function get_default_current_selected_section_colour() {
-        return 'd9edf7';
+        return '#d9edf7';
     }
 
     /**
@@ -157,7 +157,7 @@ class format_grid extends format_base {
      * @return string Default current selected image container colour.
      */
     public static function get_default_current_selected_image_container_colour() {
-        return '00CC00';
+        return '#00CC00';
     }
 
     /**
@@ -315,6 +315,25 @@ class format_grid extends format_base {
         static $courseformatoptions = false;
 
         if ($courseformatoptions === false) {
+            /* Note: Because 'admin_setting_configcolourpicker' in 'settings.php' needs to use a prefixing '#'
+                     this needs to be stripped off here if it's there for the format's specific colour picker. */
+            $defaultbordercolour = get_config('format_grid', 'defaultbordercolour');
+            if ($defaultbordercolour[0] == '#') {
+                $defaultbordercolour = substr($defaultbordercolour, 1);
+            }
+            $defaultimagecontainerbackgroundcolour = get_config('format_grid', 'defaultimagecontainerbackgroundcolour');
+            if ($defaultimagecontainerbackgroundcolour[0] == '#') {
+                $defaultimagecontainerbackgroundcolour = substr($defaultimagecontainerbackgroundcolour, 1);
+            }
+            $defaultcurrentselectedsectioncolour = get_config('format_grid', 'defaultcurrentselectedsectioncolour');
+            if ($defaultcurrentselectedsectioncolour[0] == '#') {
+                $defaultcurrentselectedsectioncolour = substr($defaultcurrentselectedsectioncolour, 1);
+            }
+            $defaultcurrentselectedimagecontainercolour = get_config('format_grid', 'defaultcurrentselectedimagecontainercolour');
+            if ($defaultcurrentselectedimagecontainercolour[0] == '#') {
+                $defaultcurrentselectedimagecontainercolour = substr($defaultcurrentselectedimagecontainercolour, 1);
+            }
+
             $courseconfig = get_config('moodlecourse');
             $courseformatoptions = array(
                 'numsections' => array(
@@ -342,7 +361,7 @@ class format_grid extends format_base {
                     'type' => PARAM_INT,
                 ),
                 'bordercolour' => array(
-                    'default' => get_config('format_grid', 'defaultbordercolour'),
+                    'default' => $defaultbordercolour,
                     'type' => PARAM_ALPHANUM,
                 ),
                 'borderwidth' => array(
@@ -354,15 +373,15 @@ class format_grid extends format_base {
                     'type' => PARAM_INT,
                 ),
                 'imagecontainerbackgroundcolour' => array(
-                    'default' => get_config('format_grid', 'defaultimagecontainerbackgroundcolour'),
+                    'default' => $defaultimagecontainerbackgroundcolour,
                     'type' => PARAM_ALPHANUM,
                 ),
                 'currentselectedsectioncolour' => array(
-                    'default' => get_config('format_grid', 'defaultcurrentselectedsectioncolour'),
+                    'default' => $defaultcurrentselectedsectioncolour,
                     'type' => PARAM_ALPHANUM,
                 ),
                 'currentselectedimagecontainercolour' => array(
-                    'default' => get_config('format_grid', 'defaultcurrentselectedimagecontainercolour'),
+                    'default' => $defaultcurrentselectedimagecontainercolour,
                     'type' => PARAM_ALPHANUM,
                 )
             );
