@@ -358,7 +358,7 @@ class format_grid_renderer extends format_section_renderer_base {
                 echo html_writer::start_tag('li', $liattributes);
 
                 // Ensure the record exists.
-                if (!array_key_exists($thissection->id, $sectionimages)) {
+                if  (($sectionimages === false) || (!array_key_exists($thissection->id, $sectionimages))) {
                     $sectionimage = $this->courseformat->create_get_imagecontainer(
                             $course->id, $thissection->id);
                 } else {
