@@ -242,6 +242,11 @@ Known Issues
 
 History
 =============
+19th November 2013 Version 2.6.1.1
+Change by G J Barnard
+  1.  Fix incorrect detection of non-existent entry in format_grid_icon table.  Thanks to
+      Llywelyn Morgan for reporting this.
+
 18th November 2013 Version 2.6.1
 Change by G J Barnard
   1.  Stable release for Moodle 2.6.
