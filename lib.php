@@ -964,10 +964,9 @@ class format_grid extends format_base {
     /**
      * Gets the grid image entries for the given course.
      * @param int $courseid The course id to use.
-     * @param int $ignorenorecords True we should not worry about no records existing, possibly down to a restore of a course.
      * @returns bool|array The records or false if the course id is 0 or the request failed.
      */
-    public function get_images($courseid, $ignorenorecords) {
+    public function get_images($courseid) {
         global $DB;
 
         if (!$courseid) {
@@ -976,11 +975,7 @@ class format_grid extends format_base {
 
         if (!$sectionimagecontainers = $DB->get_records('format_grid_icon', array('courseid' => $courseid), '',
                 'sectionid, image, displayedimageindex')) {
-            if (!$ignorenorecords) {
-                $sectionimagecontainers = false;
-            } else {
-                $sectionimagecontainers = true;
-            }
+            $sectionimagecontainers = false;
         }
         return $sectionimagecontainers;
     }
@@ -1369,9 +1364,9 @@ class format_grid extends format_base {
     }
 
     public function delete_images() {
-        $sectionimages = $this->get_images($this->courseid, false);
+        $sectionimages = $this->get_images($this->courseid);
 
-        if (($sectionimages) && (is_array($sectionimages))) {
+        if (is_array($sectionimages)) {
             global $DB;
             $context = context_course::instance($this->courseid);
             $contextid = $context->id;
@@ -1394,9 +1389,9 @@ class format_grid extends format_base {
     }
 
     public function delete_displayed_images() {
-        $sectionimages = $this->get_images($this->courseid, false);
+        $sectionimages = $this->get_images($this->courseid);
 
-        if (($sectionimages) && (is_array($sectionimages))) {
+        if (is_array($sectionimages)) {
             global $DB;
 
             $context = context_course::instance($this->courseid);
@@ -1427,7 +1422,7 @@ class format_grid extends format_base {
     private function update_displayed_images($courseid, $us, $settings, $ignorenorecords) {
         global $DB;
 
-        $sectionimages = $us->get_images($courseid, $ignorenorecords);
+        $sectionimages = $us->get_images($courseid);
         if (is_array($sectionimages)) {
             $coursecontext = context_course::instance($courseid);
             $contextid = $coursecontext->id;
