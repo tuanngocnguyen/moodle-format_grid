@@ -324,7 +324,7 @@ class format_grid_renderer extends format_section_renderer_base {
         $sectionupdated = $this->new_activity($course);
 
         // Get the section images for the course.
-        $sectionimages = $this->courseformat->get_images($course->id, false);
+        $sectionimages = $this->courseformat->get_images($course->id);
 
         // CONTRIB-4099:...
         $gridimagepath = $this->courseformat->get_image_path();
