@@ -241,6 +241,10 @@ Known Issues
 
 History
 =============
+21st November 2013 Version 2.5.5.3
+Change by G J Barnard
+  1.  Tidy up code.
+
 20th November 2013 Version 2.5.5.2
 Change by G J Barnard
   1.  Fix incorrect detection of non-existent entry in format_grid_icon table.  Thanks to

@@ -1021,11 +1021,12 @@ class format_grid extends format_base {
 
         if (!$sectionimage = $DB->get_record('format_grid_icon', array('sectionid' => $sectionid))) {
 
-            $newimage = new stdClass();
-            $newimage->sectionid = $sectionid;
-            $newimage->courseid = $courseid;
+            $newimagecontainer = new stdClass();
+            $newimagecontainer->sectionid = $sectionid;
+            $newimagecontainer->courseid = $courseid;
+            $newimagecontainer->displayedimageindex = 0;
 
-            if (!$newimage->id = $DB->insert_record('format_grid_icon', $newimage, true)) {
+            if (!$newimage->id = $DB->insert_record('format_grid_icon', $newimagecontainer, true)) {
                 throw new moodle_exception('invalidrecordid', 'format_grid', '',
                 'Could not create image container. Grid format database is not ready. An admin must visit the notifications section.');
             }
