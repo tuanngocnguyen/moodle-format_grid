@@ -1007,7 +1007,8 @@ class format_grid extends format_base {
                 'Could not create image container. Grid format database is not ready. An admin must visit the notifications section.');
             }
             $sectionimage = false;
-        } else if ($sectionimage->courseid === 1) { // 1 is the default and is the 'site' course so cannot be the Grid format.
+        } else if ($sectionimage->courseid == 1) { // 1 is the default and is the 'site' course so cannot be the Grid format.
+            // Note: Using a double equals in the test and not a triple as the latter does not work for some reason.
             /* Course id is the default and needs to be set correctly.  This can happen with data created by versions prior to
                13/7/2012. */
             $DB->set_field('format_grid_icon', 'courseid', $courseid, array('sectionid' => $sectionid));

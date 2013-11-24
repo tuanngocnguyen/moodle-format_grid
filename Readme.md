@@ -271,8 +271,9 @@ been an issue as there should be no records in the 'format_grid_icon' table for 
 because of '5' above, old courses had the 'course id' set to '1' and not the true course id of the
 course.  And so the method 'delete_images()' deleted them.  This would have been fine as the regeneration
 code should have put the images back, but because the code could not find the record containing the image
-this did not happen (which '5' above fixes).  So, with fixes '1' and '5' courses should repair themselves
-automatically when they are first viewed.
+this did not happen (which '5' above fixes).  But what I cannot explain yet is why with Dan Trockman's
+set up the 'database error' ('5') did not manifest itself.  But I hope that fixes '1' and '5' will repair
+courses automatically when they are first viewed.
 
 20th November 2013 Version 2.5.5.2
 Change by G J Barnard
