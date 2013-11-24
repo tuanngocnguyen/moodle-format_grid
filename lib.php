@@ -833,10 +833,10 @@ class format_grid extends format_base {
 
         $currentcourseid = 0;
         if ($courseid == 0) {
-            $records = $DB->get_records('course_format_options', array('format' => $this->format), '', 'id, courseid');
+            $records = $DB->get_records('course', array('format' => $this->format), '', 'id');
         } else {
-            $records = $DB->get_records('course_format_options', array('courseid' => $courseid, 'format' => $this->format), '',
-                    'id, courseid');
+            $records = $DB->get_records('course', array('id' => $courseid, 'format' => $this->format), '',
+                    'id');
         }
 
         $resetallifall = ((is_siteadmin($USER)) || ($courseid != 0)); // Will be true if reset all capability or a single course.
@@ -866,11 +866,10 @@ class format_grid extends format_base {
         }
 
         foreach ($records as $record) {
-            if ($currentcourseid != $record->courseid) {
-                $currentcourseid = $record->courseid; // Only do once per course.
-                if (($updateimagecontainersize) || ($updateimageresizemethod) || ($updateimagecontainerstyle)) {
-                    $ourcourseid = $this->courseid;
-                    $this->courseid = $currentcourseid;
+            if (($updateimagecontainersize) || ($updateimageresizemethod) || ($updateimagecontainerstyle)) {
+                $ourcourseid = $this->courseid;
+                $this->courseid = $record->id;
+                if (($updateimagecontainersize) || ($updateimageresizemethod)) {
                     $courseformat = null;
                     if ($ourcourseid !== $this->courseid) {
                         $courseformat = course_get_format($this->courseid);
@@ -879,42 +878,40 @@ class format_grid extends format_base {
                         $currentsettings = $this->get_settings();
                         $courseformat = $this;
                     }
-                    if (($updateimagecontainersize) || ($updateimageresizemethod)) {
 
-                        if (($updateimagecontainersize) &&
-                               (($currentsettings['imagecontainerwidth'] != $updatedata['imagecontainerwidth']) ||
-                                ($currentsettings['imagecontainerratio'] != $updatedata['imagecontainerratio']))) {
-                            $performimagecontainersize = true; // $updatedata will be correct.
-                        } else {
-                            // If image resize method needs to operate so use current settings.
-                            $updatedata['imagecontainerwidth'] = $currentsettings['imagecontainerwidth'];
-                            $updatedata['imagecontainerratio'] = $currentsettings['imagecontainerratio'];
-                            $performimagecontainersize = false;
-                        }
-
-                        if (($updateimageresizemethod) &&
-                            ($currentsettings['imageresizemethod'] != $updatedata['imageresizemethod'])) {
-                            $performimageresizemethod = true; // $updatedata will be correct.
-                        } else {
-                            // If image container size needs to operate so use current setting.
-                            $updatedata['imageresizemethod'] = $currentsettings['imageresizemethod'];
-                            $performimageresizemethod = false;
-                        }
-
-                        if (($performimagecontainersize) || ($performimageresizemethod)) {
-                            // No need to get the settings as parsing the updated ones, but do need to invalidate them.
-                            $courseformat->settings = null;
-                            $courseformat->update_displayed_images($currentcourseid, $courseformat, $updatedata, false);
-                        }
-                        if (self::is_developer_debug()) {
-                            error_log('reset_grid_setting - $updateimagecontainersize - course id: ' . $this->courseid);
-                            error_log('current settings: ' . print_r($currentsettings, true));
-                            error_log('update settings: ' . print_r($updatedata, true));
-                        }
+                    if (($updateimagecontainersize) &&
+                           (($currentsettings['imagecontainerwidth'] != $updatedata['imagecontainerwidth']) ||
+                            ($currentsettings['imagecontainerratio'] != $updatedata['imagecontainerratio']))) {
+                        $performimagecontainersize = true; // $updatedata will be correct.
+                    } else {
+                        // If image resize method needs to operate so use current settings.
+                        $updatedata['imagecontainerwidth'] = $currentsettings['imagecontainerwidth'];
+                        $updatedata['imagecontainerratio'] = $currentsettings['imagecontainerratio'];
+                        $performimagecontainersize = false;
                     }
-                    $courseformat->update_format_options($updatedata);
-                    $this->courseid = $ourcourseid;
+
+                    if (($updateimageresizemethod) &&
+                        ($currentsettings['imageresizemethod'] != $updatedata['imageresizemethod'])) {
+                         $performimageresizemethod = true; // $updatedata will be correct.
+                    } else {
+                        // If image container size needs to operate so use current setting.
+                        $updatedata['imageresizemethod'] = $currentsettings['imageresizemethod'];
+                        $performimageresizemethod = false;
+                    }
+
+                    if (($performimagecontainersize) || ($performimageresizemethod)) {
+                        // No need to get the settings as parsing the updated ones, but do need to invalidate them.
+                        $courseformat->settings = null;
+                        $courseformat->update_displayed_images($record->id, $courseformat, $updatedata, false);
+                    }
+                    if (self::is_developer_debug()) {
+                        error_log('reset_grid_setting - $updateimagecontainersize or $updateimageresizemethod - course id: ' . $this->courseid . ' - request course id: '. $courseid);
+                        error_log('current settings: ' . print_r($currentsettings, true));
+                        error_log('update settings: ' . print_r($updatedata, true));
+                    }
                 }
+                $this->update_format_options($updatedata);
+                $this->courseid = $ourcourseid;
             }
         }
     }
@@ -1036,6 +1033,14 @@ class format_grid extends format_base {
                 'Could not set summary status. Grid format database is not ready. An admin must visit the notifications section.');
             }
             $summarystatus = $newstatus;
+
+            /* Technically this only happens once when the course is created, so we can use it to set the
+             * course format options for the first time.  This so that the defaults are set upon creation
+             * and therefore do not have to detect when they change in the global site settings.  Which
+             * cannot be detected and therefore the icons would look odd.  So here they are set and set once
+             * until course settings are reset or changed.
+             */
+            $this->update_course_format_options($this->get_settings());
         }
         return $summarystatus;
     }

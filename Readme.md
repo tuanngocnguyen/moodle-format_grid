@@ -244,7 +244,7 @@ History
 24th November 2013 Version 2.5.5.3
 Change by G J Barnard
   1.  Fix automated backups including displayed images when they should not.
-  2.  Fix 'reset_grid_setting' in 'lib.php' updating the wrong course settings.
+  2.  Fix 'reset_grid_setting' in 'lib.php' not resetting a course if it's only on default options.
   3.  Fix restore using the wrong name for the 'image' field.
   4.  Only delete the old image file if it exists after the new one has been successfully
       created in 'setup_displayed_image' in 'lib.php'.
@@ -253,6 +253,8 @@ Change by G J Barnard
       cannot be found and yet the record exists already.  This is due to new optimisation
       code relying on using 'courseid' to find the section records for the course in
       one go rather than getting them individually.
+  6.  Ensure a course sets its settings when it is created and then detaches itself from the
+      global defaults.
 
 NOTE: I did find in changing the backup / restore code that the changes did not take hold until I
       restarted the web server (in my case the Apache service) if you encounter a situation where
