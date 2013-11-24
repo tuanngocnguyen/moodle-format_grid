@@ -359,8 +359,8 @@ class format_grid_renderer extends format_section_renderer_base {
 
                 // Ensure the record exists.
                 if  (($sectionimages === false) || (!array_key_exists($thissection->id, $sectionimages))) {
-                    $sectionimage = $this->courseformat->create_get_imagecontainer(
-                            $course->id, $thissection->id);
+                    // get_image has 'repair' functionality for when there are issues with the data.
+                    $sectionimage = $this->courseformat->get_image($course->id, $thissection->id);
                 } else {
                     $sectionimage = $sectionimages[$thissection->id];
                 }

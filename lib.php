@@ -871,15 +871,15 @@ class format_grid extends format_base {
                 if (($updateimagecontainersize) || ($updateimageresizemethod) || ($updateimagecontainerstyle)) {
                     $ourcourseid = $this->courseid;
                     $this->courseid = $currentcourseid;
+                    $courseformat = null;
+                    if ($ourcourseid !== $this->courseid) {
+                        $courseformat = course_get_format($this->courseid);
+                        $currentsettings = $courseformat->get_settings();
+                    } else {
+                        $currentsettings = $this->get_settings();
+                        $courseformat = $this;
+                    }
                     if (($updateimagecontainersize) || ($updateimageresizemethod)) {
-                        $courseformat = null;
-                        if ($ourcourseid !== $this->courseid) {
-                            $courseformat = course_get_format($this->courseid);
-                            $currentsettings = $courseformat->get_settings();
-                        } else {
-                            $currentsettings = $this->get_settings();
-                            $courseformat = $this;
-                        }
 
                         if (($updateimagecontainersize) &&
                                (($currentsettings['imagecontainerwidth'] != $updatedata['imagecontainerwidth']) ||
@@ -912,7 +912,7 @@ class format_grid extends format_base {
                             error_log('update settings: ' . print_r($updatedata, true));
                         }
                     }
-                    $this->update_format_options($updatedata);
+                    $courseformat->update_format_options($updatedata);
                     $this->courseid = $ourcourseid;
                 }
             }
@@ -981,33 +981,9 @@ class format_grid extends format_base {
     }
 
     /**
-     * Create an entry for the imagecontainer in the database if 'get_images' reports it does not exist.
-     * @param int $courseid The course id to use.
-     * @param int $sectionid The section id to use.
-     * @returns bool|class The new record or false if the course id / section id are 0.
-     * @throws moodle_exception If the table 'format_grid_imagecontainer' does not exist or the record cannot be created.
-     */
-    public function create_get_imagecontainer($courseid, $sectionid) {
-        global $DB;
-
-        if ((!$courseid) || (!$sectionid)) {
-            return false;
-        }
-
-        $newimagecontainer = new stdClass();
-        $newimagecontainer->sectionid = $sectionid;
-        $newimagecontainer->courseid = $courseid;
-        $newimagecontainer->displayedimageindex = 0;
-
-        if (!$newimagecontainer->id = $DB->insert_record('format_grid_icon', $newimagecontainer, true)) {
-            throw new moodle_exception('invalidrecordid', 'format_grid', '',
-            'Could not create image. Grid format database is not ready. An admin must visit the notifications section.');
-        }
-        return $newimagecontainer;
-    }
-
-    /**
-     * Gets the grid image entry for the given course and section.
+     * Gets the grid image entry for the given course and section.  If an entry cannot be found then one is created
+     * and returned.  If the course id is set to the default then it is updated to the one supplied as the value
+     * will be accurate.
      * @param int $courseid The course id to use.
      * @param int $sectionid The section id to use.
      * @returns bool|array The record or false if the course id is 0 or section id is 0 or the request failed.
@@ -1031,6 +1007,11 @@ class format_grid extends format_base {
                 'Could not create image container. Grid format database is not ready. An admin must visit the notifications section.');
             }
             $sectionimage = false;
+        } else if ($sectionimage->courseid === 1) { // 1 is the default and is the 'site' course so cannot be the Grid format.
+            /* Course id is the default and needs to be set correctly.  This can happen with data created by versions prior to
+               13/7/2012. */
+            $DB->set_field('format_grid_icon', 'courseid', $courseid, array('sectionid' => $sectionid));
+            $sectionimage->courseid = $courseid;
         }
         return $sectionimage;
     }
@@ -1254,11 +1235,6 @@ class format_grid extends format_base {
             if ($imagecontainerpathfile = $fs->get_file($contextid, 'course', 'section', $sectionimage->sectionid, '/',
                     $sectionimage->newimage)) {
                 $gridimagepath = $this->get_image_path();
-                // Delete old file if it exists.
-                if ($oldfile = $fs->get_file($contextid, 'course', 'section', $sectionimage->sectionid, $gridimagepath,
-                        $sectionimage->displayedimageindex . '_' . $sectionimage->image)) {
-                    $oldfile->delete();
-                }
                 $convertsuccess = true;
                 $mime = $imagecontainerpathfile->get_mimetype();
 
@@ -1303,8 +1279,11 @@ class format_grid extends format_base {
                     if ($fs->file_exists($displayedimagefilerecord['contextid'], $displayedimagefilerecord['component'],
                                     $displayedimagefilerecord['filearea'], $displayedimagefilerecord['itemid'],
                                     $displayedimagefilerecord['filepath'], $displayedimagefilerecord['filename'])) {
-                        /* I'm not currently sure why this can happen on a restore using a course backup file with the CONTRIB-4099 
-                           modifications.  Will see during testing if it keeps happening. */
+                        /* This can happen with previous CONTRIB-4099 versions where it was possible for the backup file to
+                           have the 'gridimage' files too.  Therefore without this, then 'create_file_from_string' below will
+                           baulk as the file already exists.   Unfortunately has to be here as the restore mechanism restores
+                           the grid format data for the database and then the files.  And the Grid code is called at the 'data'
+                           stage. */
                         if (self::is_developer_debug()) {
                             error_log('format_grid::setup_displayed_image - removed old file, name:' .
                                     $displayedimagefilerecord['filename'] . ' section id:' . $displayedimagefilerecord['itemid'] .
@@ -1325,6 +1304,11 @@ class format_grid extends format_base {
                 unlink($tmpfilepath);
 
                 if ($convertsuccess == true) {
+                    // Now safe to delete old file if it exists.
+                    if ($oldfile = $fs->get_file($contextid, 'course', 'section', $sectionimage->sectionid, $gridimagepath,
+                            ($sectionimage->displayedimageindex - 1) . '_' . $sectionimage->image)) {
+                        $oldfile->delete();
+                    }
                     $DB->set_field('format_grid_icon', 'displayedimageindex', $sectionimage->displayedimageindex,
                             array('sectionid' => $sectionimage->sectionid));
                 } else {
