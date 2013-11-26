@@ -999,11 +999,11 @@ class format_grid extends format_base {
             $newimagecontainer->courseid = $courseid;
             $newimagecontainer->displayedimageindex = 0;
 
-            if (!$newimage->id = $DB->insert_record('format_grid_icon', $newimagecontainer, true)) {
+            if (!$newimagecontainer->id = $DB->insert_record('format_grid_icon', $newimagecontainer, true)) {
                 throw new moodle_exception('invalidrecordid', 'format_grid', '',
                 'Could not create image container. Grid format database is not ready. An admin must visit the notifications section.');
             }
-            $sectionimage = false;
+            $sectionimage = $newimagecontainer;
         } else if ($sectionimage->courseid == 1) { // 1 is the default and is the 'site' course so cannot be the Grid format.
             // Note: Using a double equals in the test and not a triple as the latter does not work for some reason.
             /* Course id is the default and needs to be set correctly.  This can happen with data created by versions prior to
