@@ -4,7 +4,8 @@ A topics based format that uses a grid of user selectable images to pop up a lig
 
 Required version of Moodle
 ==========================
-This version works with Moodle version 2013051400.00 release 2.5 (Build: 20130514) and above until the next release.
+This version works with Moodle version 2013051400.00 release 2.5 (Build: 20130514) and above within the 2.5
+branch until the next release.
 
 Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
 'docs.moodle.org/25/en/Installing_Moodle' / 'docs.moodle.org/dev/Moodle_2.5_release_notes'.
@@ -241,7 +242,7 @@ Known Issues
 
 History
 =============
-24th November 2013 Version 2.5.5.3
+26th November 2013 Version 2.5.5.3
 Change by G J Barnard
   1.  Fix automated backups including displayed images when they should not.
   2.  Fix 'reset_grid_setting' in 'lib.php' not resetting a course if it's only on default options.
@@ -263,7 +264,7 @@ NOTE: I did find in changing the backup / restore code that the changes did not 
 
 The mystery of the disappearing images as reported on: https://moodle.org/mod/forum/discuss.php?d=244390
 by Dan Trockman and by Llywelyn Morgan where overnight the displayed images on old courses
-disappear.  This is caused by the fact that the backup mechanism intentionally removes the displayed
+disappear.  This could be caused by the fact that the backup mechanism intentionally removes the displayed
 images so that they are not in the backup file which causes issues on restore.  Then the next time the
 course is viewed they are automatically regenerated - this is intentional.  But, the automated
 functionality calling the code within the format set the course id to '1' being the site course
@@ -275,7 +276,11 @@ course.  And so the method 'delete_images()' deleted them.  This would have been
 code should have put the images back, but because the code could not find the record containing the image
 this did not happen (which '5' above fixes).  But what I cannot explain yet is why with Dan Trockman's
 set up the 'database error' ('5') did not manifest itself.  But I hope that fixes '1' and '5' will repair
-courses automatically when they are first viewed.
+courses automatically when they are first viewed.  Currently I am unable to work exactly why this
+is happening as have been unable to replicate it.  If you encounter the same problem, please let me
+know with as much information as possible, like additional add-ons and when you notice it happening.
+
+So, I have decided to release as is as the fixes above are important to distribute to the community.
 
 20th November 2013 Version 2.5.5.2
 Change by G J Barnard
