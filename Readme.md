@@ -242,6 +242,46 @@ Known Issues
 
 History
 =============
+26th November 2013 Version 2.6.1.2
+Change by G J Barnard
+  1.  Fix automated backups including displayed images when they should not.
+  2.  Fix 'reset_grid_setting' in 'lib.php' not resetting a course if it's only on default options.
+  3.  Fix restore using the wrong name for the 'image' field.
+  4.  Only delete the old image file if it exists after the new one has been successfully
+      created in 'setup_displayed_image' in 'lib.php'.
+  5.  Fix course id set to default for courses created with versions prior to
+      13/7/2012 causing an exception to be raised when a section's image record
+      cannot be found and yet the record exists already.  This is due to new optimisation
+      code relying on using 'courseid' to find the section records for the course in
+      one go rather than getting them individually.
+  6.  Ensure a course sets its settings when it is created and then detaches itself from the
+      global defaults.
+
+NOTE: I did find in changing the backup / restore code that the changes did not take hold until I
+      restarted the web server (in my case the Apache service) if you encounter a situation where
+      the automated backup files are larger than the manual ones, then please restart the web server
+      service.
+
+The mystery of the disappearing images as reported on: https://moodle.org/mod/forum/discuss.php?d=244390
+by Dan Trockman and by Llywelyn Morgan where overnight the displayed images on old courses
+disappear.  This could be caused by the fact that the backup mechanism intentionally removes the displayed
+images so that they are not in the backup file which causes issues on restore.  Then the next time the
+course is viewed they are automatically regenerated - this is intentional.  But, the automated
+functionality calling the code within the format set the course id to '1' being the site course
+and not to the course id of the course being backed up (point 1 above addresses this).  And hence
+the displayed images for course 1 would be deleted by 'delete_images()', however this would not have
+been an issue as there should be no records in the 'format_grid_icon' table for course id '1', but
+because of '5' above, old courses had the 'course id' set to '1' and not the true course id of the
+course.  And so the method 'delete_images()' deleted them.  This would have been fine as the regeneration
+code should have put the images back, but because the code could not find the record containing the image
+this did not happen (which '5' above fixes).  But what I cannot explain yet is why with Dan Trockman's
+set up the 'database error' ('5') did not manifest itself.  But I hope that fixes '1' and '5' will repair
+courses automatically when they are first viewed.  Currently I am unable to work exactly why this
+is happening as have been unable to replicate it.  If you encounter the same problem, please let me
+know with as much information as possible, like additional add-ons and when you notice it happening.
+
+So, I have decided to release as is as the fixes above are important to distribute to the community.
+
 20th November 2013 Version 2.6.1.1
 Change by G J Barnard
   1.  Fix incorrect detection of non-existent entry in format_grid_icon table.  Thanks to
