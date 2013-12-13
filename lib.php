@@ -838,7 +838,7 @@ class format_grid extends format_base {
 
         return parent::update_section_format_options($data);
     }
-    
+
     /**
      * Resets the format setting to the default.
      * @param int $courseid If not 0, then a specific course to reset.
