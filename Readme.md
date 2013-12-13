@@ -242,13 +242,17 @@ Known Issues
 
 History
 =============
-27th November 2013 Version 2.5.5.4
+13th December 2013 Version 2.5.5.4 - Zombie release.
+Change by G J Barnard
   1.  Fixed shade box still being shown in editing mode when update capability is denied.  Historical
       issue that has not been spotted before.  Given http://docs.moodle.org/25/en/Capabilities/moodle/course:update
       I have no idea why that specific capability was in the format for checking editing
       capability in conjunction with actual editing capability in the first place.  Fix
       is to remove the use of it completely which should marginally speed things up a bit.
   2.  Fixed sections disappearing when the icon is clicked on in editing mode.
+  3.  Fixed icon image eventually disappearing when the section name / summary is changed.  See CONTRIB-4784, a
+      big thank you to Nadav Kavalerchik for spotting what was the cause of this and thus providing a reliable
+      means of replicating the issue.
 
 26th November 2013 Version 2.5.5.3
 Change by G J Barnard

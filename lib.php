@@ -820,6 +820,26 @@ class format_grid extends format_base {
     }
 
     /**
+     * Updates format options for a section
+     *
+     * Section id is expected in $data->id (or $data['id'])
+     * If $data does not contain property with the option name, the option will not be updated
+     *
+     * @param stdClass|array $data return value from {@link moodleform::get_data()} or array with data
+     * @return bool whether there were any changes to the options values
+     */
+    public function update_section_format_options($data) {
+        $data = (array)$data;
+
+        // Resets the displayed image because changing the section name / details deletes the file.
+        // See CONTRIB-4784.
+        global $DB;
+        $DB->set_field('format_grid_icon', 'displayedimageindex', 0, array('sectionid' => $data['id']));
+
+        return parent::update_section_format_options($data);
+    }
+
+    /**
      * Resets the format setting to the default.
      * @param int $courseid If not 0, then a specific course to reset.
      * @param int $imagecontainersizereset If true, reset the layout to the default in the settings for the format.
