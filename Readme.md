@@ -242,6 +242,10 @@ Known Issues
 
 History
 =============
+14th December 2013 Version 2.6.1.4
+Change by G J Barnard
+  1.  Fixed path and message confusion issue with the M1.9 upgrade script.
+
 13th December 2013 Version 2.6.1.3 - Zombie release.
 Change by G J Barnard
   1.  Fixed shade box still being shown in editing mode when update capability is denied.  Historical
