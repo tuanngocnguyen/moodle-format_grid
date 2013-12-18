@@ -242,9 +242,29 @@ Known Issues
 
 History
 =============
-14th December 2013 Version 2.6.1.4
+18th December 2013 Version 2.6.1.4
 Change by G J Barnard
   1.  Fixed path and message confusion issue with the M1.9 upgrade script.
+  2.  Fixed issue reported by Graham Woodsford whereby teachers could not create Collapsed Topics courses.  The code in the area
+      concerned is identical to the Grid format and hence the same issue affects it too.  This is because the validation method
+      'edit_form_validation' in 'lib.php' was failing the values passed to it.  These happened to be the hidden label values from
+      'course_format_options' which were being used because the 'Course creator' role that teachers have before becoming an
+      'editingteacher' role as defined in 'db/access.php' does not allow the teacher to have the
+      'format/grid:changeimagecontainersize', 'format/grid:changeimageresizemethod' and 'format/grid:changeimagecontainerstyle'
+      capabilities.  This also implies that the values of the other settings are wrong, which in fact they are, causing courses to
+      be created (after fixing the colour settings for 'edit_form_validation') with odd values and not the defaults resulting in no
+      icon set etc.  And therefore needing to go back to edit the course settings.
+
+      Ok, this now leads on to a dilemma.  Currently the course creator role does not have the Grid capabilities listed above.  If
+      they were added to 'access.php' then the role would have them (existing Grid admins would have to add manually).  Then the
+      teacher would see all the options when first creating a course as they do whilst editing.  However, this means that if you
+      wish to restrict the teacher from changing things as is the purpose of the capabilities in the first place, then you have
+      to remove the capability in both the 'coursecreator' and 'editingteacher' roles.  This is because by default 'coursecreator'
+      is above 'editingteacher' and once enrolled on the course after having created it, the teacher has both.  This makes things
+      a bit complex and to be honest not that admin friendly.  Therefore to keep things simple in what is in reality an event
+      that is rare, I have decided not to add the capabilities to the 'coursecreator' role.  This is additionally based on the
+      presumed work-flow of a teacher where they create the course using the defaults, look at it and then decide what to change
+      in the settings.  The fix as it stands will facilitate this.
 
 13th December 2013 Version 2.6.1.3 - Zombie release.
 Change by G J Barnard
