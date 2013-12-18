@@ -387,6 +387,25 @@ class format_grid extends format_base {
             );
         }
         if ($foreditform && !isset($courseformatoptions['coursedisplay']['label'])) {
+            /* Note: Because 'admin_setting_configcolourpicker' in 'settings.php' needs to use a prefixing '#'
+                     this needs to be stripped off here if it's there for the format's specific colour picker. */
+            $defaultbordercolour = get_config('format_grid', 'defaultbordercolour');
+            if ($defaultbordercolour[0] == '#') {
+                $defaultbordercolour = substr($defaultbordercolour, 1);
+            }
+            $defaultimagecontainerbackgroundcolour = get_config('format_grid', 'defaultimagecontainerbackgroundcolour');
+            if ($defaultimagecontainerbackgroundcolour[0] == '#') {
+                $defaultimagecontainerbackgroundcolour = substr($defaultimagecontainerbackgroundcolour, 1);
+            }
+            $defaultcurrentselectedsectioncolour = get_config('format_grid', 'defaultcurrentselectedsectioncolour');
+            if ($defaultcurrentselectedsectioncolour[0] == '#') {
+                $defaultcurrentselectedsectioncolour = substr($defaultcurrentselectedsectioncolour, 1);
+            }
+            $defaultcurrentselectedimagecontainercolour = get_config('format_grid', 'defaultcurrentselectedimagecontainercolour');
+            if ($defaultcurrentselectedimagecontainercolour[0] == '#') {
+                $defaultcurrentselectedimagecontainercolour = substr($defaultcurrentselectedimagecontainercolour, 1);
+            }
+
             $coursecontext = context_course::instance($this->courseid);
 
             $courseconfig = get_config('moodlecourse');
@@ -441,10 +460,10 @@ class format_grid extends format_base {
                     'element_attributes' => array(self::$imagecontainerratios)
                 );
             } else {
-                $courseformatoptionsedit['imagecontainerwidth'] = array('label' => new lang_string('setimagecontainerwidth',
-                            'format_grid'), 'element_type' => 'hidden');
-                $courseformatoptionsedit['imagecontainerratio'] = array('label' => new lang_string('setimagecontainerratio',
-                            'format_grid'), 'element_type' => 'hidden');
+                $courseformatoptionsedit['imagecontainerwidth'] = array('label' => 
+                    get_config('format_grid', 'defaultimagecontainerwidth'), 'element_type' => 'hidden');
+                $courseformatoptionsedit['imagecontainerratio'] = array('label' => 
+                    get_config('format_grid', 'defaultimagecontainerratio'), 'element_type' => 'hidden');
             }
 
             if (has_capability('format/grid:changeimageresizemethod', $coursecontext)) {
@@ -461,8 +480,8 @@ class format_grid extends format_base {
                     )
                 );
             } else {
-                $courseformatoptionsedit['imageresizemethod'] = array('label' => new lang_string('setimageresizemethod',
-                            'format_grid'), 'element_type' => 'hidden');
+                $courseformatoptionsedit['imageresizemethod'] = array('label' =>
+                    get_config('format_grid', 'defaultimageresizemethod'), 'element_type' => 'hidden');
             }
 
             if (has_capability('format/grid:changeimagecontainerstyle', $coursecontext)) {
@@ -525,21 +544,18 @@ class format_grid extends format_base {
                     )
                 );
             } else {
-                $courseformatoptionsedit['bordercolour'] = array('label' => new lang_string('setbordercolour', 'format_grid'),
+                $courseformatoptionsedit['bordercolour'] = array('label' => $defaultbordercolour,
                     'element_type' => 'hidden');
-                $courseformatoptionsedit['borderwidth'] = array('label' => new lang_string('setborderwidth', 'format_grid'),
+                $courseformatoptionsedit['borderwidth'] = array('label' => get_config('format_grid', 'defaultborderwidth'),
                     'element_type' => 'hidden');
-                $courseformatoptionsedit['borderradius'] = array('label' => new lang_string('setborderradius', 'format_grid'),
+                $courseformatoptionsedit['borderradius'] = array('label' => get_config('format_grid', 'defaultborderradius'),
                     'element_type' => 'hidden');
                 $courseformatoptionsedit['imagecontainerbackgroundcolour'] =
-                        array('label' => new lang_string('setimagecontainerbackgroundcolour',
-                            'format_grid'), 'element_type' => 'hidden');
+                        array('label' => $defaultimagecontainerbackgroundcolour, 'element_type' => 'hidden');
                 $courseformatoptionsedit['currentselectedsectioncolour'] =
-                        array('label' => new lang_string('setcurrentselectedsectioncolour',
-                            'format_grid'), 'element_type' => 'hidden');
+                        array('label' => $defaultcurrentselectedsectioncolour, 'element_type' => 'hidden');
                 $courseformatoptionsedit['currentselectedimagecontainercolour'] =
-                        array('label' => new lang_string('setcurrentselectedimagecontainercolour',
-                            'format_grid'), 'element_type' => 'hidden');
+                        array('label' => $defaultcurrentselectedimagecontainercolour, 'element_type' => 'hidden');
             }
             $courseformatoptions = array_merge_recursive($courseformatoptions, $courseformatoptionsedit);
         }
