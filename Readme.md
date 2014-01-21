@@ -238,9 +238,17 @@ Roadmap
 Known Issues
 =============
 1. All listed on https://tracker.moodle.org/browse/CONTRIB/component/11231.
+2. Animated GIFs do not work.  Please see: https://moodle.org/mod/forum/discuss.php?d=252404.
 
 History
 =============
+21st January 2014 Version 2.5.5.4
+Change by G J Barnard
+  1.  Fix to RTL CSS thanks to Nadav Kavalerchik - https://github.com/gjb2048/moodle-courseformat_grid/pull/3 being:
+      Right align "New Activity" image in RTL mode.
+  2.  Fixed missing strings in 'en' language file for 'One section per page' mode.
+  3.  Fixed number format on ordered lists as reported on https://moodle.org/mod/forum/discuss.php?d=252497.
+
 21st November 2013 Version 2.5.5.3
 Change by G J Barnard
   1.  Tidy up code.
