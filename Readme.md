@@ -242,11 +242,12 @@ Known Issues
 
 History
 =============
-16th January 2014 Version 2.6.1.5
+21st January 2014 Version 2.6.1.5
 Change by G J Barnard
   1.  Fix to RTL CSS thanks to Nadav Kavalerchik - https://github.com/gjb2048/moodle-courseformat_grid/pull/3 being:
       Right align "New Activity" image in RTL mode.
   2.  Fixed missing strings in 'en' language file for 'One section per page' mode.
+  3.  Fixed number format on ordered lists as reported on https://moodle.org/mod/forum/discuss.php?d=252497.
 
 18th December 2013 Version 2.6.1.4
 Change by G J Barnard
