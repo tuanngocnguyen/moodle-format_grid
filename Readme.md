@@ -4,7 +4,8 @@ A topics based format that uses a grid of user selectable images to pop up a lig
 
 Required version of Moodle
 ==========================
-This version works with Moodle version 2013051400.00 release 2.5 (Build: 20130514) and above until the next release.
+This version works with Moodle version 2013051400.00 release 2.5 (Build: 20130514) and above within the 2.5
+branch until the next release.
 
 Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
 'docs.moodle.org/25/en/Installing_Moodle' / 'docs.moodle.org/dev/Moodle_2.5_release_notes'.
@@ -242,16 +243,88 @@ Known Issues
 
 History
 =============
-21st January 2014 Version 2.5.5.4
+21st January 2014 Version 2.5.5.6
 Change by G J Barnard
   1.  Fix to RTL CSS thanks to Nadav Kavalerchik - https://github.com/gjb2048/moodle-courseformat_grid/pull/3 being:
       Right align "New Activity" image in RTL mode.
   2.  Fixed missing strings in 'en' language file for 'One section per page' mode.
   3.  Fixed number format on ordered lists as reported on https://moodle.org/mod/forum/discuss.php?d=252497.
 
-21st November 2013 Version 2.5.5.3
+18th December 2013 Version 2.5.5.5
 Change by G J Barnard
-  1.  Tidy up code.
+  1.  Fixed path and message confusion issue with the M1.9 upgrade script.
+  2.  Fixed issue reported by Graham Woodsford whereby teachers could not create Collapsed Topics courses.  The code in the area
+      concerned is identical to the Grid format and hence the same issue affects it too.  This is because the validation method
+      'edit_form_validation' in 'lib.php' was failing the values passed to it.  These happened to be the hidden label values from
+      'course_format_options' which were being used because the 'Course creator' role that teachers have before becoming an
+      'editingteacher' role as defined in 'db/access.php' does not allow the teacher to have the
+      'format/grid:changeimagecontainersize', 'format/grid:changeimageresizemethod' and 'format/grid:changeimagecontainerstyle'
+      capabilities.  This also implies that the values of the other settings are wrong, which in fact they are, causing courses to
+      be created (after fixing the colour settings for 'edit_form_validation') with odd values and not the defaults resulting in no
+      icon set etc.  And therefore needing to go back to edit the course settings.
+
+      Ok, this now leads on to a dilemma.  Currently the course creator role does not have the Grid capabilities listed above.  If
+      they were added to 'access.php' then the role would have them (existing Grid admins would have to add manually).  Then the
+      teacher would see all the options when first creating a course as they do whilst editing.  However, this means that if you
+      wish to restrict the teacher from changing things as is the purpose of the capabilities in the first place, then you have
+      to remove the capability in both the 'coursecreator' and 'editingteacher' roles.  This is because by default 'coursecreator'
+      is above 'editingteacher' and once enrolled on the course after having created it, the teacher has both.  This makes things
+      a bit complex and to be honest not that admin friendly.  Therefore to keep things simple in what is in reality an event
+      that is rare, I have decided not to add the capabilities to the 'coursecreator' role.  This is additionally based on the
+      presumed work-flow of a teacher where they create the course using the defaults, look at it and then decide what to change
+      in the settings.  The fix as it stands will facilitate this.
+
+13th December 2013 Version 2.5.5.4 - Zombie release.
+Change by G J Barnard
+  1.  Fixed shade box still being shown in editing mode when update capability is denied.  Historical
+      issue that has not been spotted before.  Given http://docs.moodle.org/25/en/Capabilities/moodle/course:update
+      I have no idea why that specific capability was in the format for checking editing
+      capability in conjunction with actual editing capability in the first place.  Fix
+      is to remove the use of it completely which should marginally speed things up a bit.
+  2.  Fixed sections disappearing when the icon is clicked on in editing mode.
+  3.  Fixed icon image eventually disappearing when the section name / summary is changed.  See CONTRIB-4784, a
+      big thank you to Nadav Kavalerchik for spotting what was the cause of this and thus providing a reliable
+      means of replicating the issue.
+
+26th November 2013 Version 2.5.5.3
+Change by G J Barnard
+  1.  Fix automated backups including displayed images when they should not.
+  2.  Fix 'reset_grid_setting' in 'lib.php' not resetting a course if it's only on default options.
+  3.  Fix restore using the wrong name for the 'image' field.
+  4.  Only delete the old image file if it exists after the new one has been successfully
+      created in 'setup_displayed_image' in 'lib.php'.
+  5.  Fix course id set to default for courses created with versions prior to
+      13/7/2012 causing an exception to be raised when a section's image record
+      cannot be found and yet the record exists already.  This is due to new optimisation
+      code relying on using 'courseid' to find the section records for the course in
+      one go rather than getting them individually.
+  6.  Ensure a course sets its settings when it is created and then detaches itself from the
+      global defaults.
+
+NOTE: I did find in changing the backup / restore code that the changes did not take hold until I
+      restarted the web server (in my case the Apache service) if you encounter a situation where
+      the automated backup files are larger than the manual ones, then please restart the web server
+      service.
+
+The mystery of the disappearing images as reported on: https://moodle.org/mod/forum/discuss.php?d=244390
+by Dan Trockman and by Llywelyn Morgan where overnight the displayed images on old courses
+disappear.  This could be caused by the fact that the backup mechanism intentionally removes the displayed
+images so that they are not in the backup file which causes issues on restore.  Then the next time the
+course is viewed they are automatically regenerated - this is intentional.  But, the automated
+functionality calling the code within the format set the course id to '1' being the site course
+and not to the course id of the course being backed up (point 1 above addresses this).  And hence
+the displayed images for course 1 would be deleted by 'delete_images()', however this would not have
+been an issue as there should be no records in the 'format_grid_icon' table for course id '1', but
+because of '5' above, old courses had the 'course id' set to '1' and not the true course id of the
+course.  And so the method 'delete_images()' deleted them.  This would have been fine as the regeneration
+code should have put the images back, but because the code could not find the record containing the image
+this did not happen (which '5' above fixes).  But what I cannot explain yet is why with Dan Trockman's
+set up the 'database error' ('5') did not manifest itself.  But I hope that fixes '1' and '5' will repair
+courses automatically when they are first viewed.  Currently I am unable to work exactly why this
+is happening as have been unable to replicate it.  If you encounter the same problem, please let me
+know with as much information as possible, like additional add-ons and when you notice it happening.
+
+So, I have decided to release as is as the fixes above are important to distribute to the community.
 
 20th November 2013 Version 2.5.5.2
 Change by G J Barnard
