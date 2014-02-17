@@ -114,9 +114,9 @@ function xmldb_format_grid_upgrade($oldversion = 0) {
     }
 
     // Automatic 'Purge all caches'....
-    if ($oldversion < 2013121800) {
+    if ($oldversion < 2014021700) {
         purge_all_caches();
-        upgrade_plugin_savepoint(true, '2013121800', 'format', 'grid');
+        upgrade_plugin_savepoint(true, '2014021700', 'format', 'grid');
     }
 
     return true;

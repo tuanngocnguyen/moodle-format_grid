@@ -123,12 +123,10 @@ div#gridmiddle-column > ul {
     cursor: pointer;
 }
 .course-content ul.gridicons li p.icon_content {
-    font-size: 14px;
     font-weight: bold;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
-    color: black;
     height: 20px;
     text-align: center;
 }
