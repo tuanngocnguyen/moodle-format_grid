@@ -370,7 +370,8 @@ class format_grid_renderer extends format_section_renderer_base {
                 if (isset($sectionimage->image) && ($sectionimage->displayedimageindex < 1)) {
                     // Set up the displayed image:...
                     $sectionimage->newimage = $sectionimage->image;
-                    $sectionimage = $this->courseformat->setup_displayed_image($sectionimage, $contextid, $settings);
+                    $sectionimage = $this->courseformat->setup_displayed_image($sectionimage, $contextid,
+                        $this->courseformat->get_settings());
                     if (format_grid::is_developer_debug()) {
                         error_log('make_block_icon_topics: Updated displayed image for section ' . $thissection->id . ' to ' .
                                 $sectionimage->newimage . ' and index ' . $sectionimage->displayedimageindex);
