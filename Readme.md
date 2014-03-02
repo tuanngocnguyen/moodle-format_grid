@@ -242,7 +242,7 @@ Known Issues
 
 History
 =============
-21st January 2014 Version 2.6.1.5
+2nd March 2014 Version 2.6.1.5
 Change by G J Barnard
   1.  Fix to RTL CSS thanks to Nadav Kavalerchik - https://github.com/gjb2048/moodle-courseformat_grid/pull/3 being:
       Right align "New activity" notification image in RTL mode.
@@ -252,6 +252,7 @@ Change by G J Barnard
   5.  Added a new setting so that you can choose if you want to display the "New activity" notification image.  The default is yes.
   6.  Removed colour and font size attribute of icon text from styles.css.
   7.  Removed redundant icons.
+  8.  Fixed box-sizing method for Bootstrap V3 in styles.css.
 
 18th December 2013 Version 2.6.1.4
 Change by G J Barnard

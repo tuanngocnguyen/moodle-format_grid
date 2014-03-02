@@ -135,6 +135,10 @@ div#gridmiddle-column > ul {
     border-style: solid;
     text-align: center;
     vertical-align: middle;
+    /* Override Bootstrap V3 box sizing of .box-sizing(border-box); in scaffolding.less. */
+    -webkit-box-sizing: content-box;
+       -moz-box-sizing: content-box;
+            box-sizing: content-box;
 }
 
 .course-content ul.gridicons li img {
