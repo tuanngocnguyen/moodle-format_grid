@@ -149,7 +149,7 @@ class format_grid extends format_base {
      * @return string Default current selected section colour.
      */
     public static function get_default_current_selected_section_colour() {
-        return '#d9edf7';
+        return '#8E66FF';
     }
 
     /**

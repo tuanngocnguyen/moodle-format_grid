@@ -242,7 +242,7 @@ Known Issues
 
 History
 =============
-2nd March 2014 Version 2.6.1.5
+11th March 2014 Version 2.6.1.5
 Change by G J Barnard
   1.  Fix to RTL CSS thanks to Nadav Kavalerchik - https://github.com/gjb2048/moodle-courseformat_grid/pull/3 being:
       Right align "New activity" notification image in RTL mode.
@@ -253,6 +253,11 @@ Change by G J Barnard
   6.  Removed colour and font size attribute of icon text from styles.css.
   7.  Removed redundant icons.
   8.  Fixed box-sizing method for Bootstrap V3 in styles.css.
+  9.  Slightly shrunk grid icon outside to make better use of available space.
+ 10.  Changed current section colour in the grid to use a box-shadow instead of a background to avoid confusion with
+      the current selected section.  This is a compromised as the latter is there for accessibility reasons and hence
+      rationally should stand out more.  This change will not be back-ported as it's not IE8 compatible,
+      http://caniuse.com/#search=box-shadow and hence requires a version of Moodle that does not mandate it.
 
 18th December 2013 Version 2.6.1.4
 Change by G J Barnard
