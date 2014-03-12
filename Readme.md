@@ -258,6 +258,7 @@ Change by G J Barnard
       the current selected section.  This is a compromised as the latter is there for accessibility reasons and hence
       rationally should stand out more.  This change will not be back-ported as it's not IE8 compatible,
       http://caniuse.com/#search=box-shadow and hence requires a version of Moodle that does not mandate it.
+ 11.  Fixed CONTRIB-4861 - Glossary popups do not display correctly.
 
 18th December 2013 Version 2.6.1.4
 Change by G J Barnard
