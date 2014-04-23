@@ -1199,7 +1199,8 @@ class format_grid extends format_base {
             'filearea' => 'section',
             'itemid' => $sectionid,
             'filepath' => '/',
-            'filename' => $filename,
+            // CONTRIB-5001 - Avoid clashes with the same image in the section summary by using a different name.
+            'filename' => 'goi_'.$filename, // goi = tla = grid original image.
             'timecreated' => $created,
             'timemodified' => $created);
 
@@ -1268,7 +1269,7 @@ class format_grid extends format_base {
     }
 
     /**
-     * Setup the displayed image.
+     * Set up the displayed image.
      * @param array $sectionimage Section information from its row in the 'format_grid_icon' table.
      * @param array $contextid The context id to which the image relates.
      * @param array $settings The course settings to apply.
