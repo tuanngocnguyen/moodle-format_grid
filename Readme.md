@@ -242,6 +242,13 @@ Known Issues
 
 History
 =============
+23rd April 2014 Version 2.6.1.6 - CONTRIB-5001.
+Change by G J Barnard
+  1.  This is the first attempt at the fix which places the original image in with the displayed image.  However I have found that
+      the course / section entries in the files table are wiped for a specific section when you upload an image of the same name
+      in the section summary regardless of if the image is in another file path!  So comiting this code for future reference but not
+      the solution :(.
+
 28th March 2014 Version 2.6.1.5
 Change by G J Barnard
   1.  Fix to RTL CSS thanks to Nadav Kavalerchik - https://github.com/gjb2048/moodle-courseformat_grid/pull/3 being:

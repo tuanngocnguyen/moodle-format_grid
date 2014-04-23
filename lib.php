@@ -1198,7 +1198,7 @@ class format_grid extends format_base {
             'component' => 'course',
             'filearea' => 'section',
             'itemid' => $sectionid,
-            'filepath' => '/',
+            'filepath' => self::get_image_path(),
             'filename' => $filename,
             'timecreated' => $created,
             'timemodified' => $created);
@@ -1238,6 +1238,7 @@ class format_grid extends format_base {
             $data = generate_image_thumbnail($tmpfilepath, $imageinfo['width'], $imageinfo['height']);
             if (!empty($data)) {
                 $fs->create_file_from_string($storedfilerecord, $data);
+				debugging(print_r($storedfilerecord,true));
             } else {
                 $convertsuccess = false;
             }
@@ -1282,9 +1283,9 @@ class format_grid extends format_base {
         try {
             // Set up the displayed image:...
             $fs = get_file_storage();
-            if ($imagecontainerpathfile = $fs->get_file($contextid, 'course', 'section', $sectionimage->sectionid, '/',
+            $gridimagepath = self::get_image_path();
+            if ($imagecontainerpathfile = $fs->get_file($contextid, 'course', 'section', $sectionimage->sectionid, $gridimagepath,
                     $sectionimage->newimage)) {
-                $gridimagepath = $this->get_image_path();
                 $convertsuccess = true;
                 $mime = $imagecontainerpathfile->get_mimetype();
 
@@ -1371,6 +1372,7 @@ class format_grid extends format_base {
         } catch (Exception $e) {
             print('Grid Format Setup Displayed Image Exception:...');
             debugging($e->getMessage());
+            debugging(print_r($sectionimage, true));
             debugging(print_r($e, true));
         }
 
@@ -1384,11 +1386,11 @@ class format_grid extends format_base {
             $fs = get_file_storage();
 
             // Delete the image.
-            if ($file = $fs->get_file($contextid, 'course', 'section', $sectionid, '/', $sectionimage->image)) {
+            $gridimagepath = self::get_image_path();
+            if ($file = $fs->get_file($contextid, 'course', 'section', $sectionid, $gridimagepath, $sectionimage->image)) {
                 $file->delete();
                 $DB->set_field('format_grid_icon', 'image', null, array('sectionid' => $sectionimage->sectionid));
                 // Delete the displayed image.
-                $gridimagepath = $this->get_image_path();
                 if ($file = $fs->get_file($contextid, 'course', 'section', $sectionid, $gridimagepath,
                         $sectionimage->displayedimageindex . '_' . $sectionimage->image)) {
                     $file->delete();
@@ -1406,11 +1408,11 @@ class format_grid extends format_base {
             $context = context_course::instance($this->courseid);
             $contextid = $context->id;
             $fs = get_file_storage();
-            $gridimagepath = $this->get_image_path();
+            $gridimagepath = self::get_image_path();
 
             foreach ($sectionimages as $sectionimage) {
                 // Delete the image.
-                if ($file = $fs->get_file($contextid, 'course', 'section', $sectionimage->sectionid, '/', $sectionimage->image)) {
+                if ($file = $fs->get_file($contextid, 'course', 'section', $sectionimage->sectionid, $gridimagepath, $sectionimage->image)) {
                     $file->delete();
                     // Delete the displayed image.
                     if ($file = $fs->get_file($contextid, 'course', 'section', $sectionimage->sectionid, $gridimagepath,
@@ -1432,7 +1434,7 @@ class format_grid extends format_base {
             $context = context_course::instance($this->courseid);
             $contextid = $context->id;
             $fs = get_file_storage();
-            $gridimagepath = $this->get_image_path();
+            $gridimagepath = self::get_image_path();
             $t = $DB->start_delegated_transaction();
 
             foreach ($sectionimages as $sectionimage) {

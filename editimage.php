@@ -89,7 +89,7 @@ if ($mform->is_cancelled()) {
         $courseformat = course_get_format($course);
         $sectionimage = $courseformat->get_image($course->id, $sectionid);
         if (isset($sectionimage->image)) {
-            if ($file = $fs->get_file($context->id, 'course', 'section', $sectionid, '/', $sectionimage->image)) {
+            if ($file = $fs->get_file($context->id, 'course', 'section', $sectionid, format_grid::get_image_path(), $sectionimage->image)) {
                 $file->delete();
             }
         }

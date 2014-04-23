@@ -113,10 +113,44 @@ function xmldb_format_grid_upgrade($oldversion = 0) {
         upgrade_plugin_savepoint(true, '2013110400', 'format', 'grid');
     }
 
+    if ($oldversion < 2014042300) {
+        global $CFG;
+        require_once($CFG->dirroot . '/course/format/grid/lib.php');
+        if ($sectionimages = $DB->get_records('format_grid_icon', array(), '',
+                'id, courseid, sectionid, image')) {
+            $courseid = 0;
+            $created = time();
+            $storedfilerecord = array(
+                'component' => 'course',
+                'filearea' => 'section',
+                'filepath' => format_grid::get_image_path(),
+                'timecreated' => $created,
+                'timemodified' => $created);
+            $fs = get_file_storage();
+            foreach ($sectionimages as $sectionimage) {
+                if ($courseid !== $sectionimage->courseid) {
+                    $courseid = $sectionimage->courseid ;
+                    $context = context_course::instance($courseid);
+                }
+                if (isset($sectionimage->image)) {
+                    if ($file = $fs->get_file($context->id, 'course', 'section', $sectionimage->sectionid, '/', $sectionimage->image)) {
+                        // Move image to new folder.
+                        $storedfilerecord['contextid'] = $context->id;
+                        $storedfilerecord['itemid'] = $sectionimage->sectionid;
+                        $storedfilerecord['filename'] = $sectionimage->image;
+                        $fs->create_file_from_storedfile($storedfilerecord, $file);
+                        $file->delete();
+                    }
+                }
+
+            }
+        }
+    }
+
     // Automatic 'Purge all caches'....
-    if ($oldversion < 2014032800) {
+    if ($oldversion < 2014042300) {
         purge_all_caches();
-        upgrade_plugin_savepoint(true, '2014032800', 'format', 'grid');
+        upgrade_plugin_savepoint(true, '2014042300', 'format', 'grid');
     }
 
     return true;
