@@ -1372,6 +1372,8 @@ class format_grid extends format_base {
         } catch (Exception $e) {
             print('Grid Format Setup Displayed Image Exception:...');
             debugging($e->getMessage());
+            debugging(print_r($contextid, true));
+            debugging(print_r($sectionimage, true));
             debugging(print_r($e, true));
         }
 
