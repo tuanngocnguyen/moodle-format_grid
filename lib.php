@@ -1191,7 +1191,8 @@ class format_grid extends format_base {
             'filearea' => 'section',
             'itemid' => $sectionid,
             'filepath' => '/',
-            'filename' => $filename,
+            // CONTRIB-5001 - Avoid clashes with the same image in the section summary by using a different name.
+            'filename' => 'goi_'.$filename, // goi = tla = grid original image.
             'timecreated' => $created,
             'timemodified' => $created);
 
@@ -1363,6 +1364,8 @@ class format_grid extends format_base {
         } catch (Exception $e) {
             print('Grid Format Setup Displayed Image Exception:...');
             debugging($e->getMessage());
+            debugging(print_r($contextid, true));
+            debugging(print_r($sectionimage, true));
             debugging(print_r($e, true));
         }
 

@@ -123,9 +123,9 @@ All 'Grid format' does is integrate with the course page and control it's layout
 with the format is in fact to do with a theme or core component.  Please be confident that it is an issue with 'Grid format'
 but if in doubt, ask.
 
-We operate a policy that we will fix all genuine issues for free (this only applies to the code as supplied from the sources listed
+I operate a policy that I will fix all genuine issues for free (this only applies to the code as supplied from the sources listed
 in 'Free Software' above.  Any changes / improvements you make are not covered and invalidate this policy for all of the code).
-Improvements are at our discretion.  We are happy to make bespoke customisations / improvements for a negotiated fee.  We will
+Improvements are at our discretion.  I am happy to make bespoke customisations / improvements for a negotiated fee.  I will
 endeavour to respond to all requests for support as quickly as possible, if you require a faster service then offering payment for
 the service will expedite the response.
 
@@ -233,8 +233,7 @@ Roadmap
 3. CONTRIB-3240 - Gridview course format more accessible.
 4. Use of crowd funding facility to support development.
 5. Continued maintenance of issues: https://tracker.moodle.org/browse/CONTRIB/component/11231.
-6. Add in grid format specific capabilities to change things.
-7. Ongoing structured walk through and refactoring.
+6. Ongoing structured walk through and refactoring.
 
 Known Issues
 =============
@@ -243,6 +242,11 @@ Known Issues
 
 History
 =============
+23rd April 2014 Version 2.5.5.7
+Change by G J Barnard
+  1.  Fixed CONTRIB-50001 - Cannot use the same image in the section summary as well as the grid.
+  2.  Note: Julian has departed from Moodle work so I have taken over full responsibility for the format.
+
 21st January 2014 Version 2.5.5.6
 Change by G J Barnard
   1.  Fix to RTL CSS thanks to Nadav Kavalerchik - https://github.com/gjb2048/moodle-courseformat_grid/pull/3 being:
@@ -498,5 +502,4 @@ Change by G J Barnard
 
 Authors
 -------
-J Ridden - Moodle profile: https://moodle.org/user/profile.php?id=39680 - Web: http://www.moodleman.net
 G J Barnard - Moodle profile: moodle.org/user/profile.php?id=442195 - Web profile: about.me/gjbarnard
