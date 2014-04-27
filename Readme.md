@@ -4,11 +4,11 @@ A topics based format that uses a grid of user selectable images to pop up a lig
 
 Required version of Moodle
 ==========================
-This version works with Moodle version 2013111800.00 release 2.6 (Build: 20131118) and above within the 2.6 branch until the
+This version works with Moodle version 2014041700.00 release 2.7beta+ (Build: 20140417) and above within the 2.7 branch until the
 next release.
 
 Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
-'docs.moodle.org/26/en/Installing_Moodle' / 'docs.moodle.org/dev/Moodle_2.6_release_notes'.
+'docs.moodle.org/27/en/Installing_Moodle' / 'docs.moodle.org/dev/Moodle_2.7_release_notes'.
 
 Free Software
 =============
@@ -241,6 +241,9 @@ Known Issues
 
 History
 =============
+27th April 2014 Version 2.7.0.1 - BETA
+  1.  First beta version for Moodle 2.7beta.
+
 23rd April 2014 Version 2.6.1.6
 Change by G J Barnard
   1.  Fixed CONTRIB-50001 - Cannot use the same image in the section summary as well as the grid.
