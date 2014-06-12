@@ -236,8 +236,9 @@ Known Issues
 
 History
 =============
-3rd June 2014 - Version 2.7.1.1
+12th June 2014 - Version 2.7.1.1
   1.  Slight change to CSS for Bootstrap V3.
+  2.  Fixed CONTRIB-5106 - thanks to Hanna Edelman for this.
 
 20th May 2014 Version 2.7.1 - Stable.
   1.  Stable release for M2.7.
