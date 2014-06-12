@@ -241,9 +241,13 @@ Known Issues
 
 History
 =============
+12th June 2014 Version 2.6.1.7
+Change by G J Barnard
+  1.  Fixed CONTRIB-5106 - thanks to Hanna Edelman for this.
+
 23rd April 2014 Version 2.6.1.6
 Change by G J Barnard
-  1.  Fixed CONTRIB-50001 - Cannot use the same image in the section summary as well as the grid.
+  1.  Fixed CONTRIB-5001 - Cannot use the same image in the section summary as well as the grid.
   2.  Note: Julian has departed from Moodle work so I have taken over full responsibility for the format.
 
 28th March 2014 Version 2.6.1.5
