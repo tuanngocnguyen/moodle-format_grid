@@ -334,9 +334,13 @@ class format_grid_renderer extends format_section_renderer_base {
         for ($section = $this->topic0_at_top ? 1 : 0; $section <= $course->numsections; $section++) {
             $thissection = $modinfo->get_section_info($section);
 
-            // Check if section is visible to user.
+            // Check if section is visible to user.   
             $showsection = $hascapvishidsect || ($thissection->visible && ($thissection->available ||
                     $thissection->showavailability || !$course->hiddensections));
+               
+             //if we should grey it out, flag that here       
+            $sectiondisabled = !($thissection->available);
+                  
 
             if ($showsection) {
                 // We now know the value for the grid shade box shown array.
@@ -397,7 +401,9 @@ class format_grid_renderer extends format_section_renderer_base {
                             'alt' => ''));
                     }
 
-                    echo html_writer::start_tag('div', array('class' => 'image_holder'));
+					$imageclass = 'image_holder';
+					if($sectiondisabled) $imageclass .= ' inaccessible';
+                    echo html_writer::start_tag('div', array('class' => $imageclass));
 
                     $showimg = false;
                     if (is_object($sectionimage) && ($sectionimage->displayedimageindex > 0)) {
@@ -462,7 +468,9 @@ class format_grid_renderer extends format_section_renderer_base {
                                     'alt' => ''));
                     }
 
-                    $title .= html_writer::start_tag('div', array('class' => 'image_holder'));
+					$imageclass = 'image_holder';
+					if($sectiondisabled) $imageclass .= ' inaccessible';
+                    $title .= html_writer::start_tag('div', array('class' => $imageclass));
 
                     $showimg = false;
                     if (is_object($sectionimage) && ($sectionimage->displayedimageindex > 0)) {
@@ -485,7 +493,7 @@ class format_grid_renderer extends format_section_renderer_base {
                     $title .= html_writer::end_tag('div');
 
                     $url = course_get_url($course, $thissection->section);
-                    if ($url) {
+                    if ($url && !$sectiondisabled) {
                         $title = html_writer::link($url, $title, array(
                             'id' => 'gridsection-' . $thissection->section,
                             'role' => 'link',

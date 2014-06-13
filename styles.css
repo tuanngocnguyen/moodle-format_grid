@@ -225,4 +225,9 @@ body.jsenabled #gridshadebox_content.hide_content {
     margin: 0 15px 10px;
 }
 
+.inaccessible {
+    opacity: 0.3;
+    filter: alpha(opacity=30); /* msie */
+}
+
 /* @end */
