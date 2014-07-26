@@ -241,6 +241,9 @@ Known Issues
 
 History
 =============
+9th August 2014 Version 2.6.1.8
+  1.  Fixed CONTRIB-5191.  This is a workaround that depends on MDL-43525 being implemented before it is reversed.
+
 12th June 2014 Version 2.6.1.7
 Change by G J Barnard
   1.  Fixed CONTRIB-5106 - thanks to Hanna Edelman for this.
