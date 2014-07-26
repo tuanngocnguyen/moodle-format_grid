@@ -242,6 +242,9 @@ Known Issues
 
 History
 =============
+18th August 2014 Version 2.5.5.8
+  1.  Fixed CONTRIB-5191.  This is a workaround that depends on MDL-43525 being implemented before it is reversed.
+
 23rd April 2014 Version 2.5.5.7
 Change by G J Barnard
   1.  Fixed CONTRIB-50001 - Cannot use the same image in the section summary as well as the grid.
