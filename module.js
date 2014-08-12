@@ -332,12 +332,19 @@ M.format_grid.shadebox.initialize_shadebox = function() {
 
     this.hide_shadebox();
 
+    var top = 50;
+    var navbar = M.format_grid.ourYUI.one('.navbar');
+    if (navbar) {
+        var navbarDOM = navbar.getDOMNode();
+        top = navbarDOM.offsetTop + navbarDOM.clientTop + navbarDOM.offsetHeight + 15;
+    }
+
     /* This is added here as not editing and JS is on to move the content from
        below the grid icons and into the shade box. */
     var content = document.getElementById('gridshadebox_content');
     content.style.position = 'absolute';
     content.style.width = '90%';
-    content.style.top = '50px';
+    content.style.top = '' + top + 'px';
     content.style.left = '5%';
     //content.style.marginLeft = '-400px';
     content.style.zIndex = '1';
