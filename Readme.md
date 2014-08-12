@@ -244,6 +244,8 @@ History
 =============
 18th August 2014 Version 2.5.5.8
   1.  Fixed CONTRIB-5191.  This is a workaround that depends on MDL-43525 being implemented before it is reversed.
+  2.  Fixed issue whereby the grid shade box is underneath certain theme components:
+      https://moodle.org/mod/forum/discuss.php?d=266192#p1152232.
 
 23rd April 2014 Version 2.5.5.7
 Change by G J Barnard
