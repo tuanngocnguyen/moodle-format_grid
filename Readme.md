@@ -236,6 +236,9 @@ Known Issues
 
 History
 =============
+25th August 2014 Version 2.7.1.4
+  1.  Fixed CONTRIB-5256.  Thanks to Marius Jugariu for reporting the problem.
+
 18th August 2014 Version 2.7.1.3
   1.  Fixed issue whereby the grid shade box is underneath certain theme components:
       https://moodle.org/mod/forum/discuss.php?d=266192#p1152232.
