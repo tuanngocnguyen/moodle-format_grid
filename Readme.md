@@ -241,8 +241,9 @@ Known Issues
 
 History
 =============
-25th August 2014 Version 2.6.1.10
+27th August 2014 Version 2.6.1.10
   1.  Fixed CONTRIB-5256.  Thanks to Marius Jugariu for reporting the problem.
+  2.  Fixed CONTRIB-5260.  Thanks to Dan Jeffries for reporting the problem.
 
 18th August 2014 Version 2.6.1.9
   1.  Fixed issue whereby the grid shade box is underneath certain theme components:
