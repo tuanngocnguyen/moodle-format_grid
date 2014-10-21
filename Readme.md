@@ -236,8 +236,10 @@ Known Issues
 
 History
 =============
-25th August 2014 Version 2.7.1.4
+21sh October 2014 Version 2.7.1.4
   1.  Fixed CONTRIB-5256.  Thanks to Marius Jugariu for reporting the problem.
+  2.  Made the arrows easier to find and span most of the side.  Thanks to Guido Hornig for the suggestion.
+  3.  Added German 'New activity' image.  Thanks to Guido Hornig.
 
 18th August 2014 Version 2.7.1.3
   1.  Fixed issue whereby the grid shade box is underneath certain theme components:

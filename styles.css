@@ -204,6 +204,9 @@ body.jsenabled #gridshadebox_content.hide_content {
 .gridshadebox_arrow {
     position: absolute;
     cursor: pointer;
+    height: 90%;
+    width: 27px;
+    top: 20px;
     opacity: 0;
     transition: opacity .25s ease-in-out;
     -moz-transition: opacity .25s ease-in-out;
@@ -213,12 +216,10 @@ body.jsenabled #gridshadebox_content.hide_content {
     opacity: 0.8;
 }
 #gridshadebox_left {
-    top: 92px;  /* Done here so that JS can change it. */
-    left: -24px;
+    left: -14px;
 }
 #gridshadebox_right {
-    top: 92px;  /* Done here so that JS can change it. */
-    right: -24px;
+    right: -14px;
 }
 
 #gridshadebox_content ul.gtopics {
