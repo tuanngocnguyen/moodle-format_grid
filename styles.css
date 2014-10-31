@@ -55,6 +55,7 @@ body.jsenabled li.grid_section.hide_section {
 
 div#gridmiddle-column > ul {
     list-style-type: none;
+    overflow: visible;
 }
 
 .course-content ul.gtopics {
