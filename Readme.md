@@ -4,11 +4,11 @@ A topics based format that uses a grid of user selectable images to pop up a lig
 
 Required version of Moodle
 ==========================
-This version works with Moodle version 2014051200.00 release 2.7 (Build: 20140512) and above within the 2.7 branch until the
+This version works with Moodle version 2014111000.00 release 2.8 (Build: 20141110) and above within the 2.8 branch until the
 next release.
 
 Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
-'docs.moodle.org/27/en/Installing_Moodle' / 'docs.moodle.org/dev/Moodle_2.7_release_notes'.
+'docs.moodle.org/27/en/Installing_Moodle' / 'docs.moodle.org/dev/Moodle_2.8_release_notes'.
 
 Free Software
 =============
@@ -28,13 +28,15 @@ If you make improvements or bug fixes then I would appreciate if you would send 
 https://github.com/gjb2048/moodle-courseformat_grid and doing a 'Pull Request' so that the rest of the
 Moodle community benefits.
 
-Donations
-=========
-This course format is provided to you for free, and if you want to express your gratitude for using this format, please consider donating by:
+Supporting Grid development
+===========================
+If you find Grid useful and beneficial, please consider donating by:
+
+PayPal - Please contact me via my 'Moodle profile' (above) for details as I am an individual and therefore am unable to have 'donation' / 'buy me now' buttons under their terms.
 
 Flattr - https://flattr.com/profile/gjb2048
 
-Donations may allow me to provide you with more or better features in less time.
+I develop and maintain for free and any donations to assist me in this endeavour are appreciated.
 
 Installation
 ============
@@ -244,6 +246,9 @@ Known Issues
 
 History
 =============
+10th November 2014 Version 2.8.0.1 - Release Candidate
+  1.  Release candidate for Moodle 2.8 - NOT for production servers.
+
 5th November 2014 Version 2.7.1.4
   1.  Fixed CONTRIB-5256.  Thanks to Marius Jugariu for reporting the problem.
   2.  Made the arrows easier to find by placing them always 75px from the top.
