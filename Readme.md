@@ -246,6 +246,11 @@ Known Issues
 
 History
 =============
+12th December 2014 Version 2.8.2
+  1. Revamped the arrows such that they are always visible.
+  2. Arrow and close image size responsive to screen size.
+  3. Changed the arrow images to FontAwesome: http://fontawesome.io/license/ and extracted with: https://icomoon.io/app/#/select.
+
 16th November 2014 Version 2.8.1 - Stable version for Moodle 2.8.
   1.  Always show shadebox arrows on Tablets and Mobiles with the latter being half size.
 
