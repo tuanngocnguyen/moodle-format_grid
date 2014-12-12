@@ -208,36 +208,108 @@ body.jsenabled #gridshadebox_content.hide_content {
     height: 55px;
     width: 55px;
     top: 75px;
-    opacity: 0;
+    opacity: 0.35;
     transition: opacity .25s ease-in-out;
     -moz-transition: opacity .25s ease-in-out;
     -webkit-transition: opacity .25s ease-in-out;
 }
 .gridshadebox_arrow:hover {
-    opacity: 0.8;
+    opacity: 0.9;
 }
 .gridshadebox_left {
-    left: -28px;
+    left: -55px;
 }
 .gridshadebox_right {
-    right: -28px;
+    right: -55px;
 }
 
-.gridshadebox_arrow.gridshadebox_arrow_mobile {
+@media (max-width: 1199px) {
+    .gridshadebox_arrow {
+        height: 40px;
+        width: 40px;
+    }
+    .gridshadebox_left {
+        left: -40px;
+    }
+    .gridshadebox_right {
+        right: -40px;
+    }
+}
+
+@media (max-width: 767px) {
+    #gridshadebox_close {
+        height: 28px;
+        width: 28px;
+    }
+    .gridshadebox_arrow {
+        height: 30px;
+        width: 30px;
+    }
+    .gridshadebox_left {
+        left: -30px;
+    }
+    .gridshadebox_right {
+        right: -30px;
+    }
+}
+
+@media (max-width: 480px) {
+    #gridshadebox_close {
+        height: 20px;
+        width: 20px;
+        top: -7px;
+        right: -7px;
+    }
+    .gridshadebox_arrow {
+        height: 20px;
+        width: 20px;
+    }
+    .gridshadebox_left {
+        left: -20px;
+    }
+    .gridshadebox_right {
+        right: -20px;
+    }
+}
+
+.gridshadebox_arrow.gridshadebox_mobile {
+    height: 18px;
+    width: 18px;
+}
+
+.gridshadebox_arrow.gridshadebox_mobile.gridshadebox_left {
+    left: -18px;
+}
+
+.gridshadebox_arrow.gridshadebox_mobile.gridshadebox_right {
+    right: -18px;
+}
+
+.gridshadebox_arrow.gridshadebox_mobile, .gridshadebox_arrow.gridshadebox_mobile:hover {
     opacity: 1;
-    height: 27px;
-    width: 27px;
 }
 
-.gridshadebox_arrow.gridshadebox_arrow_mobile.gridshadebox_left {
-    left: -14px;
+#gridshadebox_close.gridshadebox_mobile {
+    height: 18px;
+    width: 18px;
+    top: -7px;
+    right: -7px;
 }
 
-.gridshadebox_arrow.gridshadebox_arrow_mobile.gridshadebox_right {
-    right: -14px;
+.gridshadebox_arrow.gridshadebox_tablet {
+    height: 31px;
+    width: 31px;
 }
 
-.gridshadebox_arrow.gridshadebox_arrow_tablet {
+.gridshadebox_arrow.gridshadebox_tablet.gridshadebox_left {
+    left: -31px;
+}
+
+.gridshadebox_arrow.gridshadebox_tablet.gridshadebox_right {
+    right: -31px;
+}
+
+.gridshadebox_arrow.gridshadebox_tablet, .gridshadebox_arrow.gridshadebox_tablet:hover {
     opacity: 1;
 }
 

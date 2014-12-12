@@ -129,29 +129,30 @@ class format_grid_renderer extends format_section_renderer_base {
             'role' => 'region',
             'aria-label' => get_string('shadeboxcontent', 'format_grid')));
 
-        echo html_writer::tag('img', '', array('id' => 'gridshadebox_close', 'style' => 'display:none;',
-            'src' => $this->output->pix_url('close', 'format_grid'),
-            'role' => 'link',
-            'aria-label' => get_string('closeshadebox', 'format_grid')));
-        $arrowextra = '';
+        $deviceextra = '';
         switch ($this->portable) {
             case 1: // Mobile.
-                $arrowextra = ' gridshadebox_arrow_mobile';
+                $deviceextra = ' gridshadebox_mobile';
             break;
             case 2: // Tablet.
-                $arrowextra = ' gridshadebox_arrow_tablet';
+                $deviceextra = ' gridshadebox_tablet';
             break;
             default:
             break;
         }
-        echo html_writer::tag('img', '', array('id' => 'gridshadebox_left', 'class' => 'gridshadebox_arrow gridshadebox_left'.$arrowextra,
+        echo html_writer::tag('img', '', array('id' => 'gridshadebox_close', 'style' => 'display:none;',
+            'class' => $deviceextra,
+            'src' => $this->output->pix_url('close', 'format_grid'),
+            'role' => 'link',
+            'aria-label' => get_string('closeshadebox', 'format_grid')));
+        echo html_writer::tag('img', '', array('id' => 'gridshadebox_left', 'class' => 'gridshadebox_arrow gridshadebox_left'.$deviceextra,
             'style' => 'display:none;',
-            'src' => $this->output->pix_url('arrow_l', 'format_grid'),
+            'src' => $this->output->pix_url('fa-arrow-circle-left-w', 'format_grid'),
             'role' => 'link',
             'aria-label' => get_string('previoussection', 'format_grid')));
-        echo html_writer::tag('img', '', array('id' => 'gridshadebox_right', 'class' => 'gridshadebox_arrow gridshadebox_right'.$arrowextra,
+        echo html_writer::tag('img', '', array('id' => 'gridshadebox_right', 'class' => 'gridshadebox_arrow gridshadebox_right'.$deviceextra,
             'style' => 'display:none;',
-            'src' => $this->output->pix_url('arrow_r', 'format_grid'),
+            'src' => $this->output->pix_url('fa-arrow-circle-right-w', 'format_grid'),
             'role' => 'link',
             'aria-label' => get_string('nextsection', 'format_grid')));
         echo $this->start_section_list();
