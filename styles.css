@@ -200,11 +200,12 @@ body.jsenabled #gridshadebox_content.hide_content {
     top: -10px;
     right: -10px;
     cursor: pointer;
+    z-index: 2;
 }
 
 .gridshadebox_arrow {
     position: absolute;
-    cursor: pointer;
+    cursor: inherit;
     height: 55px;
     width: 55px;
     top: 75px;
@@ -213,14 +214,24 @@ body.jsenabled #gridshadebox_content.hide_content {
     -moz-transition: opacity .25s ease-in-out;
     -webkit-transition: opacity .25s ease-in-out;
 }
-.gridshadebox_arrow:hover {
+.gridshadebox_left_area:hover .gridshadebox_arrow, .gridshadebox_right_area:hover .gridshadebox_arrow {
     opacity: 0.9;
 }
-.gridshadebox_left {
+
+.gridshadebox_left_area {
+    position: absolute;
+    top: 0;
     left: -55px;
+    width: 55px;
+    height: 100%;
 }
-.gridshadebox_right {
+
+.gridshadebox_right_area {
+    position: absolute;
+    top: 0;
     right: -55px;
+    width: 55px;
+    height: 100%;
 }
 
 @media (max-width: 1199px) {
@@ -228,11 +239,13 @@ body.jsenabled #gridshadebox_content.hide_content {
         height: 40px;
         width: 40px;
     }
-    .gridshadebox_left {
+    .gridshadebox_left_area {
         left: -40px;
+        width: 40px;
     }
-    .gridshadebox_right {
+    .gridshadebox_right_area {
         right: -40px;
+        width: 40px;
     }
 }
 
@@ -245,11 +258,13 @@ body.jsenabled #gridshadebox_content.hide_content {
         height: 30px;
         width: 30px;
     }
-    .gridshadebox_left {
+    .gridshadebox_left_area {
         left: -30px;
+        width: 30px;
     }
-    .gridshadebox_right {
+    .gridshadebox_right_area {
         right: -30px;
+        width: 30px;
     }
 }
 
@@ -264,11 +279,13 @@ body.jsenabled #gridshadebox_content.hide_content {
         height: 20px;
         width: 20px;
     }
-    .gridshadebox_left {
+    .gridshadebox_left_area {
         left: -20px;
+        width: 20px;
     }
-    .gridshadebox_right {
+    .gridshadebox_right_area {
         right: -20px;
+        width: 20px;
     }
 }
 
@@ -277,12 +294,14 @@ body.jsenabled #gridshadebox_content.hide_content {
     width: 18px;
 }
 
-.gridshadebox_arrow.gridshadebox_mobile.gridshadebox_left {
+.gridshadebox_arrow.gridshadebox_mobile.gridshadebox_left_area {
     left: -18px;
+    width: 18px;
 }
 
-.gridshadebox_arrow.gridshadebox_mobile.gridshadebox_right {
+.gridshadebox_arrow.gridshadebox_mobile.gridshadebox_right_area {
     right: -18px;
+    width: 10px;
 }
 
 .gridshadebox_arrow.gridshadebox_mobile, .gridshadebox_arrow.gridshadebox_mobile:hover {
@@ -301,12 +320,14 @@ body.jsenabled #gridshadebox_content.hide_content {
     width: 31px;
 }
 
-.gridshadebox_arrow.gridshadebox_tablet.gridshadebox_left {
+.gridshadebox_arrow.gridshadebox_tablet.gridshadebox_left_area {
     left: -31px;
+    width: 31px;
 }
 
-.gridshadebox_arrow.gridshadebox_tablet.gridshadebox_right {
+.gridshadebox_arrow.gridshadebox_tablet.gridshadebox_right_area {
     right: -31px;
+    width: 31px;
 }
 
 .gridshadebox_arrow.gridshadebox_tablet, .gridshadebox_arrow.gridshadebox_tablet:hover {
