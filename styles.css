@@ -120,7 +120,7 @@ div#gridmiddle-column > ul {
 }
 
 .course-content .gridicon_link {
-    cursor: pointer;
+    cursor: url('[[pix:format_grid|fa-hand-o-up-f]]'), auto;
 }
 .course-content ul.gridicons li p.icon_content {
     font-weight: bold;
@@ -163,7 +163,7 @@ div#gridshadebox_overlay {
     /* CSS3 standard */
     opacity: 0.7;
     z-index: 1;
-    cursor: pointer;
+    cursor: url('[[pix:format_grid|fa-times-circle-o-f]]'), auto;
 }
 #gridshadebox_content {
     background: #fff;
@@ -199,7 +199,7 @@ body.jsenabled #gridshadebox_content.hide_content {
     position: absolute;
     top: -10px;
     right: -10px;
-    cursor: pointer;
+    cursor: url('[[pix:format_grid|fa-hand-o-up-f]]'), auto;
     z-index: 2;
 }
 
@@ -252,9 +252,13 @@ body.jsenabled #gridshadebox_content.hide_content {
 }
 
 @media (max-width: 767px) {
+    div#gridshadebox_overlay {
+        cursor: url('[[pix:format_grid|fa-times-circle-o-fsm]]'), auto;
+    }
     #gridshadebox_close {
         height: 28px;
         width: 28px;
+        cursor: url('[[pix:format_grid|fa-hand-o-up-fsm]]'), auto;
     }
     .gridshadebox_arrow {
         height: 30px;
