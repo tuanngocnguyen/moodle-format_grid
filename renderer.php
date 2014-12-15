@@ -147,7 +147,6 @@ class format_grid_renderer extends format_section_renderer_base {
             'aria-label' => get_string('closeshadebox', 'format_grid')));
         echo html_writer::start_tag('div', array('id' => 'gridshadebox_left',
             'class' => 'gridshadebox_left_area',
-            'style' => 'cursor: url(\''.$this->output->pix_url('fa-hand-o-left-f', 'format_grid').'\'), auto;',
             'role' => 'link',
             'aria-label' => get_string('previoussection', 'format_grid')));
         echo html_writer::tag('img', '', array('class' => 'gridshadebox_arrow gridshadebox_left'.$deviceextra,
@@ -155,8 +154,7 @@ class format_grid_renderer extends format_section_renderer_base {
         echo html_writer::end_tag('div');
         echo html_writer::start_tag('div', array('id' => 'gridshadebox_right',
             'class' => 'gridshadebox_right_area',
-            'style' => 'cursor: url(\''.$this->output->pix_url('fa-hand-o-right-f', 'format_grid').'\'), auto;',
-             'role' => 'link',
+            'role' => 'link',
             'aria-label' => get_string('nextsection', 'format_grid')));
         echo html_writer::tag('img', '', array('class' => 'gridshadebox_arrow gridshadebox_right'.$deviceextra,
             'src' => $this->output->pix_url('fa-arrow-circle-right-w', 'format_grid')));

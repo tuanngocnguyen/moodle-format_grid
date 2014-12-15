@@ -224,6 +224,7 @@ body.jsenabled #gridshadebox_content.hide_content {
     left: -55px;
     width: 55px;
     height: 100%;
+    cursor: url('[[pix:format_grid|fa-hand-o-left-f]]'), auto;
 }
 
 .gridshadebox_right_area {
@@ -232,6 +233,7 @@ body.jsenabled #gridshadebox_content.hide_content {
     right: -55px;
     width: 55px;
     height: 100%;
+    cursor: url('[[pix:format_grid|fa-hand-o-right-f]]'), auto;
 }
 
 @media (max-width: 1199px) {
@@ -261,10 +263,12 @@ body.jsenabled #gridshadebox_content.hide_content {
     .gridshadebox_left_area {
         left: -30px;
         width: 30px;
+        cursor: url('[[pix:format_grid|fa-hand-o-left-fsm]]'), auto;
     }
     .gridshadebox_right_area {
         right: -30px;
         width: 30px;
+        cursor: url('[[pix:format_grid|fa-hand-o-right-fsm]]'), auto;
     }
 }
 
