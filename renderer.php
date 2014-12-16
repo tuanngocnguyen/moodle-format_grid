@@ -145,20 +145,25 @@ class format_grid_renderer extends format_section_renderer_base {
             'src' => $this->output->pix_url('close', 'format_grid'),
             'role' => 'link',
             'aria-label' => get_string('closeshadebox', 'format_grid')));
-        echo html_writer::start_tag('div', array('id' => 'gridshadebox_left',
-            'class' => 'gridshadebox_left_area',
-            'role' => 'link',
-            'aria-label' => get_string('previoussection', 'format_grid')));
-        echo html_writer::tag('img', '', array('class' => 'gridshadebox_arrow gridshadebox_left'.$deviceextra,
-            'src' => $this->output->pix_url('fa-arrow-circle-left-w', 'format_grid')));
-        echo html_writer::end_tag('div');
-        echo html_writer::start_tag('div', array('id' => 'gridshadebox_right',
-            'class' => 'gridshadebox_right_area',
-            'role' => 'link',
-            'aria-label' => get_string('nextsection', 'format_grid')));
-        echo html_writer::tag('img', '', array('class' => 'gridshadebox_arrow gridshadebox_right'.$deviceextra,
-            'src' => $this->output->pix_url('fa-arrow-circle-right-w', 'format_grid')));
-        echo html_writer::end_tag('div');
+
+        // Only show the arrows if there is more than one box shown.
+        if (($course->numsections > 1) || (($course->numsections == 1) && (!$this->topic0_at_top))) {
+            echo html_writer::start_tag('div', array('id' => 'gridshadebox_left',
+                'class' => 'gridshadebox_left_area',
+                'role' => 'link',
+                'aria-label' => get_string('previoussection', 'format_grid')));
+            echo html_writer::tag('img', '', array('class' => 'gridshadebox_arrow gridshadebox_left'.$deviceextra,
+                'src' => $this->output->pix_url('fa-arrow-circle-left-w', 'format_grid')));
+            echo html_writer::end_tag('div');
+            echo html_writer::start_tag('div', array('id' => 'gridshadebox_right',
+                'class' => 'gridshadebox_right_area',
+                'role' => 'link',
+                'aria-label' => get_string('nextsection', 'format_grid')));
+            echo html_writer::tag('img', '', array('class' => 'gridshadebox_arrow gridshadebox_right'.$deviceextra,
+                'src' => $this->output->pix_url('fa-arrow-circle-right-w', 'format_grid')));
+            echo html_writer::end_tag('div');
+        }
+
         echo $this->start_section_list();
         // If currently moving a file then show the current clipboard.
         $this->make_block_show_clipboard_if_file_moving($course);
@@ -267,8 +272,6 @@ class format_grid_renderer extends format_section_renderer_base {
             'role' => 'region',
             'aria-label' => $sectionname)
         );
-
-        echo html_writer::tag('div', '&nbsp;', array('class' => 'right side'));
 
         echo html_writer::start_tag('div', array('class' => 'content'));
 
