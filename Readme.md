@@ -8,7 +8,7 @@ This version works with Moodle version 2014111000.00 release 2.8 (Build: 2014111
 next release.
 
 Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
-'docs.moodle.org/27/en/Installing_Moodle' / 'docs.moodle.org/dev/Moodle_2.8_release_notes'.
+'docs.moodle.org/28/en/Installing_Moodle' / 'docs.moodle.org/dev/Moodle_2.8_release_notes'.
 
 Free Software
 =============
