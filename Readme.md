@@ -251,6 +251,9 @@ Known Issues
 
 History
 =============
+Version 2.9.0.2.
+  1.  Added the capability to delete a section.
+
 Version 2.9.0.1.
   1.  First 'release candidate' version for Moodle 2.9.
   2.  Note: Need to seriously think about using AMD and transitioning to using jQuery instead of YUI as AJAX is possible in jQuery,

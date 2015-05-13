@@ -844,6 +844,18 @@ class format_grid extends format_base {
         }
         $changes = $this->update_format_options($data);
 
+        if ($changes && array_key_exists('numsections', $data)) {
+            // If the numsections was decreased, try to completely delete the orphaned sections (unless they are not empty).
+            $numsections = (int)$data['numsections'];
+            $maxsection = $DB->get_field_sql('SELECT max(section) from {course_sections}
+                        WHERE course = ?', array($this->courseid));
+            for ($sectionnum = $maxsection; $sectionnum > $numsections; $sectionnum--) {
+                if (!$this->delete_section($sectionnum, false)) {
+                    break;
+                }
+            }
+        }
+
         // Now we can change the displayed images if needed.
         if ($changedisplayedimages) {
             $this->settings = null; // Invalidate as changed.
@@ -865,6 +877,42 @@ class format_grid extends format_base {
         }
 
         return $changes;
+    }
+
+    /**
+     * Deletes a section
+     *
+     * Do not call this function directly, instead call {@link course_delete_section()}
+     *
+     * @param int|stdClass|section_info $section
+     * @param bool $forcedeleteifnotempty if set to false section will not be deleted if it has modules in it.
+     * @return bool whether section was deleted
+     */
+    public function delete_section($section, $forcedeleteifnotempty = false) {
+        global $DB;
+        if (!is_object($section)) {
+            $section = $DB->get_record('course_sections', array('course' => $this->get_courseid(), 'section' => $section),
+                'id,section,sequence');
+        }
+
+        if (parent::delete_section($section, $forcedeleteifnotempty)) {
+            $context = context_course::instance($this->courseid);
+            $this->delete_image($section->id, $context->id);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Whether this format allows to delete sections
+     *
+     * Do not call this function directly, instead use {@link course_can_delete_section()}
+     *
+     * @param int|stdClass|section_info $section
+     * @return bool
+     */
+    public function can_delete_section($section) {
+        return true;
     }
 
     /**
