@@ -253,6 +253,7 @@ History
 =============
 Version 2.9.0.2.
   1.  Added the capability to delete a section.
+  2.  Fixed 'Pointless try...catch block in setup_displayed_image() (lib.php)' - #15.
 
 Version 2.9.0.1.
   1.  First 'release candidate' version for Moodle 2.9.
