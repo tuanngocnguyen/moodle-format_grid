@@ -105,6 +105,9 @@ $string['defaultcurrentselectedimagecontainercolour_desc'] = 'The default curren
 $string['defaultcoursedisplay'] = 'Course display default';
 $string['defaultcoursedisplay_desc'] = "Either show all the sections on a single page or section zero and the chosen section on page.";
 
+$string['defaultfitsectioncontainertowindow'] = 'Fit section container to window by default';
+$string['defaultfitsectioncontainertowindow_desc'] = 'The default setting for &quot;fit section container to window&quot;';
+
 $string['defaultnewactivity'] = 'Show new activity notification image default';
 $string['defaultnewactivity_desc'] = "Show the new activity notification image when a new activity or resource are added to a section default.";
 
@@ -129,6 +132,9 @@ $string['setcurrentselectedimagecontainercolour_help'] = 'Set the current select
 
 $string['setnewactivity'] = 'Show new activity notification image';
 $string['setnewactivity_help'] = "Show the new activity notification image when a new activity or resource are added to a section.";
+
+$string['setfitsectioncontainertowindow'] = 'Fit the section popup to the window';
+$string['setfitsectioncontainertowindow_help'] = 'If enabled, the popup box with the contents of the section will fit to the size of the window and will scroll inside if necessary. If disabled, the entire page will scroll instead.';
 
 $string['colourrule'] = "Please enter a valid RGB colour, six hexadecimal digits.";
 

@@ -332,6 +332,7 @@ class format_grid extends format_base {
             if ($defaultcurrentselectedimagecontainercolour[0] == '#') {
                 $defaultcurrentselectedimagecontainercolour = substr($defaultcurrentselectedimagecontainercolour, 1);
             }
+            $defaultfitsectioncontainertowindow = get_config('format_grid', 'defaultfitsectioncontainertowindow');
 
             $courseconfig = get_config('moodlecourse');
             $courseformatoptions = array(
@@ -385,6 +386,10 @@ class format_grid extends format_base {
                 ),
                 'newactivity' => array(
                     'default' => get_config('format_grid', 'defaultnewactivity'),
+                    'type' => PARAM_INT
+                ),
+                'fitsectioncontainertowindow' => array(
+                    'default' => get_config('format_grid', 'defaultfitsectioncontainertowindow'),
                     'type' => PARAM_INT
                 )
             );
@@ -572,6 +577,20 @@ class format_grid extends format_base {
                 'help' => 'setnewactivity',
                 'help_component' => 'format_grid'
             );
+
+            $courseformatoptionsedit['fitsectioncontainertowindow'] = array(
+                'label' => new lang_string('setfitsectioncontainertowindow', 'format_grid'),
+                'help' => 'setfitsectioncontainertowindow',
+                'help_component' => 'format_grid',
+                'element_type' => 'select',
+                'element_attributes' => array(
+                    array(
+                        1 => new lang_string('no'),   // No.
+                        2 => new lang_string('yes')   // Yes.
+                    )
+                )
+            );
+
             $courseformatoptions = array_merge_recursive($courseformatoptions, $courseformatoptionsedit);
         }
         return $courseformatoptions;

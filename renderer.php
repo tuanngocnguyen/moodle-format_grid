@@ -125,7 +125,13 @@ class format_grid_renderer extends format_section_renderer_base {
         echo html_writer::end_tag('div');
         echo html_writer::start_tag('div', array('id' => 'gridshadebox'));
         echo html_writer::tag('div', '', array('id' => 'gridshadebox_overlay', 'style' => 'display: none;'));
-        echo html_writer::start_tag('div', array('id' => 'gridshadebox_content', 'class' => 'hide_content',
+
+        $gridshadeboxcontentclasses = array('hide_content');
+        if ($this->settings['fitsectioncontainertowindow'] == 2) {
+            $gridshadeboxcontentclasses[] = 'fit_to_window_enabled';
+        }
+
+        echo html_writer::start_tag('div', array('id' => 'gridshadebox_content', 'class' => implode(' ', $gridshadeboxcontentclasses),
             'role' => 'region',
             'aria-label' => get_string('shadeboxcontent', 'format_grid')));
 
