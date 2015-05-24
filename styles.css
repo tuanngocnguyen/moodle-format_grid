@@ -182,8 +182,8 @@ body.jsenabled #gridshadebox_content.hide_content {
     z-index: 1;
 }
 #gridshadebox_content.fit_to_window ul.gtopics {
-    margin:0;
-    padding:10px;
+    margin: 0;
+    padding: 10px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
