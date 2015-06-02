@@ -667,6 +667,10 @@ class format_grid extends format_base {
                 $OUTPUT->help_icon('resetnewactivity', 'format_grid');
             $resetelements[] = & $mform->createElement('checkbox', 'resetnewactivity', '', $checkboxname);
 
+            $checkboxname = get_string('resetfitpopup', 'format_grid') .
+                $OUTPUT->help_icon('resetfitpopup', 'format_grid');
+            $resetelements[] = & $mform->createElement('checkbox', 'resetfitpopup', '', $checkboxname);
+
             $elements[] = $mform->addGroup($resetelements, 'resetgroup', get_string('resetgrp', 'format_grid'), null,
                 false);
 
@@ -688,6 +692,10 @@ class format_grid extends format_base {
                 $checkboxname = get_string('resetallnewactivity', 'format_grid') .
                     $OUTPUT->help_icon('resetallnewactivity', 'format_grid');
                 $resetallelements[] = & $mform->createElement('checkbox', 'resetallnewactivity', '', $checkboxname);
+
+                $checkboxname = get_string('resetallfitpopup', 'format_grid') .
+                    $OUTPUT->help_icon('resetallfitpopup', 'format_grid');
+                $resetallelements[] = & $mform->createElement('checkbox', 'resetallfitpopup', '', $checkboxname);
 
                 $elements[] = $mform->addGroup($resetallelements, 'resetallgroup', get_string('resetallgrp', 'format_grid'),
                     null, false);
@@ -780,10 +788,12 @@ class format_grid extends format_base {
         $resetimageresizemethod = false;
         $resetimagecontainerstyle = false;
         $resetnewactivity = false;
+        $resetfitpopup = false;
         $resetallimagecontainersize = false;
         $resetallimageresizemethod = false;
         $resetallimagecontainerstyle = false;
         $resetallnewactivity = false;
+        $resetallfitpopup = false;
         if (isset($data->resetimagecontainersize) == true) {
             $resetimagecontainersize = true;
             unset($data->resetimagecontainersize);
@@ -800,6 +810,10 @@ class format_grid extends format_base {
             $resetnewactivity = true;
             unset($data->resetnewactivity);
         }
+        if (isset($data->resetfitpopup) == true) {
+            $resetfitpopup = true;
+            unset($data->resetfitpopup);
+        }
         if (isset($data->resetallimagecontainersize) == true) {
             $resetallimagecontainersize = true;
             unset($data->resetallimagecontainersize);
@@ -815,6 +829,10 @@ class format_grid extends format_base {
         if (isset($data->resetallnewactivity) == true) {
             $resetallnewactivity = true;
             unset($data->resetallnewactivity);
+        }
+        if (isset($data->resetallfitpopup) == true) {
+            $resetfitpopup = true;
+            unset($data->resetallfitpopup);
         }
 
         $settings = $this->get_settings();
@@ -887,11 +905,11 @@ class format_grid extends format_base {
         }
 
         // Now we can do the reset.
-        if (($resetallimagecontainersize) || ($resetallimageresizemethod) || ($resetallimagecontainerstyle) || ($resetallnewactivity)) {
-            $this->reset_grid_setting(0, $resetallimagecontainersize, $resetallimageresizemethod, $resetallimagecontainerstyle, $resetallnewactivity);
+        if (($resetallimagecontainersize) || ($resetallimageresizemethod) || ($resetallimagecontainerstyle) || ($resetallnewactivity) || ($resetallfitpopup)) {
+            $this->reset_grid_setting(0, $resetallimagecontainersize, $resetallimageresizemethod, $resetallimagecontainerstyle, $resetallnewactivity, $resetallfitpopup);
             $changes = true;
-        } else if (($resetimagecontainersize) || ($resetimageresizemethod) || ($resetimagecontainerstyle) || ($resetnewactivity)) {
-            $this->reset_grid_setting($this->courseid, $resetimagecontainersize, $resetimageresizemethod, $resetimagecontainerstyle, $resetnewactivity);
+        } else if (($resetimagecontainersize) || ($resetimageresizemethod) || ($resetimagecontainerstyle) || ($resetnewactivity) || ($resetfitpopup)) {
+            $this->reset_grid_setting($this->courseid, $resetimagecontainersize, $resetimageresizemethod, $resetimagecontainerstyle, $resetnewactivity, $resetfitpopup);
             $changes = true;
         }
 
@@ -961,8 +979,9 @@ class format_grid extends format_base {
      * @param int $imageresizemethodreset If true, reset the image resize method to the default in the settings for the format.
      * @param int $imagecontainerstylereset If true, reset the colour to the default in the settings for the format.
      * @param int $newactivity If true, reset the new activity to the default in the settings for the format.
+     * @param int $fitpopupreset If true, reset the fit popup to the default in the settings for the format.
      */
-    public function reset_grid_setting($courseid, $imagecontainersizereset, $imageresizemethodreset, $imagecontainerstylereset, $newactivityreset) {
+    public function reset_grid_setting($courseid, $imagecontainersizereset, $imageresizemethodreset, $imagecontainerstylereset, $newactivityreset, $fitpopupreset) {
         global $DB, $USER;
 
         $coursecontext = context_course::instance($this->courseid);
@@ -982,6 +1001,7 @@ class format_grid extends format_base {
         $updateimageresizemethod = false;
         $updateimagecontainerstyle = false;
         $updatenewactivity = false;
+        $updatefitpopup = false;
         if ($imagecontainersizereset && has_capability('format/grid:changeimagecontainersize', $coursecontext) && $resetallifall) {
             $updatedata['imagecontainerwidth'] = get_config('format_grid', 'defaultimagecontainerwidth');
             $updatedata['imagecontainerratio'] = get_config('format_grid', 'defaultimagecontainerratio');
@@ -1005,9 +1025,13 @@ class format_grid extends format_base {
             $updatedata['newactivity'] = get_config('format_grid', 'defaultnewactivity');
             $updatenewactivity = true;
         }
+        if ($fitpopupreset && $resetallifall) {
+            $updatedata['fitsectioncontainertowindow'] = get_config('format_grid', 'defaultfitsectioncontainertowindow');
+            $updatefitpopup = true;
+        }
 
         foreach ($records as $record) {
-            if (($updateimagecontainersize) || ($updateimageresizemethod) || ($updateimagecontainerstyle) || ($updatenewactivity)) {
+            if (($updateimagecontainersize) || ($updateimageresizemethod) || ($updateimagecontainerstyle) || ($updatenewactivity) || ($updatefitpopup)) {
                 $ourcourseid = $this->courseid;
                 $this->courseid = $record->id;
                 if (($updateimagecontainersize) || ($updateimageresizemethod)) {

@@ -314,15 +314,8 @@ M.format_grid.shadebox.initialize_shadebox = function() {
     }
 
     var gridshadebox_content = M.format_grid.ourYUI.one('#gridshadebox_content');
-    if (gridshadebox_content.hasClass('fit_to_window_enabled')) {
-        // Apply the real fit_to_window class now that we know editing is off
-        gridshadebox_content.addClass('fit_to_window');
-    } else {
-        gridshadebox_content.setStyle('position', 'absolute');
-        gridshadebox_content.setStyle('width', '90%');
+    if (gridshadebox_content.hasClass('absolute')) {
         gridshadebox_content.setStyle('top', '' + top + 'px');
-        gridshadebox_content.setStyle('left', '5%');
-        gridshadebox_content.setStyle('zIndex', '1');
     }
 };
 

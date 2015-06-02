@@ -252,8 +252,11 @@ Known Issues
 History
 =============
 Version 2.9.0.2.
-  1.  Added the capability to delete a section.
-  2.  Fixed 'Pointless try...catch block in setup_displayed_image() (lib.php)' - #15.
+  1. Added the capability to delete a section.
+  2. Fixed 'Pointless try...catch block in setup_displayed_image() (lib.php)' - #15.
+  3. Add option to fit content popup to window size - #16 - thanks to Anthony Kuske - https://github.com/antriver.
+  4. Tidied up, added reset options and improved #16.
+  5. Optimised 'absolute' positioning of shadebox in light of #16.
 
 Version 2.9.0.1.
   1.  First 'release candidate' version for Moodle 2.9.

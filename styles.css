@@ -173,6 +173,14 @@ div#gridshadebox_overlay {
 body.jsenabled #gridshadebox_content.hide_content {
     display: none;
 }
+
+#gridshadebox_content.absolute {
+    position: absolute;
+    width: 90%;
+    left: 5%;
+    z-index: 1;
+}
+
 #gridshadebox_content.fit_to_window {
     position: fixed;
     top: 10%;
@@ -181,6 +189,7 @@ body.jsenabled #gridshadebox_content.hide_content {
     left: 10%;
     z-index: 1;
 }
+
 #gridshadebox_content.fit_to_window ul.gtopics {
     margin: 0;
     padding: 10px;
@@ -190,18 +199,22 @@ body.jsenabled #gridshadebox_content.hide_content {
     overflow: auto;
     height: 100%;
 }
+
 #gridshadebox_content.fit_to_window ul.gtopics h3.sectionname {
     margin-top: 0;
 }
+
 #gridshadebox_content .activity {
     list-style: none;
     border-bottom: 1px dashed #ccc;
     padding-bottom: 4px;
     padding-top: 2px;
 }
+
 #gridshadebox_content ul li.grid_section {
     list-style: none;
 }
+
 #gridshadebox_content ul li ul li, #gridshadebox_content ul li ol li {
     border-bottom: none;
     padding-bottom: 4px;
@@ -211,6 +224,7 @@ body.jsenabled #gridshadebox_content.hide_content {
 #gridshadebox_content ul li ul li {
     list-style: disc outside none;
 }
+
 #gridshadebox_content ul li ol li {
     list-style: decimal outside none;
 } 

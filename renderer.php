@@ -127,8 +127,12 @@ class format_grid_renderer extends format_section_renderer_base {
         echo html_writer::tag('div', '', array('id' => 'gridshadebox_overlay', 'style' => 'display: none;'));
 
         $gridshadeboxcontentclasses = array('hide_content');
-        if ($this->settings['fitsectioncontainertowindow'] == 2) {
-            $gridshadeboxcontentclasses[] = 'fit_to_window_enabled';
+        if (!$editing) {
+            if ($this->settings['fitsectioncontainertowindow'] == 2) {
+                 $gridshadeboxcontentclasses[] = 'fit_to_window';
+            } else {
+                 $gridshadeboxcontentclasses[] = 'absolute';
+            }
         }
 
         echo html_writer::start_tag('div', array('id' => 'gridshadebox_content', 'class' => implode(' ', $gridshadeboxcontentclasses),
