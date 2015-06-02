@@ -313,14 +313,17 @@ M.format_grid.shadebox.initialize_shadebox = function() {
         top = mainregionDOM.offsetTop + mainregionDOM.clientTop + 15;
     }
 
-    /* This is added here as not editing and JS is on to move the content from
-       below the grid icons and into the shade box. */
-    var content = document.getElementById('gridshadebox_content');
-    content.style.position = 'absolute';
-    content.style.width = '90%';
-    content.style.top = '' + top + 'px';
-    content.style.left = '5%';
-    content.style.zIndex = '1';
+    var gridshadebox_content = M.format_grid.ourYUI.one('#gridshadebox_content');
+    if (gridshadebox_content.hasClass('fit_to_window_enabled')) {
+        // Apply the real fit_to_window class now that we know editing is off
+        gridshadebox_content.addClass('fit_to_window');
+    } else {
+        gridshadebox_content.setStyle('position', 'absolute');
+        gridshadebox_content.setStyle('width', '90%');
+        gridshadebox_content.setStyle('top', '' + top + 'px');
+        gridshadebox_content.setStyle('left', '5%');
+        gridshadebox_content.setStyle('zIndex', '1');
+    }
 };
 
 /**
@@ -399,4 +402,4 @@ M.format_grid.shadebox.get_page_height = function() {
     }
 
     return pageHeight;
-};
+};
