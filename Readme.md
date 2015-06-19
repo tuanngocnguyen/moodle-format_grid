@@ -248,6 +248,8 @@ History
 =============
  3rd April 2015 Version 2.8.2.2
   1. Fixed 'importing of grid icons.' - #11 - patch gratefully received from Tim Lock.
+  2. Fix 'showavailability', ref: https://moodle.org/mod/forum/discuss.php?d=315452.
+  3. Fixed 'Pointless try...catch block in setup_displayed_image() (lib.php)' - #15.
 
 25th February 2015 Version 2.8.2.1
   1. Fixed 'Arrows still show when editing is on.' - #13.

@@ -356,8 +356,9 @@ class format_grid_renderer extends format_section_renderer_base {
             $thissection = $modinfo->get_section_info($section);
 
             // Check if section is visible to user.
-            $showsection = $hascapvishidsect || ($thissection->visible && ($thissection->available ||
-                    $thissection->showavailability || !$course->hiddensections));
+            $showsection = $hascapvishidsect || ($thissection->uservisible ||
+                    ($thissection->visible && !$thissection->available &&
+                    !empty($thissection->availableinfo)));
 
             if ($showsection) {
                 // We now know the value for the grid shade box shown array.
