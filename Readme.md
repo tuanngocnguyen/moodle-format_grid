@@ -251,6 +251,9 @@ Known Issues
 
 History
 =============
+Version 2.9.0.3.
+  1. Fix 'showavailability', ref: https://moodle.org/mod/forum/discuss.php?d=315452.
+
 Version 2.9.0.2.
   1. Added the capability to delete a section.
   2. Fixed 'Pointless try...catch block in setup_displayed_image() (lib.php)' - #15.
