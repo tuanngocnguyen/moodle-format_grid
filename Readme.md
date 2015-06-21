@@ -251,6 +251,9 @@ Known Issues
 
 History
 =============
+Version 2.9.0.4.
+  1. Optimise styles.
+
 Version 2.9.0.3.
   1. Fix 'showavailability', ref: https://moodle.org/mod/forum/discuss.php?d=315452.
 
