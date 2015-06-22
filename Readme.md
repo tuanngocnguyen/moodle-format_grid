@@ -251,6 +251,9 @@ Known Issues
 
 History
 =============
+Version 2.9.1.
+  1. First stable version for Moodle 2.9.
+
 Version 2.9.0.4.
   1. Optimise styles.
 
