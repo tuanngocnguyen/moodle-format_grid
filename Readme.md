@@ -254,6 +254,7 @@ History
 Version 2.9.1.1.
   1. Add the 'space' key as a means of opening / closing the shade box for accessibility.
   2. Attempt to set focus on first activity.  TODO: REMOVE console log before release.
+  3. Add composer.json file - #17 - thanks to Daniel Neis Araujo.
 
 Version 2.9.1.
   1. First stable version for Moodle 2.9.
