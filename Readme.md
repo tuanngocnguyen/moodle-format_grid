@@ -34,14 +34,14 @@ Moodle community benefits.
 
 Supporting Grid development
 ===========================
-If you find Grid useful and beneficial, please consider donating by:
+If you find Grid useful and beneficial, please consider sponsoring by:
 
-PayPal - Please contact me via my 'Moodle profile' (above) for details as I am an individual and therefore am unable to have
-'donation' / 'buy me now' buttons under their terms.
+PayPal - Please contact me via my 'Moodle profile' (above) for details as I am an individual and therefore am unable
+to have 'buy me now' buttons under their terms.
 
 Flattr - https://flattr.com/profile/gjb2048
 
-I develop and maintain for free and any donations to assist me in this endeavour are appreciated.
+I develop and maintain for free and any sponsorships to assist me in this endeavour are appreciated.
 
 Installation
 ============
@@ -144,7 +144,7 @@ Improvements are at our discretion.  I am happy to make bespoke customisations /
 endeavour to respond to all requests for support as quickly as possible, if you require a faster service then offering payment for
 the service will expedite the response.
 
-It takes time and effort to maintain the format, therefore donations are appreciated.
+It takes time and effort to maintain the format, therefore sponsorships are appreciated.
 
 When reporting an issue you can post in the course format's forum on Moodle.org (currently 'moodle.org/mod/forum/view.php?id=47'), 
 on Moodle tracker 'tracker.moodle.org' ensuring that you chose the 'Non-core contributed modules' and 'Course Format: Grid'
@@ -254,6 +254,7 @@ History
 Version 2.9.1.1.
   1. Add the 'space' key as a means of opening / closing the shade box for accessibility.
   2. Attempt to set focus on first activity.  TODO: REMOVE console log before release.
+  3. Update readme.
 
 Version 2.9.1.
   1. First stable version for Moodle 2.9.
