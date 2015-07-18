@@ -246,6 +246,9 @@ Known Issues
 
 History
 =============
+18th July 2015 Version 2.8.2.3
+  1. Added debug code for: https://moodle.org/mod/forum/discuss.php?d=316768.
+
  3rd April 2015 Version 2.8.2.2
   1. Fixed 'importing of grid icons.' - #11 - patch gratefully received from Tim Lock.
   2. Fix 'showavailability', ref: https://moodle.org/mod/forum/discuss.php?d=315452.
