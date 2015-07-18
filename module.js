@@ -215,7 +215,7 @@ M.format_grid.change_shown = function() {
     //document.querySelectorAll("section-" + this.selected_section_no + " a:first-of-type")[0].focus();
     var firstactivity = document.getElementById("section-" + this.selected_section_no).getElementsByTagName('a')[0];
     if (firstactivity) {
-        console.log("First activity: " + firstactivity);
+        //console.log("First activity: " + firstactivity);
         firstactivity.focus();
     }
     console.log("Active element: " + document.activeElement);
