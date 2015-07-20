@@ -251,6 +251,10 @@ Known Issues
 
 History
 =============
+Version 2.9.1.2.
+  1. Fixed coding fault when restoring a course from backup file.
+  2. Attempt self repair if grid image not in the files table.
+
 Version 2.9.1.1.
   1. Add the 'space' key as a means of opening / closing the shade box for accessibility.
   2. Attempt to set focus on first activity.
