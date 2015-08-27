@@ -171,11 +171,7 @@ M.format_grid.icon_toggle = function(e) {
  */
 M.format_grid.arrow_left = function(e) {
     "use strict";
-    if ( Y.one(document.body).hasClass('dir-rtl') ) {
-        this.change_selected_section(true);
-    } else {
-        this.change_selected_section(false);
-    }
+    this.change_selected_section(false);
 };
 
 /**
@@ -186,11 +182,7 @@ M.format_grid.arrow_left = function(e) {
  */
 M.format_grid.arrow_right = function(e) {
     "use strict";
-    if ( Y.one(document.body).hasClass('dir-rtl') ) {
-        this.change_selected_section(false);
-    } else {
-        this.change_selected_section(true);
-    }
+    this.change_selected_section(true);
 };
 
 /**
