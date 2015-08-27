@@ -246,6 +246,9 @@ Known Issues
 
 History
 =============
+Version 2.8.2.4.
+  1. Improved RTL support thanks to Nadav Kavalerchik.
+
 18th July 2015 Version 2.8.2.3
   1. Added debug code for: https://moodle.org/mod/forum/discuss.php?d=316768.
 
