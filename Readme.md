@@ -251,6 +251,9 @@ Known Issues
 
 History
 =============
+Version 2.9.1.4.
+  1. Improved RTL support thanks to Nadav Kavalerchik.
+
 Version 2.9.1.3.
   1. Fix CONTRIB-5881 - Renaming of items not allowing spacebar.
 
