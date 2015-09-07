@@ -140,7 +140,7 @@ M.format_grid.icon_click = function(e) {
  */
 M.format_grid.tab = function(index) {
     "use strict";
-    console.log('M.format_grid.tab: ' + index);
+    this.ourYUI.log('M.format_grid.tab: ' + index);
     var previous_no = this.selected_section_no;
     this.selected_section_no = index;
     this.update_selected_background(previous_no);

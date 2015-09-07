@@ -103,26 +103,30 @@ M.format_grid.gridkeys = {
                 Y.log("Selected section no: " + M.format_grid.selected_section_no);
                 M.format_grid.icon_toggle(e);
             });
-            /* Deferred functionality - see CONTRIB-3240...
+            // Initiated in CONTRIB-3240...
             Y.on('enter', function (e) {
-                //var ae = document.activeElement;
-                if (M.format_grid.shadebox.shadebox_open == false) {
+                if (M.format_grid.gridkeys.currentGridBox) {
                     e.preventDefault();
-                    Y.log("Enter pressed");
-                    Y.log("Selected section no: " + M.format_grid.selected_section_no);
-                    M.format_grid.icon_toggle(e);
-                } else if (e.shiftKey) {
-                    e.preventDefault();
-                    Y.log("Shift Enter pressed");
-                    Y.log("Selected section no: " + M.format_grid.selected_section_no);
-                    M.format_grid.icon_toggle(e);
+                    if (M.format_grid.shadebox.shadebox_open == false) {
+                        Y.log("Enter pressed");
+                        Y.log("Selected section no: " + M.format_grid.selected_section_no);
+                        M.format_grid.icon_toggle(e);
+                    } else if (e.shiftKey) {
+                        Y.log("Shift Enter pressed");
+                        Y.log("Selected section no: " + M.format_grid.selected_section_no);
+                        M.format_grid.icon_toggle(e);
+                    }
                 }
             });
-            */
             Y.on('tab', function (e) {
-                if (M.format_grid.gridkeys.findfocused()) {
-                    //e.preventDefault();
-                    M.format_grid.tab(M.format_grid.gridkeys.currentGridBoxIndex);
+                //e.preventDefault();
+                //window.dispatchEvent(e);
+                setTimeout(function() {
+                    // Cope with the fact that the default event happens after us.
+                    // Therefore we need to react after focus has moved.
+                    if (M.format_grid.gridkeys.findfocused()) {
+                        //e.preventDefault();
+                        M.format_grid.tab(M.format_grid.gridkeys.currentGridBoxIndex);
                     /*
                     if (e.shiftKey) {
                         Y.log("Shift Tab pressed");
@@ -132,7 +136,8 @@ M.format_grid.gridkeys = {
                         M.format_grid.arrow_right(e);
                     }
                     */
-                }
+                    }
+                }, 250);
             });
             Y.on('space', function (e) {
                 /*
