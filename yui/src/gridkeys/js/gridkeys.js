@@ -26,7 +26,8 @@
 M.format_grid = M.format_grid || {};
 M.format_grid.gridkeys = M.format_grid.gridkeys || {};
 M.format_grid.gridkeys = {
-    currentfocused: null,
+    currentGridBox: false,
+    currentGridBoxIndex: 0,
     findfocused: function() {
         var focused = document.activeElement;
         if (!focused || focused == document.body) {
@@ -34,7 +35,16 @@ M.format_grid.gridkeys = {
         } else if (document.querySelector) {
             focused = document.querySelector(":focus");
         }
-        M.format_grid.gridkeys.currentfocused = focused;
+        M.format_grid.gridkeys.currentGridBox = false;
+        if (focused && focused.id) {
+            Y.log(focused.id);
+            if (focused.id.indexOf('gridsection-') > -1) {
+                Y.log('Grid id:'  + focused.id);
+                M.format_grid.gridkeys.currentGridBox = true;
+                M.format_grid.gridkeys.currentGridBoxIndex = parseInt(focused.id.replace("gridsection-", ""));
+            }
+        }
+        return M.format_grid.gridkeys.currentGridBox;
     },
     init: function(params) {
         //console.log(JSON.stringify(params));
@@ -44,6 +54,39 @@ M.format_grid.gridkeys = {
                 Y.log("Esc pressed");
                 Y.log("Selected section no: " + M.format_grid.selected_section_no);
                 M.format_grid.icon_toggle(e);
+            });
+            /* Deferred functionality - see CONTRIB-3240...
+            Y.on('enter', function (e) {
+                //var ae = document.activeElement;
+                if (M.format_grid.shadebox.shadebox_open == false) {
+                    e.preventDefault();
+                    Y.log("Enter pressed");
+                    Y.log("Selected section no: " + M.format_grid.selected_section_no);
+                    M.format_grid.icon_toggle(e);
+                } else if (e.shiftKey) {
+                    e.preventDefault();
+                    Y.log("Shift Enter pressed");
+                    Y.log("Selected section no: " + M.format_grid.selected_section_no);
+                    M.format_grid.icon_toggle(e);
+                }
+            });
+            */
+            Y.on('tab', function (e) {
+                e.preventDefault();
+                document.dispatchEvent(e);
+                if (M.format_grid.gridkeys.findfocused()) {
+                    //e.preventDefault();
+                    M.format_grid.tab(M.format_grid.gridkeys.currentGridBoxIndex);
+                    /*
+                    if (e.shiftKey) {
+                        Y.log("Shift Tab pressed");
+                        M.format_grid.arrow_left(e);
+                    } else {
+                        Y.log("Tab pressed");
+                        M.format_grid.arrow_right(e);
+                    }
+                    */
+                }
             });
             Y.on('space', function (e) {
                 /*
@@ -61,18 +104,12 @@ M.format_grid.gridkeys = {
                     }
                 }
                 */
-                M.format_grid.gridkeys.findfocused();
-                Y.log(M.format_grid.gridkeys.currentfocused);
-                if (M.format_grid.gridkeys.currentfocused.id) {
-                    Y.log(M.format_grid.gridkeys.currentfocused.id);
-                    if (M.format_grid.gridkeys.currentfocused.id.indexOf('gridsection-') > -1) {
-                        Y.log('Grid id:'  + M.format_grid.gridkeys.currentfocused.id);
-                    }
+                if (M.format_grid.gridkeys.currentGridBox) {
+                    e.preventDefault();
+                    Y.log("Space pressed");
+                    Y.log("Selected section no: " + M.format_grid.selected_section_no);
+                    M.format_grid.icon_toggle(e);
                 }
-                e.preventDefault();
-                Y.log("Space pressed");
-                Y.log("Selected section no: " + M.format_grid.selected_section_no);
-                M.format_grid.icon_toggle(e);
             });
         }
         Y.on('left', function (e) {
@@ -85,34 +122,5 @@ M.format_grid.gridkeys = {
             Y.log("Right pressed");
             M.format_grid.arrow_right(e);
         });
-        /* Deferred functionality - see CONTRIB-3240...
-        Y.on('enter', function (e) {
-            //var ae = document.activeElement;
-            if (M.format_grid.shadebox.shadebox_open == false) {
-                e.preventDefault();
-                Y.log("Enter pressed");
-                Y.log("Selected section no: " + M.format_grid.selected_section_no);
-                M.format_grid.icon_toggle(e);
-            } else if (e.shiftKey) {
-                e.preventDefault();
-                Y.log("Shift Enter pressed");
-                Y.log("Selected section no: " + M.format_grid.selected_section_no);
-                M.format_grid.icon_toggle(e);
-            }
-        });
-        Y.on('tab', function (e) {
-            //var ae = document.activeElement;
-            if (M.format_grid.shadebox.shadebox_open == false) {
-                e.preventDefault();
-                if (e.shiftKey) {
-                    Y.log("Shift Tab pressed");
-                    M.format_grid.arrow_left(e);
-                } else {
-                    Y.log("Tab pressed");
-                    M.format_grid.arrow_right(e);
-                }
-            }
-        });
-        */
     }
 };
