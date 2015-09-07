@@ -136,6 +136,17 @@ M.format_grid.icon_click = function(e) {
 };
 
 /**
+ * Called when the user tabs and the item is a grid icon, set up in the init() method.
+ */
+M.format_grid.tab = function(index) {
+    "use strict";
+    console.log('M.format_grid.tab: ' + index);
+    var previous_no = this.selected_section_no;
+    this.selected_section_no = index;
+    this.update_selected_background(previous_no);
+};
+
+/**
  * Toggles the shade box on / off.
  * Called when the user clicks on a grid icon or presses the Esc or Space keys - see 'gridkeys.js'.
  * @param {Object} e Event object.
