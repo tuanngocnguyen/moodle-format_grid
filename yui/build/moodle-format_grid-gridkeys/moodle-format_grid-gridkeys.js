@@ -73,11 +73,45 @@ YUI.add('moodle-format_grid-gridkeys', function (Y, NAME) {
 M.format_grid = M.format_grid || {};
 M.format_grid.gridkeys = M.format_grid.gridkeys || {};
 M.format_grid.gridkeys = {
-    init: function() {
-        Y.on('esc', function (e) {
-            e.preventDefault();
-            M.format_grid.icon_toggle(e);
-        });
+    currentfocused: null,
+    findfocused: function() {
+        var focused = document.activeElement;
+        if (!focused || focused == document.body) {
+            focused = null;
+        } else if (document.querySelector) {
+            focused = document.querySelector(":focus");
+        }
+        M.format_grid.gridkeys.currentfocused = focused;
+    },
+    init: function(params) {
+        //console.log(JSON.stringify(params));
+        if (!params.editing) {
+            Y.on('esc', function (e) {
+                e.preventDefault();
+                M.format_grid.icon_toggle(e);
+            });
+            Y.on('space', function (e) {
+                /*
+                var focused = document.activeElement;
+                if (!focused || focused == document.body) {
+                    focused = null;
+                } else if (document.querySelector) {
+                    focused = document.querySelector(":focus");
+                }
+                if (focused.id) {
+                    if (focused.id.indexOf('gridsection-') > -1) {
+                    }
+                }
+                */
+                M.format_grid.gridkeys.findfocused();
+                if (M.format_grid.gridkeys.currentfocused.id) {
+                    if (M.format_grid.gridkeys.currentfocused.id.indexOf('gridsection-') > -1) {
+                    }
+                }
+                e.preventDefault();
+                M.format_grid.icon_toggle(e);
+            });
+        }
         Y.on('left', function (e) {
             e.preventDefault();
             M.format_grid.arrow_left(e);

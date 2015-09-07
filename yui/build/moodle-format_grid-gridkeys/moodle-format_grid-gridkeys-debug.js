@@ -73,13 +73,55 @@ YUI.add('moodle-format_grid-gridkeys', function (Y, NAME) {
 M.format_grid = M.format_grid || {};
 M.format_grid.gridkeys = M.format_grid.gridkeys || {};
 M.format_grid.gridkeys = {
-    init: function() {
-        Y.on('esc', function (e) {
-            e.preventDefault();
-            Y.log("Esc pressed");
-            Y.log("Selected section no: " + M.format_grid.selected_section_no);
-            M.format_grid.icon_toggle(e);
-        });
+    currentfocused: null,
+    findfocused: function() {
+        var focused = document.activeElement;
+        if (!focused || focused == document.body) {
+            focused = null;
+        } else if (document.querySelector) {
+            focused = document.querySelector(":focus");
+        }
+        M.format_grid.gridkeys.currentfocused = focused;
+    },
+    init: function(params) {
+        //console.log(JSON.stringify(params));
+        if (!params.editing) {
+            Y.on('esc', function (e) {
+                e.preventDefault();
+                Y.log("Esc pressed");
+                Y.log("Selected section no: " + M.format_grid.selected_section_no);
+                M.format_grid.icon_toggle(e);
+            });
+            Y.on('space', function (e) {
+                /*
+                var focused = document.activeElement;
+                if (!focused || focused == document.body) {
+                    focused = null;
+                } else if (document.querySelector) {
+                    focused = document.querySelector(":focus");
+                }
+                Y.log(focused);
+                if (focused.id) {
+                    Y.log(focused.id);
+                    if (focused.id.indexOf('gridsection-') > -1) {
+                        Y.log('Grid id:'  + focused.id);
+                    }
+                }
+                */
+                M.format_grid.gridkeys.findfocused();
+                Y.log(M.format_grid.gridkeys.currentfocused);
+                if (M.format_grid.gridkeys.currentfocused.id) {
+                    Y.log(M.format_grid.gridkeys.currentfocused.id);
+                    if (M.format_grid.gridkeys.currentfocused.id.indexOf('gridsection-') > -1) {
+                        Y.log('Grid id:'  + M.format_grid.gridkeys.currentfocused.id);
+                    }
+                }
+                e.preventDefault();
+                Y.log("Space pressed");
+                Y.log("Selected section no: " + M.format_grid.selected_section_no);
+                M.format_grid.icon_toggle(e);
+            });
+        }
         Y.on('left', function (e) {
             e.preventDefault();
             Y.log("Left pressed");
