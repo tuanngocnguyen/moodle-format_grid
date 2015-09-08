@@ -248,6 +248,9 @@ History
 =============
 Version 2.8.2.4.
   1. Improved RTL support thanks to Nadav Kavalerchik.
+  2. Delete format_grid_icon record when a section is deleted.
+  3. Update language string for 'cannotfinduploadedimage'.
+  4. Improved accessibility control by finally completing CONTRIB-3240 to use tab / shift tab, enter / shift enter controls.
 
 18th July 2015 Version 2.8.2.3
   1. Added debug code for: https://moodle.org/mod/forum/discuss.php?d=316768.

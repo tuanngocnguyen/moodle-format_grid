@@ -1389,7 +1389,7 @@ class format_grid extends format_base {
                         $sectionimage->displayedimageindex . '_' . $sectionimage->image)) {
                     $file->delete();
                 }
-                $DB->set_field('format_grid_icon', 'displayedimageindex', 0, array('sectionid' => $sectionimage->sectionid));
+                $DB->delete_records("format_grid_icon", array('courseid' => $this->courseid, 'sectionid' => $sectionimage->sectionid));
             }
         }
     }
@@ -1415,7 +1415,7 @@ class format_grid extends format_base {
                     }
                 }
             }
-            $DB->delete_records("format_grid_icon", array("courseid" => $this->courseid));
+            $DB->delete_records("format_grid_icon", array('courseid' => $this->courseid));
         }
     }
 
