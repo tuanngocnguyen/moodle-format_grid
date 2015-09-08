@@ -144,6 +144,9 @@ M.format_grid.tab = function(index) {
     var previous_no = this.selected_section_no;
     this.selected_section_no = index;
     this.update_selected_background(previous_no);
+    if (M.format_grid.shadebox.shadebox_open == true) {
+         this.change_shown();
+    }
 };
 
 /**
