@@ -251,6 +251,8 @@ Version 2.8.2.4.
   2. Delete format_grid_icon record when a section is deleted.
   3. Update language string for 'cannotfinduploadedimage'.
   4. Improved accessibility control by finally completing CONTRIB-3240 to use tab / shift tab, enter / shift enter controls.
+  5. Do not halt on missing icon error (see: https://moodle.org/mod/forum/discuss.php?d=316768) but just
+     continue and allow errors to be stored in the php.log file.
 
 18th July 2015 Version 2.8.2.3
   1. Added debug code for: https://moodle.org/mod/forum/discuss.php?d=316768.
