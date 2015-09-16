@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
     <!--[if lt IE 9]>
@@ -36,21 +36,25 @@
 <h1>
 <a id="required-version-of-moodle" class="anchor" href="#required-version-of-moodle" aria-hidden="true"><span class="octicon octicon-link"></span></a>Required version of Moodle</h1>
 
-<p>This version works with Moodle version 2014111000.00 release 2.8 (Build: 20141110) and above within the 2.8 branch until the
+<p>This version works with Moodle version 2015051100.00 2.9 (Build: 20150511) and above within the 2.9 branch until the
 next release.</p>
 
 <p>Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
-'docs.moodle.org/28/en/Installing_Moodle' / 'docs.moodle.org/dev/Moodle_2.8_release_notes'.</p>
+'docs.moodle.org/29/en/Installing_Moodle'.</p>
 
 <h1>
 <a id="free-software" class="anchor" href="#free-software" aria-hidden="true"><span class="octicon octicon-link"></span></a>Free Software</h1>
 
 <p>The Grid format is 'free' software under the terms of the GNU GPLv3 License, please see 'COPYING.txt'.</p>
 
-<p>It can be obtained for free from:
-<a href="https://moodle.org/plugins/view.php?plugin=format_grid">https://moodle.org/plugins/view.php?plugin=format_grid</a>
-and
-<a href="https://github.com/gjb2048/moodle-courseformat_grid/releases">https://github.com/gjb2048/moodle-courseformat_grid/releases</a></p>
+<p>The primary source for downloading this branch of the format is <a href="https://moodle.org/plugins/view.php?plugin=format_grid">https://moodle.org/plugins/view.php?plugin=format_grid</a>
+with 'Select Moodle version:' set at 'Moodle 2.9'.</p>
+
+<p>The secondary source is a tagged version with the v2.9 prefix on <a href="https://github.com/gjb2048/moodle-courseformat_grid/tags">https://github.com/gjb2048/moodle-courseformat_grid/tags</a></p>
+
+<p>If you download from the development area - <a href="https://github.com/gjb2048/moodle-courseformat_grid/">https://github.com/gjb2048/moodle-courseformat_grid/</a> - consider that
+the code is unstable and not for use in production environments.  This is because I develop the next version in stages
+and use GitHub as a means of backup.  Therefore the code is not finished, subject to alteration and requires testing.</p>
 
 <p>You have all the rights granted to you by the GPLv3 license.  If you are unsure about anything, then the
 FAQ - <a href="http://www.gnu.org/licenses/gpl-faq.html">http://www.gnu.org/licenses/gpl-faq.html</a> - is a good place to look.</p>
@@ -64,13 +68,14 @@ Moodle community benefits.</p>
 <h1>
 <a id="supporting-grid-development" class="anchor" href="#supporting-grid-development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supporting Grid development</h1>
 
-<p>If you find Grid useful and beneficial, please consider donating by:</p>
+<p>If you find Grid useful and beneficial, please consider sponsoring by:</p>
 
-<p>PayPal - Please contact me via my 'Moodle profile' (above) for details as I am an individual and therefore am unable to have 'donation' / 'buy me now' buttons under their terms.</p>
+<p>PayPal - Please contact me via my 'Moodle profile' (above) for details as I am an individual and therefore am unable
+to have 'buy me now' buttons under their terms.</p>
 
 <p>Flattr - <a href="https://flattr.com/profile/gjb2048">https://flattr.com/profile/gjb2048</a></p>
 
-<p>I develop and maintain for free and any donations to assist me in this endeavour are appreciated.</p>
+<p>I develop and maintain for free and any sponsorships to assist me in this endeavour are appreciated.</p>
 
 <h1>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h1>
@@ -189,7 +194,7 @@ Improvements are at our discretion.  I am happy to make bespoke customisations /
 endeavour to respond to all requests for support as quickly as possible, if you require a faster service then offering payment for
 the service will expedite the response.</p>
 
-<p>It takes time and effort to maintain the format, therefore donations are appreciated.</p>
+<p>It takes time and effort to maintain the format, therefore sponsorships are appreciated.</p>
 
 <p>When reporting an issue you can post in the course format's forum on Moodle.org (currently 'moodle.org/mod/forum/view.php?id=47'), 
 on Moodle tracker 'tracker.moodle.org' ensuring that you chose the 'Non-core contributed modules' and 'Course Format: Grid'
@@ -312,6 +317,88 @@ You can't back up the course format data independently.</p>
 <h1>
 <a id="history" class="anchor" href="#history" aria-hidden="true"><span class="octicon octicon-link"></span></a>History</h1>
 
+<p>Version 2.9.1.5.</p>
+
+<ol>
+<li>Do not halt on missing icon error (see: <a href="https://moodle.org/mod/forum/discuss.php?d=316768">https://moodle.org/mod/forum/discuss.php?d=316768</a>) but just
+ continue and allow errors to be stored in the php.log file.</li>
+</ol>
+
+<p>Version 2.9.1.4.</p>
+
+<ol>
+<li>Improved RTL support thanks to Nadav Kavalerchik.</li>
+<li>Delete format_grid_icon record when a section is deleted.</li>
+<li>Update language string for 'cannotfinduploadedimage'.</li>
+<li>Improved accessibility control by finally completing CONTRIB-3240 to use tab / shift tab, enter / shift enter controls.</li>
+</ol>
+
+<p>Version 2.9.1.3.</p>
+
+<ol>
+<li>Fix CONTRIB-5881 - Renaming of items not allowing spacebar.</li>
+</ol>
+
+<p>Version 2.9.1.2.</p>
+
+<ol>
+<li>Fixed coding fault when restoring a course from backup file.</li>
+<li>Attempt self repair if grid image not in the files table.</li>
+</ol>
+
+<p>Version 2.9.1.1.</p>
+
+<ol>
+<li>Add the 'space' key as a means of opening / closing the shade box for accessibility.</li>
+<li>Attempt to set focus on first activity.</li>
+<li>Add composer.json file - #17 - thanks to Daniel Neis Araujo.</li>
+<li>Update readme.</li>
+<li>Added debug code for: <a href="https://moodle.org/mod/forum/discuss.php?d=316768">https://moodle.org/mod/forum/discuss.php?d=316768</a>.</li>
+</ol>
+
+<p>Version 2.9.1.</p>
+
+<ol>
+<li>First stable version for Moodle 2.9.</li>
+</ol>
+
+<p>Version 2.9.0.4.</p>
+
+<ol>
+<li>Optimise styles.</li>
+</ol>
+
+<p>Version 2.9.0.3.</p>
+
+<ol>
+<li>Fix 'showavailability', ref: <a href="https://moodle.org/mod/forum/discuss.php?d=315452">https://moodle.org/mod/forum/discuss.php?d=315452</a>.</li>
+</ol>
+
+<p>Version 2.9.0.2.</p>
+
+<ol>
+<li>Added the capability to delete a section.</li>
+<li>Fixed 'Pointless try...catch block in setup_displayed_image() (lib.php)' - #15.</li>
+<li>Add option to fit content popup to window size - #16 - thanks to Anthony Kuske - <a href="https://github.com/antriver">https://github.com/antriver</a>.</li>
+<li>Tidied up, added reset options and improved #16.</li>
+<li>Optimised 'absolute' positioning of shadebox in light of #16.</li>
+</ol>
+
+<p>Version 2.9.0.1.</p>
+
+<ol>
+<li>First 'release candidate' version for Moodle 2.9.</li>
+<li>Note: Need to seriously think about using AMD and transitioning to using jQuery instead of YUI as AJAX is possible in jQuery,
+       but almost certainly not in the first instance as YUI is still supported in core.  Modularisation is do-able in AMD
+       with parameters required: <a href="https://docs.moodle.org/dev/Javascript_Modules">https://docs.moodle.org/dev/Javascript_Modules</a>.</li>
+</ol>
+
+<p>3rd April 2015 Version 2.8.2.2</p>
+
+<ol>
+<li>Fixed 'importing of grid icons.' - #11 - patch gratefully received from Tim Lock.</li>
+</ol>
+
 <p>25th February 2015 Version 2.8.2.1</p>
 
 <ol>
@@ -331,85 +418,85 @@ You can't back up the course format data independently.</p>
 <p>16th November 2014 Version 2.8.1 - Stable version for Moodle 2.8.</p>
 
 <ol>
-<li> Always show shadebox arrows on Tablets and Mobiles with the latter being half size.</li>
+<li>Always show shadebox arrows on Tablets and Mobiles with the latter being half size.</li>
 </ol>
 
 <p>10th November 2014 Version 2.8.0.1 - Release Candidate</p>
 
 <ol>
-<li> Release candidate for Moodle 2.8 - NOT for production servers.</li>
+<li>Release candidate for Moodle 2.8 - NOT for production servers.</li>
 </ol>
 
 <p>5th November 2014 Version 2.7.1.4</p>
 
 <ol>
-<li> Fixed CONTRIB-5256.  Thanks to Marius Jugariu for reporting the problem.</li>
-<li> Made the arrows easier to find by placing them always 75px from the top.</li>
-<li> Added German 'New activity' image.  Thanks to Guido Hornig.</li>
-<li> Fixed section 0 editing drop down in Bootstrap v3 themes: <a href="https://github.com/gjb2048/moodle-format_grid/issues/9">https://github.com/gjb2048/moodle-format_grid/issues/9</a>.</li>
+<li>Fixed CONTRIB-5256.  Thanks to Marius Jugariu for reporting the problem.</li>
+<li>Made the arrows easier to find by placing them always 75px from the top.</li>
+<li>Added German 'New activity' image.  Thanks to Guido Hornig.</li>
+<li>Fixed section 0 editing drop down in Bootstrap v3 themes: <a href="https://github.com/gjb2048/moodle-format_grid/issues/9">https://github.com/gjb2048/moodle-format_grid/issues/9</a>.</li>
 </ol>
 
 <p>18th August 2014 Version 2.7.1.3</p>
 
 <ol>
-<li> Fixed issue whereby the grid shade box is underneath certain theme components:
-  <a href="https://moodle.org/mod/forum/discuss.php?d=266192#p1152232">https://moodle.org/mod/forum/discuss.php?d=266192#p1152232</a>.</li>
+<li>Fixed issue whereby the grid shade box is underneath certain theme components:
+ <a href="https://moodle.org/mod/forum/discuss.php?d=266192#p1152232">https://moodle.org/mod/forum/discuss.php?d=266192#p1152232</a>.</li>
 </ol>
 
 <p>9th August 2014 Version 2.7.1.2</p>
 
 <ol>
-<li> Fixed CONTRIB-5191.  This is a workaround that depends on MDL-43525 being implemented before it is reversed.</li>
+<li>Fixed CONTRIB-5191.  This is a workaround that depends on MDL-43525 being implemented before it is reversed.</li>
 </ol>
 
 <p>12th June 2014 - Version 2.7.1.1</p>
 
 <ol>
-<li> Slight change to CSS for Bootstrap V3.</li>
-<li> Fixed CONTRIB-5106 - thanks to Hanna Edelman for this.</li>
+<li>Slight change to CSS for Bootstrap V3.</li>
+<li>Fixed CONTRIB-5106 - thanks to Hanna Edelman for this.</li>
 </ol>
 
 <p>20th May 2014 Version 2.7.1 - Stable.</p>
 
 <ol>
-<li> Stable release for M2.7.</li>
+<li>Stable release for M2.7.</li>
 </ol>
 
 <p>27th April 2014 Version 2.7.0.1 - BETA</p>
 
 <ol>
-<li> First beta version for Moodle 2.7beta.</li>
+<li>First beta version for Moodle 2.7beta.</li>
 </ol>
 
 <p>23rd April 2014 Version 2.6.1.6
 Change by G J Barnard</p>
 
 <ol>
-<li> Fixed CONTRIB-5001 - Cannot use the same image in the section summary as well as the grid.</li>
-<li> Note: Julian has departed from Moodle work so I have taken over full responsibility for the format.</li>
+<li>Fixed CONTRIB-5001 - Cannot use the same image in the section summary as well as the grid.</li>
+<li>Note: Julian has departed from Moodle work so I have taken over full responsibility for the format.</li>
 </ol>
 
 <p>28th March 2014 Version 2.6.1.5
 Change by G J Barnard</p>
 
 <ol>
-<li> Fix to RTL CSS thanks to Nadav Kavalerchik - <a href="https://github.com/gjb2048/moodle-courseformat_grid/pull/3">https://github.com/gjb2048/moodle-courseformat_grid/pull/3</a> being:
-  Right align "New activity" notification image in RTL mode.</li>
-<li> Fixed missing strings in 'en' language file for 'One section per page' mode.</li>
-<li> Fixed number format on ordered lists as reported on <a href="https://moodle.org/mod/forum/discuss.php?d=252497">https://moodle.org/mod/forum/discuss.php?d=252497</a>.</li>
-<li> Changed current selected image container to #ffc540 from #00cc00.  As the latter was too 'in your face'.</li>
-<li> Added a new setting so that you can choose if you want to display the "New activity" notification image.  The default is yes.</li>
-<li> Removed colour and font size attribute of icon text from styles.css.</li>
-<li> Removed redundant icons.</li>
-<li> Fixed box-sizing method for Bootstrap V3 in styles.css.</li>
-<li> Slightly shrunk grid icon outside to make better use of available space.
+<li>Fix to RTL CSS thanks to Nadav Kavalerchik - <a href="https://github.com/gjb2048/moodle-courseformat_grid/pull/3">https://github.com/gjb2048/moodle-courseformat_grid/pull/3</a> being:
+ Right align "New activity" notification image in RTL mode.</li>
+<li>Fixed missing strings in 'en' language file for 'One section per page' mode.</li>
+<li>Fixed number format on ordered lists as reported on <a href="https://moodle.org/mod/forum/discuss.php?d=252497">https://moodle.org/mod/forum/discuss.php?d=252497</a>.</li>
+<li>Changed current selected image container to #ffc540 from #00cc00.  As the latter was too 'in your face'.</li>
+<li>Added a new setting so that you can choose if you want to display the "New activity" notification image.  The default is yes.</li>
+<li>Removed colour and font size attribute of icon text from styles.css.</li>
+<li>Removed redundant icons.</li>
+<li>Fixed box-sizing method for Bootstrap V3 in styles.css.</li>
+<li>Slightly shrunk grid icon outside to make better use of available space.
 
 <ol>
-<li> Changed current section colour in the grid to use a box-shadow instead of a background to avoid confusion with
+<li>Changed current section colour in the grid to use a box-shadow instead of a background to avoid confusion with
 the current selected section.  This is a compromised as the latter is there for accessibility reasons and hence
 rationally should stand out more.  This change will not be back-ported as it's not IE8 compatible,
 <a href="http://caniuse.com/#search=box-shadow">http://caniuse.com/#search=box-shadow</a> and hence requires a version of Moodle that does not mandate it.</li>
-<li> Fixed CONTRIB-4861 - Glossary pop-ups do not display correctly.</li>
+<li>Fixed CONTRIB-4861 - Glossary pop-ups do not display correctly.</li>
 </ol>
 </li>
 </ol>
@@ -418,28 +505,28 @@ rationally should stand out more.  This change will not be back-ported as it's n
 Change by G J Barnard</p>
 
 <ol>
-<li> Fixed path and message confusion issue with the M1.9 upgrade script.</li>
+<li>Fixed path and message confusion issue with the M1.9 upgrade script.</li>
 <li>
 <p>Fixed issue reported by Graham Woodsford whereby teachers could not create Collapsed Topics courses.  The code in the area
-  concerned is identical to the Grid format and hence the same issue affects it too.  This is because the validation method
-  'edit_form_validation' in 'lib.php' was failing the values passed to it.  These happened to be the hidden label values from
-  'course_format_options' which were being used because the 'Course creator' role that teachers have before becoming an
-  'editingteacher' role as defined in 'db/access.php' does not allow the teacher to have the
-  'format/grid:changeimagecontainersize', 'format/grid:changeimageresizemethod' and 'format/grid:changeimagecontainerstyle'
-  capabilities.  This also implies that the values of the other settings are wrong, which in fact they are, causing courses to
-  be created (after fixing the colour settings for 'edit_form_validation') with odd values and not the defaults resulting in no
-  icon set etc.  And therefore needing to go back to edit the course settings.</p>
+ concerned is identical to the Grid format and hence the same issue affects it too.  This is because the validation method
+ 'edit_form_validation' in 'lib.php' was failing the values passed to it.  These happened to be the hidden label values from
+ 'course_format_options' which were being used because the 'Course creator' role that teachers have before becoming an
+ 'editingteacher' role as defined in 'db/access.php' does not allow the teacher to have the
+ 'format/grid:changeimagecontainersize', 'format/grid:changeimageresizemethod' and 'format/grid:changeimagecontainerstyle'
+ capabilities.  This also implies that the values of the other settings are wrong, which in fact they are, causing courses to
+ be created (after fixing the colour settings for 'edit_form_validation') with odd values and not the defaults resulting in no
+ icon set etc.  And therefore needing to go back to edit the course settings.</p>
 
 <p>Ok, this now leads on to a dilemma.  Currently the course creator role does not have the Grid capabilities listed above.  If
-  they were added to 'access.php' then the role would have them (existing Grid admins would have to add manually).  Then the
-  teacher would see all the options when first creating a course as they do whilst editing.  However, this means that if you
-  wish to restrict the teacher from changing things as is the purpose of the capabilities in the first place, then you have
-  to remove the capability in both the 'coursecreator' and 'editingteacher' roles.  This is because by default 'coursecreator'
-  is above 'editingteacher' and once enrolled on the course after having created it, the teacher has both.  This makes things
-  a bit complex and to be honest not that admin friendly.  Therefore to keep things simple in what is in reality an event
-  that is rare, I have decided not to add the capabilities to the 'coursecreator' role.  This is additionally based on the
-  presumed work-flow of a teacher where they create the course using the defaults, look at it and then decide what to change
-  in the settings.  The fix as it stands will facilitate this.</p>
+ they were added to 'access.php' then the role would have them (existing Grid admins would have to add manually).  Then the
+ teacher would see all the options when first creating a course as they do whilst editing.  However, this means that if you
+ wish to restrict the teacher from changing things as is the purpose of the capabilities in the first place, then you have
+ to remove the capability in both the 'coursecreator' and 'editingteacher' roles.  This is because by default 'coursecreator'
+ is above 'editingteacher' and once enrolled on the course after having created it, the teacher has both.  This makes things
+ a bit complex and to be honest not that admin friendly.  Therefore to keep things simple in what is in reality an event
+ that is rare, I have decided not to add the capabilities to the 'coursecreator' role.  This is additionally based on the
+ presumed work-flow of a teacher where they create the course using the defaults, look at it and then decide what to change
+ in the settings.  The fix as it stands will facilitate this.</p>
 </li>
 </ol>
 
@@ -447,33 +534,33 @@ Change by G J Barnard</p>
 Change by G J Barnard</p>
 
 <ol>
-<li> Fixed shade box still being shown in editing mode when update capability is denied.  Historical
-  issue that has not been spotted before.  Given <a href="http://docs.moodle.org/26/en/Capabilities/moodle/course:update">http://docs.moodle.org/26/en/Capabilities/moodle/course:update</a>
-  I have no idea why that specific capability was in the format for checking editing
-  capability in conjunction with actual editing capability in the first place.  Fix
-  is to remove the use of it completely which should marginally speed things up a bit.</li>
-<li> Fixed sections disappearing when the icon is clicked on in editing mode.</li>
-<li> Fixed icon image eventually disappearing when the section name / summary is changed.  See CONTRIB-4784, a
-  big thank you to Nadav Kavalerchik for spotting what was the cause of this and thus providing a reliable
-  means of replicating the issue.</li>
+<li>Fixed shade box still being shown in editing mode when update capability is denied.  Historical
+ issue that has not been spotted before.  Given <a href="http://docs.moodle.org/26/en/Capabilities/moodle/course:update">http://docs.moodle.org/26/en/Capabilities/moodle/course:update</a>
+ I have no idea why that specific capability was in the format for checking editing
+ capability in conjunction with actual editing capability in the first place.  Fix
+ is to remove the use of it completely which should marginally speed things up a bit.</li>
+<li>Fixed sections disappearing when the icon is clicked on in editing mode.</li>
+<li>Fixed icon image eventually disappearing when the section name / summary is changed.  See CONTRIB-4784, a
+ big thank you to Nadav Kavalerchik for spotting what was the cause of this and thus providing a reliable
+ means of replicating the issue.</li>
 </ol>
 
 <p>26th November 2013 Version 2.6.1.2
 Change by G J Barnard</p>
 
 <ol>
-<li> Fix automated backups including displayed images when they should not.</li>
-<li> Fix 'reset_grid_setting' in 'lib.php' not resetting a course if it's only on default options.</li>
-<li> Fix restore using the wrong name for the 'image' field.</li>
-<li> Only delete the old image file if it exists after the new one has been successfully
-  created in 'setup_displayed_image' in 'lib.php'.</li>
-<li> Fix course id set to default for courses created with versions prior to
-  13/7/2012 causing an exception to be raised when a section's image record
-  cannot be found and yet the record exists already.  This is due to new optimisation
-  code relying on using 'courseid' to find the section records for the course in
-  one go rather than getting them individually.</li>
-<li> Ensure a course sets its settings when it is created and then detaches itself from the
-  global defaults.</li>
+<li>Fix automated backups including displayed images when they should not.</li>
+<li>Fix 'reset_grid_setting' in 'lib.php' not resetting a course if it's only on default options.</li>
+<li>Fix restore using the wrong name for the 'image' field.</li>
+<li>Only delete the old image file if it exists after the new one has been successfully
+ created in 'setup_displayed_image' in 'lib.php'.</li>
+<li>Fix course id set to default for courses created with versions prior to
+ 13/7/2012 causing an exception to be raised when a section's image record
+ cannot be found and yet the record exists already.  This is due to new optimisation
+ code relying on using 'courseid' to find the section records for the course in
+ one go rather than getting them individually.</li>
+<li>Ensure a course sets its settings when it is created and then detaches itself from the
+ global defaults.</li>
 </ol>
 
 <p>NOTE: I did find in changing the backup / restore code that the changes did not take hold until I
@@ -505,88 +592,88 @@ know with as much information as possible, like additional add-ons and when you 
 Change by G J Barnard</p>
 
 <ol>
-<li> Fix incorrect detection of non-existent entry in format_grid_icon table.  Thanks to
-  Llywelyn Morgan for reporting this.</li>
+<li>Fix incorrect detection of non-existent entry in format_grid_icon table.  Thanks to
+ Llywelyn Morgan for reporting this.</li>
 </ol>
 
 <p>18th November 2013 Version 2.6.1
 Change by G J Barnard</p>
 
 <ol>
-<li> Stable release for Moodle 2.6.</li>
-<li> Fixed slight issue with lack of prefixing '#' for colour settings in default settings.</li>
+<li>Stable release for Moodle 2.6.</li>
+<li>Fixed slight issue with lack of prefixing '#' for colour settings in default settings.</li>
 </ol>
 
 <p>14th November 2013 Version 2.6.0.1
 Change by G J Barnard</p>
 
 <ol>
-<li> Initial BETA code for Moodle 2.6.</li>
+<li>Initial BETA code for Moodle 2.6.</li>
 </ol>
 
 <p>14th November 2013 Version 2.5.5
 Change by G J Barnard</p>
 
 <ol>
-<li> Fixed issue over prefixed '#' in colour picker.</li>
-<li> Added validation to HEX RGB colour codes.</li>
-<li> Added US English language file.</li>
-<li> Implemented MDL-21097.</li>
-<li> Fixed an issue when deleting a course that was not in the grid format where
-  the function 'format_grid_delete_course' in 'lib.php' was being called even
-  though the course is not in the format and the wrong format object was being
-  retrieved.  This then resulted in a method call on a non-existent method.</li>
+<li>Fixed issue over prefixed '#' in colour picker.</li>
+<li>Added validation to HEX RGB colour codes.</li>
+<li>Added US English language file.</li>
+<li>Implemented MDL-21097.</li>
+<li>Fixed an issue when deleting a course that was not in the grid format where
+ the function 'format_grid_delete_course' in 'lib.php' was being called even
+ though the course is not in the format and the wrong format object was being
+ retrieved.  This then resulted in a method call on a non-existent method.</li>
 </ol>
 
 <p>4th November 2013 Version 2.5.5 - CONTRIB-4099 - BETA
 Improvement by G J Barnard</p>
 
 <ol>
-<li> Implemented CONTRIB-4099 to add image icon size and colour changes.
-  Gratefully crowd funded by:
-    WL Wong
-    Guido Gautsch
-    Marcel de Leeuwe
-    Joseph Thibault
-    Gideon Williams
-    Jean-Marc Doucet
-    Nigel Barnett</li>
-<li> Changes for 'Accessibility' based upon MDL-41252.</li>
-<li> Fully implemented MDL-39542.</li>
-<li> Started implementing WAI-ARIA roles - <a href="http://www.w3.org/TR/wai-aria/roles">http://www.w3.org/TR/wai-aria/roles</a>.  If you have information to
-  help with this, then please contact us.</li>
+<li>Implemented CONTRIB-4099 to add image icon size and colour changes.
+ Gratefully crowd funded by:
+   WL Wong
+   Guido Gautsch
+   Marcel de Leeuwe
+   Joseph Thibault
+   Gideon Williams
+   Jean-Marc Doucet
+   Nigel Barnett</li>
+<li>Changes for 'Accessibility' based upon MDL-41252.</li>
+<li>Fully implemented MDL-39542.</li>
+<li>Started implementing WAI-ARIA roles - <a href="http://www.w3.org/TR/wai-aria/roles">http://www.w3.org/TR/wai-aria/roles</a>.  If you have information to
+ help with this, then please contact us.</li>
 </ol>
 
 <p>23rd October 2013 Version 2.5.4.4 - Stable.
 Change by G J Barnard</p>
 
 <ol>
-<li> Fix broken call to '_is_empty_text' as reported on CONTRIB-4589.</li>
-<li> Optimised fetching of icon data from database to one call instead of one call per shown section.</li>
-<li> Changed icon border size and radius to provide greater definition to the icon.</li>
-<li> Fixed shade box showing when pressing the 'Esc' key in 'Show one section per page' course layout - CONTRIB-4709.</li>
-<li> Fixed highlight this section text referring to 'topics'.</li>
+<li>Fix broken call to '_is_empty_text' as reported on CONTRIB-4589.</li>
+<li>Optimised fetching of icon data from database to one call instead of one call per shown section.</li>
+<li>Changed icon border size and radius to provide greater definition to the icon.</li>
+<li>Fixed shade box showing when pressing the 'Esc' key in 'Show one section per page' course layout - CONTRIB-4709.</li>
+<li>Fixed highlight this section text referring to 'topics'.</li>
 </ol>
 
 <p>2nd October 2013 Version 2.5.4.3 - Stable.
 Change by G J Barnard</p>
 
 <ol>
-<li> Fixed sections not being shown when in 'Show one section per page' mode and editing.  Thanks to
-  Zdravko Stoimenov for reporting this.</li>
-<li> Changed 'editimage.php' to ensure that only the icon is removed when changing it.  No specific
-  issue just refactoring the code as a preventative measure.</li>
-<li> Fixed section 0 content displaying when it's in the grid, you first load a page and click on another
-  section.  Thanks to Llywelyn Morgan for reporting this.</li>
+<li>Fixed sections not being shown when in 'Show one section per page' mode and editing.  Thanks to
+ Zdravko Stoimenov for reporting this.</li>
+<li>Changed 'editimage.php' to ensure that only the icon is removed when changing it.  No specific
+ issue just refactoring the code as a preventative measure.</li>
+<li>Fixed section 0 content displaying when it's in the grid, you first load a page and click on another
+ section.  Thanks to Llywelyn Morgan for reporting this.</li>
 </ol>
 
 <p>12th September 2013 Version 2.5.4.2 - Stable.
 Change by G J Barnard</p>
 
 <ol>
-<li> Changed 'JSON' code in 'module.js' to use the YUI library for JSON to support situations where the 'JSON'
-  library is not built into the browser.  Thanks to Colin Taylor for providing information of a situation I
-  could not have possibly tested.
+<li>Changed 'JSON' code in 'module.js' to use the YUI library for JSON to support situations where the 'JSON'
+ library is not built into the browser.  Thanks to Colin Taylor for providing information of a situation I
+ could not have possibly tested.
 Note: If you have already installed V2.5.4 or V2.5.4.1 then this is not an essential upgrade.</li>
 </ol>
 
@@ -594,8 +681,8 @@ Note: If you have already installed V2.5.4 or V2.5.4.1 then this is not an essen
 Change by G J Barnard</p>
 
 <ol>
-<li> Commented out 'console.log' code in 'module.js'.</li>
-<li> Removed old 'gridkeys.js' from 'javascript' folder.
+<li>Commented out 'console.log' code in 'module.js'.</li>
+<li>Removed old 'gridkeys.js' from 'javascript' folder.
 Note: If you have already installed V2.5.4 then this is not an essential upgrade.</li>
 </ol>
 
@@ -605,80 +692,80 @@ Change by G J Barnard</p>
 <ol>
 <li>
 <p>Partial implementation of CONTRIB-3240.  Thanks to Andrew Nicols for helping with the YUI module code
-  on: <a href="https://moodle.org/mod/forum/discuss.php?d=237275">https://moodle.org/mod/forum/discuss.php?d=237275</a>.
-  This means that it is now possible to navigate using the keyboard with the 'left' / 'right' cursor keys
-  being used to perform previous section / next section respectively and the 'esc' key to toggle open / closed
-  the shade box.  As a bonus of this change I've added in navigation arrows to the shade box which appear when
-  you hover over the middle of the sides - cool eh?
-  Initially I also added Shift-TAB (previous section) / TAB (next section) / Enter (open shade box) /
-  Shift-Enter (close shade box) keys to but after much deliberation (and logic issues) I have decided that until
-  WIA-ARIA is fully understood I'll leave them out.  Once much more information is known I'll put them back in.
-  Also thanks to Enrico Canale and Darren Britten of La Trobe University for their support and information.</p>
+ on: <a href="https://moodle.org/mod/forum/discuss.php?d=237275">https://moodle.org/mod/forum/discuss.php?d=237275</a>.
+ This means that it is now possible to navigate using the keyboard with the 'left' / 'right' cursor keys
+ being used to perform previous section / next section respectively and the 'esc' key to toggle open / closed
+ the shade box.  As a bonus of this change I've added in navigation arrows to the shade box which appear when
+ you hover over the middle of the sides - cool eh?
+ Initially I also added Shift-TAB (previous section) / TAB (next section) / Enter (open shade box) /
+ Shift-Enter (close shade box) keys to but after much deliberation (and logic issues) I have decided that until
+ WIA-ARIA is fully understood I'll leave them out.  Once much more information is known I'll put them back in.
+ Also thanks to Enrico Canale and Darren Britten of La Trobe University for their support and information.</p>
 
 <p>Note:  If you're wondering where the M2.3 and M2.4 versions are, well I intend to release them a few days after
-         this M2.5 version so that any bugs that have not been found can be fixed once without having to re-release
-         three versions.</p>
+        this M2.5 version so that any bugs that have not been found can be fixed once without having to re-release
+        three versions.</p>
 </li>
-<li> 'module.js' has been completely reworked so that it is efficient and documented.</li>
-<li> Added Pirate language.</li>
+<li>'module.js' has been completely reworked so that it is efficient and documented.</li>
+<li>Added Pirate language.</li>
 </ol>
 
 <p>30th August 2013 Version 2.5.3.3 - Stable
 Change by G J Barnard</p>
 
 <ol>
-<li> Implemented CONTRIB-4580 - Highlight current section.</li>
-<li> Implemented CONTRIB-4579, thanks to all who helped on <a href="https://moodle.org/mod/forum/discuss.php?d=236075">https://moodle.org/mod/forum/discuss.php?d=236075</a>.</li>
-<li> At the request of Tim St.Clair I've changed the code such that the sections underneath the icons are hidden
-  by CSS when JavaScript is enabled so that there is no 'flash' as previously JS would perform the hiding.</li>
-<li> Added 'Downgrading' instructions above.</li>
-<li> Added 'Upgrading' instructions above.</li>
-<li> Added 'Known Issues' above.</li>
+<li>Implemented CONTRIB-4580 - Highlight current section.</li>
+<li>Implemented CONTRIB-4579, thanks to all who helped on <a href="https://moodle.org/mod/forum/discuss.php?d=236075">https://moodle.org/mod/forum/discuss.php?d=236075</a>.</li>
+<li>At the request of Tim St.Clair I've changed the code such that the sections underneath the icons are hidden
+ by CSS when JavaScript is enabled so that there is no 'flash' as previously JS would perform the hiding.</li>
+<li>Added 'Downgrading' instructions above.</li>
+<li>Added 'Upgrading' instructions above.</li>
+<li>Added 'Known Issues' above.</li>
 </ol>
 
 <p>22nd August 2013 Version 2.5.3.2 - Stable
 Change by G J Barnard</p>
 
 <ol>
-<li> Fixed icon container size relative to icon size.</li>
-<li> Added 'alt' image attribute information being that of the section name.</li>
-<li> Tidied up more styles such that to pre-empt conflicts.</li>
+<li>Fixed icon container size relative to icon size.</li>
+<li>Added 'alt' image attribute information being that of the section name.</li>
+<li>Tidied up more styles such that to pre-empt conflicts.</li>
 </ol>
 
 <p>10th August 2013 Version 2.5.3.1 - Stable
 Change by G J Barnard</p>
 
 <ol>
-<li> Fixed CONTRIB-4216 - Error importing quizzes with grid course format.</li>
-<li> Fixed CONTRIB-4253 - mdl_log queried too often to generate New Activity tag.  This has been fixed by using the 'course_sections'
-  table instead to spot when a new activity / resource has been added since last login.</li>
+<li>Fixed CONTRIB-4216 - Error importing quizzes with grid course format.</li>
+<li>Fixed CONTRIB-4253 - mdl_log queried too often to generate New Activity tag.  This has been fixed by using the 'course_sections'
+ table instead to spot when a new activity / resource has been added since last login.</li>
 </ol>
 
 <p>4th August 2013 Version 2.5.3 - Stable
 Change by G J Barnard</p>
 
 <ol>
-<li> Fixed scroll to top when clicking on an icon.  Thanks to Javier Dorfsman for reporting this.</li>
-<li> Added in code developed by Nadav Kavalerchik to facilitate multi-lingual support for the 'new activity' icon.  Thank
-  you Nadav :).</li>
-<li> Adapted the width of the shade box such that it is dynamic against the size of the window.</li>
+<li>Fixed scroll to top when clicking on an icon.  Thanks to Javier Dorfsman for reporting this.</li>
+<li>Added in code developed by Nadav Kavalerchik to facilitate multi-lingual support for the 'new activity' icon.  Thank
+ you Nadav :).</li>
+<li>Adapted the width of the shade box such that it is dynamic against the size of the window.</li>
 </ol>
 
 <p>5th July 2013 Version 2.5.2 - Stable
 Change by G J Barnard</p>
 
 <ol>
-<li> Code refactoring to reduce and separate the format as a separate entity.</li>
-<li> Corrected as much as possible as detected by 'Code Checker' version 2013060600 release 2.2.7.</li>
-<li> Once the first box is shown then the 'Enter' key will toggle the 'current' box hidden and shown.</li>
-<li> Changed the order of the history so that the latest change is at the top.</li>
+<li>Code refactoring to reduce and separate the format as a separate entity.</li>
+<li>Corrected as much as possible as detected by 'Code Checker' version 2013060600 release 2.2.7.</li>
+<li>Once the first box is shown then the 'Enter' key will toggle the 'current' box hidden and shown.</li>
+<li>Changed the order of the history so that the latest change is at the top.</li>
 </ol>
 
 <p>14th May 2013 Version 2.5.1 - Stable
 Change by G J Barnard</p>
 
 <ol>
-<li> First stable version for Moodle 2.5 stable.</li>
+<li>First stable version for Moodle 2.5 stable.</li>
 </ol>
 
 <p>12th May 2013 - Version 2.5.0.2 - Beta
