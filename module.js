@@ -350,10 +350,14 @@ M.format_grid.shadebox.initialize_shadebox = function() {
         top = mainregionDOM.offsetTop + mainregionDOM.clientTop + 15;
     }
 
-    var gridshadebox_content = M.format_grid.ourYUI.one('#gridshadebox_content');
-    if (gridshadebox_content.hasClass('absolute')) {
-        gridshadebox_content.setStyle('top', '' + top + 'px');
-    }
+    /* This is added here as not editing and JS is on to move the content from
+       below the grid icons and into the shade box. */
+    var content = document.getElementById('gridshadebox_content');
+    content.style.position = 'absolute';
+    content.style.width = '90%';
+    content.style.top = '' + top + 'px';
+    content.style.left = '5%';
+    content.style.zIndex = '1';
 };
 
 /**
