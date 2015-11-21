@@ -4,20 +4,20 @@ A topics based format that uses a grid of user selectable images to pop up a lig
 
 Required version of Moodle
 ==========================
-This version works with Moodle version 2015051100.00 2.9 (Build: 20150511) and above within the 2.9 branch until the
+This version works with Moodle version 2015111600.00 3.0 (Build: 20151116) and above within the 3.0 branch until the
 next release.
 
 Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
-'docs.moodle.org/29/en/Installing_Moodle'.
+'docs.moodle.org/30/en/Installing_Moodle'.
 
 Free Software
 =============
 The Grid format is 'free' software under the terms of the GNU GPLv3 License, please see 'COPYING.txt'.
 
 The primary source for downloading this branch of the format is https://moodle.org/plugins/view.php?plugin=format_grid
-with 'Select Moodle version:' set at 'Moodle 2.9'.
+with 'Select Moodle version:' set at 'Moodle 3.0'.
 
-The secondary source is a tagged version with the v2.9 prefix on https://github.com/gjb2048/moodle-courseformat_grid/tags
+The secondary source is a tagged version with the v3.0 prefix on https://github.com/gjb2048/moodle-courseformat_grid/tags
 
 If you download from the development area - https://github.com/gjb2048/moodle-courseformat_grid/ - consider that
 the code is unstable and not for use in production environments.  This is because I develop the next version in stages
@@ -251,6 +251,10 @@ Known Issues
 
 History
 =============
+Version 3.0.0.1
+  1. First 'beta' version for M3.0.
+  2. Apply MDL-10405, MDL-48947 and MDL-51610.
+
 Version 2.9.1.5.
   1. Do not halt on missing icon error (see: https://moodle.org/mod/forum/discuss.php?d=316768) but just
      continue and allow errors to be stored in the php.log file.

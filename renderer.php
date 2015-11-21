@@ -220,10 +220,9 @@ class format_grid_renderer extends format_section_renderer_base {
      * @param bool $onsectionpage true if being printed on a section page
      * @return array of links with edit controls
      */
-    protected function section_edit_controls($course, $section, $onsectionpage = false) {
-        global $PAGE;
+    protected function section_edit_control_items($course, $section, $onsectionpage = false) {
 
-        if (!$PAGE->user_is_editing()) {
+        if (!$this->page->user_is_editing()) {
             return array();
         }
 
@@ -236,26 +235,49 @@ class format_grid_renderer extends format_section_renderer_base {
         }
         $url->param('sesskey', sesskey());
 
+        $isstealth = $section->section > $course->numsections;
         $controls = array();
-        if (has_capability('moodle/course:setcurrentsection', $coursecontext)) {
+        if (!$isstealth && $section->section && has_capability('moodle/course:setcurrentsection', $coursecontext)) {
             if ($course->marker == $section->section) {  // Show the "light globe" on/off.
                 $url->param('marker', 0);
-                $strmarkedthissection = get_string('markedthissection', 'format_grid');
-                $controls[] = html_writer::link($url,
-                                    html_writer::empty_tag('img', array('src' => $this->output->pix_url('i/marked'),
-                                        'class' => 'icon ', 'alt' => $strmarkedthissection)),
-                                    array('title' => $strmarkedthissection, 'class' => 'editing_highlight'));
+                $markedthissection = get_string('markedthissection', 'format_grid');
+                $highlightoff = get_string('highlightoff');
+                $controls['highlight'] = array('url' => $url, "icon" => 'i/marked',
+                                               'name' => $highlightoff,
+                                               'pixattr' => array('class' => '', 'alt' => $markedthissection),
+                                               'attr' => array('class' => 'editing_highlight', 'title' => $markedthissection));
+                $url->param('marker', 0);
             } else {
-                $strmarkthissection = get_string('markthissection', 'format_grid');
                 $url->param('marker', $section->section);
-                $controls[] = html_writer::link($url,
-                                html_writer::empty_tag('img', array('src' => $this->output->pix_url('i/marker'),
-                                    'class' => 'icon', 'alt' => $strmarkthissection)),
-                                array('title' => $strmarkthissection, 'class' => 'editing_highlight'));
+                $markthissection = get_string('markthissection', 'format_grid');
+                $highlight = get_string('highlight');
+                $controls['highlight'] = array('url' => $url, "icon" => 'i/marker',
+                                               'name' => $highlight,
+                                               'pixattr' => array('class' => '', 'alt' => $markthissection),
+                                               'attr' => array('class' => 'editing_highlight', 'title' => $markthissection));
+                $strmarkthissection = get_string('markthissection', 'format_grid');
             }
         }
 
-        return array_merge($controls, parent::section_edit_controls($course, $section, $onsectionpage));
+        $parentcontrols = parent::section_edit_control_items($course, $section, $onsectionpage);
+
+        // If the edit key exists, we are going to insert our controls after it.
+        if (array_key_exists("edit", $parentcontrols)) {
+            $merged = array();
+            // We can't use splice because we are using associative arrays.
+            // Step through the array and merge the arrays.
+            foreach ($parentcontrols as $key => $action) {
+                $merged[$key] = $action;
+                if ($key == "edit") {
+                    // If we have come to the edit key, merge these controls here.
+                    $merged = array_merge($merged, $controls);
+    }
+            }
+
+            return $merged;
+        } else {
+            return array_merge($controls, $parentcontrols);
+        }
     }
 
     // Grid format specific code.
@@ -278,7 +300,7 @@ class format_grid_renderer extends format_section_renderer_base {
             echo html_writer::start_tag('ul', array('class' => 'gtopics-0'));
         }
 
-        $sectionname = get_section_name($course, $thissection);
+        $sectionname = $this->courseformat->get_section_name($thissection);
         echo html_writer::start_tag('li', array(
             'id' => 'section-0',
             'class' => 'section main' . ($this->topic0_at_top ? '' : ' grid_section hide_section'),

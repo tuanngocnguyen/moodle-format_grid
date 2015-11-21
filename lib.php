@@ -64,6 +64,18 @@ class format_grid extends format_base {
         parent::__construct($format, $courseid);
     }
 
+     /**
+     * Returns the default section name for the format.
+     *
+     * @param stdClass $section Section object from database or just field course_sections section
+     * @return string The default value for the section name.
+     */
+    public function get_default_section_name($section) {
+        /* Follow the same logic so that this method is supported.  The MDL-51610 enchancement refactored things,
+           but that is not appropriate for us. */
+        return $this->get_section_name($section);
+    }
+
     /**
      * Prevents ability to change a static variable outside of the class.
      * @return array Array of imagecontainer widths.
