@@ -255,7 +255,6 @@ class format_grid_renderer extends format_section_renderer_base {
                                                'name' => $highlight,
                                                'pixattr' => array('class' => '', 'alt' => $markthissection),
                                                'attr' => array('class' => 'editing_highlight', 'title' => $markthissection));
-                $strmarkthissection = get_string('markthissection', 'format_grid');
             }
         }
 
@@ -271,7 +270,7 @@ class format_grid_renderer extends format_section_renderer_base {
                 if ($key == "edit") {
                     // If we have come to the edit key, merge these controls here.
                     $merged = array_merge($merged, $controls);
-    }
+                }
             }
 
             return $merged;
