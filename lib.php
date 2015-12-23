@@ -757,7 +757,7 @@ class format_grid extends format_base {
      * picker code in the form, however I find this area rather fraut and I hear that
      * Dan Poltawski (via MDL-42270) will be re-writing the forms lib so hopefully more
      * developer friendly.
-     * 
+     *
      * Note: Colour names removed, but might consider putting them back in if asked, but
      *       at the moment that would require quite a few changes and coping with existing
      *       settings.  Either convert the names to hex or allow them as valid values and
@@ -910,11 +910,22 @@ class format_grid extends format_base {
         }
 
         // Now we can do the reset.
-        if (($resetallimagecontainersize) || ($resetallimageresizemethod) || ($resetallimagecontainerstyle) || ($resetallnewactivity) || ($resetallfitpopup)) {
-            $this->reset_grid_setting(0, $resetallimagecontainersize, $resetallimageresizemethod, $resetallimagecontainerstyle, $resetallnewactivity, $resetallfitpopup);
+        if (($resetallimagecontainersize) ||
+            ($resetallimageresizemethod) ||
+            ($resetallimagecontainerstyle) ||
+            ($resetallnewactivity) ||
+            ($resetallfitpopup)) {
+            $this->reset_grid_setting(0, $resetallimagecontainersize, $resetallimageresizemethod, $resetallimagecontainerstyle,
+                $resetallnewactivity, $resetallfitpopup);
             $changes = true;
-        } else if (($resetimagecontainersize) || ($resetimageresizemethod) || ($resetimagecontainerstyle) || ($resetnewactivity) || ($resetfitpopup)) {
-            $this->reset_grid_setting($this->courseid, $resetimagecontainersize, $resetimageresizemethod, $resetimagecontainerstyle, $resetnewactivity, $resetfitpopup);
+        } else if (
+            ($resetimagecontainersize) ||
+            ($resetimageresizemethod) ||
+            ($resetimagecontainerstyle) ||
+            ($resetnewactivity) ||
+            ($resetfitpopup)) {
+            $this->reset_grid_setting($this->courseid, $resetimagecontainersize, $resetimageresizemethod, $resetimagecontainerstyle,
+                $resetnewactivity, $resetfitpopup);
             $changes = true;
         }
 
@@ -986,7 +997,8 @@ class format_grid extends format_base {
      * @param int $newactivity If true, reset the new activity to the default in the settings for the format.
      * @param int $fitpopupreset If true, reset the fit popup to the default in the settings for the format.
      */
-    public function reset_grid_setting($courseid, $imagecontainersizereset, $imageresizemethodreset, $imagecontainerstylereset, $newactivityreset, $fitpopupreset) {
+    public function reset_grid_setting($courseid, $imagecontainersizereset, $imageresizemethodreset, $imagecontainerstylereset,
+        $newactivityreset, $fitpopupreset) {
         global $DB, $USER;
 
         $coursecontext = context_course::instance($this->courseid);
@@ -1035,7 +1047,11 @@ class format_grid extends format_base {
         }
 
         foreach ($records as $record) {
-            if (($updateimagecontainersize) || ($updateimageresizemethod) || ($updateimagecontainerstyle) || ($updatenewactivity) || ($updatefitpopup)) {
+            if (($updateimagecontainersize) ||
+                ($updateimageresizemethod) ||
+                ($updateimagecontainerstyle) ||
+                ($updatenewactivity) ||
+                ($updatefitpopup)) {
                 $ourcourseid = $this->courseid;
                 $this->courseid = $record->id;
                 if (($updateimagecontainersize) || ($updateimageresizemethod)) {
@@ -1192,8 +1208,8 @@ class format_grid extends format_base {
         if (($imagecontainerwidth !== self::$currentwidth) || ($imagecontainerratio !== self::$currentratio) ||
                 ($borderwidth !== self::$currentborderwidth)) {
             $height = $this->calculate_height($imagecontainerwidth, $imagecontainerratio);
-            // margin-top = image holder height - ( image height - border width)).
-            // margin-left = (image holder width - image width) + border width.
+            // This is: margin-top = image holder height - ( image height - border width)).
+            // This is: margin-left = (image holder width - image width) + border width.
 
             $result = array(
                 'height' => $height,
@@ -1239,7 +1255,7 @@ class format_grid extends format_base {
         $basewidth = $width;
 
         switch ($ratio) {
-            // 1 => '3-2', 2 => '3-1', 3 => '3-3', 4 => '2-3', 5 => '1-3', 6 => '4-3', 7 => '3-4'.
+            // Ratios 1 => '3-2', 2 => '3-1', 3 => '3-3', 4 => '2-3', 5 => '1-3', 6 => '4-3', 7 => '3-4'.
             case 1: // 3-2.
             case 2: // 3-1.
             case 3: // 3-3.
@@ -1259,7 +1275,7 @@ class format_grid extends format_base {
 
         $height = $basewidth;
         switch ($ratio) {
-            // 1 => '3-2', 2 => '3-1', 3 => '3-3', 4 => '2-3', 5 => '1-3', 6 => '4-3', 7 => '3-4'.
+            // Ratios 1 => '3-2', 2 => '3-1', 3 => '3-3', 4 => '2-3', 5 => '1-3', 6 => '4-3', 7 => '3-4'.
             case 2: // 3-1.
                 $height = $basewidth;
                 break;
