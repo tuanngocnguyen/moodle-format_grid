@@ -340,7 +340,7 @@ class format_grid_renderer extends format_section_renderer_base {
      */
     private function make_block_icon_topics($contextid, $modinfo, $course, $editing, $hascapvishidsect,
             $urlpicedit) {
-        global $USER, $CFG;
+        global $CFG;
 
         if ($this->settings['newactivity'] == 2) {
             $currentlanguage = current_language();
@@ -686,7 +686,7 @@ class format_grid_renderer extends format_section_renderer_base {
 
     /**
      * Attempts to return a 40 character title for the section image container.
-     * If section names are set, they are used. Otherwise it scans 
+     * If section names are set, they are used. Otherwise it scans
      * the summary for what looks like the first line.
      */
     private function get_title($section) {

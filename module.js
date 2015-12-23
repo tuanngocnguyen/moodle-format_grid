@@ -165,7 +165,7 @@ M.format_grid.icon_toggle = function(e) {
         } else if (this.section_redirect !== null) {
             // Keyboard control of 'toggle' in 'One section per page' layout.
             location.replace(this.section_redirect + "&section=" + this.selected_section_no);
-        } else if (M.format_grid.shadebox.shadebox_open == true) {
+        } else if (M.format_grid.shadebox.shadebox_open === true) {
             //console.log("Shadebox was open");
             this.shadebox.toggle_shadebox();
         } else {
