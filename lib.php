@@ -752,7 +752,7 @@ class format_grid extends format_base {
     /**
      * Validates the colour that was entered by the user.
      * Borrowed from 'admin_setting_configcolourpicker' in '/lib/adminlib.php'.
-     * 
+     *
      * I'm not completely happy with this solution as would rather embed in the colour
      * picker code in the form, however I find this area rather fraut and I hear that
      * Dan Poltawski (via MDL-42270) will be re-writing the forms lib so hopefully more
@@ -762,9 +762,9 @@ class format_grid extends format_base {
      *       at the moment that would require quite a few changes and coping with existing
      *       settings.  Either convert the names to hex or allow them as valid values and
      *       fix the colour picker code and the CSS code in 'format.php' for the setting.
-     * 
+     *
      * Colour name to hex on: http://www.w3schools.com/cssref/css_colornames.asp.
-     * 
+     *
      * @param string $data the colour string to validate.
      * @return true|false
      */
@@ -991,7 +991,6 @@ class format_grid extends format_base {
 
         $coursecontext = context_course::instance($this->courseid);
 
-        $currentcourseid = 0;
         if ($courseid == 0) {
             $records = $DB->get_records('course', array('format' => $this->format), '', 'id');
         } else {
@@ -1052,7 +1051,7 @@ class format_grid extends format_base {
                     if (($updateimagecontainersize) &&
                            (($currentsettings['imagecontainerwidth'] != $updatedata['imagecontainerwidth']) ||
                             ($currentsettings['imagecontainerratio'] != $updatedata['imagecontainerratio']))) {
-                        $performimagecontainersize = true; // $updatedata will be correct.
+                        $performimagecontainersize = true; // Variable $updatedata will be correct.
                     } else {
                         // If image resize method needs to operate so use current settings.
                         $updatedata['imagecontainerwidth'] = $currentsettings['imagecontainerwidth'];
@@ -1062,7 +1061,7 @@ class format_grid extends format_base {
 
                     if (($updateimageresizemethod) &&
                         ($currentsettings['imageresizemethod'] != $updatedata['imageresizemethod'])) {
-                         $performimageresizemethod = true; // $updatedata will be correct.
+                         $performimageresizemethod = true; // Variable $updatedata will be correct.
                     } else {
                         // If image container size needs to operate so use current setting.
                         $updatedata['imageresizemethod'] = $currentsettings['imageresizemethod'];
@@ -1354,7 +1353,6 @@ class format_grid extends format_base {
             }
             print('Grid Format Image Exception:...');
             debugging($e->getMessage());
-            error_log($e->getMessage() . print_r($e, true));
         }
     }
 
@@ -1462,7 +1460,8 @@ class format_grid extends format_base {
                         $sectionimage->displayedimageindex . '_' . $sectionimage->image)) {
                     $file->delete();
                 }
-                $DB->delete_records("format_grid_icon", array('courseid' => $this->courseid, 'sectionid' => $sectionimage->sectionid));
+                $DB->delete_records("format_grid_icon", array('courseid' => $this->courseid,
+                    'sectionid' => $sectionimage->sectionid));
             }
         }
     }
@@ -1478,7 +1477,8 @@ class format_grid extends format_base {
 
             foreach ($sectionimages as $sectionimage) {
                 // Delete the image.
-                if ($file = $fs->get_file($coursecontext->id, 'course', 'section', $sectionimage->sectionid, '/', $sectionimage->image)) {
+                if ($file = $fs->get_file($coursecontext->id, 'course', 'section', $sectionimage->sectionid,
+                    '/', $sectionimage->image)) {
                     $file->delete();
                     // Delete the displayed image.
                     if ($file = $fs->get_file($coursecontext->id, 'course', 'section', $sectionimage->sectionid, $gridimagepath,
@@ -1665,7 +1665,7 @@ class format_grid extends format_base {
                 $targetwidth = floor($originalwidth * $ratio);
                 $targetheight = floor($originalheight * $ratio);
             } else {
-                // do not enlarge the original file if it is smaller than the requested thumbnail size
+                // Do not enlarge the original file if it is smaller than the requested thumbnail size.
                 $targetwidth = $originalwidth;
                 $targetheight = $originalheight;
             }
@@ -1743,7 +1743,7 @@ function format_grid_delete_course($courseid) {
        Done this way so will work if the course has
        been a grid format course in the past even if
        it is not now. */
-    $courseformat = format_grid::get_instance($courseid); // 
+    $courseformat = format_grid::get_instance($courseid);
     $courseformat->delete_images();
     unset($courseformat);  // Destruct.
 
