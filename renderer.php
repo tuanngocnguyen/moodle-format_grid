@@ -278,7 +278,7 @@ class format_grid_renderer extends format_section_renderer_base {
             echo html_writer::start_tag('ul', array('class' => 'gtopics-0'));
         }
 
-        $sectionname = get_section_name($course, $thissection);
+        $sectionname = $this->courseformat->get_section_name($thissection);
         echo html_writer::start_tag('li', array(
             'id' => 'section-0',
             'class' => 'section main' . ($this->topic0_at_top ? '' : ' grid_section hide_section'),
