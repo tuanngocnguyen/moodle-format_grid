@@ -1281,7 +1281,7 @@ class format_grid extends format_base {
                 break;
         }
 
-        return $height;
+        return round($height);
     }
 
     public function create_original_image_record($contextid, $sectionid, $filename) {

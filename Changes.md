@@ -2,6 +2,7 @@ History
 =============
 Version 2.9.1.6.
   1. Add Travis CI Support.
+  2. Fix #22 - Grid sometimes loads with blocks misaligned.
 
 Version 2.9.1.5.
   1. Do not halt on missing icon error (see: https://moodle.org/mod/forum/discuss.php?d=316768) but just
