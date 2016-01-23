@@ -2,6 +2,7 @@ History
 =============
 Version 3.0.0.2
   1. Add Travis CI Support.
+  2. Fix #22 - Grid sometimes loads with blocks misaligned.
 
 Version 3.0.0.1
   1. First 'beta' version for M3.0.
