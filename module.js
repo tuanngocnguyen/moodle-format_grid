@@ -120,6 +120,19 @@ M.format_grid.init = function(Y, the_editing_on, the_section_redirect, the_num_s
     }
     this.shadebox_content = Y.one("#gridshadebox_content");
     this.shadebox_content.removeClass('hide_content'); // Content 'flash' prevention.
+    // Show the shadebox of a named anchor in the URL where it is expected to be of the form:
+    // #section-X.
+    if (window.location.hash) {
+        var idx = parseInt(window.location.hash.substring(window.location.hash.indexOf("-") + 1));
+        var min = 1;
+        if (M.format_grid.shadebox_shown_array[0] == 2) { // Section 0 can be shown.
+            min = 0;
+        }
+        if ((idx >= min) && (idx <= this.num_sections) && (M.format_grid.shadebox_shown_array[idx] == 2)) {
+            M.format_grid.tab(idx);
+            M.format_grid.grid_toggle();
+        }
+    }
 };
 
 /**
@@ -137,7 +150,7 @@ M.format_grid.icon_click = function(e) {
 };
 
 /**
- * Called when the user tabs and the item is a grid icon, set up in the init() method.
+ * Called when the user tabs and the item is a grid icon.
  */
 M.format_grid.tab = function(index) {
     "use strict";
@@ -158,6 +171,11 @@ M.format_grid.tab = function(index) {
 M.format_grid.icon_toggle = function(e) {
     "use strict";
     e.preventDefault();
+    this.grid_toggle();
+};
+
+
+M.format_grid.grid_toggle = function() {
     if (this.selected_section_no != -1) { // Then a valid shown section has been selected.
         if ((this.editing_on === true) && (this.update_capability === true)) {
             // Jump to the section on the page.

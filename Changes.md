@@ -3,6 +3,8 @@ History
 Version 3.0.0.2
   1. Add Travis CI Support.
   2. Fix #22 - Grid sometimes loads with blocks misaligned.
+  3. Show the correct shadebox section in response to a named anchor in the URL of the format:
+     "#section-X" where 'X' is the section number.
 
 Version 3.0.0.1
   1. First 'beta' version for M3.0.
