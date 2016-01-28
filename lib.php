@@ -1027,7 +1027,8 @@ class format_grid extends format_base {
             $updatedata['imageresizemethod'] = get_config('format_grid', 'defaultimageresizemethod');
             $updateimageresizemethod = true;
         }
-        if ($imagecontainerstylereset && has_capability('format/grid:changeimagecontainerstyle', $coursecontext) && $resetallifall) {
+        if ($imagecontainerstylereset && has_capability('format/grid:changeimagecontainerstyle', $coursecontext)
+            && $resetallifall) {
             $updatedata['bordercolour'] = get_config('format_grid', 'defaultbordercolour');
             $updatedata['borderwidth'] = get_config('format_grid', 'defaultborderwidth');
             $updatedata['borderradius'] = get_config('format_grid', 'defaultborderradius');
@@ -1150,7 +1151,8 @@ class format_grid extends format_base {
 
             if (!$newimagecontainer->id = $DB->insert_record('format_grid_icon', $newimagecontainer, true)) {
                 throw new moodle_exception('invalidrecordid', 'format_grid', '',
-                'Could not create image container. Grid format database is not ready. An admin must visit the notifications section.');
+                'Could not create image container.  Grid format database is not ready.'.
+                '  An admin must visit the notifications section.');
             }
             $sectionimage = $newimagecontainer;
         } else if ($sectionimage->courseid == 1) { // 1 is the default and is the 'site' course so cannot be the Grid format.
@@ -1599,7 +1601,8 @@ class format_grid extends format_base {
             $filters = null;
             $quality = 90;
         } else {
-            debugging('Neither JPEG nor PNG are supported at this server, please fix the system configuration to have the GD PHP extension installed.');
+            debugging('Neither JPEG nor PNG are supported at this server, please fix the system configuration'.
+                ' to have the GD PHP extension installed.');
             return false;
         }
 
@@ -1644,13 +1647,13 @@ class format_grid extends format_base {
             if ($cropheight) {
                 // Reset after change for resizeToWidth.
                 $height = $requestedheight;
-                // 'cropCenterHeight'.
+                // This is 'cropCenterHeight'.
                 $width = imagesx($original);
                 $srcoffset = (imagesy($original) / 2) - ($height / 2);
             } else {
                 // Reset after change for resizeToHeight.
                 $width = $requestedwidth;
-                // 'cropCenterWidth'.
+                // This is 'cropCenterWidth'.
                 $height = imagesy($original);
                 $srcoffset = (imagesx($original) / 2) - ($width / 2);
             }
@@ -1667,10 +1670,10 @@ class format_grid extends format_base {
             }
 
             if ($cropheight) {
-                // 'cropCenterHeight'.
+                // This is 'cropCenterHeight'.
                 imagecopybicubic($finalimage, $original, 0, 0, 0, $srcoffset, $width, $height, $width, $height);
             } else {
-                // 'cropCenterWidth'.
+                // This is 'cropCenterWidth'.
                 imagecopybicubic($finalimage, $original, 0, 0, $srcoffset, 0, $width, $height, $width, $height);
             }
         } else {
