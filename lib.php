@@ -707,7 +707,7 @@ class format_grid extends format_base {
 
         return $elements;
     }
-    
+
     /**
      * Override if you need to perform some extra validation of the format options
      *
@@ -720,7 +720,7 @@ class format_grid extends format_base {
      */
     public function edit_form_validation($data, $files, $errors) {
         $retr = array();
-        
+
         if ($this->validate_colour($data['bordercolour']) === false) {
             $retr['bordercolour'] = get_string('colourrule', 'format_grid');
         }
@@ -733,7 +733,7 @@ class format_grid extends format_base {
         if ($this->validate_colour($data['currentselectedimagecontainercolour']) === false) {
             $retr['currentselectedimagecontainercolour'] = get_string('colourrule', 'format_grid');
         }
-        
+
         return $retr;
     }
 
@@ -847,8 +847,8 @@ class format_grid extends format_base {
                 /* Detect now and action later as 'setup_displayed_image' when called from 'update_displayed_images()' will need to
                    use the new values. */
                 $changedisplayedimages = true;
-                }
             }
+        }
 
         $data = (array) $data;
         if ($oldcourse !== null) {
@@ -1015,7 +1015,8 @@ class format_grid extends format_base {
             $updatedata['imageresizemethod'] = get_config('format_grid', 'defaultimageresizemethod');
             $updateimageresizemethod = true;
         }
-        if ($imagecontainerstylereset && has_capability('format/grid:changeimagecontainerstyle', $coursecontext) && $resetallifall) {
+        if ($imagecontainerstylereset && has_capability('format/grid:changeimagecontainerstyle', $coursecontext)
+            && $resetallifall) {
             $updatedata['bordercolour'] = get_config('format_grid', 'defaultbordercolour');
             $updatedata['borderwidth'] = get_config('format_grid', 'defaultborderwidth');
             $updatedata['borderradius'] = get_config('format_grid', 'defaultborderradius');
@@ -1077,7 +1078,7 @@ class format_grid extends format_base {
                         $courseformat->settings = null;
                         $courseformat->update_displayed_images($record->id, $courseformat, $updatedata, false);
                     }
-                    }
+                }
                 $this->update_format_options($updatedata);
                 $this->courseid = $ourcourseid;
             }
@@ -1138,7 +1139,8 @@ class format_grid extends format_base {
 
             if (!$newimagecontainer->id = $DB->insert_record('format_grid_icon', $newimagecontainer, true)) {
                 throw new moodle_exception('invalidrecordid', 'format_grid', '',
-                'Could not create image container. Grid format database is not ready. An admin must visit the notifications section.');
+                'Could not create image container.  Grid format database is not ready.'.
+                '  An admin must visit the notifications section.');
             }
             $sectionimage = $newimagecontainer;
         } else if ($sectionimage->courseid == 1) { // 1 is the default and is the 'site' course so cannot be the Grid format.
@@ -1537,8 +1539,8 @@ class format_grid extends format_base {
                 if ($sectionimage->displayedimageindex > 0) {
                     $sectionimage->newimage = $sectionimage->image;
                     $sectionimage = $us->setup_displayed_image($sectionimage, $coursecontext->id, $settings);
-                    }
                 }
+            }
             $t->allow_commit();
         } else if (!$ignorenorecords) { // Only report error if it's ok not to have records.
             print_error('cannotgetimagesforcourse', 'format_grid', '', null, "update_displayed_images - Course id: " . $courseid);
@@ -1587,7 +1589,8 @@ class format_grid extends format_base {
             $filters = null;
             $quality = 90;
         } else {
-            debugging('Neither JPEG nor PNG are supported at this server, please fix the system configuration to have the GD PHP extension installed.');
+            debugging('Neither JPEG nor PNG are supported at this server,'.
+                ' please fix the system configuration to have the GD PHP extension installed.');
             return false;
         }
 
@@ -1632,13 +1635,13 @@ class format_grid extends format_base {
             if ($cropheight) {
                 // Reset after change for resizeToWidth.
                 $height = $requestedheight;
-                // 'cropCenterHeight'.
+                // This is 'cropCenterHeight'.
                 $width = imagesx($original);
                 $srcoffset = (imagesy($original) / 2) - ($height / 2);
             } else {
                 // Reset after change for resizeToHeight.
                 $width = $requestedwidth;
-                // 'cropCenterWidth'.
+                // This is 'cropCenterWidth'.
                 $height = imagesy($original);
                 $srcoffset = (imagesx($original) / 2) - ($width / 2);
             }
@@ -1655,10 +1658,10 @@ class format_grid extends format_base {
             }
 
             if ($cropheight) {
-                // 'cropCenterHeight'.
+                // This is 'cropCenterHeight'.
                 imagecopybicubic($finalimage, $original, 0, 0, 0, $srcoffset, $width, $height, $width, $height);
             } else {
-                // 'cropCenterWidth'.
+                // This is 'cropCenterWidth'.
                 imagecopybicubic($finalimage, $original, 0, 0, $srcoffset, 0, $width, $height, $width, $height);
             }
         } else {
