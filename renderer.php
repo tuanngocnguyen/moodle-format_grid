@@ -359,6 +359,10 @@ class format_grid_renderer extends format_section_renderer_base {
         // CONTRIB-4099:...
         $gridimagepath = $this->courseformat->get_image_path();
 
+        if ($course->coursedisplay == COURSE_DISPLAY_MULTIPAGE) {
+            $singlepageurl = $this->courseformat->get_view_url(null)->out(true);
+        }
+
         // Start at 1 to skip the summary block or include the summary block if it's in the grid display.
         for ($section = $this->topic0attop ? 1 : 0; $section <= $course->numsections; $section++) {
             $thissection = $modinfo->get_section_info($section);
@@ -451,16 +455,16 @@ class format_grid_renderer extends format_section_renderer_base {
                     }
                     echo html_writer::end_tag('li');
                 } else {
-                    $title = html_writer::tag('p', $sectionname, array('class' => 'icon_content'));
+                    $content = html_writer::tag('p', $sectionname, array('class' => 'icon_content'));
 
                     if (($this->settings['newactivity'] == 2) && (isset($sectionupdated[$thissection->id]))) {
-                        $title .= html_writer::empty_tag('img', array(
+                        $content .= html_writer::empty_tag('img', array(
                                     'class' => 'new_activity',
                                     'src' => $urlpicnewactivity,
                                     'alt' => ''));
                     }
 
-                    $title .= html_writer::start_tag('div', array('class' => 'image_holder'));
+                    $content .= html_writer::start_tag('div', array('class' => 'image_holder'));
 
                     $showimg = false;
                     if (is_object($sectionimage) && ($sectionimage->displayedimageindex > 0)) {
@@ -473,26 +477,27 @@ class format_grid_renderer extends format_section_renderer_base {
                         $showimg = true;
                     }
                     if ($showimg) {
-                        $title .= html_writer::empty_tag('img', array(
+                        $content .= html_writer::empty_tag('img', array(
                                     'src' => $imgurl,
                                     'alt' => $sectionname,
                                     'role' => 'img',
                                     'aria-label' => $sectionname));
                     }
 
-                    $title .= html_writer::end_tag('div');
+                    $content .= html_writer::end_tag('div');
 
-                    $url = course_get_url($course, $thissection->section);
-                    if ($url) {
-                        $title = html_writer::link($url, $title, array(
+                    if ($editing) {
+                        echo html_writer::link($singlepageurl.'#section-'.$thissection->section, $content, array(
                             'id' => 'gridsection-' . $thissection->section,
                             'role' => 'link',
                             'aria-label' => $sectionname));
-                    }
-                    echo $title;
 
-                    if ($editing) {
                         $this->make_block_icon_topics_editing($thissection, $contextid, $urlpicedit, $course, $section);
+                    } else {
+                        echo html_writer::link($singlepageurl.'&section='.$thissection->section, $content, array(
+                            'id' => 'gridsection-' . $thissection->section,
+                            'role' => 'link',
+                            'aria-label' => $sectionname));
                     }
                     echo html_writer::end_tag('li');
                 }
