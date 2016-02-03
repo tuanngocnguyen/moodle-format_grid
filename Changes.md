@@ -1,5 +1,8 @@
 History
 =============
+Version 3.0.0.3
+  1. Change colour setting type from 'text' to 'colourtext - 'ftext' -> 'fcolourtext' for theme styling.
+
 Version 3.0.0.2
   1. Add Travis CI Support.
   2. Fix #22 - Grid sometimes loads with blocks misaligned.
