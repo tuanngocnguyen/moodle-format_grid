@@ -2,6 +2,7 @@ History
 =============
 Version 3.0.0.3
   1. Change colour setting type from 'text' to 'colourtext - 'ftext' -> 'fcolourtext' for theme styling.
+  2. Fix logic flaw with named anchor and editing is on.
 
 Version 3.0.0.2
   1. Add Travis CI Support.

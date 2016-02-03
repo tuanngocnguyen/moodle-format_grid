@@ -122,7 +122,7 @@ M.format_grid.init = function(Y, the_editing_on, the_section_redirect, the_num_s
     this.shadebox_content.removeClass('hide_content'); // Content 'flash' prevention.
     // Show the shadebox of a named anchor in the URL where it is expected to be of the form:
     // #section-X.
-    if (window.location.hash) {
+    if ((window.location.hash) && (!the_editing_on)) {
         var idx = parseInt(window.location.hash.substring(window.location.hash.indexOf("-") + 1));
         var min = 1;
         if (M.format_grid.shadebox_shown_array[0] == 2) { // Section 0 can be shown.
