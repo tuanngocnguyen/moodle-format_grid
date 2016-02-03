@@ -1,5 +1,8 @@
 History
 =============
+Version 2.9.1.7
+  1. Change colour setting type from 'text' to 'colourtext - 'ftext' -> 'fcolourtext' for theme styling.
+
 Version 2.9.1.6.
   1. Add Travis CI Support.
   2. Fix #22 - Grid sometimes loads with blocks misaligned.
