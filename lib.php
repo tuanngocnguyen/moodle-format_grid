@@ -258,7 +258,11 @@ class format_grid extends format_base {
             } else {
                 $usercoursedisplay = $course->coursedisplay;
             }
+            $topic0attop = $this->get_summary_visibility($course->id)->showsummary == 1;
+			error_log('GF: '.$topic0attop);
             if ($sectionno != 0 && $usercoursedisplay == COURSE_DISPLAY_MULTIPAGE) {
+                $url->param('section', $sectionno);
+            } else if ($sectionno == 0 && $usercoursedisplay == COURSE_DISPLAY_MULTIPAGE  && (!$topic0attop)) {
                 $url->param('section', $sectionno);
             } else {
                 if (!empty($options['navigation'])) {

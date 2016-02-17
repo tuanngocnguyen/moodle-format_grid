@@ -145,7 +145,15 @@ $gfsettings['imagecontainerwidth'], $gfsettings['imagecontainerratio'], $gfsetti
     /* ]]> */
 </style>
 <?php
-if (!empty($displaysection)) {
+$sectionparam = optional_param('section', -1, PARAM_INT);
+if ($sectionparam != -1) {
+    $displaysection = $sectionparam;
+}
+
+global $USER;
+error_log(print_r($USER->profile, true));
+
+if ($sectionparam != -1) {
     $renderer->print_single_section_page($course, null, null, null, null, $displaysection);
 } else {
     $renderer->print_multiple_section_page($course, null, null, null, null);
