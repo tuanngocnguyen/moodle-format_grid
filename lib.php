@@ -247,7 +247,6 @@ class format_grid extends format_base {
                 $usercoursedisplay = $course->coursedisplay;
             }
             $topic0attop = $this->get_summary_visibility($course->id)->showsummary == 1;
-			error_log('GF: '.$topic0attop);
             if ($sectionno != 0 && $usercoursedisplay == COURSE_DISPLAY_MULTIPAGE) {
                 $url->param('section', $sectionno);
             } else if ($sectionno == 0 && $usercoursedisplay == COURSE_DISPLAY_MULTIPAGE  && (!$topic0attop)) {
@@ -1421,11 +1420,11 @@ class format_grid extends format_base {
                        baulk as the file already exists.   Unfortunately has to be here as the restore mechanism restores
                        the grid format data for the database and then the files.  And the Grid code is called at the 'data'
                        stage. */
-                    // Delete old file.
                     if ($oldfile = $fs->get_file($displayedimagefilerecord['contextid'],
                             $displayedimagefilerecord['component'], $displayedimagefilerecord['filearea'],
                             $displayedimagefilerecord['itemid'], $displayedimagefilerecord['filepath'],
                             $displayedimagefilerecord['filename'])) {
+                        // Delete old file.
                         $oldfile->delete();
                     }
                 }

@@ -142,7 +142,6 @@ M.format_grid.icon_click = function(e) {
     "use strict";
     e.preventDefault();
     var icon_index = parseInt(e.currentTarget.get('id').replace("gridsection-", ""));
-    //console.log(icon_index);
     var previous_no = this.selected_section_no;
     this.selected_section_no = icon_index;
     this.update_selected_background(previous_no);
@@ -184,16 +183,12 @@ M.format_grid.grid_toggle = function() {
             // Keyboard control of 'toggle' in 'One section per page' layout.
             location.replace(this.section_redirect + "&section=" + this.selected_section_no);
         } else if (M.format_grid.shadebox.shadebox_open === true) {
-            //console.log("Shadebox was open");
             this.shadebox.toggle_shadebox();
         } else {
-            //console.log("Shadebox was closed");
             this.change_shown();
             this.shadebox.toggle_shadebox();
         }
-    } //else {
-        //console.log("Grid format:icon_toggle() - no selected section to show.");
-    //}
+    }
 };
 
 /**
@@ -234,13 +229,10 @@ M.format_grid.change_selected_section = function(increase_section) {
     "use strict";
     if (this.selected_section_no != -1) { // Then a valid shown section has been selected.
         this.set_selected_section(this.selected_section_no, increase_section, false);
-        //console.log("Selected section no is now: " + this.selected_section_no);
         if (M.format_grid.shadebox.shadebox_open === true) {
             this.change_shown();
         }
-    } //else {
-        //console.log("Grid format:change_selected_section() - no selected section to show.");
-    //}
+    }
 };
 
 /**
@@ -255,15 +247,10 @@ M.format_grid.change_shown = function() {
     this.selected_section = this.ourYUI.one("#section-" + this.selected_section_no);
 
     // Focus on the first element in the shade box.
-    //this.selected_section.focus();
-    //document.getElementById("section-" + this.selected_section_no).focus();
-    //document.querySelectorAll("section-" + this.selected_section_no + " a:first-of-type")[0].focus();
     var firstactivity = document.getElementById("section-" + this.selected_section_no).getElementsByTagName('a')[0];
     if (firstactivity) {
-        //console.log("First activity: " + firstactivity);
         firstactivity.focus();
     }
-    //console.log("Active element: " + document.activeElement);
 
     this.selected_section.removeClass('hide_section');
 };
@@ -338,7 +325,9 @@ M.format_grid.find_next_shown_section = function(starting_point, increase_sectio
     return next;
 };
 
-/** Below is shade box code **/
+/**
+ * Below is shade box code 
+ */
 M.format_grid.shadebox = M.format_grid.shadebox || {
     // Boolean stating if the shade box is open or not.
     shadebox_open: null,
