@@ -3,6 +3,7 @@ History
 Version 3.0.0.4
   1. Use custom user profile fields for accessibility - #23 - work in progress.
   2. Section 0 not shown on its own when in the Grid and 'Show one section per page' - #24 - work in progress.
+  3. TravisCI - tidy up.
 
 Version 3.0.0.3
   1. Change colour setting type from 'text' to 'colourtext - 'ftext' -> 'fcolourtext' for theme styling.

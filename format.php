@@ -86,55 +86,54 @@ $gfsettings['imagecontainerwidth'], $gfsettings['imagecontainerratio'], $gfsetti
         width: <?php echo $gfsettings['imagecontainerwidth']; ?>px;
         height: <?php echo $imageproperties['height']; ?>px;
         border-color: <?php
-        if ($gfsettings['bordercolour'][0] != '#') {
-            echo '#';
-        }
-        echo $gfsettings['bordercolour'];
-        ?>;
+if ($gfsettings['bordercolour'][0] != '#') {
+    echo '#';
+}
+echo $gfsettings['bordercolour'];
+?>;
         background-color: <?php
-        if ($gfsettings['imagecontainerbackgroundcolour'][0] != '#') {
-            echo '#';
-        }
-        echo $gfsettings['imagecontainerbackgroundcolour'];
-        ?>;
+if ($gfsettings['imagecontainerbackgroundcolour'][0] != '#') {
+    echo '#';
+}
+echo $gfsettings['imagecontainerbackgroundcolour'];
+?>;
         border-width: <?php echo $gfsettings['borderwidth']; ?>px;
         <?php
-        if ($gfsettings['borderradius'] == 2) { // On.
-            echo 'border-radius: ' . $gfsettings['borderwidth'] . 'px;';
-        }
-        ?>
-
+if ($gfsettings['borderradius'] == 2) { // On.
+    echo 'border-radius: ' . $gfsettings['borderwidth'] . 'px;';
+}
+?>
     }
 
-    <?php
-    $startindex = 0;
-    if ($gfsettings['bordercolour'][0] == '#') {
-        $startindex++;
-    }
-    $red = hexdec(substr($gfsettings['bordercolour'], $startindex, 2));
-    $green = hexdec(substr($gfsettings['bordercolour'], $startindex + 2, 2));
-    $blue = hexdec(substr($gfsettings['bordercolour'], $startindex + 4, 2));
-    ?>
+<?php
+$startindex = 0;
+if ($gfsettings['bordercolour'][0] == '#') {
+    $startindex++;
+}
+$red = hexdec(substr($gfsettings['bordercolour'], $startindex, 2));
+$green = hexdec(substr($gfsettings['bordercolour'], $startindex + 2, 2));
+$blue = hexdec(substr($gfsettings['bordercolour'], $startindex + 4, 2));
+?>
     .course-content ul.gridicons li:hover .image_holder {
         box-shadow: 0 0 0 <?php echo $gfsettings['borderwidth']; ?>px rgba(<?php echo $red.','.$green.','.$blue ?>, 0.3);
     }
 
     .course-content ul.gridicons li.currenticon .image_holder {
         box-shadow: 0 0 2px 4px <?php
-        if ($gfsettings['currentselectedsectioncolour'][0] != '#') {
-            echo '#';
-        }
-        echo $gfsettings['currentselectedsectioncolour'];
-        ?>;
+if ($gfsettings['currentselectedsectioncolour'][0] != '#') {
+    echo '#';
+}
+echo $gfsettings['currentselectedsectioncolour'];
+?>;
     }
 
     .course-content ul.gridicons li.currentselected {
         background-color: <?php
-        if ($gfsettings['currentselectedimagecontainercolour'][0] != '#') {
-            echo '#';
-        }
-        echo $gfsettings['currentselectedimagecontainercolour'];
-        ?>;
+if ($gfsettings['currentselectedimagecontainercolour'][0] != '#') {
+    echo '#';
+}
+echo $gfsettings['currentselectedimagecontainercolour'];
+?>;
     }
 
     .course-content ul.gridicons img.new_activity {
@@ -149,9 +148,6 @@ $sectionparam = optional_param('section', -1, PARAM_INT);
 if ($sectionparam != -1) {
     $displaysection = $sectionparam;
 }
-
-global $USER;
-error_log(print_r($USER->profile, true));
 
 if ($sectionparam != -1) {
     $renderer->print_single_section_page($course, null, null, null, null, $displaysection);
