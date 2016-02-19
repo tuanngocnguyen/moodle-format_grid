@@ -182,6 +182,17 @@ refresh.
 
 The shade box is not shown in this mode.
 
+Accessibility
+-------------
+If you wish for a user not to see the grid and shadebox and have the course presented like the Topics format, then add a custom
+user checkbox field with a shortname of 'accessible' and on the user profile tick it, please see:
+
+https://docs.moodle.org/en/User_profile_fields
+
+and:
+
+https://github.com/gjb2048/moodle-format_grid/issues/23
+
 Making Changes
 ==============
 
