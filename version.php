@@ -38,7 +38,7 @@ $plugin->requires = 2015111600.00; // 3.0 (Build: 20151116).
 $plugin->component = 'format_grid';
 
 // Software maturity level.
-$plugin->maturity = MATURITY_BETA;
+$plugin->maturity = MATURITY_RC;
 
 // User-friendly version number.
 $plugin->release = '3.0.0.4';

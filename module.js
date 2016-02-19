@@ -325,9 +325,7 @@ M.format_grid.find_next_shown_section = function(starting_point, increase_sectio
     return next;
 };
 
-/**
- * Below is shade box code.
- */
+// Below is shade box code.
 M.format_grid.shadebox = M.format_grid.shadebox || {
     // Boolean stating if the shade box is open or not.
     shadebox_open: null,
@@ -337,9 +335,7 @@ M.format_grid.shadebox = M.format_grid.shadebox || {
     grid_shadebox: null
 };
 
-/**
- * Initialises the shade box.
- */
+// Initialises the shade box.
 M.format_grid.shadebox.initialize_shadebox = function() {
     "use strict";
     this.shadebox_open = false;
@@ -364,9 +360,7 @@ M.format_grid.shadebox.initialize_shadebox = function() {
     }
 };
 
-/**
- * Toggles the shade box open / closed.
- */
+// Toggles the shade box open / closed.
 M.format_grid.shadebox.toggle_shadebox = function() {
     "use strict";
     if (this.shadebox_open) {
@@ -379,26 +373,20 @@ M.format_grid.shadebox.toggle_shadebox = function() {
     }
 };
 
-/**
- * Shows the shade box.
- */
+// Shows the shade box.
 M.format_grid.shadebox.show_shadebox = function() {
     "use strict";
     this.update_shadebox();
     this.grid_shadebox.style.display = "";
 };
 
-/**
- * Hides the shade box.
- */
+// Hides the shade box.
 M.format_grid.shadebox.hide_shadebox = function() {
     "use strict";
     this.grid_shadebox.style.display = "none";
 };
 
-/**
- * Adjusts the size of the shade box every time it's shown as the browser window could have changed.
- */
+// Adjusts the size of the shade box every time it's shown as the browser window could have changed.
 M.format_grid.shadebox.update_shadebox = function() {
     "use strict";
     // Make the overlay full screen (width happens automatically, so just update the height).
