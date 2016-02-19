@@ -30,8 +30,8 @@ require_once($CFG->dirroot . '/course/format/grid/lib.php');
 
 class format_grid_renderer extends format_section_renderer_base {
 
-    private $topic0attop; // Boolean to state if section zero is at the top (true) or in the grid (false).
-    private $courseformat; // Our course format object as defined in lib.php.
+    protected $topic0attop; // Boolean to state if section zero is at the top (true) or in the grid (false).
+    protected $courseformat; // Our course format object as defined in lib.php.
     private $settings; // Settings array.
     private $shadeboxshownarray = array(); // Value of 1 = not shown, value of 2 = shown - to reduce ambiguity in JS.
     private $portable = 0; // 1 = mobile, 2 = tablet.
@@ -46,6 +46,7 @@ class format_grid_renderer extends format_section_renderer_base {
         parent::__construct($page, $target);
         $this->courseformat = course_get_format($page->course);
         $this->settings = $this->courseformat->get_settings();
+        $this->topic0attop = $this->courseformat->get_summary_visibility($page->course->id)->showsummary == 1;
 
         /* Since format_grid_renderer::section_edit_controls() only displays the 'Set current section' control when editing
            mode is on we need to be sure that the link 'Turn editing mode on' is available for a user who does not have any
@@ -176,7 +177,6 @@ class format_grid_renderer extends format_section_renderer_base {
      * @param int $displaysection The section number in the course which is being displayed
      */
     public function print_single_section_page($course, $sections, $mods, $modnames, $modnamesused, $displaysection) {
-        $this->topic0attop = $this->courseformat->get_summary_visibility($course->id)->showsummary == 1;
         if ($this->topic0attop) {
             return parent::print_single_section_page($course, $sections, $mods, $modnames, $modnamesused, $displaysection);
         } else {
@@ -270,7 +270,6 @@ class format_grid_renderer extends format_section_renderer_base {
         }
 
         global $PAGE;
-        $summarystatus = $this->courseformat->get_summary_visibility($course->id);
         $coursecontext = context_course::instance($course->id);
         $editing = $PAGE->user_is_editing();
         $hascapvishidsect = has_capability('moodle/course:viewhiddensections', $coursecontext);
@@ -290,7 +289,6 @@ class format_grid_renderer extends format_section_renderer_base {
         $sections = $modinfo->get_section_info_all();
 
         // Start at 1 to skip the summary block or include the summary block if it's in the grid display.
-        $this->topic0attop = $summarystatus->showsummary == 1;
         if ($this->topic0attop) {
             $this->topic0attop = $this->make_block_topic0($course, $sections, $modinfo, $editing, $urlpicedit,
                     $streditsummary, false);
