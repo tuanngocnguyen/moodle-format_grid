@@ -25,14 +25,14 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['display_summary'] = 'move out of grid';
+$string['display_summary'] = 'Move out of grid';
 $string['display_summary_alt'] = 'Move this section out of the grid';
 $string['editimage'] = 'Change image';
 $string['editimage_alt'] = 'Set or change image';
 $string['formatgrid'] = 'Grid format'; // Name to display for format.
 $string['general_information'] = 'General Information';  // No longer used kept for legacy versions.
 $string['hidden_topic'] = 'This section has been hidden';
-$string['hide_summary'] = 'move section into grid';
+$string['hide_summary'] = 'Move section into grid';
 $string['hide_summary_alt'] = 'Move this section into the grid';
 $string['namegrid'] = 'Grid view';
 $string['title'] = 'Section title';

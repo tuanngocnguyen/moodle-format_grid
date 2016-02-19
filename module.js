@@ -326,7 +326,7 @@ M.format_grid.find_next_shown_section = function(starting_point, increase_sectio
 };
 
 /**
- * Below is shade box code 
+ * Below is shade box code.
  */
 M.format_grid.shadebox = M.format_grid.shadebox || {
     // Boolean stating if the shade box is open or not.
