@@ -4,6 +4,7 @@ Version 2.9.1.8
   1. Use custom user profile fields for accessibility - #23.
   2. Section 0 not shown on its own when in the Grid and 'Show one section per page' - #24.
   3. TravisCI - tidy up.
+  4. Implement MDL-26226.
 
 Version 2.9.1.7
   1. Change colour setting type from 'text' to 'colourtext - 'ftext' -> 'fcolourtext' for theme styling.
