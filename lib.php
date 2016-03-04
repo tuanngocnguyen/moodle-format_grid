@@ -264,7 +264,8 @@ class format_grid extends format_base {
             } else if ($sectionno == 0 && $usercoursedisplay == COURSE_DISPLAY_MULTIPAGE  && (!$topic0attop)) {
                 $url->param('section', $sectionno);
             } else {
-                if (!empty($options['navigation'])) {
+                global $CFG;
+                if (empty($CFG->linkcoursesections) && !empty($options['navigation'])) {
                     return null;
                 }
                 $url->set_anchor('section-' . $sectionno);

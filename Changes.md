@@ -1,5 +1,8 @@
 History
 =============
+Version 3.0.1
+  1. Implement MDL-26226.
+
 Version 3.0.0.4
   1. Use custom user profile fields for accessibility - #23.
   2. Section 0 not shown on its own when in the Grid and 'Show one section per page' - #24.
