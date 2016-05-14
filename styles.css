@@ -24,9 +24,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-.course-content a {
-    outline: none;
-}
 .course-content .grid_title {
     font-size: 160%;
     font-weight: bold;
@@ -34,14 +31,14 @@
 .course-content ul.gtopics h3.sectionname {
     background: transparent;
     font-weight: normal;
-    border: 0px none;
+    border: 0 none;
     border-bottom: dashed 1px #000;
-    padding: 0px;
+    padding: 0;
     padding-bottom: 5px;
 }
 .course-content ul.gtopics-0 #section-0 {
     background: transparent;
-    border: 0px none;
+    border: 0 none;
 }
 
 .course-content ul.gtopics-0 #section-0 .side {
@@ -55,6 +52,7 @@ body.jsenabled li.grid_section.hide_section {
 
 div#gridmiddle-column > ul {
     list-style-type: none;
+    overflow: visible;
 }
 
 .course-content ul.gtopics {
@@ -78,7 +76,7 @@ div#gridmiddle-column > ul {
 
 .course-content ul.gtopics li.section .left {
     float:left;
-    padding: 0px;
+    padding: 0;
 }
 
 .course-content ul.gtopics li.section .right {
@@ -89,7 +87,7 @@ div#gridmiddle-column > ul {
 #gridiconcontainer {
     width: 100%;
     margin: 0 auto;
-    padding: 0px;
+    padding: 0;
     text-align: center;
     height: auto;
 }
@@ -119,7 +117,7 @@ div#gridmiddle-column > ul {
 }
 
 .course-content .gridicon_link {
-    cursor: pointer;
+    cursor: url('[[pix:format_grid|fa-hand-o-up-f]]'), auto;
 }
 .course-content ul.gridicons li p.icon_content {
     font-weight: bold;
@@ -162,7 +160,7 @@ div#gridshadebox_overlay {
     /* CSS3 standard */
     opacity: 0.7;
     z-index: 1;
-    cursor: pointer;
+    cursor: url('[[pix:format_grid|fa-times-circle-o-f]]'), auto;
 }
 #gridshadebox_content {
     background: #fff;
@@ -172,15 +170,48 @@ div#gridshadebox_overlay {
 body.jsenabled #gridshadebox_content.hide_content {
     display: none;
 }
+
+#gridshadebox_content.absolute {
+    position: absolute;
+    width: 90%;
+    left: 5%;
+    z-index: 1;
+}
+
+#gridshadebox_content.fit_to_window {
+    position: fixed;
+    top: 10%;
+    right: 10%;
+    bottom: 10%;
+    left: 10%;
+    z-index: 1;
+}
+
+#gridshadebox_content.fit_to_window ul.gtopics {
+    margin: 0;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: auto;
+    height: 100%;
+}
+
+#gridshadebox_content.fit_to_window ul.gtopics h3.sectionname {
+    margin-top: 0;
+}
+
 #gridshadebox_content .activity {
     list-style: none;
     border-bottom: 1px dashed #ccc;
     padding-bottom: 4px;
     padding-top: 2px;
 }
+
 #gridshadebox_content ul li.grid_section {
     list-style: none;
 }
+
 #gridshadebox_content ul li ul li, #gridshadebox_content ul li ol li {
     border-bottom: none;
     padding-bottom: 4px;
@@ -190,6 +221,7 @@ body.jsenabled #gridshadebox_content.hide_content {
 #gridshadebox_content ul li ul li {
     list-style: disc outside none;
 }
+
 #gridshadebox_content ul li ol li {
     list-style: decimal outside none;
 } 
@@ -198,36 +230,165 @@ body.jsenabled #gridshadebox_content.hide_content {
     position: absolute;
     top: -10px;
     right: -10px;
-    cursor: pointer;
+    cursor: url('[[pix:format_grid|fa-hand-o-up-f]]'), auto;
+    z-index: 2;
 }
 
 .gridshadebox_arrow {
     position: absolute;
-    cursor: pointer;
-    opacity: 0;
+    cursor: inherit;
+    height: 55px;
+    width: 55px;
+    top: 75px;
+    opacity: 0.35;
     transition: opacity .25s ease-in-out;
     -moz-transition: opacity .25s ease-in-out;
     -webkit-transition: opacity .25s ease-in-out;
 }
-.gridshadebox_arrow:hover {
-    opacity: 0.8;
+.gridshadebox_area:hover .gridshadebox_arrow {
+    opacity: 0.9;
 }
-#gridshadebox_left {
-    top: 92px;  /* Done here so that JS can change it. */
-    left: -24px;
+
+.gridshadebox_area  {
+    position: absolute;
+    top: 0;
+    width: 55px;
+    height: 100%;
 }
-#gridshadebox_right {
-    top: 92px;  /* Done here so that JS can change it. */
-    right: -24px;
+
+.gridshadebox_left_area {
+    left: -55px;
+    cursor: url('[[pix:format_grid|fa-hand-o-left-f]]'), auto;
+}
+
+.gridshadebox_right_area {
+    right: -55px;
+    cursor: url('[[pix:format_grid|fa-hand-o-right-f]]'), auto;
+}
+
+@media (max-width: 1199px) {
+    .gridshadebox_arrow {
+        height: 40px;
+        width: 40px;
+    }
+    .gridshadebox_area {
+        width: 40px;
+    }
+    .gridshadebox_left_area {
+        left: -40px;
+    }
+    .gridshadebox_right_area {
+        right: -40px;
+    }
+}
+
+@media (max-width: 767px) {
+    div#gridshadebox_overlay {
+        cursor: url('[[pix:format_grid|fa-times-circle-o-fsm]]'), auto;
+    }
+    #gridshadebox_close {
+        height: 28px;
+        width: 28px;
+        cursor: url('[[pix:format_grid|fa-hand-o-up-fsm]]'), auto;
+    }
+    .gridshadebox_arrow {
+        height: 30px;
+        width: 30px;
+    }
+    .gridshadebox_area {
+        width: 30px;
+    }
+    .gridshadebox_left_area {
+        left: -30px;
+        cursor: url('[[pix:format_grid|fa-hand-o-left-fsm]]'), auto;
+    }
+    .gridshadebox_right_area {
+        right: -30px;
+        cursor: url('[[pix:format_grid|fa-hand-o-right-fsm]]'), auto;
+    }
+}
+
+@media (max-width: 480px) {
+    #gridshadebox_close {
+        height: 20px;
+        width: 20px;
+        top: -7px;
+        right: -7px;
+    }
+    .gridshadebox_arrow {
+        height: 20px;
+        width: 20px;
+    }
+    .gridshadebox_area {
+        width: 20px;
+    }
+    .gridshadebox_left_area {
+        left: -20px;
+    }
+    .gridshadebox_right_area {
+        right: -20px;
+    }
+}
+
+.gridshadebox_arrow.gridshadebox_mobile {
+    height: 18px;
+    width: 18px;
+}
+
+.gridshadebox_arrow.gridshadebox_mobile.gridshadebox_area {
+    width: 18px;
+}
+
+.gridshadebox_arrow.gridshadebox_mobile.gridshadebox_left_area {
+    left: -18px;
+}
+
+.gridshadebox_arrow.gridshadebox_mobile.gridshadebox_right_area {
+    right: -18px;
+}
+
+.gridshadebox_arrow.gridshadebox_mobile, .gridshadebox_arrow.gridshadebox_mobile:hover {
+    opacity: 1;
+}
+
+#gridshadebox_close.gridshadebox_mobile {
+    height: 18px;
+    width: 18px;
+    top: -7px;
+    right: -7px;
+}
+
+.gridshadebox_arrow.gridshadebox_tablet {
+    height: 31px;
+    width: 31px;
+}
+
+.gridshadebox_arrow.gridshadebox_tablet.gridshadebox_area {
+    width: 31px;
+}
+
+.gridshadebox_arrow.gridshadebox_tablet.gridshadebox_left_area {
+    left: -31px;
+}
+
+.gridshadebox_arrow.gridshadebox_tablet.gridshadebox_right_area {
+    right: -31px;
+}
+
+.gridshadebox_arrow.gridshadebox_tablet, .gridshadebox_arrow.gridshadebox_tablet:hover {
+    opacity: 1;
 }
 
 #gridshadebox_content ul.gtopics {
     margin: 0 15px 10px;
 }
 
+/* Added by Justin 20160514 */
 .inaccessible {
-    opacity: 0.3;
-    filter: alpha(opacity=30); /* msie */
-}
 
+    opacity: 0.3;
+
+    filter: alpha(opacity=30); /* msie */
+
+}
 /* @end */

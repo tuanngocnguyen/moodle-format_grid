@@ -49,9 +49,9 @@ if ($week = optional_param('week', 0, PARAM_INT)) { // Weeks old section paramet
 }
 // End backwards-compatible aliasing..
 
-$context = context_course::instance($course->id);
+$coursecontext = context_course::instance($course->id);
 
-if (($marker >= 0) && has_capability('moodle/course:setcurrentsection', $context) && confirm_sesskey()) {
+if (($marker >= 0) && has_capability('moodle/course:setcurrentsection', $coursecontext) && confirm_sesskey()) {
     $course->marker = $marker;
     course_set_marker($course->id, $marker);
 }
@@ -63,9 +63,19 @@ course_create_sections_if_missing($course, range(0, $course->numsections));
 
 $renderer = $PAGE->get_renderer('format_grid');
 
+$devicetype = core_useragent::get_device_type(); // In /lib/classes/useragent.php.
+if ($devicetype == "mobile") {
+    $portable = 1;
+} else if ($devicetype == "tablet") {
+    $portable = 2;
+} else {
+    $portable = 0;
+}
+$renderer->set_portable($portable);
+
 $gfsettings = $courseformat->get_settings();
 $imageproperties = $courseformat->calculate_image_container_properties(
-    $gfsettings['imagecontainerwidth'], $gfsettings['imagecontainerratio'], $gfsettings['borderwidth']);
+$gfsettings['imagecontainerwidth'], $gfsettings['imagecontainerratio'], $gfsettings['borderwidth']);
 ?>
 <style type="text/css" media="screen">
     /* <![CDATA[ */
@@ -76,55 +86,54 @@ $imageproperties = $courseformat->calculate_image_container_properties(
         width: <?php echo $gfsettings['imagecontainerwidth']; ?>px;
         height: <?php echo $imageproperties['height']; ?>px;
         border-color: <?php
-        if ($gfsettings['bordercolour'][0] != '#') {
-            echo '#';
-        }
-        echo $gfsettings['bordercolour'];
-        ?>;
+if ($gfsettings['bordercolour'][0] != '#') {
+    echo '#';
+}
+echo $gfsettings['bordercolour'];
+?>;
         background-color: <?php
-        if ($gfsettings['imagecontainerbackgroundcolour'][0] != '#') {
-            echo '#';
-        }
-        echo $gfsettings['imagecontainerbackgroundcolour'];
-        ?>;
+if ($gfsettings['imagecontainerbackgroundcolour'][0] != '#') {
+    echo '#';
+}
+echo $gfsettings['imagecontainerbackgroundcolour'];
+?>;
         border-width: <?php echo $gfsettings['borderwidth']; ?>px;
         <?php
-        if ($gfsettings['borderradius'] == 2) { // On.
-            echo 'border-radius: ' . $gfsettings['borderwidth'] . 'px;';
-        }
-        ?>
-
+if ($gfsettings['borderradius'] == 2) { // On.
+    echo 'border-radius: ' . $gfsettings['borderwidth'] . 'px;';
+}
+?>
     }
 
-    <?php
-    $startindex = 0;
-    if ($gfsettings['bordercolour'][0] == '#') {
-        $startindex++;
-    }
-    $red = hexdec(substr($gfsettings['bordercolour'], $startindex, 2));
-    $green = hexdec(substr($gfsettings['bordercolour'], $startindex + 2, 2));
-    $blue = hexdec(substr($gfsettings['bordercolour'], $startindex + 4, 2));
-    ?>
+<?php
+$startindex = 0;
+if ($gfsettings['bordercolour'][0] == '#') {
+    $startindex++;
+}
+$red = hexdec(substr($gfsettings['bordercolour'], $startindex, 2));
+$green = hexdec(substr($gfsettings['bordercolour'], $startindex + 2, 2));
+$blue = hexdec(substr($gfsettings['bordercolour'], $startindex + 4, 2));
+?>
     .course-content ul.gridicons li:hover .image_holder {
-        box-shadow: 0px 0px 0px <?php echo $gfsettings['borderwidth']; ?>px rgba(<?php echo $red . ',' . $green . ',' . $blue ?>,0.3);
+        box-shadow: 0 0 0 <?php echo $gfsettings['borderwidth']; ?>px rgba(<?php echo $red.','.$green.','.$blue ?>, 0.3);
     }
 
     .course-content ul.gridicons li.currenticon .image_holder {
-        box-shadow: 0px 0px 2px 4px <?php
-        if ($gfsettings['currentselectedsectioncolour'][0] != '#') {
-            echo '#';
-        }
-        echo $gfsettings['currentselectedsectioncolour'];
-        ?>;
+        box-shadow: 0 0 2px 4px <?php
+if ($gfsettings['currentselectedsectioncolour'][0] != '#') {
+    echo '#';
+}
+echo $gfsettings['currentselectedsectioncolour'];
+?>;
     }
 
     .course-content ul.gridicons li.currentselected {
         background-color: <?php
-        if ($gfsettings['currentselectedimagecontainercolour'][0] != '#') {
-            echo '#';
-        }
-        echo $gfsettings['currentselectedimagecontainercolour'];
-        ?>;
+if ($gfsettings['currentselectedimagecontainercolour'][0] != '#') {
+    echo '#';
+}
+echo $gfsettings['currentselectedimagecontainercolour'];
+?>;
     }
 
     .course-content ul.gridicons img.new_activity {
@@ -135,7 +144,12 @@ $imageproperties = $courseformat->calculate_image_container_properties(
     /* ]]> */
 </style>
 <?php
-if (!empty($displaysection)) {
+$sectionparam = optional_param('section', -1, PARAM_INT);
+if ($sectionparam != -1) {
+    $displaysection = $sectionparam;
+}
+
+if ($sectionparam != -1) {
     $renderer->print_single_section_page($course, null, null, null, null, $displaysection);
 } else {
     $renderer->print_multiple_section_page($course, null, null, null, null);

@@ -1,4 +1,4 @@
-YUI.add('gallery-event-nav-keys', function(Y) {
+YUI.add('event-nav-keys', function(Y) {
 
 var keys = {
         enter    : 13,
@@ -10,7 +10,8 @@ var keys = {
         left     : 37,
         up       : 38,
         right    : 39,
-        down     : 40
+        down     : 40,
+        space    : 32
     };
 
 Y.Object.each(keys, function (keyCode, name) {
@@ -42,4 +43,4 @@ Y.Object.each(keys, function (keyCode, name) {
 });
 
 
-}, 'gallery-2011.02.02-21-07' ,{requires:['event-synthetic']});
+}, '2011.02.02-21-07' ,{requires:['event-synthetic']});
