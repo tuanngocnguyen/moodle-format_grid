@@ -410,7 +410,11 @@ class format_grid extends format_base {
                 'fitsectioncontainertowindow' => array(
                     'default' => get_config('format_grid', 'defaultfitsectioncontainertowindow'),
                     'type' => PARAM_INT
-                )
+                ),
+                 'greyouthidden' => array(
+                    'default' => get_config('format_grid', 'defaultgreyouthidden'),
+                    'type' => PARAM_INT
+                ),
             );
         }
         if ($foreditform && !isset($courseformatoptions['coursedisplay']['label'])) {
@@ -600,6 +604,19 @@ class format_grid extends format_base {
             $courseformatoptionsedit['fitsectioncontainertowindow'] = array(
                 'label' => new lang_string('setfitsectioncontainertowindow', 'format_grid'),
                 'help' => 'setfitsectioncontainertowindow',
+                'help_component' => 'format_grid',
+                'element_type' => 'select',
+                'element_attributes' => array(
+                    array(
+                        1 => new lang_string('no'),   // No.
+                        2 => new lang_string('yes')   // Yes.
+                    )
+                )
+            );
+            
+             $courseformatoptionsedit['greyouthidden'] = array(
+                'label' => new lang_string('greyouthidden', 'format_grid'),
+                'help' => 'greyouthidden',
                 'help_component' => 'format_grid',
                 'element_type' => 'select',
                 'element_attributes' => array(
@@ -810,6 +827,7 @@ class format_grid extends format_base {
         $resetallimagecontainerstyle = false;
         $resetallnewactivity = false;
         $resetallfitpopup = false;
+        $resetgreyouthidden = false;
         if (isset($data->resetimagecontainersize) == true) {
             $resetimagecontainersize = true;
             unset($data->resetimagecontainersize);
@@ -849,6 +867,10 @@ class format_grid extends format_base {
         if (isset($data->resetallfitpopup) == true) {
             $resetfitpopup = true;
             unset($data->resetallfitpopup);
+        }
+         if (isset($data->resetgreyouthidden) == true) {
+            $resetgreyouthidden = true;
+            unset($data->resetgreyouthidden);
         }
 
         $settings = $this->get_settings();

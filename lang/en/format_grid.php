@@ -164,8 +164,16 @@ $string['resetfitpopup'] = 'Fit section popup to the window';
 $string['resetfitpopup_help'] = 'Resets the \'Fit section popup to the window\' to the default value so it will be the same as a course the first time it is in the Grid format.';
 $string['resetallfitpopup'] = 'Fit section popups to the window';
 $string['resetallfitpopup_help'] = 'Resets the \'Fit section popup to the window\' to the default value for all courses so it will be the same as a course the first time it is in the Grid format.';
+$string['resetgreyouthidden'] = 'Grey out unavailable';
+$string['resetgreyouthidden_desc'] = 'Resets the property \'Grid display show unavailable section images in grey and unlinked.\'';
+$string['resetgreyouthidden_help'] = 'Resets the property \'In Grid display show unavailable section images in grey and unlinked.\'';
 
 // Capabilities.
 $string['grid:changeimagecontainersize'] = 'Change or reset the image container size';
 $string['grid:changeimageresizemethod'] = 'Change or reset the image resize method';
 $string['grid:changeimagecontainerstyle'] = 'Change or reset the image container style';
+
+//Other
+$string['greyouthidden'] = 'Grey out unavailable';
+$string['greyouthidden_desc'] = 'In Grid display show unavailable section images in grey and unlinked.';
+$string['greyouthidden_help'] = 'In Grid display show unavailable section images in grey and unlinked.';
