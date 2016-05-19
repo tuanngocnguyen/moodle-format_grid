@@ -578,8 +578,6 @@ class format_grid_renderer extends format_section_renderer_base {
             $greyouthidden = $this->settings['greyouthidden'] == 2;
             $sectiongreyedout = $sectionunavailable && !$hascapvishidsect && $greyouthidden;
 
-			error_log(print_r('SN: '.$thissection->section.', SU: '.$sectionunavailable.', G: '.$greyouthidden.', CHS: '.$hascapvishidsect.' SGO: '.$sectiongreyedout, true));
-
             if ($showsection || $sectiongreyedout) {
                 // We now know the value for the grid shade box shown array.
                 $this->shadeboxshownarray[$section] = 2;
