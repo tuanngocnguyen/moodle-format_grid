@@ -411,10 +411,10 @@ class format_grid extends format_base {
                     'default' => get_config('format_grid', 'defaultfitsectioncontainertowindow'),
                     'type' => PARAM_INT
                 ),
-                 'greyouthidden' => array(
+                'greyouthidden' => array(
                     'default' => get_config('format_grid', 'defaultgreyouthidden'),
                     'type' => PARAM_INT
-                ),
+                )
             );
         }
         if ($foreditform && !isset($courseformatoptions['coursedisplay']['label'])) {
@@ -613,8 +613,8 @@ class format_grid extends format_base {
                     )
                 )
             );
-            
-             $courseformatoptionsedit['greyouthidden'] = array(
+
+            $courseformatoptionsedit['greyouthidden'] = array(
                 'label' => new lang_string('greyouthidden', 'format_grid'),
                 'help' => 'greyouthidden',
                 'help_component' => 'format_grid',
@@ -868,7 +868,7 @@ class format_grid extends format_base {
             $resetfitpopup = true;
             unset($data->resetallfitpopup);
         }
-         if (isset($data->resetgreyouthidden) == true) {
+        if (isset($data->resetgreyouthidden) == true) {
             $resetgreyouthidden = true;
             unset($data->resetgreyouthidden);
         }

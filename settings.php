@@ -145,15 +145,15 @@ if ($ADMIN->fulltree) {
         2 => new lang_string('yes')   // Yes.
     );
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
-    
-     /* Grey out hidden sections. */
+
+    /* Grey out hidden sections. */
     $name = 'format_grid/defaultgreyouthidden';
     $title = get_string('greyouthidden', 'format_grid');
     $description = get_string('greyouthidden_desc', 'format_grid');
     $default = 1;
-     $choices = array(
+    $choices = array(
         1 => new lang_string('no'),   // No.
         2 => new lang_string('yes')   // Yes.
     );
-     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
+    $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 }

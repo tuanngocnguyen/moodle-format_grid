@@ -568,15 +568,17 @@ class format_grid_renderer extends format_section_renderer_base {
             $thissection = $modinfo->get_section_info($section);
 
             // Check if section is visible to user.
-            $section_visible = ($thissection->uservisible ||
+            $sectionvisible = ($thissection->uservisible ||
                     ($thissection->visible && !$thissection->available &&
                     !empty($thissection->availableinfo)));
-            $showsection = $hascapvishidsect || $section_visible;
-               
-             //if we should grey it out, flag that here. Justin 2016/05/14  
-            $section_unavailable = !$thissection->available;     
+            $showsection = $hascapvishidsect || $sectionvisible;
+
+            // If we should grey it out, flag that here.  Justin 2016/05/14.
+            $sectionunavailable = !$thissection->available;
             $greyouthidden = $this->settings['greyouthidden'] == 2;
-            $sectiongreyedout = $section_unavailable && !$hascapvishidsect && $greyouthidden;
+            $sectiongreyedout = $sectionunavailable && !$hascapvishidsect && $greyouthidden;
+
+			error_log(print_r('SN: '.$thissection->section.', SU: '.$sectionunavailable.', G: '.$greyouthidden.', CHS: '.$hascapvishidsect.' SGO: '.$sectiongreyedout, true));
 
             if ($showsection || $sectiongreyedout) {
                 // We now know the value for the grid shade box shown array.
@@ -633,8 +635,10 @@ class format_grid_renderer extends format_section_renderer_base {
                             'alt' => ''));
                     }
 
-					$imageclass = 'image_holder';
-					if($sectiongreyedout) $imageclass .= ' inaccessible';
+                    $imageclass = 'image_holder';
+                    if ($sectiongreyedout) {
+                        $imageclass .= ' inaccessible';
+                    }
                     echo html_writer::start_tag('div', array('class' => $imageclass));
 
                     $showimg = false;
@@ -672,9 +676,11 @@ class format_grid_renderer extends format_section_renderer_base {
                                     'alt' => ''));
                     }
 
-					//grey out code: Justin 2016/05/14
-					$imageclass = 'image_holder';
-					if($sectiongreyedout) $imageclass .= ' inaccessible';
+                    // Grey out code: Justin 2016/05/14.
+                    $imageclass = 'image_holder';
+                    if ($sectiongreyedout) {
+                        $imageclass .= ' inaccessible';
+                    }
                     $content .= html_writer::start_tag('div', array('class' => $imageclass));
 
                     $showimg = false;
@@ -698,25 +704,25 @@ class format_grid_renderer extends format_section_renderer_base {
                     $content .= html_writer::end_tag('div');
 
                     if ($editing) {
-                        //Section greyed out by Justin 2016/05/14
-                    	if(!$sectiongreyedout){
-                          echo html_writer::link($singlepageurl.'#section-'.$thissection->section, $content, array(
-                              'id' => 'gridsection-' . $thissection->section,
-                              'role' => 'link',
-                              'aria-label' => $sectionname));
-                          }else{
-                          	echo $content;
-                          }//end of if not disabled
+                        // Section greyed out by Justin 2016/05/14.
+                        if (!$sectiongreyedout) {
+                            echo html_writer::link($singlepageurl.'#section-'.$thissection->section, $content, array(
+                                'id' => 'gridsection-' . $thissection->section,
+                                'role' => 'link',
+                                'aria-label' => $sectionname));
+                        } else {
+                            echo $content;
+                        } // End of if not disabled.
                         $this->make_block_icon_topics_editing($thissection, $contextid, $urlpicedit, $course, $section);
                     } else {
-                      if(!$sectiongreyedout){
-                        echo html_writer::link($singlepageurl.'&section='.$thissection->section, $content, array(
-                            'id' => 'gridsection-' . $thissection->section,
-                            'role' => 'link',
-                            'aria-label' => $sectionname));
-                      }else{
-                      	echo $content;
-                      }//end of if not disabled
+                        if (!$sectiongreyedout) {
+                            echo html_writer::link($singlepageurl.'&section='.$thissection->section, $content, array(
+                                'id' => 'gridsection-' . $thissection->section,
+                                'role' => 'link',
+                                'aria-label' => $sectionname));
+                        } else {
+                            echo $content;
+                        } // End of if not disabled.
                     }
                     echo html_writer::end_tag('li');
                 }

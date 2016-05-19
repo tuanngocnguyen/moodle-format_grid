@@ -173,7 +173,7 @@ $string['grid:changeimagecontainersize'] = 'Change or reset the image container 
 $string['grid:changeimageresizemethod'] = 'Change or reset the image resize method';
 $string['grid:changeimagecontainerstyle'] = 'Change or reset the image container style';
 
-//Other
+// Other.
 $string['greyouthidden'] = 'Grey out unavailable';
 $string['greyouthidden_desc'] = 'In Grid display show unavailable section images in grey and unlinked.';
 $string['greyouthidden_help'] = 'In Grid display show unavailable section images in grey and unlinked.';
