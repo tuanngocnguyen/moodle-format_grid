@@ -2,6 +2,7 @@ History
 =============
 Version 3.1.0.1
   1. First 'beta' version for M3.1.
+  2. Changes for MDL-51802.
 
 Version 3.0.1.1
   1. Updated php4 constructor - #27 - thanks to Mark Sharp.
