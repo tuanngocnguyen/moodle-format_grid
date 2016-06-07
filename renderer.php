@@ -709,8 +709,9 @@ class format_grid_renderer extends format_section_renderer_base {
                                 'role' => 'link',
                                 'aria-label' => $sectionname));
                         } else {
-                            echo $content;
-                        } // End of if not disabled.
+                            // Need an enclosing 'span' for IE.
+                            echo html_writer::tag('span', $content);
+                        }
                         $this->make_block_icon_topics_editing($thissection, $contextid, $urlpicedit, $course, $section);
                     } else {
                         if (!$sectiongreyedout) {
@@ -719,8 +720,9 @@ class format_grid_renderer extends format_section_renderer_base {
                                 'role' => 'link',
                                 'aria-label' => $sectionname));
                         } else {
-                            echo $content;
-                        } // End of if not disabled.
+                            // Need an enclosing 'span' for IE.
+                            echo html_writer::tag('span', $content);
+                        }
                     }
                     echo html_writer::end_tag('li');
                 }
