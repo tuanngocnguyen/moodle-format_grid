@@ -1,6 +1,7 @@
 History
 =============
 Version 3.1.0.2
+  1. Changes for MDL-54557.
 
 Version 3.1.0.1
   1. First 'beta' version for M3.1.
