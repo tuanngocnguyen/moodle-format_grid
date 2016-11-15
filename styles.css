@@ -100,7 +100,7 @@ div#gridmiddle-column > ul {
     height: auto;
     padding: 10px;
     text-align: left;
-    display: inline-table;
+    display: inline-block;
 }
 .dir-rtl #gridiconcontainer ul.gridicons li {
    text-align: right;
