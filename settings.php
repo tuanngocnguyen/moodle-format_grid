@@ -124,6 +124,17 @@ if ($ADMIN->fulltree) {
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
     $settings->add($setting);
 
+    /* Section title box position - 1 = Inside, 2 = Outside. */
+    $name = 'format_grid/defaultsectiontitleboxposition';
+    $title = get_string('defaultsectiontitleboxposition', 'format_grid');
+    $description = get_string('defaultsectiontitleboxposition_desc', 'format_grid');
+    $default = 2;
+    $choices = array(
+        1 => new lang_string('sectiontitleboxpositioninside', 'format_grid'),
+        2 => new lang_string('sectiontitleboxpositionoutside', 'format_grid')
+    );
+    $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
+
     /* Show new activity notification image - 1 = no, 2 = yes. */
     $name = 'format_grid/defaultnewactivity';
     $title = get_string('defaultnewactivity', 'format_grid');

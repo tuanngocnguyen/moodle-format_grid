@@ -318,7 +318,12 @@ class format_grid_renderer extends format_section_renderer_base {
         }
         echo html_writer::start_tag('div', array('id' => 'gridiconcontainer', 'role' => 'navigation',
             'aria-label' => get_string('gridimagecontainer', 'format_grid')));
-        echo html_writer::start_tag('ul', array('class' => 'gridicons'));
+                        $sectiontitleclass = 'icon_content';
+        $gridiconsclass = 'gridicons';
+        if ($this->settings['sectiontitleboxposition'] == 1) {
+            $gridiconsclass .= ' content_inside';
+        }
+        echo html_writer::start_tag('ul', array('class' => $gridiconsclass));
         // Print all of the image containers.
         $this->make_block_icon_topics($coursecontext->id, $modinfo, $course, $editing, $hascapvishidsect, $urlpicedit);
         echo html_writer::end_tag('ul');
@@ -636,6 +641,11 @@ class format_grid_renderer extends format_section_renderer_base {
                         $this->settings);
                 }
 
+                $sectiontitleclass = 'icon_content';
+                if ($this->settings['sectiontitleboxposition'] == 1) {
+                    $sectiontitleclass .= ' content_inside';
+                }
+
                 if ($course->coursedisplay != COURSE_DISPLAY_MULTIPAGE) {
                     echo html_writer::start_tag('a', array(
                         'href' => '#section-' . $thissection->section,
@@ -644,7 +654,7 @@ class format_grid_renderer extends format_section_renderer_base {
                         'role' => 'link',
                         'aria-label' => $sectionname));
 
-                    echo html_writer::tag('p', $sectionname, array('class' => 'icon_content'));
+                    echo html_writer::tag('p', $sectionname, array('class' => $sectiontitleclass));
 
                     if (($this->settings['newactivity'] == 2) && (isset($sectionupdated[$thissection->id]))) {
                         // The section has been updated since the user last visited this course, add NEW label.
@@ -686,7 +696,7 @@ class format_grid_renderer extends format_section_renderer_base {
                     }
                     echo html_writer::end_tag('li');
                 } else {
-                    $content = html_writer::tag('p', $sectionname, array('class' => 'icon_content'));
+                    $content = html_writer::tag('p', $sectionname, array('class' => $sectiontitleclass));
 
                     if (($this->settings['newactivity'] == 2) && (isset($sectionupdated[$thissection->id]))) {
                         $content .= html_writer::empty_tag('img', array(

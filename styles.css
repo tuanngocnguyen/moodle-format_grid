@@ -103,7 +103,10 @@ div#gridmiddle-column > ul {
     display: inline-block;
 }
 .dir-rtl #gridiconcontainer ul.gridicons li {
-   text-align: right;
+    text-align: right;
+}
+#gridiconcontainer ul.gridicons.content_inside li {
+    position: relative;
 }
 
 .course-content ul.gridicons li.currentselected {
@@ -128,6 +131,33 @@ div#gridmiddle-column > ul {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.course-content ul.gridicons li p.icon_content.content_inside {
+    background-color: white;
+    color: black;
+    height: 40px;
+    opacity: 0.8;
+    overflow-wrap: break-word;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    position: absolute;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+.course-content ul.gridicons li p.icon_content.content_inside.middle {
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    right: 0;
+    top: 0;
+    width: 100%;
+}
+.course-content ul.gridicons li p.icon_content.content_inside.bottom {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
 .course-content ul.gridicons li .image_holder {
     overflow: hidden;
     border-style: solid;

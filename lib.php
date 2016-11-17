@@ -407,6 +407,10 @@ class format_grid extends format_base {
                     'default' => get_config('format_grid', 'defaultnewactivity'),
                     'type' => PARAM_INT
                 ),
+                'sectiontitleboxposition' => array(
+                    'default' => get_config('format_grid', 'defaultsectiontitleboxposition'),
+                    'type' => PARAM_INT
+                ),
                 'fitsectioncontainertowindow' => array(
                     'default' => get_config('format_grid', 'defaultfitsectioncontainertowindow'),
                     'type' => PARAM_INT
@@ -588,6 +592,21 @@ class format_grid extends format_base {
                 $courseformatoptionsedit['currentselectedimagecontainercolour'] = array(
                     'label' => $defaultcurrentselectedimagecontainercolour, 'element_type' => 'hidden');
             }
+
+            // TODO: Capability
+            $courseformatoptionsedit['sectiontitleboxposition'] = array(
+                'label' => new lang_string('sectiontitleboxposition', 'format_grid'),
+                'element_type' => 'select',
+                'element_attributes' => array(
+                    array(
+                        1 => new lang_string('sectiontitleboxpositioninside', 'format_grid'),
+                        2 => new lang_string('sectiontitleboxpositionoutside', 'format_grid')
+                    )
+                ),
+                'help' => 'sectiontitleboxposition',
+                'help_component' => 'format_grid'
+            );
+
             $courseformatoptionsedit['newactivity'] = array(
                 'label' => new lang_string('setnewactivity', 'format_grid'),
                 'element_type' => 'select',
