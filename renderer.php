@@ -643,18 +643,35 @@ class format_grid_renderer extends format_section_renderer_base {
 
                 $sectiontitleclass = 'icon_content';
                 if ($this->settings['sectiontitleboxposition'] == 1) {
-                    $sectiontitleclass .= ' content_inside';
-                    if ($this->settings['sectiontitleboxinsideposition'] == 2) {
-                        $sectiontitleclass .= ' middle';
-                    } else if ($this->settings['sectiontitleboxinsideposition'] == 3) {
-                        $sectiontitleclass .= ' bottom';
+                    // Only bother if there is a section name to show.
+                    $canshow = false;
+                    $sectionnamelength = core_text::strlen($sectionname);
+                    if ($sectionnamelength > 0) {
+                        if ($sectionnamelength == 1) {
+                            if ($sectionname[0] != ' ') {
+                                $canshow = true;                           
+                            }
+                        } else {
+                            $canshow = true;
+                        }
+                    }
+                    if ($canshow) {
+                        $sectiontitleclass .= ' content_inside';
+                        if ($this->settings['sectiontitleboxinsideposition'] == 2) {
+                            $sectiontitleclass .= ' middle';
+                        } else if ($this->settings['sectiontitleboxinsideposition'] == 3) {
+                            $sectiontitleclass .= ' bottom';
+                        }
                     }
                 }
                 $sectiontitleattribues = array(
                             'id' => 'gridsectionname-'.$thissection->section,
                             'class' => $sectiontitleclass);
                 if ($this->settings['showsectiontitlesummary'] == 2) {
-                    $sectiontitleattribues['title'] = format_text($thissection->summary, FORMAT_MOODLE);
+                    $summary = strip_tags($thissection->summary);
+                    if (core_text::strlen($summary) > 0) {
+                        $sectiontitleattribues['title'] = strip_tags($thissection->summary);
+                    }
                 }
 
                 if ($course->coursedisplay != COURSE_DISPLAY_MULTIPAGE) {
