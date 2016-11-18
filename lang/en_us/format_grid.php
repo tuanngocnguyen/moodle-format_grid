@@ -45,4 +45,14 @@ $string['setcurrentselectedsectioncolour_help'] = 'Set the current selected sect
 $string['setcurrentselectedimagecontainercolour'] = 'Set the current selected image container color';
 $string['setcurrentselectedimagecontainercolour_help'] = 'Set the current selected image container color in hexidecimal RGB.';
 
+// Section title text format options.
+$string['sectiontitleinsidetitletextcolour'] = 'Section title text color when \'Inside\' option';
+$string['sectiontitleinsidetitletextcolour_help'] = 'Set title text color when it is \'Inside\' the grid box.';
+$string['defaultsectiontitleinsidetitletextcolour'] = 'Section title text color when \'Inside\' option';
+$string['defaultsectiontitleinsidetitletextcolour_help'] = 'Set title text color when it is \'Inside\' the grid box.';
+$string['sectiontitleinsidetitlebackgroundcolour'] = 'Section title background color when \'Inside\' option';
+$string['sectiontitleinsidetitlebackgroundcolour_help'] = 'Set title background color when it is \'Inside\' the grid box.';
+$string['defaultsectiontitleinsidetitlebackgroundcolour'] = 'Section title background color when \'Inside\' option';
+$string['defaultsectiontitleinsidetitlebackgroundcolour_help'] = 'Set title background color when it is \'Inside\' the grid box.';
+
 $string['colourrule'] = "Please enter a valid RGB color, six hexadecimal digits.";

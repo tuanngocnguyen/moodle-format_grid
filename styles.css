@@ -122,7 +122,7 @@ div#gridmiddle-column > ul {
 .course-content .gridicon_link {
     cursor: url('[[pix:format_grid|fa-hand-o-up-f]]'), auto;
 }
-.course-content ul.gridicons li p.icon_content {
+.course-content ul.gridicons li .icon_content {
     font-weight: bold;
     height: 20px;
     margin: 0;
@@ -132,7 +132,7 @@ div#gridmiddle-column > ul {
     white-space: nowrap;
 }
 
-.course-content ul.gridicons li p.icon_content.content_inside {
+.course-content ul.gridicons li .icon_content.content_inside {
     background-color: white;
     color: black;
     height: 40px;
@@ -144,7 +144,7 @@ div#gridmiddle-column > ul {
     white-space: pre-wrap;
     word-wrap: break-word;
 }
-.course-content ul.gridicons li p.icon_content.content_inside.middle {
+.course-content ul.gridicons li .icon_content.content_inside.middle {
     bottom: 0;
     left: 0;
     margin: auto;
@@ -152,7 +152,7 @@ div#gridmiddle-column > ul {
     top: 0;
     width: 100%;
 }
-.course-content ul.gridicons li p.icon_content.content_inside.bottom {
+.course-content ul.gridicons li .icon_content.content_inside.bottom {
     bottom: 0;
     left: 0;
     width: 100%;

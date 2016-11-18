@@ -431,6 +431,10 @@ class format_grid extends format_base {
                     'default' => get_config('format_grid', 'defaultsectiontitleboxinsideposition'),
                     'type' => PARAM_INT
                 ),
+                'showsectiontitlesummary' => array(
+                    'default' => get_config('format_grid', 'defaultshowsectiontitlesummary'),
+                    'type' => PARAM_INT
+                ),
                 'sectiontitleinsidetitletextcolour' => array(
                     'default' => get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour'),
                     'type' => PARAM_ALPHANUM
@@ -572,7 +576,8 @@ class format_grid extends format_base {
                     'help_component' => 'format_grid',
                     'element_type' => 'select',
                     'element_attributes' => array(
-                        array(1 => new lang_string('off', 'format_grid'),
+                        array(
+                            1 => new lang_string('off', 'format_grid'),
                             2 => new lang_string('on', 'format_grid'))
                     )
                 );
@@ -645,6 +650,18 @@ class format_grid extends format_base {
                         )
                     ),
                     'help' => 'sectiontitleboxposition',
+                    'help_component' => 'format_grid'
+                );
+                $courseformatoptionsedit['showsectiontitlesummary'] = array(
+                    'label' => new lang_string('showsectiontitlesummary', 'format_grid'),
+                    'element_type' => 'select',
+                    'element_attributes' => array(
+                        array(
+                            1 => new lang_string('no'), // No.
+                            2 => new lang_string('yes')   // Yes.
+                        )
+                    ),
+                    'help' => 'showsectiontitlesummary',
                     'help_component' => 'format_grid'
                 );
                 $courseformatoptionsedit['sectiontitleinsidetitletextcolour'] = array(
@@ -1181,6 +1198,7 @@ class format_grid extends format_base {
         if ($sectiontitleoptionsreset && has_capability('format/grid:changesectiontitleoptions', $coursecontext) && $resetallifall) {
             $updatedata['sectiontitleboxposition'] = get_config('format_grid', 'defaultsectiontitleboxposition');
             $updatedata['sectiontitleboxinsideposition'] = get_config('format_grid', 'defaultsectiontitleboxinsideposition');
+            $updatedata['showsectiontitlesummary'] = get_config('format_grid', 'defaultshowsectiontitlesummary');
             $updatedata['sectiontitleinsidetitletextcolour'] = get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour');
             $updatedata['sectiontitleinsidetitlebackgroundcolour'] = get_config('format_grid', 'defaultsectiontitleinsidetitlebackgroundcolour');
             $updatesectiontitleoptions = true;

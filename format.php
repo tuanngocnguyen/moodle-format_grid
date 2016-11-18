@@ -79,7 +79,7 @@ $gfsettings['imagecontainerwidth'], $gfsettings['imagecontainerratio'], $gfsetti
 
 echo '<style type="text/css" media="screen">';
 echo '/* <![CDATA[ */';
-echo '.course-content ul.gridicons li p.icon_content {';
+echo '.course-content ul.gridicons li .icon_content {';
 echo 'width: '.($gfsettings['imagecontainerwidth'] + ($gfsettings['borderwidth'] * 2)).'px;';
 echo '}';
 echo '.course-content ul.gridicons li .image_holder {';
@@ -130,7 +130,7 @@ echo $gfsettings['currentselectedimagecontainercolour'].';';
 echo '}';
 
 if ($gfsettings['sectiontitleboxposition'] == 1) {
-    echo '.course-content ul.gridicons li p.icon_content.content_inside {';
+    echo '.course-content ul.gridicons li .icon_content.content_inside {';
     echo 'background-color: ';
     if ($gfsettings['sectiontitleinsidetitlebackgroundcolour'][0] != '#') {
         echo '#';

@@ -570,10 +570,10 @@ class format_grid_renderer extends format_section_renderer_base {
 
         if ($this->settings['newactivity'] == 2) {
             $currentlanguage = current_language();
-            if (!file_exists("$CFG->dirroot/course/format/grid/pix/new_activity_" . $currentlanguage . ".png")) {
+            if (!file_exists("$CFG->dirroot/course/format/grid/pix/new_activity_".$currentlanguage.".png")) {
                 $currentlanguage = 'en';
             }
-            $urlpicnewactivity = $this->output->pix_url('new_activity_' . $currentlanguage, 'format_grid');
+            $urlpicnewactivity = $this->output->pix_url('new_activity_'.$currentlanguage, 'format_grid');
 
             // Get all the section information about which items should be marked with the NEW picture.
             $sectionupdated = $this->new_activity($course);
@@ -617,8 +617,8 @@ class format_grid_renderer extends format_section_renderer_base {
                    that all browsers support it against the browser requirements of Moodle. */
                 $liattributes = array(
                     'role' => 'region',
-                    'aria-label' => $sectionname
-                );
+                    'aria-labelledby' => 'gridsectionname-'.$thissection->section
+                ); // NOTE: When implement not show the section title then need an 'aria-label' here with the section title.
                 if ($this->courseformat->is_section_current($section)) {
                     $liattributes['class'] = 'currenticon';
                 }
@@ -650,16 +650,21 @@ class format_grid_renderer extends format_section_renderer_base {
                         $sectiontitleclass .= ' bottom';
                     }
                 }
+                $sectiontitleattribues = array(
+                            'id' => 'gridsectionname-'.$thissection->section,
+                            'class' => $sectiontitleclass);
+                if ($this->settings['showsectiontitlesummary'] == 2) {
+                    $sectiontitleattribues['title'] = format_text($thissection->summary, FORMAT_MOODLE);
+                }
 
                 if ($course->coursedisplay != COURSE_DISPLAY_MULTIPAGE) {
                     echo html_writer::start_tag('a', array(
-                        'href' => '#section-' . $thissection->section,
-                        'id' => 'gridsection-' . $thissection->section,
+                        'href' => '#section-'.$thissection->section,
+                        'id' => 'gridsection-'.$thissection->section,
                         'class' => 'gridicon_link',
-                        'role' => 'link',
-                        'aria-label' => $sectionname));
+                        'role' => 'link'));
 
-                    echo html_writer::tag('p', $sectionname, array('class' => $sectiontitleclass));
+                    echo html_writer::tag('div', $sectionname, $sectiontitleattribues);
 
                     if (($this->settings['newactivity'] == 2) && (isset($sectionupdated[$thissection->id]))) {
                         // The section has been updated since the user last visited this course, add NEW label.
@@ -701,7 +706,7 @@ class format_grid_renderer extends format_section_renderer_base {
                     }
                     echo html_writer::end_tag('li');
                 } else {
-                    $content = html_writer::tag('p', $sectionname, array('class' => $sectiontitleclass));
+                    $content = html_writer::tag('div', $sectionname, $sectiontitleattribues);
 
                     if (($this->settings['newactivity'] == 2) && (isset($sectionupdated[$thissection->id]))) {
                         $content .= html_writer::empty_tag('img', array(
@@ -741,9 +746,9 @@ class format_grid_renderer extends format_section_renderer_base {
                         // Section greyed out by Justin 2016/05/14.
                         if (!$sectiongreyedout) {
                             echo html_writer::link($singlepageurl.'#section-'.$thissection->section, $content, array(
-                                'id' => 'gridsection-' . $thissection->section,
-                                'role' => 'link',
-                                'aria-label' => $sectionname));
+                                'id' => 'gridsection-'.$thissection->section,
+                                'class' => 'gridicon_link',
+                                'role' => 'link'));
                         } else {
                             // Need an enclosing 'span' for IE.
                             echo html_writer::tag('span', $content);
@@ -752,9 +757,9 @@ class format_grid_renderer extends format_section_renderer_base {
                     } else {
                         if (!$sectiongreyedout) {
                             echo html_writer::link($singlepageurl.'&section='.$thissection->section, $content, array(
-                                'id' => 'gridsection-' . $thissection->section,
-                                'role' => 'link',
-                                'aria-label' => $sectionname));
+                                'id' => 'gridsection-'.$thissection->section,
+                                'class' => 'gridicon_link',
+                                'role' => 'link'));
                         } else {
                             // Need an enclosing 'span' for IE.
                             echo html_writer::tag('span', $content);

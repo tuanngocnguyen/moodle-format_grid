@@ -147,6 +147,17 @@ if ($ADMIN->fulltree) {
     );
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
+    /* Show section title summary on hover - 1 = no, 2 = yes. */
+    $name = 'format_grid/defaultshowsectiontitlesummary';
+    $title = get_string('defaultshowsectiontitlesummary', 'format_grid');
+    $description = get_string('defaultshowsectiontitlesummary_desc', 'format_grid');
+    $default = 2;
+    $choices = array(
+        1 => new lang_string('no'),   // No.
+        2 => new lang_string('yes')   // Yes.
+    );
+    $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
+
     // Default section title text colour in hexadecimal RGB with preceding '#'.
     $name = 'format_grid/defaultsectiontitleinsidetitletextcolour';
     $title = get_string('defaultsectiontitleinsidetitletextcolour', 'format_grid');
