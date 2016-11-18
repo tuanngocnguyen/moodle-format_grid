@@ -103,7 +103,7 @@ if ($ADMIN->fulltree) {
     // Default imagecontainer background colour in hexadecimal RGB with preceding '#'.
     $name = 'format_grid/defaultimagecontainerbackgroundcolour';
     $title = get_string('defaultimagecontainerbackgroundcolour', 'format_grid');
-    $description = get_string('defaultimagecontainerbackgroundcolour', 'format_grid');
+    $description = get_string('defaultimagecontainerbackgroundcolour_desc', 'format_grid');
     $default = format_grid::get_default_image_container_background_colour();
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
     $settings->add($setting);
@@ -111,7 +111,7 @@ if ($ADMIN->fulltree) {
     // Default current selected section colour in hexadecimal RGB with preceding '#'.
     $name = 'format_grid/defaultcurrentselectedsectioncolour';
     $title = get_string('defaultcurrentselectedsectioncolour', 'format_grid');
-    $description = get_string('defaultcurrentselectedsectioncolour', 'format_grid');
+    $description = get_string('defaultcurrentselectedsectioncolour_desc', 'format_grid');
     $default = format_grid::get_default_current_selected_section_colour();
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
     $settings->add($setting);
@@ -119,7 +119,7 @@ if ($ADMIN->fulltree) {
     // Default current selected imagecontainer colour in hexadecimal RGB with preceding '#'.
     $name = 'format_grid/defaultcurrentselectedimagecontainercolour';
     $title = get_string('defaultcurrentselectedimagecontainercolour', 'format_grid');
-    $description = get_string('defaultcurrentselectedimagecontainercolour', 'format_grid');
+    $description = get_string('defaultcurrentselectedimagecontainercolour_desc', 'format_grid');
     $default = format_grid::get_default_current_selected_image_container_colour();
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
     $settings->add($setting);
@@ -146,6 +146,22 @@ if ($ADMIN->fulltree) {
         3 => new lang_string('sectiontitleboxinsidepositionmiddle', 'format_grid')
     );
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
+
+    // Default section title text colour in hexadecimal RGB with preceding '#'.
+    $name = 'format_grid/defaultsectiontitleinsidetitletextcolour';
+    $title = get_string('defaultsectiontitleinsidetitletextcolour', 'format_grid');
+    $description = get_string('defaultsectiontitleinsidetitletextcolour_desc', 'format_grid');
+    $default = format_grid::get_default_section_title_inside_title_text_colour();
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
+    $settings->add($setting);
+
+    // Default section title background colour in hexadecimal RGB with preceding '#'.
+    $name = 'format_grid/defaultsectiontitleinsidetitlebackgroundcolour';
+    $title = get_string('defaultsectiontitleinsidetitlebackgroundcolour', 'format_grid');
+    $description = get_string('defaultsectiontitleinsidetitlebackgroundcolour_desc', 'format_grid');
+    $default = format_grid::get_default_section_title_inside_title_background_colour();
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
+    $settings->add($setting);
 
     /* Show new activity notification image - 1 = no, 2 = yes. */
     $name = 'format_grid/defaultnewactivity';

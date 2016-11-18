@@ -89,14 +89,12 @@ echo 'border-color: ';
 if ($gfsettings['bordercolour'][0] != '#') {
     echo '#';
 }
-echo $gfsettings['bordercolour'];
-echo ';';
+echo $gfsettings['bordercolour'].';';
 echo 'background-color: ';
 if ($gfsettings['imagecontainerbackgroundcolour'][0] != '#') {
     echo '#';
 }
-echo $gfsettings['imagecontainerbackgroundcolour'];
-echo ';';
+echo $gfsettings['imagecontainerbackgroundcolour'].';';
 echo 'border-width: '.$gfsettings['borderwidth'].'px;';
 if ($gfsettings['borderradius'] == 2) { // On.
     echo 'border-radius: ' . $gfsettings['borderwidth'] . 'px;';
@@ -120,8 +118,7 @@ echo 'box-shadow: 0 0 2px 4px ';
 if ($gfsettings['currentselectedsectioncolour'][0] != '#') {
     echo '#';
 }
-echo $gfsettings['currentselectedsectioncolour'];
-echo ';';
+echo $gfsettings['currentselectedsectioncolour'].';';
 echo '}';
 
 echo '.course-content ul.gridicons li.currentselected {';
@@ -129,9 +126,23 @@ echo 'background-color: ';
 if ($gfsettings['currentselectedimagecontainercolour'][0] != '#') {
     echo '#';
 }
-echo $gfsettings['currentselectedimagecontainercolour'];
-echo ';';
+echo $gfsettings['currentselectedimagecontainercolour'].';';
 echo '}';
+
+if ($gfsettings['sectiontitleboxposition'] == 1) {
+    echo '.course-content ul.gridicons li p.icon_content.content_inside {';
+    echo 'background-color: ';
+    if ($gfsettings['sectiontitleinsidetitlebackgroundcolour'][0] != '#') {
+        echo '#';
+    }
+    echo $gfsettings['sectiontitleinsidetitlebackgroundcolour'].';';
+    echo 'color: ';
+    if ($gfsettings['sectiontitleinsidetitletextcolour'][0] != '#') {
+        echo '#';
+    }
+    echo $gfsettings['sectiontitleinsidetitletextcolour'].';';
+    echo '}';
+}
 
 echo '.course-content ul.gridicons img.new_activity {';
 echo 'margin-top: '.$imageproperties['margin-top'].'px;';

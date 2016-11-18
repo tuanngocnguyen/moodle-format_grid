@@ -54,7 +54,7 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         )
     ),
-    
+
     'format/grid:changesectiontitleoptions' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,

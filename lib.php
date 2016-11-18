@@ -176,6 +176,22 @@ class format_grid extends format_base {
     }
 
     /**
+     * Gets the default section title inside text colour.
+     * @return string Default default section title inside text colour.
+     */
+    public static function get_default_section_title_inside_title_text_colour() {
+        return '#000000';
+    }
+
+    /**
+     * Gets the default section title inside background colour.
+     * @return string Default default section title inside background colour.
+     */
+    public static function get_default_section_title_inside_title_background_colour() {
+        return '#ffffff';
+    }
+
+    /**
      * Gets the displayed image path for storage of the displayed image.
      * @return string The path.
      */
@@ -415,6 +431,14 @@ class format_grid extends format_base {
                     'default' => get_config('format_grid', 'defaultsectiontitleboxinsideposition'),
                     'type' => PARAM_INT
                 ),
+                'sectiontitleinsidetitletextcolour' => array(
+                    'default' => get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour'),
+                    'type' => PARAM_ALPHANUM
+                ),
+                'sectiontitleinsidetitlebackgroundcolour' => array(
+                    'default' => get_config('format_grid', 'defaultsectiontitleinsidetitlebackgroundcolour'),
+                    'type' => PARAM_ALPHANUM
+                ),
                 'fitsectioncontainertowindow' => array(
                     'default' => get_config('format_grid', 'defaultfitsectioncontainertowindow'),
                     'type' => PARAM_INT
@@ -622,6 +646,24 @@ class format_grid extends format_base {
                     ),
                     'help' => 'sectiontitleboxposition',
                     'help_component' => 'format_grid'
+                );
+                $courseformatoptionsedit['sectiontitleinsidetitletextcolour'] = array(
+                    'label' => new lang_string('sectiontitleinsidetitletextcolour', 'format_grid'),
+                    'help' => 'sectiontitleinsidetitletextcolour',
+                    'help_component' => 'format_grid',
+                    'element_type' => 'gfcolourpopup',
+                    'element_attributes' => array(
+                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour'))
+                    )
+                );
+                $courseformatoptionsedit['sectiontitleinsidetitlebackgroundcolour'] = array(
+                    'label' => new lang_string('sectiontitleinsidetitlebackgroundcolour', 'format_grid'),
+                    'help' => 'sectiontitleinsidetitlebackgroundcolour',
+                    'help_component' => 'format_grid',
+                    'element_type' => 'gfcolourpopup',
+                    'element_attributes' => array(
+                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultsectiontitleinsidetitlebackgroundcolour'))
+                    )
                 );
             }
 
@@ -1139,6 +1181,8 @@ class format_grid extends format_base {
         if ($sectiontitleoptionsreset && has_capability('format/grid:changesectiontitleoptions', $coursecontext) && $resetallifall) {
             $updatedata['sectiontitleboxposition'] = get_config('format_grid', 'defaultsectiontitleboxposition');
             $updatedata['sectiontitleboxinsideposition'] = get_config('format_grid', 'defaultsectiontitleboxinsideposition');
+            $updatedata['sectiontitleinsidetitletextcolour'] = get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour');
+            $updatedata['sectiontitleinsidetitlebackgroundcolour'] = get_config('format_grid', 'defaultsectiontitleinsidetitlebackgroundcolour');
             $updatesectiontitleoptions = true;
         }
         if ($newactivityreset && $resetallifall) {
