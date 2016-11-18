@@ -644,6 +644,11 @@ class format_grid_renderer extends format_section_renderer_base {
                 $sectiontitleclass = 'icon_content';
                 if ($this->settings['sectiontitleboxposition'] == 1) {
                     $sectiontitleclass .= ' content_inside';
+                    if ($this->settings['sectiontitleboxinsideposition'] == 2) {
+                        $sectiontitleclass .= ' middle';
+                    } else if ($this->settings['sectiontitleboxinsideposition'] == 3) {
+                        $sectiontitleclass .= ' bottom';
+                    }
                 }
 
                 if ($course->coursedisplay != COURSE_DISPLAY_MULTIPAGE) {

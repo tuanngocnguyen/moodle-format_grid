@@ -135,6 +135,18 @@ if ($ADMIN->fulltree) {
     );
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
+    /* Section title box inside position - 1 = Top, 2 = Middle, 3 = Bottom. */
+    $name = 'format_grid/defaultsectiontitleboxinsideposition';
+    $title = get_string('defaultsectiontitleboxinsideposition', 'format_grid');
+    $description = get_string('defaultsectiontitleboxinsideposition_desc', 'format_grid');
+    $default = 1;
+    $choices = array(
+        1 => new lang_string('sectiontitleboxinsidepositiontop', 'format_grid'),
+        2 => new lang_string('sectiontitleboxinsidepositionmiddle', 'format_grid'),
+        3 => new lang_string('sectiontitleboxinsidepositionmiddle', 'format_grid')
+    );
+    $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
+
     /* Show new activity notification image - 1 = no, 2 = yes. */
     $name = 'format_grid/defaultnewactivity';
     $title = get_string('defaultnewactivity', 'format_grid');
