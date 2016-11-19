@@ -875,7 +875,12 @@ class format_grid extends format_base {
         if ($this->validate_colour($data['currentselectedimagecontainercolour']) === false) {
             $retr['currentselectedimagecontainercolour'] = get_string('colourrule', 'format_grid');
         }
-
+        if ($this->validate_colour($data['sectiontitleinsidetitletextcolour']) === false) {
+            $retr['sectiontitleinsidetitletextcolour'] = get_string('colourrule', 'format_grid');
+        }
+        if ($this->validate_colour($data['sectiontitleinsidetitlebackgroundcolour']) === false) {
+            $retr['sectiontitleinsidetitlebackgroundcolour'] = get_string('colourrule', 'format_grid');
+        }
         return $retr;
     }
 
@@ -951,9 +956,9 @@ class format_grid extends format_base {
             $resetimagecontainerstyle = true;
             unset($data->resetimagecontainerstyle);
         }
-        if (isset($data->$resetsectiontitleoptions) == true) {
+        if (isset($data->resetsectiontitleoptions) == true) {
             $resetsectiontitleoptions = true;
-            unset($data->$resetsectiontitleoptions);
+            unset($data->resetsectiontitleoptions);
         }
         if (isset($data->resetnewactivity) == true) {
             $resetnewactivity = true;
@@ -975,9 +980,9 @@ class format_grid extends format_base {
             $resetallimagecontainerstyle = true;
             unset($data->resetallimagecontainerstyle);
         }
-        if (isset($data->$resetallsectiontitleoptions) == true) {
+        if (isset($data->resetallsectiontitleoptions) == true) {
             $resetallsectiontitleoptions = true;
-            unset($data->$resetallsectiontitleoptions);
+            unset($data->resetallsectiontitleoptions);
         }
         if (isset($data->resetallnewactivity) == true) {
             $resetallnewactivity = true;
