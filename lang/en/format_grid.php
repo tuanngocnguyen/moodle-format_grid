@@ -167,11 +167,11 @@ $string['defaultshowsectiontitlesummary_desc'] = 'Show the section title summary
 $string['sectiontitleinsidetitletextcolour'] = 'Section title text colour when \'Inside\' option';
 $string['sectiontitleinsidetitletextcolour_help'] = 'Set title text colour when it is \'Inside\' the grid box.';
 $string['defaultsectiontitleinsidetitletextcolour'] = 'Section title text colour when \'Inside\' option';
-$string['defaultsectiontitleinsidetitletextcolour_help'] = 'Set title text colour when it is \'Inside\' the grid box.';
+$string['defaultsectiontitleinsidetitletextcolour_desc'] = 'Set title text colour when it is \'Inside\' the grid box.';
 $string['sectiontitleinsidetitlebackgroundcolour'] = 'Section title background colour when \'Inside\' option';
 $string['sectiontitleinsidetitlebackgroundcolour_help'] = 'Set title background colour when it is \'Inside\' the grid box.';
 $string['defaultsectiontitleinsidetitlebackgroundcolour'] = 'Section title background colour when \'Inside\' option';
-$string['defaultsectiontitleinsidetitlebackgroundcolour_help'] = 'Set title background colour when it is \'Inside\' the grid box.';
+$string['defaultsectiontitleinsidetitlebackgroundcolour_desc'] = 'Set title background colour when it is \'Inside\' the grid box.';
 
 // Reset.
 $string['resetgrp'] = 'Reset:';
