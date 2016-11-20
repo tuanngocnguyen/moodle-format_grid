@@ -649,7 +649,7 @@ class format_grid_renderer extends format_section_renderer_base {
                     if ($sectionnamelength > 0) {
                         if ($sectionnamelength == 1) {
                             if ($sectionname[0] != ' ') {
-                                $canshow = true;                           
+                                $canshow = true;
                             }
                         } else {
                             $canshow = true;
