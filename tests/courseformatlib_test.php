@@ -44,6 +44,9 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->courseone = $this->getDataGenerator()->create_course(
             array('format' => 'grid',
                 'numsections' => 1,
+                'sectiontitleboxposition' => 1,
+                'sectiontitleboxinsideposition' => 2,
+                'showsectiontitlesummary' => 1,
                 'sectiontitleinsidetitletextcolour' => '#ffffff',
                 'sectiontitleinsidetitlebackgroundcolour' => '#000000'),
             array('createsections' => true));
@@ -51,6 +54,9 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->coursetwo = $this->getDataGenerator()->create_course(
             array('format' => 'grid',
                 'numsections' => 1,
+                'sectiontitleboxposition' => 1,
+                'sectiontitleboxinsideposition' => 3,
+                'showsectiontitlesummary' => 1,
                 'sectiontitleinsidetitletextcolour' => '#ffffff',
                 'sectiontitleinsidetitlebackgroundcolour' => '#000000'),
             array('createsections' => true));
@@ -64,6 +70,9 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->courseformatone->update_course_format_options($data);
         $cfo = $this->courseformatone->get_format_options();
 
+        $this->assertEquals(2, $cfo['sectiontitleboxposition']);
+        $this->assertEquals(1, $cfo['sectiontitleboxinsideposition']);
+        $this->assertEquals(2, $cfo['showsectiontitlesummary']);
         $this->assertEquals('000000', $cfo['sectiontitleinsidetitletextcolour']);
         $this->assertEquals('ffffff', $cfo['sectiontitleinsidetitlebackgroundcolour']);
     }
@@ -74,15 +83,17 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $data->resetallsectiontitleoptions = true;
         $this->courseformatone->update_course_format_options($data);
         $cfo1 = $this->courseformatone->get_format_options();
+        $cfo2 = $this->courseformattwo->get_format_options();
 
+        $this->assertEquals(2, $cfo1['sectiontitleboxposition']);
+        $this->assertEquals(1, $cfo1['sectiontitleboxinsideposition']);
+        $this->assertEquals(2, $cfo1['showsectiontitlesummary']);
         $this->assertEquals('000000', $cfo1['sectiontitleinsidetitletextcolour']);
         $this->assertEquals('ffffff', $cfo1['sectiontitleinsidetitlebackgroundcolour']);
 
-        $data = new stdClass;
-        $data->resetallsectiontitleoptions = true;
-        $this->courseformattwo->update_course_format_options($data);
-        $cfo2 = $this->courseformattwo->get_format_options();
-
+        $this->assertEquals(2, $cfo2['sectiontitleboxposition']);
+        $this->assertEquals(1, $cfo2['sectiontitleboxinsideposition']);
+        $this->assertEquals(2, $cfo2['showsectiontitlesummary']);
         $this->assertEquals('000000', $cfo2['sectiontitleinsidetitletextcolour']);
         $this->assertEquals('ffffff', $cfo2['sectiontitleinsidetitlebackgroundcolour']);
     }
