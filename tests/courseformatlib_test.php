@@ -39,11 +39,11 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->resetAfterTest(true);
 
         set_config('theme', 'clean');
-        global $PAGE;
         // Ref: https://docs.moodle.org/dev/Writing_PHPUnit_tests.
         $this->courseone = $this->getDataGenerator()->create_course(
             array('format' => 'grid',
                 'numsections' => 1,
+                'hidesectiontitle' => 2,
                 'sectiontitleboxposition' => 1,
                 'sectiontitleboxinsideposition' => 2,
                 'showsectiontitlesummary' => 1,
@@ -54,6 +54,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->coursetwo = $this->getDataGenerator()->create_course(
             array('format' => 'grid',
                 'numsections' => 1,
+                'hidesectiontitle' => 2,
                 'sectiontitleboxposition' => 1,
                 'sectiontitleboxinsideposition' => 3,
                 'showsectiontitlesummary' => 1,
@@ -70,6 +71,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->courseformatone->update_course_format_options($data);
         $cfo = $this->courseformatone->get_format_options();
 
+        $this->assertEquals(1, $cfo['hidesectiontitle']);
         $this->assertEquals(2, $cfo['sectiontitleboxposition']);
         $this->assertEquals(1, $cfo['sectiontitleboxinsideposition']);
         $this->assertEquals(2, $cfo['showsectiontitlesummary']);
@@ -85,12 +87,14 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $cfo1 = $this->courseformatone->get_format_options();
         $cfo2 = $this->courseformattwo->get_format_options();
 
+        $this->assertEquals(1, $cfo1['hidesectiontitle']);
         $this->assertEquals(2, $cfo1['sectiontitleboxposition']);
         $this->assertEquals(1, $cfo1['sectiontitleboxinsideposition']);
         $this->assertEquals(2, $cfo1['showsectiontitlesummary']);
         $this->assertEquals('000000', $cfo1['sectiontitleinsidetitletextcolour']);
         $this->assertEquals('ffffff', $cfo1['sectiontitleinsidetitlebackgroundcolour']);
 
+        $this->assertEquals(1, $cfo2['hidesectiontitle']);
         $this->assertEquals(2, $cfo2['sectiontitleboxposition']);
         $this->assertEquals(1, $cfo2['sectiontitleboxinsideposition']);
         $this->assertEquals(2, $cfo2['showsectiontitlesummary']);

@@ -367,7 +367,6 @@ class format_grid extends format_base {
             if ($defaultcurrentselectedimagecontainercolour[0] == '#') {
                 $defaultcurrentselectedimagecontainercolour = substr($defaultcurrentselectedimagecontainercolour, 1);
             }
-            $defaultfitsectioncontainertowindow = get_config('format_grid', 'defaultfitsectioncontainertowindow');
 
             $courseconfig = get_config('moodlecourse');
             $courseformatoptions = array(
@@ -419,8 +418,8 @@ class format_grid extends format_base {
                     'default' => $defaultcurrentselectedimagecontainercolour,
                     'type' => PARAM_ALPHANUM
                 ),
-                'newactivity' => array(
-                    'default' => get_config('format_grid', 'defaultnewactivity'),
+                'hidesectiontitle' => array(
+                    'default' => get_config('format_grid', 'defaulthidesectiontitle'),
                     'type' => PARAM_INT
                 ),
                 'sectiontitleboxposition' => array(
@@ -442,6 +441,10 @@ class format_grid extends format_base {
                 'sectiontitleinsidetitlebackgroundcolour' => array(
                     'default' => get_config('format_grid', 'defaultsectiontitleinsidetitlebackgroundcolour'),
                     'type' => PARAM_ALPHANUM
+                ),
+                'newactivity' => array(
+                    'default' => get_config('format_grid', 'defaultnewactivity'),
+                    'type' => PARAM_INT
                 ),
                 'fitsectioncontainertowindow' => array(
                     'default' => get_config('format_grid', 'defaultfitsectioncontainertowindow'),
@@ -627,6 +630,18 @@ class format_grid extends format_base {
             }
 
             if (has_capability('format/grid:changesectiontitleoptions', $coursecontext)) {
+                $courseformatoptionsedit['hidesectiontitle'] = array(
+                    'label' => new lang_string('hidesectiontitle', 'format_grid'),
+                    'element_type' => 'select',
+                    'element_attributes' => array(
+                        array(
+                            1 => new lang_string('no'), // No.
+                            2 => new lang_string('yes') // Yes.
+                        )
+                    ),
+                    'help' => 'hidesectiontitle',
+                    'help_component' => 'format_grid'
+                );
                 $courseformatoptionsedit['sectiontitleboxposition'] = array(
                     'label' => new lang_string('sectiontitleboxposition', 'format_grid'),
                     'element_type' => 'select',
@@ -658,7 +673,7 @@ class format_grid extends format_base {
                     'element_attributes' => array(
                         array(
                             1 => new lang_string('no'), // No.
-                            2 => new lang_string('yes')   // Yes.
+                            2 => new lang_string('yes') // Yes.
                         )
                     ),
                     'help' => 'showsectiontitlesummary',
@@ -1201,6 +1216,7 @@ class format_grid extends format_base {
             $updateimagecontainerstyle = true;
         }
         if ($sectiontitleoptionsreset && has_capability('format/grid:changesectiontitleoptions', $coursecontext) && $resetallifall) {
+            $updatedata['hidesectiontitle'] = get_config('format_grid', 'defaulthidesectiontitle');
             $updatedata['sectiontitleboxposition'] = get_config('format_grid', 'defaultsectiontitleboxposition');
             $updatedata['sectiontitleboxinsideposition'] = get_config('format_grid', 'defaultsectiontitleboxinsideposition');
             $updatedata['showsectiontitlesummary'] = get_config('format_grid', 'defaultshowsectiontitlesummary');

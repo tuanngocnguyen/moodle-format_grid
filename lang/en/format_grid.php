@@ -147,6 +147,10 @@ $string['setfitsectioncontainertowindow_help'] = 'If enabled, the popup box with
 $string['colourrule'] = "Please enter a valid RGB colour, six hexadecimal digits.";
 
 // Section title text format options.
+$string['hidesectiontitle'] = 'Hide section title option';
+$string['hidesectiontitle_help'] = 'Hide the section title.';
+$string['defaulthidesectiontitle'] = 'Hide section title option';
+$string['defaulthidesectiontitle_desc'] = 'Hide the section title.';
 $string['sectiontitleboxposition'] = 'Section title box position option';
 $string['sectiontitleboxposition_help'] = 'Set the position of the section title within the grid box to one of: \'Inside\' or \'Outside\'.';
 $string['defaultsectiontitleboxposition'] = 'Section title box position option';

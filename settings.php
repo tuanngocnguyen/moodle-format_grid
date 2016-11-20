@@ -124,6 +124,17 @@ if ($ADMIN->fulltree) {
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
     $settings->add($setting);
 
+    /* Hide section title - 1 = no, 2 = yes. */
+    $name = 'format_grid/defaulthidesectiontitle';
+    $title = get_string('defaulthidesectiontitle', 'format_grid');
+    $description = get_string('defaulthidesectiontitle_desc', 'format_grid');
+    $default = 1;
+    $choices = array(
+        1 => new lang_string('no'),   // No.
+        2 => new lang_string('yes')   // Yes.
+    );
+    $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
+
     /* Section title box position - 1 = Inside, 2 = Outside. */
     $name = 'format_grid/defaultsectiontitleboxposition';
     $title = get_string('defaultsectiontitleboxposition', 'format_grid');

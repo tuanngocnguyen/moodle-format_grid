@@ -608,8 +608,6 @@ class format_grid_renderer extends format_section_renderer_base {
                 // We now know the value for the grid shade box shown array.
                 $this->shadeboxshownarray[$section] = 2;
 
-                $sectionname = $this->courseformat->get_section_name($thissection);
-
                 /* Roles info on based on: http://www.w3.org/TR/wai-aria/roles.
                    Looked into the 'grid' role but that requires 'row' before 'gridcell' and there are none as the grid
                    is responsive, so as the container is a 'navigation' then need to look into converting the containing
@@ -641,14 +639,22 @@ class format_grid_renderer extends format_section_renderer_base {
                         $this->settings);
                 }
 
+                $sectionname = $this->courseformat->get_section_name($thissection);
+                $sectiontitleattribues = array();
+                if ($this->settings['hidesectiontitle'] == 1) {
+                    $displaysectionname = $sectionname;
+                } else {
+                    $displaysectionname = '';
+                    $sectiontitleattribues['aria-label'] = $sectionname;
+                }
                 $sectiontitleclass = 'icon_content';
                 if ($this->settings['sectiontitleboxposition'] == 1) {
                     // Only bother if there is a section name to show.
                     $canshow = false;
-                    $sectionnamelength = core_text::strlen($sectionname);
+                    $sectionnamelength = core_text::strlen($displaysectionname);
                     if ($sectionnamelength > 0) {
                         if ($sectionnamelength == 1) {
-                            if ($sectionname[0] != ' ') {
+                            if ($displaysectionname[0] != ' ') {
                                 $canshow = true;
                             }
                         } else {
@@ -664,9 +670,9 @@ class format_grid_renderer extends format_section_renderer_base {
                         }
                     }
                 }
-                $sectiontitleattribues = array(
-                            'id' => 'gridsectionname-'.$thissection->section,
-                            'class' => $sectiontitleclass);
+
+                $sectiontitleattribues['id'] = 'gridsectionname-'.$thissection->section;
+                $sectiontitleattribues['class'] = $sectiontitleclass;
                 if ($this->settings['showsectiontitlesummary'] == 2) {
                     $summary = strip_tags($thissection->summary);
                     if (core_text::strlen($summary) > 0) {
@@ -681,7 +687,7 @@ class format_grid_renderer extends format_section_renderer_base {
                         'class' => 'gridicon_link',
                         'role' => 'link'));
 
-                    echo html_writer::tag('div', $sectionname, $sectiontitleattribues);
+                    echo html_writer::tag('div', $displaysectionname, $sectiontitleattribues);
 
                     if (($this->settings['newactivity'] == 2) && (isset($sectionupdated[$thissection->id]))) {
                         // The section has been updated since the user last visited this course, add NEW label.
@@ -723,7 +729,7 @@ class format_grid_renderer extends format_section_renderer_base {
                     }
                     echo html_writer::end_tag('li');
                 } else {
-                    $content = html_writer::tag('div', $sectionname, $sectiontitleattribues);
+                    $content = html_writer::tag('div', $displaysectionname, $sectiontitleattribues);
 
                     if (($this->settings['newactivity'] == 2) && (isset($sectionupdated[$thissection->id]))) {
                         $content .= html_writer::empty_tag('img', array(
