@@ -141,6 +141,7 @@ if ($gfsettings['sectiontitleboxposition'] == 1) {
         echo '#';
     }
     echo $gfsettings['sectiontitleinsidetitletextcolour'].';';
+    echo 'height: '.round(($imageproperties['height'] * 0.25), 0, PHP_ROUND_HALF_UP).'px;';
     echo '}';
 }
 

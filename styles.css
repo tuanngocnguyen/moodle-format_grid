@@ -150,12 +150,12 @@ div#gridmiddle-column > ul {
     margin: auto;
     right: 0;
     top: 0;
-    width: 100%;
 }
 .course-content ul.gridicons li .icon_content.content_inside.bottom {
     bottom: 0;
     left: 0;
-    width: 100%;
+    margin: auto;
+    right: 0;
 }
 
 .course-content ul.gridicons li .image_holder {
