@@ -682,7 +682,7 @@ class format_grid_renderer extends format_section_renderer_base {
                     $summary = strip_tags($thissection->summary);
                     if (core_text::strlen($summary) > 0) {
                         $sectiontitleattribues['title'] = strip_tags($thissection->summary);
-                        $sectiontitleattribues['data-toggle'] = 'tooltip';
+                        $sectiontitleattribues['data-toggle'] = 'gridtooltip';
                         $sectiontitleattribues['data-placement'] = 'top';
                     }
                 }
