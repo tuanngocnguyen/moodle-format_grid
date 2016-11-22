@@ -138,9 +138,12 @@ div#gridmiddle-column > ul {
     height: 40px;
     opacity: 0.8;
     overflow-wrap: break-word;
-    padding-bottom: 15px;
-    padding-top: 15px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
     position: absolute;
+    text-overflow: inherit;
     white-space: pre-wrap;
     word-wrap: break-word;
 }

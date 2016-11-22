@@ -80,7 +80,11 @@ $gfsettings['imagecontainerwidth'], $gfsettings['imagecontainerratio'], $gfsetti
 echo '<style type="text/css" media="screen">';
 echo '/* <![CDATA[ */';
 echo '.course-content ul.gridicons li .icon_content {';
-echo 'width: '.($gfsettings['imagecontainerwidth'] + ($gfsettings['borderwidth'] * 2)).'px;';
+if ($gfsettings['sectiontitleboxposition'] == 1) {
+    echo 'width: '.(($gfsettings['imagecontainerwidth'] + ($gfsettings['borderwidth'] * 2)) - 20).'px;';
+} else {
+    echo 'width: '.($gfsettings['imagecontainerwidth'] + ($gfsettings['borderwidth'] * 2)).'px;';
+}
 echo '}';
 echo '.course-content ul.gridicons li .image_holder {';
 echo 'width: '.$gfsettings['imagecontainerwidth'].'px;';
