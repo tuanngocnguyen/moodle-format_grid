@@ -19,7 +19,7 @@
  *
  * @package    course/format
  * @subpackage grid
- * @copyright  &copy; 2012+ G J Barnard in respect to modifications of standard topics format.
+ * @copyright  &copy; 2016+ G J Barnard in respect to modifications of standard topics format.
  * @author     G J Barnard - gjbarnard at gmail dot com, about.me/gjbarnard and {@link http://moodle.org/user/profile.php?id=442195}
  * @author     Based on code originally written by Paul Krix and Julian Ridden.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -44,6 +44,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
             array('format' => 'grid',
                 'numsections' => 1,
                 'hidesectiontitle' => 2,
+                'currentselectedimagecontainertextcolour' => '#ffffff',
                 'sectiontitleboxposition' => 1,
                 'sectiontitleboxinsideposition' => 2,
                 'showsectiontitlesummary' => 1,
@@ -55,6 +56,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
             array('format' => 'grid',
                 'numsections' => 1,
                 'hidesectiontitle' => 2,
+                'currentselectedimagecontainertextcolour' => '#244896',
                 'sectiontitleboxposition' => 1,
                 'sectiontitleboxinsideposition' => 3,
                 'showsectiontitlesummary' => 1,
@@ -62,6 +64,28 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
                 'sectiontitleinsidetitlebackgroundcolour' => '#000000'),
             array('createsections' => true));
         $this->courseformattwo = course_get_format($this->courseone);
+    }
+
+    public function test_reset_image_container_style() {
+        $this->setAdminUser();
+        $data = new stdClass;
+        $data->resetimagecontainerstyle = true;
+        $this->courseformatone->update_course_format_options($data);
+        $cfo = $this->courseformatone->get_format_options();
+
+        $this->assertEquals('3b53ad', $cfo['currentselectedimagecontainertextcolour']);
+    }
+
+    public function test_reset_image_container_styles() {
+        $this->setAdminUser();
+        $data = new stdClass;
+        $data->resetimagecontainerstyle = true;
+        $this->courseformatone->update_course_format_options($data);
+        $cfo1 = $this->courseformatone->get_format_options();
+        $cfo2 = $this->courseformatone->get_format_options();
+
+        $this->assertEquals('3b53ad', $cfo1['currentselectedimagecontainertextcolour']);
+        $this->assertEquals('3b53ad', $cfo2['currentselectedimagecontainertextcolour']);
     }
 
     public function test_reset_section_title_options() {

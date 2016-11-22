@@ -147,6 +147,13 @@ if ($gfsettings['sectiontitleboxposition'] == 1) {
     echo $gfsettings['sectiontitleinsidetitletextcolour'].';';
     echo 'height: '.round(($imageproperties['height'] * 0.25), 0, PHP_ROUND_HALF_UP).'px;';
     echo '}';
+} else {
+    echo '.course-content ul.gridicons li.currentselected .icon_content {';
+    echo 'color: ';
+    if ($gfsettings['currentselectedimagecontainertextcolour'][0] != '#') {
+        echo '#';
+    }
+    echo $gfsettings['currentselectedimagecontainertextcolour'].';';    
 }
 
 echo '.course-content ul.gridicons img.new_activity {';
