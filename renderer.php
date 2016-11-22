@@ -589,6 +589,11 @@ class format_grid_renderer extends format_section_renderer_base {
             $singlepageurl = $this->courseformat->get_view_url(null)->out(true);
         }
 
+        if ($this->settings['showsectiontitlesummary'] == 2) {
+            global $PAGE;
+            $PAGE->requires->js_call_amd('format_grid/tooltip', 'init', array());
+        }
+
         // Start at 1 to skip the summary block or include the summary block if it's in the grid display.
         for ($section = $this->topic0attop ? 1 : 0; $section <= $course->numsections; $section++) {
             $thissection = $modinfo->get_section_info($section);
@@ -677,6 +682,8 @@ class format_grid_renderer extends format_section_renderer_base {
                     $summary = strip_tags($thissection->summary);
                     if (core_text::strlen($summary) > 0) {
                         $sectiontitleattribues['title'] = strip_tags($thissection->summary);
+                        $sectiontitleattribues['data-toggle'] = 'tooltip';
+                        $sectiontitleattribues['data-placement'] = 'top';
                     }
                 }
 
