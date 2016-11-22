@@ -107,6 +107,8 @@ $string['defaultimagecontainerbackgroundcolour'] = 'Default image container back
 $string['defaultimagecontainerbackgroundcolour_desc'] = 'The default image container background colour.';
 $string['defaultcurrentselectedsectioncolour'] = 'Default current selected section colour';
 $string['defaultcurrentselectedsectioncolour_desc'] = 'The default current selected section colour.';
+$string['defaultcurrentselectedimagecontainertextcolour'] = 'Default current selected image container text colour';
+$string['defaultcurrentselectedimagecontainertextcolour_desc'] = 'The default current selected image container text colour.';
 $string['defaultcurrentselectedimagecontainercolour'] = 'Default current selected image container colour';
 $string['defaultcurrentselectedimagecontainercolour_desc'] = 'The default current selected image container colour.';
 
@@ -135,6 +137,8 @@ $string['setimagecontainerbackgroundcolour'] = 'Set the image container backgrou
 $string['setimagecontainerbackgroundcolour_help'] = 'Set the image container background colour in hexidecimal RGB.';
 $string['setcurrentselectedsectioncolour'] = 'Set the current selected section colour';
 $string['setcurrentselectedsectioncolour_help'] = 'Set the current selected section colour in hexidecimal RGB.';
+$string['setcurrentselectedimagecontainertextcolour'] = 'Set the current selected image container text colour';
+$string['setcurrentselectedimagecontainertextcolour_help'] = 'Set the current selected image container text colour in hexidecimal RGB.';
 $string['setcurrentselectedimagecontainercolour'] = 'Set the current selected image container colour';
 $string['setcurrentselectedimagecontainercolour_help'] = 'Set the current selected image container colour in hexidecimal RGB.';
 

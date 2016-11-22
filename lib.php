@@ -168,6 +168,14 @@ class format_grid extends format_base {
     }
 
     /**
+     * Gets the default current selected image container text colour.
+     * @return string Default current selected image container text colour.
+     */
+    public static function get_default_current_selected_image_container_text_colour() {
+        return '#3b53ad';
+    }
+
+    /**
      * Gets the default current selected image container colour.
      * @return string Default current selected image container colour.
      */
@@ -363,9 +371,21 @@ class format_grid extends format_base {
             if ($defaultcurrentselectedsectioncolour[0] == '#') {
                 $defaultcurrentselectedsectioncolour = substr($defaultcurrentselectedsectioncolour, 1);
             }
+            $defaultcurrentselectedimagecontainertextcolour = get_config('format_grid', 'defaultcurrentselectedimagecontainertextcolour');
+            if ($defaultcurrentselectedimagecontainertextcolour[0] == '#') {
+                $defaultcurrentselectedimagecontainertextcolour = substr($defaultcurrentselectedimagecontainertextcolour, 1);
+            }
             $defaultcurrentselectedimagecontainercolour = get_config('format_grid', 'defaultcurrentselectedimagecontainercolour');
             if ($defaultcurrentselectedimagecontainercolour[0] == '#') {
                 $defaultcurrentselectedimagecontainercolour = substr($defaultcurrentselectedimagecontainercolour, 1);
+            }
+            $defaultsectiontitleinsidetitletextcolour = get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour');
+            if ($defaultsectiontitleinsidetitletextcolour[0] == '#') {
+                $defaultsectiontitleinsidetitletextcolour = substr($defaultsectiontitleinsidetitletextcolour, 1);
+            }
+            $defaultsectiontitleinsidetitlebackgroundcolour = get_config('format_grid', 'defaultsectiontitleinsidetitlebackgroundcolour');
+            if ($defaultsectiontitleinsidetitlebackgroundcolour[0] == '#') {
+                $defaultsectiontitleinsidetitlebackgroundcolour = substr($defaultsectiontitleinsidetitlebackgroundcolour, 1);
             }
 
             $courseconfig = get_config('moodlecourse');
@@ -414,6 +434,10 @@ class format_grid extends format_base {
                     'default' => $defaultcurrentselectedsectioncolour,
                     'type' => PARAM_ALPHANUM
                 ),
+                'currentselectedimagecontainertextcolour' => array(
+                    'default' => $defaultcurrentselectedimagecontainertextcolour,
+                    'type' => PARAM_ALPHANUM
+                ),
                 'currentselectedimagecontainercolour' => array(
                     'default' => $defaultcurrentselectedimagecontainercolour,
                     'type' => PARAM_ALPHANUM
@@ -435,11 +459,11 @@ class format_grid extends format_base {
                     'type' => PARAM_INT
                 ),
                 'sectiontitleinsidetitletextcolour' => array(
-                    'default' => get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour'),
+                    'default' => $defaultsectiontitleinsidetitletextcolour,
                     'type' => PARAM_ALPHANUM
                 ),
                 'sectiontitleinsidetitlebackgroundcolour' => array(
-                    'default' => get_config('format_grid', 'defaultsectiontitleinsidetitlebackgroundcolour'),
+                    'default' => $defaultsectiontitleinsidetitlebackgroundcolour,
                     'type' => PARAM_ALPHANUM
                 ),
                 'newactivity' => array(
@@ -471,9 +495,21 @@ class format_grid extends format_base {
             if ($defaultcurrentselectedsectioncolour[0] == '#') {
                 $defaultcurrentselectedsectioncolour = substr($defaultcurrentselectedsectioncolour, 1);
             }
+            $defaultcurrentselectedimagecontainertextcolour = get_config('format_grid', 'defaultcurrentselectedimagecontainertextcolour');
+            if ($defaultcurrentselectedimagecontainertextcolour[0] == '#') {
+                $defaultcurrentselectedimagecontainertextcolour = substr($defaultcurrentselectedimagecontainertextcolour, 1);
+            }
             $defaultcurrentselectedimagecontainercolour = get_config('format_grid', 'defaultcurrentselectedimagecontainercolour');
             if ($defaultcurrentselectedimagecontainercolour[0] == '#') {
                 $defaultcurrentselectedimagecontainercolour = substr($defaultcurrentselectedimagecontainercolour, 1);
+            }
+            $defaultsectiontitleinsidetitletextcolour = get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour');
+            if ($defaultsectiontitleinsidetitletextcolour[0] == '#') {
+                $defaultsectiontitleinsidetitletextcolour = substr($defaultsectiontitleinsidetitletextcolour, 1);
+            }
+            $defaultsectiontitleinsidetitlebackgroundcolour = get_config('format_grid', 'defaultsectiontitleinsidetitlebackgroundcolour');
+            if ($defaultsectiontitleinsidetitlebackgroundcolour[0] == '#') {
+                $defaultsectiontitleinsidetitlebackgroundcolour = substr($defaultsectiontitleinsidetitlebackgroundcolour, 1);
             }
 
             $coursecontext = context_course::instance($this->courseid);
@@ -605,6 +641,16 @@ class format_grid extends format_base {
                     )
                 );
 
+                $courseformatoptionsedit['currentselectedimagecontainertextcolour'] = array(
+                    'label' => new lang_string('setcurrentselectedimagecontainertextcolour', 'format_grid'),
+                    'help' => 'setcurrentselectedimagecontainertextcolour',
+                    'help_component' => 'format_grid',
+                    'element_type' => 'gfcolourpopup',
+                    'element_attributes' => array(
+                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultcurrentselectedimagecontainertextcolour'))
+                    )
+                );
+
                 $courseformatoptionsedit['currentselectedimagecontainercolour'] = array(
                     'label' => new lang_string('setcurrentselectedimagecontainercolour', 'format_grid'),
                     'help' => 'setcurrentselectedimagecontainercolour',
@@ -625,6 +671,8 @@ class format_grid extends format_base {
                     'label' => $defaultimagecontainerbackgroundcolour, 'element_type' => 'hidden');
                 $courseformatoptionsedit['currentselectedsectioncolour'] = array(
                     'label' => $defaultcurrentselectedsectioncolour, 'element_type' => 'hidden');
+                $courseformatoptionsedit['currentselectedimagecontainertextcolour'] = array(
+                    'label' => $defaultcurrentselectedimagecontainertextcolour, 'element_type' => 'hidden');
                 $courseformatoptionsedit['currentselectedimagecontainercolour'] = array(
                     'label' => $defaultcurrentselectedimagecontainercolour, 'element_type' => 'hidden');
             }
@@ -697,6 +745,19 @@ class format_grid extends format_base {
                         array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultsectiontitleinsidetitlebackgroundcolour'))
                     )
                 );
+            } else {
+                $courseformatoptionsedit['hidesectiontitle'] = array('label' => get_config('format_grid', 'defaulthidesectiontitle'),
+                    'element_type' => 'hidden');
+                $courseformatoptionsedit['sectiontitleboxposition'] = array('label' => get_config('format_grid', 'defaultsectiontitleboxposition'),
+                    'element_type' => 'hidden');
+                $courseformatoptionsedit['sectiontitleboxinsideposition'] = array(
+                    'label' => get_config('format_grid', 'defaultsectiontitleboxinsideposition'), 'element_type' => 'hidden');
+                $courseformatoptionsedit['showsectiontitlesummary'] = array(
+                    'label' => get_config('format_grid', 'defaultshowsectiontitlesummary'), 'element_type' => 'hidden');
+                $courseformatoptionsedit['sectiontitleinsidetitletextcolour'] = array(
+                    'label' => $defaultsectiontitleinsidetitletextcolour, 'element_type' => 'hidden');
+                $courseformatoptionsedit['sectiontitleinsidetitlebackgroundcolour'] = array(
+                    'label' => $defaultsectiontitleinsidetitlebackgroundcolour, 'element_type' => 'hidden');
             }
 
             $courseformatoptionsedit['newactivity'] = array(
@@ -1211,6 +1272,8 @@ class format_grid extends format_base {
             $updatedata['borderradius'] = get_config('format_grid', 'defaultborderradius');
             $updatedata['imagecontainerbackgroundcolour'] = get_config('format_grid', 'defaultimagecontainerbackgroundcolour');
             $updatedata['currentselectedsectioncolour'] = get_config('format_grid', 'defaultcurrentselectedsectioncolour');
+            $updatedata['currentselectedimagecontainertextcolour'] = get_config('format_grid',
+                    'defaultcurrentselectedimagecontainertextcolour');
             $updatedata['currentselectedimagecontainercolour'] = get_config('format_grid',
                     'defaultcurrentselectedimagecontainercolour');
             $updateimagecontainerstyle = true;

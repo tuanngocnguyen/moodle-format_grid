@@ -116,7 +116,15 @@ if ($ADMIN->fulltree) {
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
     $settings->add($setting);
 
-    // Default current selected imagecontainer colour in hexadecimal RGB with preceding '#'.
+    // Default current selected image container text colour in hexadecimal RGB with preceding '#'.
+    $name = 'format_grid/defaultcurrentselectedimagecontainertextcolour';
+    $title = get_string('defaultcurrentselectedimagecontainertextcolour', 'format_grid');
+    $description = get_string('defaultcurrentselectedimagecontainertextcolour_desc', 'format_grid');
+    $default = format_grid::get_default_current_selected_image_container_text_colour();
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
+    $settings->add($setting);
+
+    // Default current selected image container colour in hexadecimal RGB with preceding '#'.
     $name = 'format_grid/defaultcurrentselectedimagecontainercolour';
     $title = get_string('defaultcurrentselectedimagecontainercolour', 'format_grid');
     $description = get_string('defaultcurrentselectedimagecontainercolour_desc', 'format_grid');
