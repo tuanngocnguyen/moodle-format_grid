@@ -782,7 +782,7 @@ class format_grid extends format_base {
         }
         return $defaults;
     }
-    
+
     /**
      * Adds format options elements to the course/section edit form.
      *

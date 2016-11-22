@@ -153,7 +153,7 @@ if ($gfsettings['sectiontitleboxposition'] == 1) {
     if ($gfsettings['currentselectedimagecontainertextcolour'][0] != '#') {
         echo '#';
     }
-    echo $gfsettings['currentselectedimagecontainertextcolour'].';';    
+    echo $gfsettings['currentselectedimagecontainertextcolour'].';';
 }
 
 echo '.course-content ul.gridicons img.new_activity {';
