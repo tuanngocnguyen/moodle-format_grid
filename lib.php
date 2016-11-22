@@ -359,34 +359,7 @@ class format_grid extends format_base {
         if ($courseformatoptions === false) {
             /* Note: Because 'admin_setting_configcolourpicker' in 'settings.php' needs to use a prefixing '#'
               this needs to be stripped off here if it's there for the format's specific colour picker. */
-            $defaultbordercolour = get_config('format_grid', 'defaultbordercolour');
-            if ($defaultbordercolour[0] == '#') {
-                $defaultbordercolour = substr($defaultbordercolour, 1);
-            }
-            $defaultimagecontainerbackgroundcolour = get_config('format_grid', 'defaultimagecontainerbackgroundcolour');
-            if ($defaultimagecontainerbackgroundcolour[0] == '#') {
-                $defaultimagecontainerbackgroundcolour = substr($defaultimagecontainerbackgroundcolour, 1);
-            }
-            $defaultcurrentselectedsectioncolour = get_config('format_grid', 'defaultcurrentselectedsectioncolour');
-            if ($defaultcurrentselectedsectioncolour[0] == '#') {
-                $defaultcurrentselectedsectioncolour = substr($defaultcurrentselectedsectioncolour, 1);
-            }
-            $defaultcurrentselectedimagecontainertextcolour = get_config('format_grid', 'defaultcurrentselectedimagecontainertextcolour');
-            if ($defaultcurrentselectedimagecontainertextcolour[0] == '#') {
-                $defaultcurrentselectedimagecontainertextcolour = substr($defaultcurrentselectedimagecontainertextcolour, 1);
-            }
-            $defaultcurrentselectedimagecontainercolour = get_config('format_grid', 'defaultcurrentselectedimagecontainercolour');
-            if ($defaultcurrentselectedimagecontainercolour[0] == '#') {
-                $defaultcurrentselectedimagecontainercolour = substr($defaultcurrentselectedimagecontainercolour, 1);
-            }
-            $defaultsectiontitleinsidetitletextcolour = get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour');
-            if ($defaultsectiontitleinsidetitletextcolour[0] == '#') {
-                $defaultsectiontitleinsidetitletextcolour = substr($defaultsectiontitleinsidetitletextcolour, 1);
-            }
-            $defaultsectiontitleinsidetitlebackgroundcolour = get_config('format_grid', 'defaultsectiontitleinsidetitlebackgroundcolour');
-            if ($defaultsectiontitleinsidetitlebackgroundcolour[0] == '#') {
-                $defaultsectiontitleinsidetitlebackgroundcolour = substr($defaultsectiontitleinsidetitlebackgroundcolour, 1);
-            }
+            $defaults = $this->get_course_format_colour_defaults();
 
             $courseconfig = get_config('moodlecourse');
             $courseformatoptions = array(
@@ -415,7 +388,7 @@ class format_grid extends format_base {
                     'type' => PARAM_INT
                 ),
                 'bordercolour' => array(
-                    'default' => $defaultbordercolour,
+                    'default' => $defaults['defaultbordercolour'],
                     'type' => PARAM_ALPHANUM
                 ),
                 'borderwidth' => array(
@@ -427,19 +400,19 @@ class format_grid extends format_base {
                     'type' => PARAM_INT
                 ),
                 'imagecontainerbackgroundcolour' => array(
-                    'default' => $defaultimagecontainerbackgroundcolour,
+                    'default' => $defaults['defaultimagecontainerbackgroundcolour'],
                     'type' => PARAM_ALPHANUM
                 ),
                 'currentselectedsectioncolour' => array(
-                    'default' => $defaultcurrentselectedsectioncolour,
+                    'default' => $defaults['defaultcurrentselectedsectioncolour'],
                     'type' => PARAM_ALPHANUM
                 ),
                 'currentselectedimagecontainertextcolour' => array(
-                    'default' => $defaultcurrentselectedimagecontainertextcolour,
+                    'default' => $defaults['defaultcurrentselectedimagecontainertextcolour'],
                     'type' => PARAM_ALPHANUM
                 ),
                 'currentselectedimagecontainercolour' => array(
-                    'default' => $defaultcurrentselectedimagecontainercolour,
+                    'default' => $defaults['defaultcurrentselectedimagecontainercolour'],
                     'type' => PARAM_ALPHANUM
                 ),
                 'hidesectiontitle' => array(
@@ -459,11 +432,11 @@ class format_grid extends format_base {
                     'type' => PARAM_INT
                 ),
                 'sectiontitleinsidetitletextcolour' => array(
-                    'default' => $defaultsectiontitleinsidetitletextcolour,
+                    'default' => $defaults['defaultsectiontitleinsidetitletextcolour'],
                     'type' => PARAM_ALPHANUM
                 ),
                 'sectiontitleinsidetitlebackgroundcolour' => array(
-                    'default' => $defaultsectiontitleinsidetitlebackgroundcolour,
+                    'default' => $defaults['defaultsectiontitleinsidetitlebackgroundcolour'],
                     'type' => PARAM_ALPHANUM
                 ),
                 'newactivity' => array(
@@ -483,34 +456,7 @@ class format_grid extends format_base {
         if ($foreditform && !isset($courseformatoptions['coursedisplay']['label'])) {
             /* Note: Because 'admin_setting_configcolourpicker' in 'settings.php' needs to use a prefixing '#'
               this needs to be stripped off here if it's there for the format's specific colour picker. */
-            $defaultbordercolour = get_config('format_grid', 'defaultbordercolour');
-            if ($defaultbordercolour[0] == '#') {
-                $defaultbordercolour = substr($defaultbordercolour, 1);
-            }
-            $defaultimagecontainerbackgroundcolour = get_config('format_grid', 'defaultimagecontainerbackgroundcolour');
-            if ($defaultimagecontainerbackgroundcolour[0] == '#') {
-                $defaultimagecontainerbackgroundcolour = substr($defaultimagecontainerbackgroundcolour, 1);
-            }
-            $defaultcurrentselectedsectioncolour = get_config('format_grid', 'defaultcurrentselectedsectioncolour');
-            if ($defaultcurrentselectedsectioncolour[0] == '#') {
-                $defaultcurrentselectedsectioncolour = substr($defaultcurrentselectedsectioncolour, 1);
-            }
-            $defaultcurrentselectedimagecontainertextcolour = get_config('format_grid', 'defaultcurrentselectedimagecontainertextcolour');
-            if ($defaultcurrentselectedimagecontainertextcolour[0] == '#') {
-                $defaultcurrentselectedimagecontainertextcolour = substr($defaultcurrentselectedimagecontainertextcolour, 1);
-            }
-            $defaultcurrentselectedimagecontainercolour = get_config('format_grid', 'defaultcurrentselectedimagecontainercolour');
-            if ($defaultcurrentselectedimagecontainercolour[0] == '#') {
-                $defaultcurrentselectedimagecontainercolour = substr($defaultcurrentselectedimagecontainercolour, 1);
-            }
-            $defaultsectiontitleinsidetitletextcolour = get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour');
-            if ($defaultsectiontitleinsidetitletextcolour[0] == '#') {
-                $defaultsectiontitleinsidetitletextcolour = substr($defaultsectiontitleinsidetitletextcolour, 1);
-            }
-            $defaultsectiontitleinsidetitlebackgroundcolour = get_config('format_grid', 'defaultsectiontitleinsidetitlebackgroundcolour');
-            if ($defaultsectiontitleinsidetitlebackgroundcolour[0] == '#') {
-                $defaultsectiontitleinsidetitlebackgroundcolour = substr($defaultsectiontitleinsidetitlebackgroundcolour, 1);
-            }
+            $defaults = $this->get_course_format_colour_defaults();
 
             $coursecontext = context_course::instance($this->courseid);
 
@@ -661,20 +607,20 @@ class format_grid extends format_base {
                     )
                 );
             } else {
-                $courseformatoptionsedit['bordercolour'] = array('label' => $defaultbordercolour,
+                $courseformatoptionsedit['bordercolour'] = array('label' => $defaults['defaultbordercolour'],
                     'element_type' => 'hidden');
                 $courseformatoptionsedit['borderwidth'] = array('label' => get_config('format_grid', 'defaultborderwidth'),
                     'element_type' => 'hidden');
                 $courseformatoptionsedit['borderradius'] = array('label' => get_config('format_grid', 'defaultborderradius'),
                     'element_type' => 'hidden');
                 $courseformatoptionsedit['imagecontainerbackgroundcolour'] = array(
-                    'label' => $defaultimagecontainerbackgroundcolour, 'element_type' => 'hidden');
+                    'label' => $defaults['defaultimagecontainerbackgroundcolour'], 'element_type' => 'hidden');
                 $courseformatoptionsedit['currentselectedsectioncolour'] = array(
-                    'label' => $defaultcurrentselectedsectioncolour, 'element_type' => 'hidden');
+                    'label' => $defaults['defaultcurrentselectedsectioncolour'], 'element_type' => 'hidden');
                 $courseformatoptionsedit['currentselectedimagecontainertextcolour'] = array(
-                    'label' => $defaultcurrentselectedimagecontainertextcolour, 'element_type' => 'hidden');
+                    'label' => $defaults['defaultcurrentselectedimagecontainertextcolour'], 'element_type' => 'hidden');
                 $courseformatoptionsedit['currentselectedimagecontainercolour'] = array(
-                    'label' => $defaultcurrentselectedimagecontainercolour, 'element_type' => 'hidden');
+                    'label' => $defaults['defaultcurrentselectedimagecontainercolour'], 'element_type' => 'hidden');
             }
 
             if (has_capability('format/grid:changesectiontitleoptions', $coursecontext)) {
@@ -755,9 +701,9 @@ class format_grid extends format_base {
                 $courseformatoptionsedit['showsectiontitlesummary'] = array(
                     'label' => get_config('format_grid', 'defaultshowsectiontitlesummary'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['sectiontitleinsidetitletextcolour'] = array(
-                    'label' => $defaultsectiontitleinsidetitletextcolour, 'element_type' => 'hidden');
+                    'label' => $defaults['defaultsectiontitleinsidetitletextcolour'], 'element_type' => 'hidden');
                 $courseformatoptionsedit['sectiontitleinsidetitlebackgroundcolour'] = array(
-                    'label' => $defaultsectiontitleinsidetitlebackgroundcolour, 'element_type' => 'hidden');
+                    'label' => $defaults['defaultsectiontitleinsidetitlebackgroundcolour'], 'element_type' => 'hidden');
             }
 
             $courseformatoptionsedit['newactivity'] = array(
@@ -804,6 +750,39 @@ class format_grid extends format_base {
         return $courseformatoptions;
     }
 
+    protected function get_course_format_colour_defaults() {
+        $defaults = array();
+        $defaults['defaultbordercolour'] = get_config('format_grid', 'defaultbordercolour');
+        if ($defaults['defaultbordercolour'][0] == '#') {
+            $defaults['defaultbordercolour'] = substr($defaults['defaultbordercolour'][0], 1);
+        }
+        $defaults['defaultimagecontainerbackgroundcolour'] = get_config('format_grid', 'defaultimagecontainerbackgroundcolour');
+        if ($defaults['defaultimagecontainerbackgroundcolour'][0] == '#') {
+            $defaults['defaultimagecontainerbackgroundcolour'] = substr($defaults['defaultimagecontainerbackgroundcolour'], 1);
+        }
+        $defaults['defaultcurrentselectedsectioncolour'] = get_config('format_grid', 'defaultcurrentselectedsectioncolour');
+        if ($defaults['defaultcurrentselectedsectioncolour'][0] == '#') {
+            $defaults['defaultcurrentselectedsectioncolour'] = substr($defaults['defaultcurrentselectedsectioncolour'], 1);
+        }
+        $defaults['defaultcurrentselectedimagecontainertextcolour'] = get_config('format_grid', 'defaultcurrentselectedimagecontainertextcolour');
+        if ($defaults['defaultcurrentselectedimagecontainertextcolour'][0] == '#') {
+            $defaults['defaultcurrentselectedimagecontainertextcolour'] = substr($defaults['defaultcurrentselectedimagecontainertextcolour'], 1);
+        }
+        $defaults['defaultcurrentselectedimagecontainercolour'] = get_config('format_grid', 'defaultcurrentselectedimagecontainercolour');
+        if ($defaults['defaultcurrentselectedimagecontainercolour'][0] == '#') {
+            $defaults['defaultcurrentselectedimagecontainercolour'] = substr($defaults['defaultcurrentselectedimagecontainercolour'], 1);
+        }
+        $defaults['defaultsectiontitleinsidetitletextcolour'] = get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour');
+        if ($defaults['defaultsectiontitleinsidetitletextcolour'][0] == '#') {
+            $defaults['defaultsectiontitleinsidetitletextcolour'] = substr($defaults['defaultsectiontitleinsidetitletextcolour'], 1);
+        }
+        $defaults['defaultsectiontitleinsidetitlebackgroundcolour'] = get_config('format_grid', 'defaultsectiontitleinsidetitlebackgroundcolour');
+        if ($defaults['defaultsectiontitleinsidetitlebackgroundcolour'][0] == '#') {
+            $defaults['defaultsectiontitleinsidetitlebackgroundcolour'] = substr($defaults['defaultsectiontitleinsidetitlebackgroundcolour'], 1);
+        }
+        return $defaults;
+    }
+    
     /**
      * Adds format options elements to the course/section edit form.
      *
