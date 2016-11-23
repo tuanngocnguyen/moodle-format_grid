@@ -184,6 +184,46 @@ class format_grid extends format_base {
     }
 
     /**
+     * Gets the default hide section title.
+     * @return int Default default hide section title.
+     */
+    public static function get_default_hide_section_title() {
+        return 1; // No.
+    }
+
+    /**
+     * Gets the default section title box position.
+     * @return int Default default section title box position.
+     */
+    public static function get_default_section_title_box_position() {
+        return 2; // Outside.
+    }
+
+    /**
+     * Gets the default section title box inside position.
+     * @return int Default default section title box inside position.
+     */
+    public static function get_default_section_title_box_inside_position() {
+        return 1; // Top.
+    }
+
+    /**
+     * Gets the default show section title summary.
+     * @return int Default default show section title summary.
+     */
+    public static function get_default_show_section_title_summary() {
+        return 2; // Yes.
+    }
+
+    /**
+     * Gets the default set show section title summary position.
+     * @return int Default default set show section title summary position.
+     */
+    public static function get_default_set_show_section_title_summary_position() {
+        return 1; // Top.
+    }
+
+    /**
      * Gets the default section title inside text colour.
      * @return string Default default section title inside text colour.
      */
@@ -222,6 +262,32 @@ class format_grid extends format_base {
         return $this->settings;
     }
 
+    /**
+     * Returns the mapped value of the 'setshowsectiontitlesummaryposition' setting.
+     * @return string One of 'top', 'bottom', 'left' or 'right'.
+     */
+    public function get_set_show_section_title_summary_position() {
+        $settings = $this->get_settings();
+        $returnvalue = 'top';
+        
+        switch($settings['setshowsectiontitlesummaryposition']) {
+            case 1:
+                $returnvalue = 'top';
+                break;
+            case 2:
+                $returnvalue = 'bottom';
+                break;
+            case 3:
+                $returnvalue = 'left';
+                break;
+            case 4:
+                $returnvalue = 'right';
+                break;
+        }
+        
+        return $returnvalue;
+    }
+    
     /**
      * Gets the name for the provided section.
      *
@@ -429,6 +495,10 @@ class format_grid extends format_base {
                 ),
                 'showsectiontitlesummary' => array(
                     'default' => get_config('format_grid', 'defaultshowsectiontitlesummary'),
+                    'type' => PARAM_INT
+                ),
+                'setshowsectiontitlesummaryposition' => array(
+                    'default' => get_config('format_grid', 'defaultsetshowsectiontitlesummaryposition'),
                     'type' => PARAM_INT
                 ),
                 'sectiontitleinsidetitletextcolour' => array(
@@ -673,6 +743,20 @@ class format_grid extends format_base {
                     'help' => 'showsectiontitlesummary',
                     'help_component' => 'format_grid'
                 );
+                $courseformatoptionsedit['setshowsectiontitlesummaryposition'] = array(
+                    'label' => new lang_string('setshowsectiontitlesummaryposition', 'format_grid'),
+                    'element_type' => 'select',
+                    'element_attributes' => array(
+                        array(
+                            1 => new lang_string('top', 'format_grid'),
+                            2 => new lang_string('bottom', 'format_grid'),
+                            3 => new lang_string('left', 'format_grid'),
+                            4 => new lang_string('right', 'format_grid')
+                        )
+                    ),
+                    'help' => 'setshowsectiontitlesummaryposition',
+                    'help_component' => 'format_grid'
+                );
                 $courseformatoptionsedit['sectiontitleinsidetitletextcolour'] = array(
                     'label' => new lang_string('sectiontitleinsidetitletextcolour', 'format_grid'),
                     'help' => 'sectiontitleinsidetitletextcolour',
@@ -700,6 +784,8 @@ class format_grid extends format_base {
                     'label' => get_config('format_grid', 'defaultsectiontitleboxinsideposition'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['showsectiontitlesummary'] = array(
                     'label' => get_config('format_grid', 'defaultshowsectiontitlesummary'), 'element_type' => 'hidden');
+                $courseformatoptionsedit['setshowsectiontitlesummaryposition'] = array(
+                    'label' => get_config('format_grid', 'defaultsetshowsectiontitlesummaryposition'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['sectiontitleinsidetitletextcolour'] = array(
                     'label' => $defaults['defaultsectiontitleinsidetitletextcolour'], 'element_type' => 'hidden');
                 $courseformatoptionsedit['sectiontitleinsidetitlebackgroundcolour'] = array(
@@ -1262,6 +1348,7 @@ class format_grid extends format_base {
             $updatedata['sectiontitleboxposition'] = get_config('format_grid', 'defaultsectiontitleboxposition');
             $updatedata['sectiontitleboxinsideposition'] = get_config('format_grid', 'defaultsectiontitleboxinsideposition');
             $updatedata['showsectiontitlesummary'] = get_config('format_grid', 'defaultshowsectiontitlesummary');
+            $updatedata['setshowsectiontitlesummaryposition'] = get_config('format_grid', 'defaultsetshowsectiontitlesummaryposition');
             $updatedata['sectiontitleinsidetitletextcolour'] = get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour');
             $updatedata['sectiontitleinsidetitlebackgroundcolour'] = get_config('format_grid', 'defaultsectiontitleinsidetitlebackgroundcolour');
             $updatesectiontitleoptions = true;

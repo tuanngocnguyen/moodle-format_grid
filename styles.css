@@ -138,7 +138,7 @@ div#gridmiddle-column > ul {
     height: 40px;
     opacity: 0.8;
     overflow-wrap: break-word;
-    padding: 10px 10px 20px;
+    padding: 10px 10px 30px;
     position: absolute;
     text-overflow: inherit;
     white-space: pre-wrap;
@@ -156,6 +156,31 @@ div#gridmiddle-column > ul {
     left: 0;
     margin: auto;
     right: 0;
+}
+
+.course-content ul.gridicons li .gridicon_link .tooltip {
+    font-size: 14px;
+}
+
+.course-content ul.gridicons li .gridicon_link .tooltip-inner {
+    background-color: #ffc540;
+    color: #3b53ad;
+}
+
+.course-content ul.gridicons li .gridicon_link .tooltip.top .tooltip-arrow {
+    border-top-color: #ffc540;
+}
+
+.course-content ul.gridicons li .gridicon_link .tooltip.bottom .tooltip-arrow {
+    border-bottom-color: #ffc540;
+}
+
+.course-content ul.gridicons li .gridicon_link .tooltip.left .tooltip-arrow {
+    border-left-color: #ffc540;
+}
+
+.course-content ul.gridicons li .gridicon_link .tooltip.right .tooltip-arrow {
+    border-right-color: #ffc540;
 }
 
 .course-content ul.gridicons li .image_holder {

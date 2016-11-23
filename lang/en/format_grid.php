@@ -172,6 +172,10 @@ $string['showsectiontitlesummary'] = 'Show section title summary on hover option
 $string['showsectiontitlesummary_help'] = 'Show the section title summary when hovering over the grid box.';
 $string['defaultshowsectiontitlesummary'] = 'Show section title summary on hover option';
 $string['defaultshowsectiontitlesummary_desc'] = 'Show the section title summary when hovering over the grid box.';
+$string['setshowsectiontitlesummaryposition'] = 'Set the show section title summary on hover position option';
+$string['setshowsectiontitlesummaryposition_help'] = 'Set the show the section title summary position when hovering over the grid box to one of: \'top\', \'bottom\', \'left\' or \'right\'.';
+$string['defaultsetshowsectiontitlesummaryposition'] = 'Set the show section title summary on hover position option';
+$string['defaultsetshowsectiontitlesummaryposition_desc'] = 'Set the show the section title summary position when hovering over the grid box to one of: \'top\', \'bottom\', \'left\' or \'right\'.';
 $string['sectiontitleinsidetitletextcolour'] = 'Section title text colour when \'Inside\' option';
 $string['sectiontitleinsidetitletextcolour_help'] = 'Set title text colour when it is \'Inside\' the grid box.';
 $string['defaultsectiontitleinsidetitletextcolour'] = 'Section title text colour when \'Inside\' option';
@@ -180,6 +184,10 @@ $string['sectiontitleinsidetitlebackgroundcolour'] = 'Section title background c
 $string['sectiontitleinsidetitlebackgroundcolour_help'] = 'Set title background colour when it is \'Inside\' the grid box.';
 $string['defaultsectiontitleinsidetitlebackgroundcolour'] = 'Section title background colour when \'Inside\' option';
 $string['defaultsectiontitleinsidetitlebackgroundcolour_desc'] = 'Set title background colour when it is \'Inside\' the grid box.';
+$string['top'] = 'Top';
+$string['bottom'] = 'Bottom';
+$string['left'] = 'Left';
+$string['right'] = 'Right';
 
 // Reset.
 $string['resetgrp'] = 'Reset:';

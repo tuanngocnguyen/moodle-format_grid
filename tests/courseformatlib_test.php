@@ -48,6 +48,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
                 'sectiontitleboxposition' => 1,
                 'sectiontitleboxinsideposition' => 2,
                 'showsectiontitlesummary' => 1,
+                'setshowsectiontitlesummaryposition' => 2,
                 'sectiontitleinsidetitletextcolour' => '#ffffff',
                 'sectiontitleinsidetitlebackgroundcolour' => '#000000'),
             array('createsections' => true));
@@ -60,6 +61,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
                 'sectiontitleboxposition' => 1,
                 'sectiontitleboxinsideposition' => 3,
                 'showsectiontitlesummary' => 1,
+                'setshowsectiontitlesummaryposition' => 3,
                 'sectiontitleinsidetitletextcolour' => '#ffffff',
                 'sectiontitleinsidetitlebackgroundcolour' => '#000000'),
             array('createsections' => true));
@@ -99,6 +101,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->assertEquals(2, $cfo['sectiontitleboxposition']);
         $this->assertEquals(1, $cfo['sectiontitleboxinsideposition']);
         $this->assertEquals(2, $cfo['showsectiontitlesummary']);
+        $this->assertEquals(1, $cfo['setshowsectiontitlesummaryposition']);
         $this->assertEquals('000000', $cfo['sectiontitleinsidetitletextcolour']);
         $this->assertEquals('ffffff', $cfo['sectiontitleinsidetitlebackgroundcolour']);
     }
@@ -115,6 +118,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->assertEquals(2, $cfo1['sectiontitleboxposition']);
         $this->assertEquals(1, $cfo1['sectiontitleboxinsideposition']);
         $this->assertEquals(2, $cfo1['showsectiontitlesummary']);
+        $this->assertEquals(1, $cfo1['setshowsectiontitlesummaryposition']);
         $this->assertEquals('000000', $cfo1['sectiontitleinsidetitletextcolour']);
         $this->assertEquals('ffffff', $cfo1['sectiontitleinsidetitlebackgroundcolour']);
 
@@ -122,7 +126,40 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->assertEquals(2, $cfo2['sectiontitleboxposition']);
         $this->assertEquals(1, $cfo2['sectiontitleboxinsideposition']);
         $this->assertEquals(2, $cfo2['showsectiontitlesummary']);
+        $this->assertEquals(1, $cfo2['setshowsectiontitlesummaryposition']);
         $this->assertEquals('000000', $cfo2['sectiontitleinsidetitletextcolour']);
         $this->assertEquals('ffffff', $cfo2['sectiontitleinsidetitlebackgroundcolour']);
+    }
+    
+    public function test_get_set_show_section_title_summary_position() {
+        $this->setAdminUser();
+
+        $course = $this->getDataGenerator()->create_course(
+            array('format' => 'grid',
+                'numsections' => 1,
+                'setshowsectiontitlesummaryposition' => 1),
+            array('createsections' => false));
+        $this->assertEquals('top', course_get_format($course)->get_set_show_section_title_summary_position());
+
+        $course = $this->getDataGenerator()->create_course(
+            array('format' => 'grid',
+                'numsections' => 1,
+                'setshowsectiontitlesummaryposition' => 2),
+            array('createsections' => false));
+        $this->assertEquals('bottom', course_get_format($course)->get_set_show_section_title_summary_position());
+
+        $course = $this->getDataGenerator()->create_course(
+            array('format' => 'grid',
+                'numsections' => 1,
+                'setshowsectiontitlesummaryposition' => 3),
+            array('createsections' => false));
+        $this->assertEquals('left', course_get_format($course)->get_set_show_section_title_summary_position());
+
+        $course = $this->getDataGenerator()->create_course(
+            array('format' => 'grid',
+                'numsections' => 1,
+                'setshowsectiontitlesummaryposition' => 4),
+            array('createsections' => false));
+        $this->assertEquals('right', course_get_format($course)->get_set_show_section_title_summary_position());
     }
 }

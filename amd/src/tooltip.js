@@ -90,7 +90,7 @@ define(['jquery', 'core/log'], function($, log) {
         this.$element   = null
         this.inState    = null
 
-        this.init('tooltip', element, options)
+        this.init('gridtooltip', element, options)
     }
 
     GridTooltip.VERSION  = '3.3.7'
@@ -561,16 +561,16 @@ define(['jquery', 'core/log'], function($, log) {
     function GridTOOLTIPPlugin(option) {
         return this.each(function () {
             var $this   = $(this)
-            var data    = $this.data('bs.tooltip')
+            var data    = $this.data('bs.gridtooltip')
             var options = typeof option == 'object' && option
 
             if (!data && /destroy|hide/.test(option)) return
-            if (!data) $this.data('bs.tooltip', (data = new GridTooltip(this, options)))
+            if (!data) $this.data('bs.gridtooltip', (data = new GridTooltip(this, options)))
             if (typeof option == 'string') data[option]()
         })
     }
 
-    var old = $.fn.tooltip
+    var old = $.fn.gridtooltip
 
     $.fn.gridtooltip             = GridTOOLTIPPlugin
     $.fn.gridtooltip.Constructor = GridTooltip
