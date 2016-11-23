@@ -269,7 +269,7 @@ class format_grid extends format_base {
     public function get_set_show_section_title_summary_position() {
         $settings = $this->get_settings();
         $returnvalue = 'top';
-        
+
         switch($settings['setshowsectiontitlesummaryposition']) {
             case 1:
                 $returnvalue = 'top';
@@ -284,10 +284,10 @@ class format_grid extends format_base {
                 $returnvalue = 'right';
                 break;
         }
-        
+
         return $returnvalue;
     }
-    
+
     /**
      * Gets the name for the provided section.
      *

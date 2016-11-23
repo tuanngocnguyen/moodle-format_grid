@@ -130,7 +130,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->assertEquals('000000', $cfo2['sectiontitleinsidetitletextcolour']);
         $this->assertEquals('ffffff', $cfo2['sectiontitleinsidetitlebackgroundcolour']);
     }
-    
+
     public function test_get_set_show_section_title_summary_position() {
         $this->setAdminUser();
 

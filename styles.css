@@ -184,11 +184,11 @@ div#gridmiddle-column > ul {
 }
 
 .course-content ul.gridicons li .image_holder {
+    border-style: solid;
     /* Override Bootstrap V3 box sizing of .box-sizing(border-box); in scaffolding.less. */
     -webkit-box-sizing: content-box;
        -moz-box-sizing: content-box;
             box-sizing: content-box;
-    border-style: solid;
     overflow: hidden;
     text-align: center;
     vertical-align: middle;
@@ -343,8 +343,8 @@ body.jsenabled #gridshadebox_content.hide_content {
         cursor: url('[[pix:format_grid|fa-times-circle-o-fsm]]'), auto;
     }
     #gridshadebox_close {
-        height: 28px;
         cursor: url('[[pix:format_grid|fa-hand-o-up-fsm]]'), auto;
+        height: 28px;
         width: 28px;
     }
     .gridshadebox_arrow {
