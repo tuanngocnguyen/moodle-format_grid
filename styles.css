@@ -109,12 +109,6 @@ div#gridmiddle-column > ul {
     position: relative;
 }
 
-.course-content ul.gridicons li.currentselected {
-    filter:alpha(opacity=80); /* IE */
-    -moz-opacity:0.8; /* Mozilla */
-    opacity: 0.8; /* CSS3 */
-}
-
 .course-content ul.gridicons img.new_activity {
     position: absolute;
 }
