@@ -192,6 +192,14 @@ class format_grid extends format_base {
     }
 
     /**
+     * Gets the default section title grid length max option.
+     * @return int Default default section title grid length max option.
+     */
+    public static function get_default_section_title_grid_length_max_option() {
+        return 0; // No truncation.
+    }
+
+    /**
      * Gets the default section title box position.
      * @return int Default default section title box position.
      */
@@ -485,6 +493,10 @@ class format_grid extends format_base {
                     'default' => get_config('format_grid', 'defaulthidesectiontitle'),
                     'type' => PARAM_INT
                 ),
+                'sectiontitlegridlengthmaxoption' => array(
+                    'default' => get_config('format_grid', 'defaultsectiontitlegridlengthmaxoption'),
+                    'type' => PARAM_INT
+                ),
                 'sectiontitleboxposition' => array(
                     'default' => get_config('format_grid', 'defaultsectiontitleboxposition'),
                     'type' => PARAM_INT
@@ -706,6 +718,13 @@ class format_grid extends format_base {
                     'help' => 'hidesectiontitle',
                     'help_component' => 'format_grid'
                 );
+                $courseformatoptionsedit['sectiontitlegridlengthmaxoption'] = array(
+                    'label' => new lang_string('sectiontitlegridlengthmaxoption', 'format_grid'),
+                    'element_type' => 'text',
+                    'element_attributes' => array('size' => 3),
+                    'help' => 'sectiontitlegridlengthmaxoption',
+                    'help_component' => 'format_grid'
+                );
                 $courseformatoptionsedit['sectiontitleboxposition'] = array(
                     'label' => new lang_string('sectiontitleboxposition', 'format_grid'),
                     'element_type' => 'select',
@@ -777,6 +796,8 @@ class format_grid extends format_base {
                 );
             } else {
                 $courseformatoptionsedit['hidesectiontitle'] = array('label' => get_config('format_grid', 'defaulthidesectiontitle'),
+                    'element_type' => 'hidden');
+                $courseformatoptionsedit['sectiontitlegridlengthmaxoption'] = array('label' => get_config('format_grid', 'defaultsectiontitlegridlengthmaxoption'),
                     'element_type' => 'hidden');
                 $courseformatoptionsedit['sectiontitleboxposition'] = array('label' => get_config('format_grid', 'defaultsectiontitleboxposition'),
                     'element_type' => 'hidden');
@@ -1015,6 +1036,9 @@ class format_grid extends format_base {
         }
         if ($this->validate_colour($data['currentselectedimagecontainercolour']) === false) {
             $retr['currentselectedimagecontainercolour'] = get_string('colourrule', 'format_grid');
+        }
+        if ($data['sectiontitlegridlengthmaxoption'] < 0) {
+            $retr['sectiontitlegridlengthmaxoption'] = get_string('sectiontitlegridlengthmaxoptionrule', 'format_grid');
         }
         if ($this->validate_colour($data['sectiontitleinsidetitletextcolour']) === false) {
             $retr['sectiontitleinsidetitletextcolour'] = get_string('colourrule', 'format_grid');
@@ -1345,6 +1369,7 @@ class format_grid extends format_base {
         }
         if ($sectiontitleoptionsreset && has_capability('format/grid:changesectiontitleoptions', $coursecontext) && $resetallifall) {
             $updatedata['hidesectiontitle'] = get_config('format_grid', 'defaulthidesectiontitle');
+            $updatedata['sectiontitlegridlengthmaxoption'] = get_config('format_grid', 'defaultsectiontitlegridlengthmaxoption');
             $updatedata['sectiontitleboxposition'] = get_config('format_grid', 'defaultsectiontitleboxposition');
             $updatedata['sectiontitleboxinsideposition'] = get_config('format_grid', 'defaultsectiontitleboxinsideposition');
             $updatedata['showsectiontitlesummary'] = get_config('format_grid', 'defaultshowsectiontitlesummary');

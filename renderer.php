@@ -652,13 +652,21 @@ class format_grid_renderer extends format_section_renderer_base {
                     $displaysectionname = '';
                     $sectiontitleattribues['aria-label'] = $sectionname;
                 }
+                if ($this->settings['sectiontitlegridlengthmaxoption'] != 0) {
+                    $sectionnamelen = core_text::strlen($displaysectionname);
+                    if ($sectionnamelen !== false) {
+                        if ($sectionnamelen > $this->settings['sectiontitlegridlengthmaxoption']) {
+                            $displaysectionname = core_text::substr($displaysectionname, 0, $this->settings['sectiontitlegridlengthmaxoption']).'...';
+                        }
+                    }
+                }
                 $sectiontitleclass = 'icon_content';
                 if ($this->settings['sectiontitleboxposition'] == 1) {
                     // Only bother if there is a section name to show.
                     $canshow = false;
-                    $sectionnamelength = core_text::strlen($displaysectionname);
-                    if ($sectionnamelength > 0) {
-                        if ($sectionnamelength == 1) {
+                    $sectionnamelen = core_text::strlen($displaysectionname);
+                    if (($sectionnamelen !== false) && ($sectionnamelen > 0)) {
+                        if ($sectionnamelen == 1) {
                             if ($displaysectionname[0] != ' ') {
                                 $canshow = true;
                             }

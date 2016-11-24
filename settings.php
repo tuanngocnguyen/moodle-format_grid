@@ -143,6 +143,13 @@ if ($ADMIN->fulltree) {
     );
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
+    /* Section title in grid box maximum length with 0 for no truncation. */
+    $name = 'format_grid/defaultsectiontitlegridlengthmaxoption';
+    $title = get_string('defaultsectiontitlegridlengthmaxoption', 'format_grid');
+    $description = get_string('defaultsectiontitlegridlengthmaxoption_desc', 'format_grid');
+    $default = format_grid::get_default_section_title_grid_length_max_option();
+    $settings->add(new admin_setting_configtext($name, $title, $description, $default, PARAM_INT));
+
     /* Section title box position - 1 = Inside, 2 = Outside. */
     $name = 'format_grid/defaultsectiontitleboxposition';
     $title = get_string('defaultsectiontitleboxposition', 'format_grid');

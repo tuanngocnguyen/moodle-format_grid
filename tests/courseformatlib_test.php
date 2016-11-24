@@ -44,6 +44,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
             array('format' => 'grid',
                 'numsections' => 1,
                 'hidesectiontitle' => 2,
+                'sectiontitlegridlengthmaxoption' => 24,
                 'currentselectedimagecontainertextcolour' => '#ffffff',
                 'sectiontitleboxposition' => 1,
                 'sectiontitleboxinsideposition' => 2,
@@ -57,6 +58,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
             array('format' => 'grid',
                 'numsections' => 1,
                 'hidesectiontitle' => 2,
+                'sectiontitlegridlengthmaxoption' => 12,
                 'currentselectedimagecontainertextcolour' => '#244896',
                 'sectiontitleboxposition' => 1,
                 'sectiontitleboxinsideposition' => 3,
@@ -98,6 +100,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $cfo = $this->courseformatone->get_format_options();
 
         $this->assertEquals(1, $cfo['hidesectiontitle']);
+        $this->assertEquals(0, $cfo['sectiontitlegridlengthmaxoption']);
         $this->assertEquals(2, $cfo['sectiontitleboxposition']);
         $this->assertEquals(1, $cfo['sectiontitleboxinsideposition']);
         $this->assertEquals(2, $cfo['showsectiontitlesummary']);
@@ -115,6 +118,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $cfo2 = $this->courseformattwo->get_format_options();
 
         $this->assertEquals(1, $cfo1['hidesectiontitle']);
+        $this->assertEquals(0, $cfo1['sectiontitlegridlengthmaxoption']);
         $this->assertEquals(2, $cfo1['sectiontitleboxposition']);
         $this->assertEquals(1, $cfo1['sectiontitleboxinsideposition']);
         $this->assertEquals(2, $cfo1['showsectiontitlesummary']);
@@ -123,6 +127,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->assertEquals('ffffff', $cfo1['sectiontitleinsidetitlebackgroundcolour']);
 
         $this->assertEquals(1, $cfo2['hidesectiontitle']);
+        $this->assertEquals(0, $cfo2['sectiontitlegridlengthmaxoption']);
         $this->assertEquals(2, $cfo2['sectiontitleboxposition']);
         $this->assertEquals(1, $cfo2['sectiontitleboxinsideposition']);
         $this->assertEquals(2, $cfo2['showsectiontitlesummary']);
