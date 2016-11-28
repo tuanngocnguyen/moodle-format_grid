@@ -1822,9 +1822,9 @@ class format_grid extends format_base {
                 }
             }
             $DB->delete_records("format_grid_icon", array('courseid' => $this->courseid,
-                    'sectionid' => $sectionimage->sectionid));
-            }
+                'sectionid' => $sectionimage->sectionid));
         }
+    }
 
     public function delete_images() {
         $sectionimages = $this->get_images($this->courseid);
