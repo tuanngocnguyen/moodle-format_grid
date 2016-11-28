@@ -190,9 +190,8 @@ div#gridmiddle-column > ul {
 
 .course-content ul.gridicons li img {
     -ms-interpolation-mode: bicubic;
-    height: auto;
-    margin-top: 0;
     max-width: 100%;
+    min-height: 100%;
     width: auto\9;
 }
 .course-content li.grid_section {
