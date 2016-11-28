@@ -1807,18 +1807,18 @@ class format_grid extends format_base {
         if ($sectionimage) {
             global $DB;
             if (!empty($sectionimage->image)) {
-            $fs = get_file_storage();
+                $fs = get_file_storage();
 
-            // Delete the image.
-            if ($file = $fs->get_file($contextid, 'course', 'section', $sectionid, '/', $sectionimage->image)) {
-                $file->delete();
-                $DB->set_field('format_grid_icon', 'image', null, array('sectionid' => $sectionimage->sectionid));
-                // Delete the displayed image.
-                $gridimagepath = $this->get_image_path();
-                if ($file = $fs->get_file($contextid, 'course', 'section', $sectionid, $gridimagepath,
-                        $sectionimage->displayedimageindex . '_' . $sectionimage->image)) {
+                // Delete the image.
+                if ($file = $fs->get_file($contextid, 'course', 'section', $sectionid, '/', $sectionimage->image)) {
                     $file->delete();
-                }
+                    $DB->set_field('format_grid_icon', 'image', null, array('sectionid' => $sectionimage->sectionid));
+                    // Delete the displayed image.
+                    $gridimagepath = $this->get_image_path();
+                    if ($file = $fs->get_file($contextid, 'course', 'section', $sectionid, $gridimagepath,
+                            $sectionimage->displayedimageindex . '_' . $sectionimage->image)) {
+                        $file->delete();
+                    }
                 }
             }
             $DB->delete_records("format_grid_icon", array('courseid' => $this->courseid,
@@ -1838,16 +1838,16 @@ class format_grid extends format_base {
             foreach ($sectionimages as $sectionimage) {
                 // Delete the image if there is one.
                 if (!empty($sectionimage->image)) {
-                if ($file = $fs->get_file($coursecontext->id, 'course', 'section', $sectionimage->sectionid, '/',
-                        $sectionimage->image)) {
-                    $file->delete();
-                    // Delete the displayed image.
-                    if ($file = $fs->get_file($coursecontext->id, 'course', 'section', $sectionimage->sectionid, $gridimagepath,
-                            $sectionimage->displayedimageindex . '_' . $sectionimage->image)) {
+                    if ($file = $fs->get_file($coursecontext->id, 'course', 'section', $sectionimage->sectionid, '/',
+                            $sectionimage->image)) {
                         $file->delete();
+                        // Delete the displayed image.
+                        if ($file = $fs->get_file($coursecontext->id, 'course', 'section', $sectionimage->sectionid, $gridimagepath,
+                                $sectionimage->displayedimageindex . '_' . $sectionimage->image)) {
+                            $file->delete();
+                        }
                     }
                 }
-            }
             }
             $DB->delete_records("format_grid_icon", array('courseid' => $this->courseid));
         }
