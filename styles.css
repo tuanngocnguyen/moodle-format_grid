@@ -189,9 +189,14 @@ div#gridmiddle-column > ul {
 }
 
 .course-content ul.gridicons li img {
+    margin-top: 0;
+}
+
+.course-content ul.gridicons li img.info {
     height: 100%;
     width: 100%;
 }
+
 .course-content li.grid_section {
     clear: both;
 }

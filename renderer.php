@@ -718,20 +718,21 @@ class format_grid_renderer extends format_section_renderer_base {
                     }
                     echo html_writer::start_tag('div', array('class' => $imageclass));
 
-                    $showimg = false;
                     if (is_object($sectionimage) && ($sectionimage->displayedimageindex > 0)) {
                         $imgurl = moodle_url::make_pluginfile_url(
                             $contextid, 'course', 'section', $thissection->id, $gridimagepath,
                             $sectionimage->displayedimageindex . '_' . $sectionimage->image);
-                        $showimg = true;
-                    } else if ($section == 0) {
-                        $imgurl = $this->output->pix_url('info', 'format_grid');
-                        $showimg = true;
-                    }
-                    if ($showimg) {
                         echo html_writer::empty_tag('img', array(
                             'src' => $imgurl,
                             'alt' => $sectionname,
+                            'role' => 'img',
+                            'aria-label' => $sectionname));
+                    } else if ($section == 0) {
+                        $imgurl = $this->output->pix_url('info', 'format_grid');
+                        echo html_writer::empty_tag('img', array(
+                            'src' => $imgurl,
+                            'alt' => $sectionname,
+                            'class' => 'info',
                             'role' => 'img',
                             'aria-label' => $sectionname));
                     }
@@ -760,22 +761,23 @@ class format_grid_renderer extends format_section_renderer_base {
                     }
                     $content .= html_writer::start_tag('div', array('class' => $imageclass));
 
-                    $showimg = false;
                     if (is_object($sectionimage) && ($sectionimage->displayedimageindex > 0)) {
                         $imgurl = moodle_url::make_pluginfile_url(
                             $contextid, 'course', 'section', $thissection->id, $gridimagepath,
                             $sectionimage->displayedimageindex . '_' . $sectionimage->image);
-                        $showimg = true;
+                        echo html_writer::empty_tag('img', array(
+                            'src' => $imgurl,
+                            'alt' => $sectionname,
+                            'role' => 'img',
+                            'aria-label' => $sectionname));
                     } else if ($section == 0) {
                         $imgurl = $this->output->pix_url('info', 'format_grid');
-                        $showimg = true;
-                    }
-                    if ($showimg) {
-                        $content .= html_writer::empty_tag('img', array(
-                                    'src' => $imgurl,
-                                    'alt' => $sectionname,
-                                    'role' => 'img',
-                                    'aria-label' => $sectionname));
+                        echo html_writer::empty_tag('img', array(
+                            'src' => $imgurl,
+                            'alt' => $sectionname,
+                            'class' => 'info',
+                            'role' => 'img',
+                            'aria-label' => $sectionname));
                     }
 
                     $content .= html_writer::end_tag('div');
