@@ -1,5 +1,7 @@
 History
 =============
+Version 3.2.0.2
+
 Version 3.2.0.1
   1. First beta for M3.2.
 
