@@ -154,6 +154,7 @@ if ($gfsettings['sectiontitleboxposition'] == 1) {
         echo '#';
     }
     echo $gfsettings['currentselectedimagecontainertextcolour'].';';
+    echo '}';
 }
 
 echo '.course-content ul.gridicons img.new_activity {';
