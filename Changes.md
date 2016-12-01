@@ -1,5 +1,7 @@
 History
 =============
+Version 3.1.1.1
+
 Version 3.1.1.0
   1. Changes for MDL-54557.
   2. Fix layout rendering issues when section name is empty by using the single space trick - #36.
