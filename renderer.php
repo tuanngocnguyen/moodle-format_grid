@@ -697,7 +697,7 @@ class format_grid_renderer extends format_section_renderer_base {
                     }
                     echo html_writer::start_tag('div', array('class' => $imageclass));
 
-                    $this->output_section_image($section, $sectionname, $sectionimage, $contextid, $thissection, $gridimagepath);
+                    echo $this->output_section_image($section, $sectionname, $sectionimage, $contextid, $thissection, $gridimagepath);
 
                     echo html_writer::end_tag('div');
                     echo html_writer::end_tag('a');
@@ -723,7 +723,7 @@ class format_grid_renderer extends format_section_renderer_base {
                     }
                     $content .= html_writer::start_tag('div', array('class' => $imageclass));
 
-                    $this->output_section_image($section, $sectionname, $sectionimage, $contextid, $thissection, $gridimagepath);
+                    $content .= $this->output_section_image($section, $sectionname, $sectionimage, $contextid, $thissection, $gridimagepath);
 
                     $content .= html_writer::end_tag('div');
 
@@ -760,24 +760,26 @@ class format_grid_renderer extends format_section_renderer_base {
     }
 
     protected function output_section_image($section, $sectionname, $sectionimage, $contextid, $thissection, $gridimagepath) {
+        $content = '';
         if (is_object($sectionimage) && ($sectionimage->displayedimageindex > 0)) {
             $imgurl = moodle_url::make_pluginfile_url(
             $contextid, 'course', 'section', $thissection->id, $gridimagepath,
             $sectionimage->displayedimageindex . '_' . $sectionimage->image);
-            echo html_writer::empty_tag('img', array(
+            $content = html_writer::empty_tag('img', array(
                 'src' => $imgurl,
                 'alt' => $sectionname,
                 'role' => 'img',
                 'aria-label' => $sectionname));
         } else if ($section == 0) {
             $imgurl = $this->output->pix_url('info', 'format_grid');
-            echo html_writer::empty_tag('img', array(
+            $content = html_writer::empty_tag('img', array(
                 'src' => $imgurl,
                 'alt' => $sectionname,
                 'class' => 'info',
                 'role' => 'img',
                 'aria-label' => $sectionname));
         }
+        return $content;
     }
 
     private function make_block_icon_topics_editing($thissection, $contextid, $urlpicedit, $course, $section) {
