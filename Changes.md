@@ -1,6 +1,8 @@
 History
 =============
 Version 3.1.1.1
+  1. Improve deletion.
+  2. Section title text format options.  Thanks to Murdoch University, Perth, WA for supporting this enhancement.
 
 Version 3.1.1.0
   1. Changes for MDL-54557.
