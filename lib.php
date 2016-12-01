@@ -964,7 +964,7 @@ class format_grid extends format_base {
                     $checkboxname = get_string('resetsectiontitleoptions', 'format_grid') .
                             $OUTPUT->help_icon('resetsectiontitleoptions', 'format_grid');
                     $resetelements[] = & $mform->createElement('checkbox', 'resetsectiontitleoptions', '', $checkboxname);
-            }
+                }
             }
 
             $checkboxname = get_string('resetnewactivity', 'format_grid') .
