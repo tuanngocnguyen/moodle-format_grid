@@ -1,6 +1,8 @@
 History
 =============
 Version 3.2.0.2
+  1. Improve deletion.
+  2. Section title text format options.  Thanks to Murdoch University, Perth, WA for supporting this enhancement.
 
 Version 3.2.0.1
   1. First beta for M3.2.
