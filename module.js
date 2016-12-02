@@ -112,14 +112,19 @@ M.format_grid.init = function(Y, the_editing_on, the_section_redirect, the_num_s
             node.setAttribute("href", "#");
         });
 
-        M.format_grid.shadebox.initialize_shadebox();
-        M.format_grid.shadebox.update_shadebox();
-        window.onresize = function() {
+        M.format_grid.shadebox_overlay = document.getElementById('gridshadebox_overlay');
+        if (M.format_grid.shadebox_overlay) {
+            M.format_grid.shadebox.initialize_shadebox();
             M.format_grid.shadebox.update_shadebox();
-        };
+            window.onresize = function() {
+                M.format_grid.shadebox.update_shadebox();
+            };
+        }
     }
     this.shadebox_content = Y.one("#gridshadebox_content");
-    this.shadebox_content.removeClass('hide_content'); // Content 'flash' prevention.
+    if (this.shadebox_content) {
+        this.shadebox_content.removeClass('hide_content'); // Content 'flash' prevention.
+    }
     // Show the shadebox of a named anchor in the URL where it is expected to be of the form:
     // #section-X.
     if ((window.location.hash) && (!the_editing_on)) {
@@ -172,7 +177,6 @@ M.format_grid.icon_toggle = function(e) {
     e.preventDefault();
     this.grid_toggle();
 };
-
 
 M.format_grid.grid_toggle = function() {
     if (this.selected_section_no != -1) { // Then a valid shown section has been selected.
