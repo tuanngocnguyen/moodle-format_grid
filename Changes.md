@@ -1,5 +1,7 @@
 History
 =============
+Version 3.0.1.3
+
 Version 3.0.1.2
   1. Changes for MDL-54557.
   2. Improve deletion.  Ref: https://moodle.org/mod/forum/discuss.php?d=334353#p1384895.
