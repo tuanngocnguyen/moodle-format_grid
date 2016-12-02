@@ -1,5 +1,7 @@
 History
 =============
+Version 3.1.1.2
+
 Version 3.1.1.1
   1. Improve deletion.
   2. Section title text format options.  Thanks to Murdoch University, Perth, WA for supporting this enhancement.
