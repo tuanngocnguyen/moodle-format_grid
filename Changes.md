@@ -1,7 +1,8 @@
 History
 =============
 Version 3.2.0.3
- 1. Fix 'Embedded videos still load in one section per page mode' - #39.
+  1. Fix 'Embedded videos still load in one section per page mode' - #39.
+  2. Remove old 'format_grid_delete_course' function and replace with '\core\event\course_content_deleted' event.
 
 Version 3.2.0.2
   1. Improve deletion.
