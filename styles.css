@@ -228,9 +228,9 @@ body.jsenabled #gridshadebox_content.hide_content {
 }
 
 #gridshadebox_content.absolute {
-    left: 5%;
+    left: 60px;
     position: absolute;
-    width: 90%;
+    right: 60px;
     z-index: 1;
 }
 
