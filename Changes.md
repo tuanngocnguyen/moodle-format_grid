@@ -1,6 +1,7 @@
 History
 =============
 Version 3.2.1.1
+  1. Fix '"bordercolour" is set to 0 when creating courses using the "Upload courses" tool' - CONTRIB-6655.
 
 Version 3.2.1.0
   1. Fix 'Embedded videos still load in one section per page mode' - #39.
