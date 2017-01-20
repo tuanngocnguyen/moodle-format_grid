@@ -1,7 +1,8 @@
 History
 =============
 Version 3.1.1.2
- 1. Fix 'Embedded videos still load in one section per page mode' - #39.
+  1. Fix 'Embedded videos still load in one section per page mode' - #39.
+  2. Fix '"bordercolour" is set to 0 when creating courses using the "Upload courses" tool' - CONTRIB-6655.
 
 Version 3.1.1.1
   1. Improve deletion.

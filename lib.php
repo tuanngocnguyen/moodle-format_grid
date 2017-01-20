@@ -861,7 +861,7 @@ class format_grid extends format_base {
         $defaults = array();
         $defaults['defaultbordercolour'] = get_config('format_grid', 'defaultbordercolour');
         if ($defaults['defaultbordercolour'][0] == '#') {
-            $defaults['defaultbordercolour'] = substr($defaults['defaultbordercolour'][0], 1);
+            $defaults['defaultbordercolour'] = substr($defaults['defaultbordercolour'], 1);
         }
         $defaults['defaultimagecontainerbackgroundcolour'] = get_config('format_grid', 'defaultimagecontainerbackgroundcolour');
         if ($defaults['defaultimagecontainerbackgroundcolour'][0] == '#') {
