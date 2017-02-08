@@ -3,6 +3,7 @@ History
 Version 3.0.1.3
   1. Fix 'Embedded videos still load in one section per page mode' - #39.
   2. Fix '"bordercolour" is set to 0 when creating courses using the "Upload courses" tool' - CONTRIB-6655.
+  3. Fix 'Managers assigned at Course Category levels cannot create a course with grid format selected' - #42.
 
 Version 3.0.1.2
   1. Changes for MDL-54557.
