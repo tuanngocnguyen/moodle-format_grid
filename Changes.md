@@ -6,6 +6,7 @@ Version 3.2.1.2
             Rebuilt YUI JS with Shifter - https://docs.moodle.org/dev/YUI/Shifter.
   2. Fix 'Managers assigned at Course Category levels cannot create a course with grid format selected' - #42.
   3. Fix position of shadebox with Essential / Boost theme - #45.
+  4. Fix missing closing 'div'.
 
 Version 3.2.1.1
   1. Fix '"bordercolour" is set to 0 when creating courses using the "Upload courses" tool' - CONTRIB-6655.
