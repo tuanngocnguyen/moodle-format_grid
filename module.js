@@ -341,7 +341,7 @@ M.format_grid.shadebox.initialize_shadebox = function() {
     var gridshadebox_content = M.format_grid.ourYUI.one('#gridshadebox_content');
     if (gridshadebox_content.hasClass('absolute')) {
         var top = 50;
-        var pageelement = M.format_grid.ourYUI.one('#page-header'); // Boost theme.
+        var pageelement = M.format_grid.ourYUI.one('#page'); // Boost theme.
         if (!pageelement) {
             pageelement = M.format_grid.ourYUI.one('#region-main');
         }
