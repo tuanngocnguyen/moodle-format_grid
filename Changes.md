@@ -8,6 +8,7 @@ Version 3.2.1.2
   3. Fix position of shadebox with Essential / Boost theme - #45.
   4. Fix missing closing 'div'.
   5. Fix position of section title when inside the grid box and section title tooltip width.
+  6. Incorrect word in 'defaultsectiontitleboxinsideposition' setting option - #46.
 
 Version 3.2.1.1
   1. Fix '"bordercolour" is set to 0 when creating courses using the "Upload courses" tool' - CONTRIB-6655.
