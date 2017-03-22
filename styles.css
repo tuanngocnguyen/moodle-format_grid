@@ -147,7 +147,7 @@ div#gridmiddle-column > ul {
     top: 0;
 }
 .course-content ul.gridicons li .icon_content.content_inside.bottom {
-    bottom: 0;
+    bottom: 10px;
     left: 0;
     margin: auto;
     right: 0;
@@ -155,11 +155,13 @@ div#gridmiddle-column > ul {
 
 .course-content ul.gridicons li .gridicon_link .tooltip {
     font-size: 14px;
+	width: 100%;
 }
 
 .course-content ul.gridicons li .gridicon_link .tooltip-inner {
     background-color: #ffc540;
     color: #3b53ad;
+	max-width: none;
 }
 
 .course-content ul.gridicons li .gridicon_link .tooltip.top .tooltip-arrow {
