@@ -10,6 +10,7 @@ Version 3.2.1.1
   5. Fix missing closing 'div'.
   6. Fix position of section title when inside the grid box and section title tooltip width.
   7. Incorrect word in 'defaultsectiontitleboxinsideposition' setting option - #46.
+  8. Changed overlay and shadebox z-index to 2 for the Essential theme.  If proven issues then will need to be somehow dynamic.
 
 Version 3.2.1.0
   1. Fix 'Embedded videos still load in one section per page mode' - #39.
