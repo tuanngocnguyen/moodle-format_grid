@@ -37,9 +37,9 @@ class format_grid extends format_base {
     // Ratio constants - 3-2, 3-1, 3-3, 2-3, 1-3, 4-3 and 3-4:...
     private static $imagecontainerratios = array(
         1 => '3-2', 2 => '3-1', 3 => '3-3', 4 => '2-3', 5 => '1-3', 6 => '4-3', 7 => '3-4');
-    // Border width constants - 1 to 10:....
-    private static $borderwidths = array(1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '5', 6 => '6', 7 => '7', 8 => '8',
-        9 => '9', 10 => '10');
+    // Border width constants - 0 to 10:....
+    private static $borderwidths = array(0 => '0', 1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '5', 6 => '6', 7 => '7',
+        8 => '8', 9 => '9', 10 => '10');
     /* Image holder height and new activity position for all on the basis that once calculated the majority of courses
       will be the same. */
     private static $currentwidth = 210;

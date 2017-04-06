@@ -99,9 +99,17 @@ if ($gfsettings['imagecontainerbackgroundcolour'][0] != '#') {
     echo '#';
 }
 echo $gfsettings['imagecontainerbackgroundcolour'].';';
-echo 'border-width: '.$gfsettings['borderwidth'].'px;';
+echo 'border-width: '.$gfsettings['borderwidth'];
+if ($gfsettings['borderwidth']) {
+    echo 'px';
+}
+echo ';';
 if ($gfsettings['borderradius'] == 2) { // On.
-    echo 'border-radius: ' . $gfsettings['borderwidth'] . 'px;';
+    echo 'border-radius: '.$gfsettings['borderwidth'];
+    if ($gfsettings['borderwidth']) {
+        echo 'px';
+    }
+    echo ';';
 }
 echo '}';
 
@@ -114,7 +122,11 @@ $green = hexdec(substr($gfsettings['bordercolour'], $startindex + 2, 2));
 $blue = hexdec(substr($gfsettings['bordercolour'], $startindex + 4, 2));
 
 echo '.course-content ul.gridicons li:hover .image_holder {';
-echo 'box-shadow: 0 0 0 '.$gfsettings['borderwidth'].'px rgba('.$red.','.$green.','.$blue.', 0.3);';
+echo 'box-shadow: 0 0 0 '.$gfsettings['borderwidth'];
+if ($gfsettings['borderwidth']) {
+    echo 'px';
+}
+echo ' rgba('.$red.','.$green.','.$blue.', 0.3);';
 echo '}';
 
 echo '.course-content ul.gridicons li.currenticon .image_holder {';
