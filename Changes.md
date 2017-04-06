@@ -1,5 +1,7 @@
 History
 =============
+Version 3.2.1.2
+
 Version 3.2.1.1
   1. Fix '"bordercolour" is set to 0 when creating courses using the "Upload courses" tool' - CONTRIB-6655.
   2. Fix 'Arrows and cursors in M3.2 with RTL' - #41.
