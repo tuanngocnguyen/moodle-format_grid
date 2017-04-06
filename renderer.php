@@ -716,13 +716,19 @@ class format_grid_renderer extends format_section_renderer_base {
                 }
 
                 if ($course->coursedisplay != COURSE_DISPLAY_MULTIPAGE) {
+                    if (($editing) && ($section == 0)) {
+                        $this->make_block_icon_topic0_editing($course);
+                    }
+
                     echo html_writer::start_tag('a', array(
                         'href' => '#section-'.$thissection->section,
                         'id' => 'gridsection-'.$thissection->section,
                         'class' => 'gridicon_link',
                         'role' => 'link'));
 
-                    echo html_writer::tag('div', $displaysectionname, $sectiontitleattribues);
+                    if ($this->settings['sectiontitleboxposition'] == 2) {
+                        echo html_writer::tag('div', $displaysectionname, $sectiontitleattribues);
+                    }
 
                     if (($this->settings['newactivity'] == 2) && (isset($sectionupdated[$thissection->id]))) {
                         // The section has been updated since the user last visited this course, add NEW label.
@@ -738,17 +744,24 @@ class format_grid_renderer extends format_section_renderer_base {
                     }
                     echo html_writer::start_tag('div', array('class' => $imageclass));
 
+                    if ($this->settings['sectiontitleboxposition'] == 1) {
+                        echo html_writer::tag('div', $displaysectionname, $sectiontitleattribues);
+                    }
+
                     echo $this->output_section_image($section, $sectionname, $sectionimage, $contextid, $thissection, $gridimagepath);
 
                     echo html_writer::end_tag('div');
                     echo html_writer::end_tag('a');
 
                     if ($editing) {
-                        $this->make_block_icon_topics_editing($thissection, $contextid, $urlpicedit, $course, $section);
+                        $this->make_block_icon_topics_editing($thissection, $contextid, $urlpicedit);
                     }
                     echo html_writer::end_tag('li');
                 } else {
-                    $content = html_writer::tag('div', $displaysectionname, $sectiontitleattribues);
+                    $content = '';
+                    if ($this->settings['sectiontitleboxposition'] == 2) {
+                        $content .= html_writer::tag('div', $displaysectionname, $sectiontitleattribues);
+                    }
 
                     if (($this->settings['newactivity'] == 2) && (isset($sectionupdated[$thissection->id]))) {
                         $content .= html_writer::empty_tag('img', array(
@@ -764,11 +777,18 @@ class format_grid_renderer extends format_section_renderer_base {
                     }
                     $content .= html_writer::start_tag('div', array('class' => $imageclass));
 
+                    if ($this->settings['sectiontitleboxposition'] == 1) {
+                        $content .= html_writer::tag('div', $displaysectionname, $sectiontitleattribues);
+                    }
+
                     $content .= $this->output_section_image($section, $sectionname, $sectionimage, $contextid, $thissection, $gridimagepath);
 
                     $content .= html_writer::end_tag('div');
 
                     if ($editing) {
+                        if ($section == 0) {
+                            $this->make_block_icon_topic0_editing($course);
+                        }
                         // Section greyed out by Justin 2016/05/14.
                         if (!$sectiongreyedout) {
                             echo html_writer::link($singlepageurl.'#section-'.$thissection->section, $content, array(
@@ -779,7 +799,7 @@ class format_grid_renderer extends format_section_renderer_base {
                             // Need an enclosing 'span' for IE.
                             echo html_writer::tag('span', $content);
                         }
-                        $this->make_block_icon_topics_editing($thissection, $contextid, $urlpicedit, $course, $section);
+                        $this->make_block_icon_topics_editing($thissection, $contextid, $urlpicedit);
                     } else {
                         if (!$sectiongreyedout) {
                             echo html_writer::link($singlepageurl.'&section='.$thissection->section, $content, array(
@@ -823,7 +843,7 @@ class format_grid_renderer extends format_section_renderer_base {
         return $content;
     }
 
-    private function make_block_icon_topics_editing($thissection, $contextid, $urlpicedit, $course, $section) {
+    private function make_block_icon_topics_editing($thissection, $contextid, $urlpicedit) {
         global $USER;
 
         $streditimage = get_string('editimage', 'format_grid');
@@ -844,27 +864,27 @@ class format_grid_renderer extends format_section_renderer_base {
                 'aria-label' => $streditimagealt)).'&nbsp;'.$streditimage,
             array('title' => $streditimagealt)
         );
+    }
 
-        if ($section == 0) {
-            $strdisplaysummary = get_string('display_summary', 'format_grid');
-            $strdisplaysummaryalt = get_string('display_summary_alt', 'format_grid');
+    private function make_block_icon_topic0_editing($course) {
+        $strdisplaysummary = get_string('display_summary', 'format_grid');
+        $strdisplaysummaryalt = get_string('display_summary_alt', 'format_grid');
 
-            echo html_writer::empty_tag('br') . html_writer::link(
-                $this->courseformat->grid_moodle_url('mod_summary.php', array(
-                    'sesskey' => sesskey(),
-                    'course' => $course->id,
-                    'showsummary' => 1,
-                    'role' => 'link',
-                    'aria-label' => $strdisplaysummaryalt)
-                ),
-                html_writer::empty_tag('img', array(
-                    'src' => $this->output->pix_url('out_of_grid', 'format_grid'),
-                    'alt' => $strdisplaysummaryalt,
-                    'role' => 'img',
-                    'aria-label' => $strdisplaysummaryalt)) . '&nbsp;' . $strdisplaysummary,
-                    array('title' => $strdisplaysummaryalt)
-            );
-        }
+        echo html_writer::link(
+            $this->courseformat->grid_moodle_url('mod_summary.php', array(
+                'sesskey' => sesskey(),
+                'course' => $course->id,
+                'showsummary' => 1,
+                'role' => 'link',
+                'aria-label' => $strdisplaysummaryalt)
+            ),
+            html_writer::empty_tag('img', array(
+                'src' => $this->output->pix_url('out_of_grid', 'format_grid'),
+                'alt' => $strdisplaysummaryalt,
+                'role' => 'img',
+                'aria-label' => $strdisplaysummaryalt)) . '&nbsp;' . $strdisplaysummary,
+                array('title' => $strdisplaysummaryalt)
+        );
     }
 
     /**
