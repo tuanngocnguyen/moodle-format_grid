@@ -1,6 +1,7 @@
 History
 =============
 Version 3.2.1.2
+  1. Fix unable to use cursor keys to edit section title when editing.
 
 Version 3.2.1.1
   1. Fix '"bordercolour" is set to 0 when creating courses using the "Upload courses" tool' - CONTRIB-6655.
