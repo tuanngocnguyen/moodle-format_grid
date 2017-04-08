@@ -137,6 +137,7 @@ div#gridmiddle-column > ul {
     position: absolute;
     text-overflow: inherit;
     white-space: pre-wrap;
+    width: calc(100% - 20px);
     word-wrap: break-word;
 }
 .course-content ul.gridicons li .icon_content.content_inside.middle {
@@ -155,6 +156,9 @@ div#gridmiddle-column > ul {
 
 .course-content ul.gridicons li .gridicon_link .tooltip {
     font-size: 14px;
+}
+
+.course-content ul.gridicons li .gridicon_link .icon_content.content_inside .tooltip {
     width: 100%;
 }
 
@@ -186,7 +190,7 @@ div#gridmiddle-column > ul {
     -webkit-box-sizing: content-box;
        -moz-box-sizing: content-box;
             box-sizing: content-box;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
     text-align: center;
     vertical-align: middle;
