@@ -237,6 +237,14 @@ class format_grid extends format_base {
     }
 
     /**
+     * Gets the default section title box height.
+     * @return int Default default section title box height.
+     */
+    public static function get_default_section_title_box_height() {
+        return 0; // Calculated.
+    }
+
+    /**
      * Gets the default show section title summary.
      * @return int Default default show section title summary.
      */
@@ -530,6 +538,10 @@ class format_grid extends format_base {
                     'default' => get_config('format_grid', 'defaultsectiontitleboxinsideposition'),
                     'type' => PARAM_INT
                 ),
+                'sectiontitleboxheight' => array(
+                    'default' => get_config('format_grid', 'defaultsectiontitleboxheight'),
+                    'type' => PARAM_INT
+                ),
                 'showsectiontitlesummary' => array(
                     'default' => get_config('format_grid', 'defaultshowsectiontitlesummary'),
                     'type' => PARAM_INT
@@ -787,6 +799,13 @@ class format_grid extends format_base {
                     'help' => 'sectiontitleboxposition',
                     'help_component' => 'format_grid'
                 );
+                $courseformatoptionsedit['sectiontitleboxheight'] = array(
+                    'label' => new lang_string('sectiontitleboxheight', 'format_grid'),
+                    'element_type' => 'text',
+                    'element_attributes' => array('size' => 3),
+                    'help' => 'sectiontitleboxheight',
+                    'help_component' => 'format_grid'
+                );
                 $courseformatoptionsedit['showsectiontitlesummary'] = array(
                     'label' => new lang_string('showsectiontitlesummary', 'format_grid'),
                     'element_type' => 'select',
@@ -840,6 +859,8 @@ class format_grid extends format_base {
                     'element_type' => 'hidden');
                 $courseformatoptionsedit['sectiontitleboxinsideposition'] = array(
                     'label' => get_config('format_grid', 'defaultsectiontitleboxinsideposition'), 'element_type' => 'hidden');
+                $courseformatoptionsedit['sectiontitleboxheight'] = array(
+                    'label' => get_config('format_grid', 'defaultsectiontitleboxheight'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['showsectiontitlesummary'] = array(
                     'label' => get_config('format_grid', 'defaultshowsectiontitlesummary'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['setshowsectiontitlesummaryposition'] = array(
@@ -1438,6 +1459,7 @@ class format_grid extends format_base {
             $updatedata['sectiontitlegridlengthmaxoption'] = get_config('format_grid', 'defaultsectiontitlegridlengthmaxoption');
             $updatedata['sectiontitleboxposition'] = get_config('format_grid', 'defaultsectiontitleboxposition');
             $updatedata['sectiontitleboxinsideposition'] = get_config('format_grid', 'defaultsectiontitleboxinsideposition');
+            $updatedata['sectiontitleboxheight'] = get_config('format_grid', 'defaultsectiontitleboxheight');
             $updatedata['showsectiontitlesummary'] = get_config('format_grid', 'defaultshowsectiontitlesummary');
             $updatedata['setshowsectiontitlesummaryposition'] = get_config('format_grid', 'defaultsetshowsectiontitlesummaryposition');
             $updatedata['sectiontitleinsidetitletextcolour'] = get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour');

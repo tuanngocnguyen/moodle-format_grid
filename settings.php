@@ -181,6 +181,13 @@ if ($ADMIN->fulltree) {
     );
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
+    /* Section title box height. */
+    $name = 'format_grid/defaultsectiontitleboxheight';
+    $title = get_string('defaultsectiontitleboxheight', 'format_grid');
+    $description = get_string('defaultsectiontitleboxheight_desc', 'format_grid');
+    $default = format_grid::get_default_section_title_box_height();
+    $settings->add(new admin_setting_configtext($name, $title, $description, $default, PARAM_INT));
+
     /* Show section title summary on hover - 1 = no, 2 = yes. */
     $name = 'format_grid/defaultshowsectiontitlesummary';
     $title = get_string('defaultshowsectiontitlesummary', 'format_grid');

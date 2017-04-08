@@ -83,7 +83,7 @@ echo '#gridiconcontainer {';
 echo 'text-align: '.$gfsettings['imagecontaineralignment'].';';
 echo '}';
 echo '.course-content ul.gridicons li .icon_content {';
-if ($gfsettings['sectiontitleboxposition'] == 1) {
+if ($gfsettings['sectiontitleboxposition'] == 1) { // Inside.
     echo 'width: '.(($gfsettings['imagecontainerwidth'] + ($gfsettings['borderwidth'] * 2)) - 20).'px;';
 } else {
     echo 'width: '.($gfsettings['imagecontainerwidth'] + ($gfsettings['borderwidth'] * 2)).'px;';
@@ -148,7 +148,7 @@ if ($gfsettings['currentselectedimagecontainercolour'][0] != '#') {
 echo $gfsettings['currentselectedimagecontainercolour'].';';
 echo '}';
 
-if ($gfsettings['sectiontitleboxposition'] == 1) {
+if ($gfsettings['sectiontitleboxposition'] == 1) { // Inside.
     echo '.course-content ul.gridicons li .icon_content.content_inside {';
     echo 'background-color: ';
     if ($gfsettings['sectiontitleinsidetitlebackgroundcolour'][0] != '#') {
@@ -160,7 +160,13 @@ if ($gfsettings['sectiontitleboxposition'] == 1) {
         echo '#';
     }
     echo $gfsettings['sectiontitleinsidetitletextcolour'].';';
-    echo 'height: '.round(($imageproperties['height'] * 0.25), 0, PHP_ROUND_HALF_UP).'px;';
+    echo 'height: ';
+    if ($gfsettings['sectiontitleboxheight'] == 0) {
+        echo round(($imageproperties['height'] * 0.25), 0, PHP_ROUND_HALF_UP);
+    } else {
+        echo $gfsettings['sectiontitleboxheight'];
+    }
+    echo 'px;';
     echo '}';
 } else {
     echo '.course-content ul.gridicons li.currentselected .icon_content {';
