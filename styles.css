@@ -158,7 +158,8 @@ div#gridmiddle-column > ul {
     font-size: 14px;
 }
 
-.course-content ul.gridicons li .gridicon_link .icon_content.content_inside .tooltip {
+/* Set the width of the tooltip when the section summary is 'Inside', thus within the 'image_holder'. */
+.course-content ul.gridicons li .gridicon_link .image_holder .tooltip {
     width: 100%;
 }
 
