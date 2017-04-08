@@ -46,6 +46,14 @@ if ($ADMIN->fulltree) {
     );
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
+    /* Container alignment. */
+    $name = 'format_grid/defaultimagecontaineralignment';
+    $title = get_string('defaultimagecontaineralignment', 'format_grid');
+    $description = get_string('defaultimagecontaineralignment_desc', 'format_grid');
+    $default = format_grid::get_default_image_container_alignment();
+    $choices = format_grid::get_image_container_alignments();
+    $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
+
     /* Icon width. */
     $name = 'format_grid/defaultimagecontainerwidth';
     $title = get_string('defaultimagecontainerwidth', 'format_grid');

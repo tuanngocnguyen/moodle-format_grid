@@ -91,6 +91,8 @@ $string['deleteimage'] = 'Delete image';
 $string['deleteimage_help'] = "Delete the image for the section being edited.  If you've uploaded an image then it will not replace the deleted image.";
 $string['gfreset'] = 'Grid reset options';
 $string['gfreset_help'] = 'Reset to Grid defaults.';
+$string['defaultimagecontaineralignment'] = 'Default alignment of the image containers';
+$string['defaultimagecontaineralignment_desc'] = 'The default alignment of the image containers.';
 $string['defaultimagecontainerwidth'] = 'Default width of the image container';
 $string['defaultimagecontainerwidth_desc'] = 'The default width of the image container.';
 $string['defaultimagecontainerratio'] = 'Default ratio of the image container relative to the width';
@@ -121,6 +123,8 @@ $string['defaultfitsectioncontainertowindow_desc'] = 'The default setting for \'
 $string['defaultnewactivity'] = 'Show new activity notification image default';
 $string['defaultnewactivity_desc'] = "Show the new activity notification image when a new activity or resource are added to a section default.";
 
+$string['setimagecontaineralignment'] = 'Set the image container alignment';
+$string['setimagecontaineralignment_help'] = 'Set the image container width to one of: Left, Centre or Right';
 $string['setimagecontainerwidth'] = 'Set the image container width';
 $string['setimagecontainerwidth_help'] = 'Set the image container width to one of: 128, 192, 210, 256, 320, 384, 448, 512, 576, 640, 704 or 768';
 $string['setimagecontainerratio'] = 'Set the image container ratio relative to the width';
@@ -191,12 +195,17 @@ $string['defaultsectiontitleinsidetitlebackgroundcolour'] = 'Section title backg
 $string['defaultsectiontitleinsidetitlebackgroundcolour_desc'] = 'Set title background colour when it is \'Inside\' the grid box.';
 $string['top'] = 'Top';
 $string['bottom'] = 'Bottom';
+$string['centre'] = 'Centre';
 $string['left'] = 'Left';
 $string['right'] = 'Right';
 
 // Reset.
 $string['resetgrp'] = 'Reset:';
 $string['resetallgrp'] = 'Reset all:';
+$string['resetimagecontaineralignment'] = 'Image container alignment';
+$string['resetimagecontaineralignment_help'] = 'Resets the image container alignment to the default value so it will be the same as a course the first time it is in the Grid format.';
+$string['resetallimagecontaineralignment'] = 'Image container alignments';
+$string['resetallimagecontaineralignment_help'] = 'Resets the image container alignmentss to the default value for all courses so it will be the same as a course the first time it is in the Grid format.';
 $string['resetimagecontainersize'] = 'Image container size';
 $string['resetimagecontainersize_help'] = 'Resets the image container size to the default value so it will be the same as a course the first time it is in the Grid format.';
 $string['resetallimagecontainersize'] = 'Image container sizes';
@@ -226,6 +235,7 @@ $string['resetgreyouthidden_desc'] = 'Resets the property \'Grid display show un
 $string['resetgreyouthidden_help'] = 'Resets the property \'In Grid display show unavailable section images in grey and unlinked.\'';
 
 // Capabilities.
+$string['grid:changeimagecontaineralignment'] = 'Change or reset the image container alignment';
 $string['grid:changeimagecontainersize'] = 'Change or reset the image container size';
 $string['grid:changeimageresizemethod'] = 'Change or reset the image resize method';
 $string['grid:changeimagecontainerstyle'] = 'Change or reset the image container style';

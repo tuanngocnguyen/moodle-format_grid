@@ -44,6 +44,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
             array('format' => 'grid',
                 'numsections' => 1,
                 'hidesectiontitle' => 2,
+                'imagecontaineralignment' => 'left',
                 'sectiontitlegridlengthmaxoption' => 24,
                 'currentselectedimagecontainertextcolour' => '#ffffff',
                 'sectiontitleboxposition' => 1,
@@ -58,6 +59,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
             array('format' => 'grid',
                 'numsections' => 1,
                 'hidesectiontitle' => 2,
+                'imagecontaineralignment' => 'right',
                 'sectiontitlegridlengthmaxoption' => 12,
                 'currentselectedimagecontainertextcolour' => '#244896',
                 'sectiontitleboxposition' => 1,
@@ -70,6 +72,28 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->courseformattwo = course_get_format($this->courseone);
     }
 
+    public function test_reset_image_container_alignment() {
+        $this->setAdminUser();
+        $data = new stdClass;
+        $data->resetimagecontaineralignment = true;
+        $this->courseformatone->update_course_format_options($data);
+        $cfo = $this->courseformatone->get_format_options();
+
+        $this->assertEquals('center', $cfo['imagecontaineralignment']);
+    }
+
+    public function test_reset_all_image_container_alignments() {
+        $this->setAdminUser();
+        $data = new stdClass;
+        $data->resetallimagecontaineralignment = true;
+        $this->courseformatone->update_course_format_options($data);
+        $cfo1 = $this->courseformatone->get_format_options();
+        $cfo2 = $this->courseformatone->get_format_options();
+
+        $this->assertEquals('center', $cfo1['imagecontaineralignment']);
+        $this->assertEquals('center', $cfo2['imagecontaineralignment']);
+    }
+
     public function test_reset_image_container_style() {
         $this->setAdminUser();
         $data = new stdClass;
@@ -80,10 +104,10 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->assertEquals('3b53ad', $cfo['currentselectedimagecontainertextcolour']);
     }
 
-    public function test_reset_image_container_styles() {
+    public function test_reset_all_image_container_styles() {
         $this->setAdminUser();
         $data = new stdClass;
-        $data->resetimagecontainerstyle = true;
+        $data->resetallimagecontainerstyle = true;
         $this->courseformatone->update_course_format_options($data);
         $cfo1 = $this->courseformatone->get_format_options();
         $cfo2 = $this->courseformatone->get_format_options();

@@ -79,6 +79,9 @@ $gfsettings['imagecontainerwidth'], $gfsettings['imagecontainerratio'], $gfsetti
 
 echo '<style type="text/css" media="screen">';
 echo '/* <![CDATA[ */';
+echo '#gridiconcontainer {';
+echo 'text-align: '.$gfsettings['imagecontaineralignment'].';';
+echo '}';
 echo '.course-content ul.gridicons li .icon_content {';
 if ($gfsettings['sectiontitleboxposition'] == 1) {
     echo 'width: '.(($gfsettings['imagecontainerwidth'] + ($gfsettings['borderwidth'] * 2)) - 20).'px;';

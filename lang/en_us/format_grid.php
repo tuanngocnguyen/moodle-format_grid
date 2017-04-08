@@ -38,6 +38,7 @@ $string['defaultcurrentselectedimagecontainertextcolour_desc'] = 'The default cu
 $string['defaultcurrentselectedimagecontainercolour'] = 'Default current selected image container color';
 $string['defaultcurrentselectedimagecontainercolour_desc'] = 'The default current selected image container color.';
 
+$string['setimagecontaineralignment_help'] = 'Set the image container width to one of: Left, Center or Right';
 $string['setbordercolour'] = 'Set the border color';
 $string['setbordercolour_help'] = 'Set the border color in hexidecimal RGB.';
 $string['setimagecontainerbackgroundcolour'] = 'Set the image container background color';
@@ -48,6 +49,7 @@ $string['setcurrentselectedimagecontainertextcolour'] = 'Set the current selecte
 $string['setcurrentselectedimagecontainertextcolour_help'] = 'Set the current selected image container text color in hexidecimal RGB.';
 $string['setcurrentselectedimagecontainercolour'] = 'Set the current selected image container color';
 $string['setcurrentselectedimagecontainercolour_help'] = 'Set the current selected image container color in hexidecimal RGB.';
+$string['centre'] = 'Center';
 
 // Section title text format options.
 $string['sectiontitleinsidetitletextcolour'] = 'Section title text color when \'Inside\' option';
