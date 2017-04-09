@@ -92,6 +92,8 @@ div#gridmiddle-column > ul {
     width: 100%;
 }
 #gridiconcontainer ul.gridicons {
+    display: flex;
+    flex-wrap: wrap;
     margin: 0 auto;
     padding: 0;
     width: 100%;
