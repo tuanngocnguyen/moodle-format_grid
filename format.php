@@ -167,6 +167,7 @@ if ($gfsettings['sectiontitleboxposition'] == 1) { // Inside.
         echo $gfsettings['sectiontitleboxheight'];
     }
     echo 'px;';
+    echo 'opacity: '.$gfsettings['sectiontitleboxopacity'].';';
     echo '}';
 } else {
     echo '.course-content ul.gridicons li.currentselected .icon_content {';

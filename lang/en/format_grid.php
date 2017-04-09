@@ -153,6 +153,7 @@ $string['setfitsectioncontainertowindow'] = 'Fit the section popup to the window
 $string['setfitsectioncontainertowindow_help'] = 'If enabled, the popup box with the contents of the section will fit to the size of the window and will scroll inside if necessary.  If disabled, the entire page will scroll instead.';
 
 $string['colourrule'] = "Please enter a valid RGB colour, six hexadecimal digits.";
+$string['opacityrule'] = "Please enter a valid opacity, between 0 and 1 with 0.1 increments.";
 
 // Section title text format options.
 $string['hidesectiontitle'] = 'Hide section title option';
@@ -180,7 +181,11 @@ $string['sectiontitleboxinsidepositionbottom'] = 'Bottom';
 $string['sectiontitleboxheight'] = 'Section title box height';
 $string['sectiontitleboxheight_help'] = 'Section title box height in pixels or 0 for calculated.  When the box position is \'Inside\'.';
 $string['defaultsectiontitleboxheight'] = 'Section title box height';
-$string['defaultsectiontitleboxheight_desc'] = 'Section title box height in pixels or 0 for calculated.  When the box position is \'Inside\'';
+$string['defaultsectiontitleboxheight_desc'] = 'Section title box height in pixels or 0 for calculated.  When the box position is \'Inside\'.';
+$string['sectiontitleboxopacity'] = 'Section title box opacity';
+$string['sectiontitleboxopacity_help'] = 'Section title box opacity between 0 and 1 in 0.1 increments.  When the box position is \'Inside\'.';
+$string['defaultsectiontitleboxopacity'] = 'Section title box opacity';
+$string['defaultsectiontitleboxopacity_desc'] = 'Section title box opacity between 0 and 1 in 0.1 increments.  When the box position is \'Inside\'.';
 $string['showsectiontitlesummary'] = 'Show section title summary on hover option';
 $string['showsectiontitlesummary_help'] = 'Show the section title summary when hovering over the grid box.';
 $string['defaultshowsectiontitlesummary'] = 'Show section title summary on hover option';

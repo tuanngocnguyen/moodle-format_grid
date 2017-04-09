@@ -48,6 +48,9 @@ class format_grid extends format_base {
     private static $currentheight = 140;
     private static $activitymargintop = 101;
     private static $activitymarginleft = 1118;
+    // Opacity constants - 0 to 1:....
+    private static $opacities = array('0' => '0.0', '.1' => '0.1', '.2' => '0.2', '.3' => '0.3', '.4' => '0.4',
+       '.5' => '0.5', '.6' => '0.6', '.7' => '0.7', '.8' => '0.8', '.9' => '0.9', '1' => '1.0');
     private $settings;
 
     /**
@@ -242,6 +245,22 @@ class format_grid extends format_base {
      */
     public static function get_default_section_title_box_height() {
         return 0; // Calculated.
+    }
+
+    /**
+     * Gets the default opacity for the section title box.
+     * @return string Opacity of section title box.
+     */
+    public static function get_default_section_title_box_opacity() {
+        return '.8';
+    }
+
+    /**
+     * Gets the default opacities.
+     * @return Array Opacities.
+     */
+    public static function get_default_opacities() {
+        return self::$opacities;
     }
 
     /**
@@ -542,6 +561,10 @@ class format_grid extends format_base {
                     'default' => get_config('format_grid', 'defaultsectiontitleboxheight'),
                     'type' => PARAM_INT
                 ),
+                'sectiontitleboxopacity' => array(
+                    'default' => get_config('format_grid', 'defaultsectiontitleboxopacity'),
+                    'type' => PARAM_RAW
+                ),
                 'showsectiontitlesummary' => array(
                     'default' => get_config('format_grid', 'defaultshowsectiontitlesummary'),
                     'type' => PARAM_INT
@@ -806,6 +829,13 @@ class format_grid extends format_base {
                     'help' => 'sectiontitleboxheight',
                     'help_component' => 'format_grid'
                 );
+                $courseformatoptionsedit['sectiontitleboxopacity'] = array(
+                    'label' => new lang_string('sectiontitleboxopacity', 'format_grid'),
+                    'element_type' => 'select',
+                    'element_attributes' => array(self::get_default_opacities()),
+                    'help' => 'sectiontitleboxopacity',
+                    'help_component' => 'format_grid'
+                );
                 $courseformatoptionsedit['showsectiontitlesummary'] = array(
                     'label' => new lang_string('showsectiontitlesummary', 'format_grid'),
                     'element_type' => 'select',
@@ -861,6 +891,8 @@ class format_grid extends format_base {
                     'label' => get_config('format_grid', 'defaultsectiontitleboxinsideposition'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['sectiontitleboxheight'] = array(
                     'label' => get_config('format_grid', 'defaultsectiontitleboxheight'), 'element_type' => 'hidden');
+                $courseformatoptionsedit['sectiontitleboxopacity'] = array(
+                    'label' => get_config('format_grid', 'defaultsectiontitleboxopacity'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['showsectiontitlesummary'] = array(
                     'label' => get_config('format_grid', 'defaultshowsectiontitlesummary'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['setshowsectiontitlesummaryposition'] = array(
@@ -1116,6 +1148,9 @@ class format_grid extends format_base {
         if ($this->validate_colour($data['sectiontitleinsidetitlebackgroundcolour']) === false) {
             $retr['sectiontitleinsidetitlebackgroundcolour'] = get_string('colourrule', 'format_grid');
         }
+        if ($this->validate_opacity($data['sectiontitleboxopacity']) === false) {
+            $retr['sectiontitleboxopacity'] = get_string('opacityrule', 'format_grid');
+        }
         return $retr;
     }
 
@@ -1140,6 +1175,20 @@ class format_grid extends format_base {
      */
     private function validate_colour($data) {
         if (preg_match('/^#?([[:xdigit:]]{3}){1,2}$/', $data)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Validates the opacity that was entered by the user.
+     *
+     * @param string $data the opacity string to validate.
+     * @return true|false
+     */
+    private function validate_opacity($data) {
+        if (array_key_exists($data, self::$opacities)) {
             return true;
         } else {
             return false;
@@ -1460,6 +1509,7 @@ class format_grid extends format_base {
             $updatedata['sectiontitleboxposition'] = get_config('format_grid', 'defaultsectiontitleboxposition');
             $updatedata['sectiontitleboxinsideposition'] = get_config('format_grid', 'defaultsectiontitleboxinsideposition');
             $updatedata['sectiontitleboxheight'] = get_config('format_grid', 'defaultsectiontitleboxheight');
+            $updatedata['sectiontitleboxopacity'] = get_config('format_grid', 'defaultsectiontitleboxopacity');
             $updatedata['showsectiontitlesummary'] = get_config('format_grid', 'defaultshowsectiontitlesummary');
             $updatedata['setshowsectiontitlesummaryposition'] = get_config('format_grid', 'defaultsetshowsectiontitlesummaryposition');
             $updatedata['sectiontitleinsidetitletextcolour'] = get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour');

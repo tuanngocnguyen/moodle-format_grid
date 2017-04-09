@@ -188,6 +188,14 @@ if ($ADMIN->fulltree) {
     $default = format_grid::get_default_section_title_box_height();
     $settings->add(new admin_setting_configtext($name, $title, $description, $default, PARAM_INT));
 
+    /* Section title box opacity. */
+    $name = 'format_grid/defaultsectiontitleboxopacity';
+    $title = get_string('defaultsectiontitleboxopacity', 'format_grid');
+    $description = get_string('defaultsectiontitleboxopacity_desc', 'format_grid');
+    $default = format_grid::get_default_section_title_box_opacity();
+    $choices = format_grid::get_default_opacities();
+    $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
+
     /* Show section title summary on hover - 1 = no, 2 = yes. */
     $name = 'format_grid/defaultshowsectiontitlesummary';
     $title = get_string('defaultshowsectiontitlesummary', 'format_grid');
