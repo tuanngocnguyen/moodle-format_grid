@@ -60,5 +60,7 @@ $string['sectiontitleinsidetitlebackgroundcolour'] = 'Section title background c
 $string['sectiontitleinsidetitlebackgroundcolour_help'] = 'Set title background color when it is \'Inside\' the grid box.';
 $string['defaultsectiontitleinsidetitlebackgroundcolour'] = 'Section title background color when \'Inside\' option';
 $string['defaultsectiontitleinsidetitlebackgroundcolour_help'] = 'Set title background color when it is \'Inside\' the grid box.';
+$string['sectiontitlealignment_help'] = 'Set the section title alignment to one of \'Left\', \'Center\' or \'Right\'.';
+$string['defaultsectiontitlealignment_desc'] = 'Set the section title alignment to one of \'Left\', \'Center\' or \'Right\'.';
 
 $string['colourrule'] = "Please enter a valid RGB color, six hexadecimal digits.";

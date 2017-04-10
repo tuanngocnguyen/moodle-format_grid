@@ -51,7 +51,7 @@ if ($ADMIN->fulltree) {
     $title = get_string('defaultimagecontaineralignment', 'format_grid');
     $description = get_string('defaultimagecontaineralignment_desc', 'format_grid');
     $default = format_grid::get_default_image_container_alignment();
-    $choices = format_grid::get_image_container_alignments();
+    $choices = format_grid::get_horizontal_alignments();
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
     /* Icon width. */
@@ -202,6 +202,14 @@ if ($ADMIN->fulltree) {
     $description = get_string('defaultsectiontitlefontsize_desc', 'format_grid');
     $default = format_grid::get_default_section_title_font_size();
     $choices = format_grid::get_default_section_font_sizes();
+    $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
+
+    /* Section title alignment. */
+    $name = 'format_grid/defaultsectiontitlealignment';
+    $title = get_string('defaultsectiontitlealignment', 'format_grid');
+    $description = get_string('defaultsectiontitlealignment_desc', 'format_grid');
+    $default = format_grid::get_default_section_title_alignment();
+    $choices = format_grid::get_horizontal_alignments();
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
     /* Show section title summary on hover - 1 = no, 2 = yes. */

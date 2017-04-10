@@ -89,6 +89,7 @@ if ($gfsettings['sectiontitlefontsize']) { // Font size is set.
         echo 'height: '.($gfsettings['sectiontitlefontsize'] + 4).'px;';
     }
 }
+echo 'text-align: '.$gfsettings['sectiontitlealignment'].';';
 if ($gfsettings['sectiontitleboxposition'] == 1) { // Inside.
     echo 'width: '.(($gfsettings['imagecontainerwidth'] + ($gfsettings['borderwidth'] * 2)) - 20).'px;';
 } else {

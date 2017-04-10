@@ -86,9 +86,9 @@ class format_grid extends format_base {
 
     /**
      * Prevents ability to change a static variable outside of the class.
-     * @return array Array of imagecontainer alignments.
+     * @return array Array of horizontal alignments.
      */
-    public static function get_image_container_alignments() {
+    public static function get_horizontal_alignments() {
         $imagecontaineralignments = array(
             'left' => get_string('left', 'format_grid'),
             'center' => get_string('centre', 'format_grid'),
@@ -267,10 +267,18 @@ class format_grid extends format_base {
 
     /**
      * Gets the default font size for the section title.
-     * @return string Font size of the section title.
+     * @return int Font size of the section title.
      */
     public static function get_default_section_title_font_size() {
         return 0;
+    }
+
+    /**
+     * Gets the default alignment for the section title.
+     * @return string Alignment of the section title.
+     */
+    public static function get_default_section_title_alignment() {
+        return 'center';
     }
 
     /**
@@ -587,6 +595,10 @@ class format_grid extends format_base {
                     'default' => get_config('format_grid', 'defaultsectiontitlefontsize'),
                     'type' => PARAM_INT
                 ),
+                'sectiontitlealignment' => array(
+                    'default' => get_config('format_grid', 'defaultsectiontitlealignment'),
+                    'type' => PARAM_ALPHANUM
+                ),
                 'showsectiontitlesummary' => array(
                     'default' => get_config('format_grid', 'defaultshowsectiontitlesummary'),
                     'type' => PARAM_INT
@@ -666,7 +678,7 @@ class format_grid extends format_base {
                     'help' => 'setimagecontaineralignment',
                     'help_component' => 'format_grid',
                     'element_type' => 'select',
-                    'element_attributes' => array(self::get_image_container_alignments())
+                    'element_attributes' => array(self::get_horizontal_alignments())
                 );
             } else {
                 $courseformatoptionsedit['imagecontaineralignment'] = array('label' => get_config(
@@ -865,6 +877,13 @@ class format_grid extends format_base {
                     'help' => 'sectiontitlefontsize',
                     'help_component' => 'format_grid'
                 );
+                $courseformatoptionsedit['sectiontitlealignment'] = array(
+                    'label' => new lang_string('sectiontitlealignment', 'format_grid'),
+                    'help' => 'sectiontitlealignment',
+                    'help_component' => 'format_grid',
+                    'element_type' => 'select',
+                    'element_attributes' => array(self::get_horizontal_alignments())
+                );
                 $courseformatoptionsedit['showsectiontitlesummary'] = array(
                     'label' => new lang_string('showsectiontitlesummary', 'format_grid'),
                     'element_type' => 'select',
@@ -924,6 +943,8 @@ class format_grid extends format_base {
                     'label' => get_config('format_grid', 'defaultsectiontitleboxopacity'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['sectiontitlefontsize'] = array(
                     'label' => get_config('format_grid', 'defaultsectiontitlefontsize'), 'element_type' => 'hidden');
+                $courseformatoptionsedit['sectiontitlealignment'] = array(
+                    'label' => get_config('format_grid', 'defaultsectiontitlealignment'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['showsectiontitlesummary'] = array(
                     'label' => get_config('format_grid', 'defaultshowsectiontitlesummary'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['setshowsectiontitlesummaryposition'] = array(
@@ -1559,6 +1580,7 @@ class format_grid extends format_base {
             $updatedata['sectiontitleboxheight'] = get_config('format_grid', 'defaultsectiontitleboxheight');
             $updatedata['sectiontitleboxopacity'] = get_config('format_grid', 'defaultsectiontitleboxopacity');
             $updatedata['sectiontitlefontsize'] = get_config('format_grid', 'defaultsectiontitlefontsize');
+            $updatedata['sectiontitlealignment'] = get_config('format_grid', 'defaultsectiontitlealignment');
             $updatedata['showsectiontitlesummary'] = get_config('format_grid', 'defaultshowsectiontitlesummary');
             $updatedata['setshowsectiontitlesummaryposition'] = get_config('format_grid', 'defaultsetshowsectiontitlesummaryposition');
             $updatedata['sectiontitleinsidetitletextcolour'] = get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour');
