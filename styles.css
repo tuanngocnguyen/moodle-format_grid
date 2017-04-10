@@ -139,7 +139,6 @@ div#gridmiddle-column > ul {
     position: absolute;
     text-overflow: inherit;
     white-space: pre-wrap;
-    width: calc(100% - 20px);
     word-wrap: break-word;
 }
 .course-content ul.gridicons li .icon_content.content_inside.middle {
