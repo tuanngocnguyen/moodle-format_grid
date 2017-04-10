@@ -708,8 +708,14 @@ class format_grid_renderer extends format_section_renderer_base {
                 $sectiontitleattribues['class'] = $sectiontitleclass;
                 if ($this->settings['showsectiontitlesummary'] == 2) {
                     $summary = strip_tags($thissection->summary);
-                    if (core_text::strlen($summary) > 0) {
-                        $sectiontitleattribues['title'] = strip_tags($thissection->summary);
+                    $summarylen = core_text::strlen($summary);
+                    if ($summarylen > 0) {
+                        if ($this->settings['sectiontitlesummarymaxlength'] != 0) {
+                            if ($summarylen > $this->settings['sectiontitlesummarymaxlength']) {
+                                $summary = core_text::substr($summary, 0, $this->settings['sectiontitlesummarymaxlength']).'...';
+                            }
+                        }
+                        $sectiontitleattribues['title'] = $summary;
                         $sectiontitleattribues['data-toggle'] = 'gridtooltip';
                         $sectiontitleattribues['data-placement'] = $this->courseformat->get_set_show_section_title_summary_position();
                     }

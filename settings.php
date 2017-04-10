@@ -212,6 +212,22 @@ if ($ADMIN->fulltree) {
     $choices = format_grid::get_horizontal_alignments();
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
+    // Default section title text colour in hexadecimal RGB with preceding '#'.
+    $name = 'format_grid/defaultsectiontitleinsidetitletextcolour';
+    $title = get_string('defaultsectiontitleinsidetitletextcolour', 'format_grid');
+    $description = get_string('defaultsectiontitleinsidetitletextcolour_desc', 'format_grid');
+    $default = format_grid::get_default_section_title_inside_title_text_colour();
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
+    $settings->add($setting);
+
+    // Default section title background colour in hexadecimal RGB with preceding '#'.
+    $name = 'format_grid/defaultsectiontitleinsidetitlebackgroundcolour';
+    $title = get_string('defaultsectiontitleinsidetitlebackgroundcolour', 'format_grid');
+    $description = get_string('defaultsectiontitleinsidetitlebackgroundcolour_desc', 'format_grid');
+    $default = format_grid::get_default_section_title_inside_title_background_colour();
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
+    $settings->add($setting);
+
     /* Show section title summary on hover - 1 = no, 2 = yes. */
     $name = 'format_grid/defaultshowsectiontitlesummary';
     $title = get_string('defaultshowsectiontitlesummary', 'format_grid');
@@ -236,21 +252,12 @@ if ($ADMIN->fulltree) {
     );
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
-    // Default section title text colour in hexadecimal RGB with preceding '#'.
-    $name = 'format_grid/defaultsectiontitleinsidetitletextcolour';
-    $title = get_string('defaultsectiontitleinsidetitletextcolour', 'format_grid');
-    $description = get_string('defaultsectiontitleinsidetitletextcolour_desc', 'format_grid');
-    $default = format_grid::get_default_section_title_inside_title_text_colour();
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
-    $settings->add($setting);
-
-    // Default section title background colour in hexadecimal RGB with preceding '#'.
-    $name = 'format_grid/defaultsectiontitleinsidetitlebackgroundcolour';
-    $title = get_string('defaultsectiontitleinsidetitlebackgroundcolour', 'format_grid');
-    $description = get_string('defaultsectiontitleinsidetitlebackgroundcolour_desc', 'format_grid');
-    $default = format_grid::get_default_section_title_inside_title_background_colour();
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
-    $settings->add($setting);
+    /* Section title summary maximum length with 0 for no truncation. */
+    $name = 'format_grid/defaultsectiontitlesummarymaxlength';
+    $title = get_string('defaultsectiontitlesummarymaxlength', 'format_grid');
+    $description = get_string('defaultsectiontitlesummarymaxlength_desc', 'format_grid');
+    $default = format_grid::get_default_section_title_summary_max_length();
+    $settings->add(new admin_setting_configtext($name, $title, $description, $default, PARAM_INT));
 
     /* Show new activity notification image - 1 = no, 2 = yes. */
     $name = 'format_grid/defaultnewactivity';

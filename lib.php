@@ -290,6 +290,22 @@ class format_grid extends format_base {
     }
 
     /**
+     * Gets the default section title inside text colour.
+     * @return string Default default section title inside text colour.
+     */
+    public static function get_default_section_title_inside_title_text_colour() {
+        return '#000000';
+    }
+
+    /**
+     * Gets the default section title inside background colour.
+     * @return string Default default section title inside background colour.
+     */
+    public static function get_default_section_title_inside_title_background_colour() {
+        return '#ffffff';
+    }
+
+    /**
      * Gets the default show section title summary.
      * @return int Default default show section title summary.
      */
@@ -306,19 +322,11 @@ class format_grid extends format_base {
     }
 
     /**
-     * Gets the default section title inside text colour.
-     * @return string Default default section title inside text colour.
+     * Gets the default section title summary max length.
+     * @return int Default default section title summary max length.
      */
-    public static function get_default_section_title_inside_title_text_colour() {
-        return '#000000';
-    }
-
-    /**
-     * Gets the default section title inside background colour.
-     * @return string Default default section title inside background colour.
-     */
-    public static function get_default_section_title_inside_title_background_colour() {
-        return '#ffffff';
+    public static function get_default_section_title_summary_max_length() {
+        return 0; // No truncation.
     }
 
     /**
@@ -599,6 +607,14 @@ class format_grid extends format_base {
                     'default' => get_config('format_grid', 'defaultsectiontitlealignment'),
                     'type' => PARAM_ALPHANUM
                 ),
+                'sectiontitleinsidetitletextcolour' => array(
+                    'default' => $defaults['defaultsectiontitleinsidetitletextcolour'],
+                    'type' => PARAM_ALPHANUM
+                ),
+                'sectiontitleinsidetitlebackgroundcolour' => array(
+                    'default' => $defaults['defaultsectiontitleinsidetitlebackgroundcolour'],
+                    'type' => PARAM_ALPHANUM
+                ),
                 'showsectiontitlesummary' => array(
                     'default' => get_config('format_grid', 'defaultshowsectiontitlesummary'),
                     'type' => PARAM_INT
@@ -607,13 +623,9 @@ class format_grid extends format_base {
                     'default' => get_config('format_grid', 'defaultsetshowsectiontitlesummaryposition'),
                     'type' => PARAM_INT
                 ),
-                'sectiontitleinsidetitletextcolour' => array(
-                    'default' => $defaults['defaultsectiontitleinsidetitletextcolour'],
-                    'type' => PARAM_ALPHANUM
-                ),
-                'sectiontitleinsidetitlebackgroundcolour' => array(
-                    'default' => $defaults['defaultsectiontitleinsidetitlebackgroundcolour'],
-                    'type' => PARAM_ALPHANUM
+                'sectiontitlesummarymaxlength' => array(
+                    'default' => get_config('format_grid', 'defaultsectiontitlesummarymaxlength'),
+                    'type' => PARAM_INT
                 ),
                 'newactivity' => array(
                     'default' => get_config('format_grid', 'defaultnewactivity'),
@@ -884,6 +896,24 @@ class format_grid extends format_base {
                     'element_type' => 'select',
                     'element_attributes' => array(self::get_horizontal_alignments())
                 );
+                $courseformatoptionsedit['sectiontitleinsidetitletextcolour'] = array(
+                    'label' => new lang_string('sectiontitleinsidetitletextcolour', 'format_grid'),
+                    'help' => 'sectiontitleinsidetitletextcolour',
+                    'help_component' => 'format_grid',
+                    'element_type' => 'gfcolourpopup',
+                    'element_attributes' => array(
+                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour'))
+                    )
+                );
+                $courseformatoptionsedit['sectiontitleinsidetitlebackgroundcolour'] = array(
+                    'label' => new lang_string('sectiontitleinsidetitlebackgroundcolour', 'format_grid'),
+                    'help' => 'sectiontitleinsidetitlebackgroundcolour',
+                    'help_component' => 'format_grid',
+                    'element_type' => 'gfcolourpopup',
+                    'element_attributes' => array(
+                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultsectiontitleinsidetitlebackgroundcolour'))
+                    )
+                );
                 $courseformatoptionsedit['showsectiontitlesummary'] = array(
                     'label' => new lang_string('showsectiontitlesummary', 'format_grid'),
                     'element_type' => 'select',
@@ -910,23 +940,12 @@ class format_grid extends format_base {
                     'help' => 'setshowsectiontitlesummaryposition',
                     'help_component' => 'format_grid'
                 );
-                $courseformatoptionsedit['sectiontitleinsidetitletextcolour'] = array(
-                    'label' => new lang_string('sectiontitleinsidetitletextcolour', 'format_grid'),
-                    'help' => 'sectiontitleinsidetitletextcolour',
-                    'help_component' => 'format_grid',
-                    'element_type' => 'gfcolourpopup',
-                    'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour'))
-                    )
-                );
-                $courseformatoptionsedit['sectiontitleinsidetitlebackgroundcolour'] = array(
-                    'label' => new lang_string('sectiontitleinsidetitlebackgroundcolour', 'format_grid'),
-                    'help' => 'sectiontitleinsidetitlebackgroundcolour',
-                    'help_component' => 'format_grid',
-                    'element_type' => 'gfcolourpopup',
-                    'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultsectiontitleinsidetitlebackgroundcolour'))
-                    )
+                $courseformatoptionsedit['sectiontitlesummarymaxlength'] = array(
+                    'label' => new lang_string('sectiontitlesummarymaxlength', 'format_grid'),
+                    'element_type' => 'text',
+                    'element_attributes' => array('size' => 3),
+                    'help' => 'sectiontitlesummarymaxlength',
+                    'help_component' => 'format_grid'
                 );
             } else {
                 $courseformatoptionsedit['hidesectiontitle'] = array('label' => get_config('format_grid', 'defaulthidesectiontitle'),
@@ -945,14 +964,16 @@ class format_grid extends format_base {
                     'label' => get_config('format_grid', 'defaultsectiontitlefontsize'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['sectiontitlealignment'] = array(
                     'label' => get_config('format_grid', 'defaultsectiontitlealignment'), 'element_type' => 'hidden');
-                $courseformatoptionsedit['showsectiontitlesummary'] = array(
-                    'label' => get_config('format_grid', 'defaultshowsectiontitlesummary'), 'element_type' => 'hidden');
-                $courseformatoptionsedit['setshowsectiontitlesummaryposition'] = array(
-                    'label' => get_config('format_grid', 'defaultsetshowsectiontitlesummaryposition'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['sectiontitleinsidetitletextcolour'] = array(
                     'label' => $defaults['defaultsectiontitleinsidetitletextcolour'], 'element_type' => 'hidden');
                 $courseformatoptionsedit['sectiontitleinsidetitlebackgroundcolour'] = array(
                     'label' => $defaults['defaultsectiontitleinsidetitlebackgroundcolour'], 'element_type' => 'hidden');
+                $courseformatoptionsedit['showsectiontitlesummary'] = array(
+                    'label' => get_config('format_grid', 'defaultshowsectiontitlesummary'), 'element_type' => 'hidden');
+                $courseformatoptionsedit['setshowsectiontitlesummaryposition'] = array(
+                    'label' => get_config('format_grid', 'defaultsetshowsectiontitlesummaryposition'), 'element_type' => 'hidden');
+                $courseformatoptionsedit['sectiontitlesummarymaxlength'] = array(
+                    'label' => get_config('format_grid', 'defaultsectiontitlesummarymaxlength'), 'element_type' => 'hidden');
             }
 
             $courseformatoptionsedit['newactivity'] = array(
@@ -1581,10 +1602,11 @@ class format_grid extends format_base {
             $updatedata['sectiontitleboxopacity'] = get_config('format_grid', 'defaultsectiontitleboxopacity');
             $updatedata['sectiontitlefontsize'] = get_config('format_grid', 'defaultsectiontitlefontsize');
             $updatedata['sectiontitlealignment'] = get_config('format_grid', 'defaultsectiontitlealignment');
-            $updatedata['showsectiontitlesummary'] = get_config('format_grid', 'defaultshowsectiontitlesummary');
-            $updatedata['setshowsectiontitlesummaryposition'] = get_config('format_grid', 'defaultsetshowsectiontitlesummaryposition');
             $updatedata['sectiontitleinsidetitletextcolour'] = get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour');
             $updatedata['sectiontitleinsidetitlebackgroundcolour'] = get_config('format_grid', 'defaultsectiontitleinsidetitlebackgroundcolour');
+            $updatedata['showsectiontitlesummary'] = get_config('format_grid', 'defaultshowsectiontitlesummary');
+            $updatedata['setshowsectiontitlesummaryposition'] = get_config('format_grid', 'defaultsetshowsectiontitlesummaryposition');
+            $updatedata['sectiontitlesummarymaxlength'] = get_config('format_grid', 'defaultsectiontitlesummarymaxlength');
             $updatesectiontitleoptions = true;
         }
         if ($newactivityreset && $resetallifall) {
