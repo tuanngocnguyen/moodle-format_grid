@@ -196,6 +196,14 @@ if ($ADMIN->fulltree) {
     $choices = format_grid::get_default_opacities();
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
+    /* Section title font size. */
+    $name = 'format_grid/defaultsectiontitlefontsize';
+    $title = get_string('defaultsectiontitlefontsize', 'format_grid');
+    $description = get_string('defaultsectiontitlefontsize_desc', 'format_grid');
+    $default = format_grid::get_default_section_title_font_size();
+    $choices = format_grid::get_default_section_font_sizes();
+    $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
+
     /* Show section title summary on hover - 1 = no, 2 = yes. */
     $name = 'format_grid/defaultshowsectiontitlesummary';
     $title = get_string('defaultshowsectiontitlesummary', 'format_grid');

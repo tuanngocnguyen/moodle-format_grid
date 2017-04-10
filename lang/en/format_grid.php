@@ -154,6 +154,7 @@ $string['setfitsectioncontainertowindow_help'] = 'If enabled, the popup box with
 
 $string['colourrule'] = "Please enter a valid RGB colour, six hexadecimal digits.";
 $string['opacityrule'] = "Please enter a valid opacity, between 0 and 1 with 0.1 increments.";
+$string['sectiontitlefontsizerule'] = "Please enter a valid section title font size, between 12 and 24 (pixels) or 0 for 'do not set'.";
 
 // Section title text format options.
 $string['hidesectiontitle'] = 'Hide section title option';
@@ -186,6 +187,10 @@ $string['sectiontitleboxopacity'] = 'Section title box opacity';
 $string['sectiontitleboxopacity_help'] = 'Section title box opacity between 0 and 1 in 0.1 increments.  When the box position is \'Inside\'.';
 $string['defaultsectiontitleboxopacity'] = 'Section title box opacity';
 $string['defaultsectiontitleboxopacity_desc'] = 'Section title box opacity between 0 and 1 in 0.1 increments.  When the box position is \'Inside\'.';
+$string['sectiontitlefontsize'] = 'Section title font size';
+$string['sectiontitlefontsize_help'] = 'Section title font size between 12 and 24 pixels where 0 represents \'do not set but inherit from theme or any other applying CSS\'.';
+$string['defaultsectiontitlefontsize'] = 'Section title font size';
+$string['defaultsectiontitlefontsize_desc'] = 'Section title font size between 12 and 24 pixels where 0 represents \'do not set but inherit from theme or any other applying CSS\'.';
 $string['showsectiontitlesummary'] = 'Show section title summary on hover option';
 $string['showsectiontitlesummary_help'] = 'Show the section title summary when hovering over the grid box.';
 $string['defaultshowsectiontitlesummary'] = 'Show section title summary on hover option';

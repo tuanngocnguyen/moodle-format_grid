@@ -51,6 +51,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
                 'sectiontitleboxinsideposition' => 2,
                 'sectiontitleboxheight' => 42,
                 'sectiontitleboxopacity' => '.3',
+                'sectiontitlefontsize' => 24,
                 'showsectiontitlesummary' => 1,
                 'setshowsectiontitlesummaryposition' => 2,
                 'sectiontitleinsidetitletextcolour' => '#ffffff',
@@ -68,6 +69,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
                 'sectiontitleboxinsideposition' => 3,
                 'sectiontitleboxheight' => 34,
                 'sectiontitleboxopacity' => '.7',
+                'sectiontitlefontsize' => 12,
                 'showsectiontitlesummary' => 1,
                 'setshowsectiontitlesummaryposition' => 3,
                 'sectiontitleinsidetitletextcolour' => '#ffffff',
@@ -133,6 +135,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->assertEquals(1, $cfo['sectiontitleboxinsideposition']);
         $this->assertEquals(0, $cfo['sectiontitleboxheight']);
         $this->assertEquals('.8', $cfo['sectiontitleboxopacity']);
+        $this->assertEquals(0, $cfo['sectiontitlefontsize']);
         $this->assertEquals(2, $cfo['showsectiontitlesummary']);
         $this->assertEquals(1, $cfo['setshowsectiontitlesummaryposition']);
         $this->assertEquals('000000', $cfo['sectiontitleinsidetitletextcolour']);
@@ -153,6 +156,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->assertEquals(1, $cfo1['sectiontitleboxinsideposition']);
         $this->assertEquals(0, $cfo1['sectiontitleboxheight']);
         $this->assertEquals('.8', $cfo1['sectiontitleboxopacity']);
+        $this->assertEquals(0, $cfo1['sectiontitlefontsize']);
         $this->assertEquals(2, $cfo1['showsectiontitlesummary']);
         $this->assertEquals(1, $cfo1['setshowsectiontitlesummaryposition']);
         $this->assertEquals('000000', $cfo1['sectiontitleinsidetitletextcolour']);
@@ -164,6 +168,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->assertEquals(1, $cfo2['sectiontitleboxinsideposition']);
         $this->assertEquals(0, $cfo2['sectiontitleboxheight']);
         $this->assertEquals('.8', $cfo2['sectiontitleboxopacity']);
+        $this->assertEquals(0, $cfo2['sectiontitlefontsize']);
         $this->assertEquals(2, $cfo2['showsectiontitlesummary']);
         $this->assertEquals(1, $cfo2['setshowsectiontitlesummaryposition']);
         $this->assertEquals('000000', $cfo2['sectiontitleinsidetitletextcolour']);

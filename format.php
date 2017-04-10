@@ -83,6 +83,12 @@ echo '#gridiconcontainer {';
 echo 'text-align: '.$gfsettings['imagecontaineralignment'].';';
 echo '}';
 echo '.course-content ul.gridicons li .icon_content {';
+if ($gfsettings['sectiontitlefontsize']) { // Font size is set.
+    echo 'font-size: '.$gfsettings['sectiontitlefontsize'].'px;';
+    if (($gfsettings['sectiontitlefontsize'] + 4) > 20) {
+        echo 'height: '.($gfsettings['sectiontitlefontsize'] + 4).'px;';
+    }
+}
 if ($gfsettings['sectiontitleboxposition'] == 1) { // Inside.
     echo 'width: '.(($gfsettings['imagecontainerwidth'] + ($gfsettings['borderwidth'] * 2)) - 20).'px;';
 } else {

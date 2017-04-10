@@ -51,6 +51,8 @@ class format_grid extends format_base {
     // Opacity constants - 0 to 1:....
     private static $opacities = array('0' => '0.0', '.1' => '0.1', '.2' => '0.2', '.3' => '0.3', '.4' => '0.4',
        '.5' => '0.5', '.6' => '0.6', '.7' => '0.7', '.8' => '0.8', '.9' => '0.9', '1' => '1.0');
+    private static $sectiontitlefontsizes = array(0 => '0', 12 => '12', 13 => '13', 14 => '14', 15 => '15', 16 => '16',
+       17 => '17', 18 => '18', 19 => '19', 20 => '20', 21 => '21', 22 => '22', 23 => '23', 24 => '24');
     private $settings;
 
     /**
@@ -261,6 +263,22 @@ class format_grid extends format_base {
      */
     public static function get_default_opacities() {
         return self::$opacities;
+    }
+
+    /**
+     * Gets the default font size for the section title.
+     * @return string Font size of the section title.
+     */
+    public static function get_default_section_title_font_size() {
+        return 0;
+    }
+
+    /**
+     * Gets the default section title font sizes.
+     * @return Array Font sizes.
+     */
+    public static function get_default_section_font_sizes() {
+        return self::$sectiontitlefontsizes;
     }
 
     /**
@@ -565,6 +583,10 @@ class format_grid extends format_base {
                     'default' => get_config('format_grid', 'defaultsectiontitleboxopacity'),
                     'type' => PARAM_RAW
                 ),
+                'sectiontitlefontsize' => array(
+                    'default' => get_config('format_grid', 'defaultsectiontitlefontsize'),
+                    'type' => PARAM_INT
+                ),
                 'showsectiontitlesummary' => array(
                     'default' => get_config('format_grid', 'defaultshowsectiontitlesummary'),
                     'type' => PARAM_INT
@@ -836,6 +858,13 @@ class format_grid extends format_base {
                     'help' => 'sectiontitleboxopacity',
                     'help_component' => 'format_grid'
                 );
+                $courseformatoptionsedit['sectiontitlefontsize'] = array(
+                    'label' => new lang_string('sectiontitlefontsize', 'format_grid'),
+                    'element_type' => 'select',
+                    'element_attributes' => array(self::get_default_section_font_sizes()),
+                    'help' => 'sectiontitlefontsize',
+                    'help_component' => 'format_grid'
+                );
                 $courseformatoptionsedit['showsectiontitlesummary'] = array(
                     'label' => new lang_string('showsectiontitlesummary', 'format_grid'),
                     'element_type' => 'select',
@@ -893,6 +922,8 @@ class format_grid extends format_base {
                     'label' => get_config('format_grid', 'defaultsectiontitleboxheight'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['sectiontitleboxopacity'] = array(
                     'label' => get_config('format_grid', 'defaultsectiontitleboxopacity'), 'element_type' => 'hidden');
+                $courseformatoptionsedit['sectiontitlefontsize'] = array(
+                    'label' => get_config('format_grid', 'defaultsectiontitlefontsize'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['showsectiontitlesummary'] = array(
                     'label' => get_config('format_grid', 'defaultshowsectiontitlesummary'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['setshowsectiontitlesummaryposition'] = array(
@@ -1151,6 +1182,9 @@ class format_grid extends format_base {
         if ($this->validate_opacity($data['sectiontitleboxopacity']) === false) {
             $retr['sectiontitleboxopacity'] = get_string('opacityrule', 'format_grid');
         }
+        if ($this->validate_section_title_font_size($data['sectiontitlefontsize']) === false) {
+            $retr['sectiontitlefontsize'] = get_string('sectiontitlefontsizerule', 'format_grid');
+        }
         return $retr;
     }
 
@@ -1189,6 +1223,20 @@ class format_grid extends format_base {
      */
     private function validate_opacity($data) {
         if (array_key_exists($data, self::$opacities)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Validates the font size that was entered by the user.
+     *
+     * @param string $data the font size integer to validate.
+     * @return true|false
+     */
+    private function validate_section_title_font_size($data) {
+        if (array_key_exists($data, self::$sectiontitlefontsizes)) {
             return true;
         } else {
             return false;
@@ -1510,6 +1558,7 @@ class format_grid extends format_base {
             $updatedata['sectiontitleboxinsideposition'] = get_config('format_grid', 'defaultsectiontitleboxinsideposition');
             $updatedata['sectiontitleboxheight'] = get_config('format_grid', 'defaultsectiontitleboxheight');
             $updatedata['sectiontitleboxopacity'] = get_config('format_grid', 'defaultsectiontitleboxopacity');
+            $updatedata['sectiontitlefontsize'] = get_config('format_grid', 'defaultsectiontitlefontsize');
             $updatedata['showsectiontitlesummary'] = get_config('format_grid', 'defaultshowsectiontitlesummary');
             $updatedata['setshowsectiontitlesummaryposition'] = get_config('format_grid', 'defaultsetshowsectiontitlesummaryposition');
             $updatedata['sectiontitleinsidetitletextcolour'] = get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour');
