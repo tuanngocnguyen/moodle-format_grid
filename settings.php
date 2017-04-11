@@ -259,6 +259,14 @@ if ($ADMIN->fulltree) {
     $default = format_grid::get_default_section_title_summary_max_length();
     $settings->add(new admin_setting_configtext($name, $title, $description, $default, PARAM_INT));
 
+    // Default section title summary text colour on hover in hexadecimal RGB with preceding '#'.
+    $name = 'format_grid/defaultsectiontitlesummarytextcolour';
+    $title = get_string('defaultsectiontitlesummarytextcolour', 'format_grid');
+    $description = get_string('defaultsectiontitlesummarytextcolour_desc', 'format_grid');
+    $default = format_grid::get_default_section_title_summary_text_colour();
+    $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
+    $settings->add($setting);
+
     /* Show new activity notification image - 1 = no, 2 = yes. */
     $name = 'format_grid/defaultnewactivity';
     $title = get_string('defaultnewactivity', 'format_grid');

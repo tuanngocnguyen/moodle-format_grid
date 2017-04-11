@@ -57,7 +57,8 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
                 'sectiontitleinsidetitlebackgroundcolour' => '#000000',
                 'showsectiontitlesummary' => 1,
                 'setshowsectiontitlesummaryposition' => 2,
-                'sectiontitlesummarymaxlength' => 20),
+                'sectiontitlesummarymaxlength' => 20,
+                'sectiontitlesummarytextcolour' => '#ffffff'),
             array('createsections' => true));
         $this->courseformatone = course_get_format($this->courseone);
         $this->coursetwo = $this->getDataGenerator()->create_course(
@@ -77,7 +78,8 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
                 'sectiontitleinsidetitlebackgroundcolour' => '#000000',
                 'showsectiontitlesummary' => 1,
                 'setshowsectiontitlesummaryposition' => 3,
-                'sectiontitlesummarymaxlength' => 10),
+                'sectiontitlesummarymaxlength' => 10,
+                'sectiontitlesummarytextcolour' => '#ffffff'),
             array('createsections' => true));
         $this->courseformattwo = course_get_format($this->courseone);
     }
@@ -146,6 +148,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->assertEquals(2, $cfo['showsectiontitlesummary']);
         $this->assertEquals(1, $cfo['setshowsectiontitlesummaryposition']);
         $this->assertEquals(0, $cfo['sectiontitlesummarymaxlength']);
+        $this->assertEquals('3b53ad', $cfo['sectiontitlesummarytextcolour']);
     }
 
     public function test_reset_all_section_title_options() {
@@ -169,6 +172,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->assertEquals(2, $cfo1['showsectiontitlesummary']);
         $this->assertEquals(1, $cfo1['setshowsectiontitlesummaryposition']);
         $this->assertEquals(0, $cfo1['sectiontitlesummarymaxlength']);
+        $this->assertEquals('3b53ad', $cfo1['sectiontitlesummarytextcolour']);
 
         $this->assertEquals(1, $cfo2['hidesectiontitle']);
         $this->assertEquals(0, $cfo2['sectiontitlegridlengthmaxoption']);
@@ -183,6 +187,7 @@ class format_grid_courseformatlib_testcase extends advanced_testcase {
         $this->assertEquals(2, $cfo2['showsectiontitlesummary']);
         $this->assertEquals(1, $cfo2['setshowsectiontitlesummaryposition']);
         $this->assertEquals(0, $cfo2['sectiontitlesummarymaxlength']);
+        $this->assertEquals('3b53ad', $cfo2['sectiontitlesummarytextcolour']);
     }
 
     public function test_get_set_show_section_title_summary_position() {

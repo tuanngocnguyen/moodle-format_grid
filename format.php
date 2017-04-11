@@ -186,6 +186,14 @@ if ($gfsettings['sectiontitleboxposition'] == 1) { // Inside.
     echo '}';
 }
 
+echo '.course-content ul.gridicons li .gridicon_link .tooltip-inner {';
+    echo 'color: ';
+    if ($gfsettings['sectiontitlesummarytextcolour'][0] != '#') {
+        echo '#';
+    }
+    echo $gfsettings['sectiontitlesummarytextcolour'].';';
+echo '}';
+
 echo '.course-content ul.gridicons img.new_activity {';
 echo 'margin-top: '.$imageproperties['margin-top'].'px;';
 echo 'margin-left: '.$imageproperties['margin-left'].'px;';

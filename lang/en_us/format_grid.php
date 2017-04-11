@@ -49,6 +49,10 @@ $string['setcurrentselectedimagecontainertextcolour'] = 'Set the current selecte
 $string['setcurrentselectedimagecontainertextcolour_help'] = 'Set the current selected image container text color in hexidecimal RGB.';
 $string['setcurrentselectedimagecontainercolour'] = 'Set the current selected image container color';
 $string['setcurrentselectedimagecontainercolour_help'] = 'Set the current selected image container color in hexidecimal RGB.';
+$string['sectiontitlesummarytextcolour'] = 'Set the section title summary text color on hover';
+$string['sectiontitlesummarytextcolour_help'] = 'Set the the section title summary text color when hovering over the grid box.';
+$string['defaultsectiontitlesummarytextcolour'] = 'Set the section title summary text color on hover';
+$string['defaultsectiontitlesummarytextcolour_desc'] = 'Set the the section title summary text color when hovering over the grid box.';
 $string['centre'] = 'Center';
 
 // Section title text format options.
