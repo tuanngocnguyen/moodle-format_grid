@@ -318,11 +318,17 @@ class format_grid_renderer extends format_section_renderer_base {
         }
         echo html_writer::start_tag('div', array('id' => 'gridiconcontainer', 'role' => 'navigation',
             'aria-label' => get_string('gridimagecontainer', 'format_grid')));
-                        $sectiontitleclass = 'icon_content';
+        $sectiontitleclass = 'icon_content';
+
         $gridiconsclass = 'gridicons';
         if ($this->settings['sectiontitleboxposition'] == 1) {
             $gridiconsclass .= ' content_inside';
         }
+        $defaultcustommousepointers = get_config('format_grid', 'defaultcustommousepointers');
+        if ($defaultcustommousepointers == 2) { // Yes.
+            $gridiconsclass .= ' gridcursor';
+        }
+
         echo html_writer::start_tag('ul', array('class' => $gridiconsclass));
         // Print all of the image containers.
         $this->make_block_icon_topics($coursecontext->id, $modinfo, $course, $editing, $hascapvishidsect, $urlpicedit);
@@ -331,7 +337,11 @@ class format_grid_renderer extends format_section_renderer_base {
 
         $rtl = right_to_left();
         if (!(($course->coursedisplay == COURSE_DISPLAY_MULTIPAGE) && (!$editing))) {
-            echo html_writer::start_tag('div', array('id' => 'gridshadebox'));
+            $gridshadeboxattributes = array('id' => 'gridshadebox');
+            if ($defaultcustommousepointers == 2) { // Yes.
+                $gridshadeboxattributes['class'] = 'gridcursor';
+            }
+            echo html_writer::start_tag('div', $gridshadeboxattributes);
             echo html_writer::tag('div', '', array('id' => 'gridshadebox_overlay', 'style' => 'display: none;'));
 
             $gridshadeboxcontentclasses = array('hide_content');

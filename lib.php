@@ -1049,7 +1049,7 @@ class format_grid extends format_base {
                 'element_attributes' => array(
                     array(
                         1 => new lang_string('no'), // No.
-                        2 => new lang_string('yes')   // Yes.
+                        2 => new lang_string('yes') // Yes.
                     )
                 ),
                 'help' => 'setnewactivity',
@@ -1064,7 +1064,7 @@ class format_grid extends format_base {
                 'element_attributes' => array(
                     array(
                         1 => new lang_string('no'), // No.
-                        2 => new lang_string('yes')   // Yes.
+                        2 => new lang_string('yes') // Yes.
                     )
                 )
             );
@@ -1077,7 +1077,7 @@ class format_grid extends format_base {
                 'element_attributes' => array(
                     array(
                         1 => new lang_string('no'), // No.
-                        2 => new lang_string('yes')   // Yes.
+                        2 => new lang_string('yes') // Yes.
                     )
                 )
             );

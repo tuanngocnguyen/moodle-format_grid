@@ -315,4 +315,15 @@ if ($ADMIN->fulltree) {
         2 => new lang_string('yes')   // Yes.
     );
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
+
+    /* Custom mouse pointers - 1 = no, 2 = yes. */
+    $name = 'format_grid/defaultcustommousepointers';
+    $title = get_string('custommousepointers', 'format_grid');
+    $description = get_string('custommousepointers_desc', 'format_grid');
+    $default = 2;
+    $choices = array(
+        1 => new lang_string('no'),   // No.
+        2 => new lang_string('yes')   // Yes.
+    );
+    $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 }

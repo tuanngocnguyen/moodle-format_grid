@@ -115,7 +115,7 @@ div#gridmiddle-column > ul {
     position: absolute;
 }
 
-.course-content .gridicon_link {
+.course-content .gridcursor .gridicon_link {
     /*rtl:ignore*/
     cursor: url('[[pix:format_grid|fa-hand-o-up-f]]'), auto;
 }
@@ -214,10 +214,13 @@ div#gridmiddle-column > ul {
 
 /* @group Shadebox */
 
-div#gridshadebox_overlay {
-    background: black;
+.gridcursor div#gridshadebox_overlay {
     /*rtl:ignore*/
     cursor: url('[[pix:format_grid|fa-times-circle-o-f]]'), auto;
+}
+
+div#gridshadebox_overlay {
+    background: black;
     /* for IE */
     filter: alpha(opacity=70);
     height: 500px;
@@ -292,18 +295,23 @@ body.jsenabled #gridshadebox_content.hide_content {
 #gridshadebox_content ul li ol li {
     list-style: decimal outside none;
 } 
- 
-#gridshadebox_close {
+
+.gridcursor #gridshadebox_close {
     /*rtl:ignore*/
     cursor: url('[[pix:format_grid|fa-hand-o-up-f]]'), auto;
+}
+
+#gridshadebox_close {
     position: absolute;
     right: -10px;
     top: -10px;
     z-index: 2;
 }
 
-.gridshadebox_arrow {
+.gridcursor .gridshadebox_arrow {
     cursor: inherit;
+}
+.gridshadebox_arrow {
     height: 55px;
     opacity: 0.35;
     position: absolute;
@@ -332,14 +340,14 @@ body.jsenabled #gridshadebox_content.hide_content {
     right: -55px;
 }
 
-.gridshadebox_previous_area.ltr,
-.gridshadebox_next_area.rtl {
+.gridcursor .gridshadebox_previous_area.ltr,
+.gridcursor .gridshadebox_next_area.rtl {
     /*rtl:ignore*/
     cursor: url('[[pix:format_grid|fa-hand-o-left-f]]'), auto;
 }
 
-.gridshadebox_next_area.ltr,
-.gridshadebox_previous_area.rtl {
+.gridcursor .gridshadebox_next_area.ltr,
+.gridcursor .gridshadebox_previous_area.rtl {
     /*rtl:ignore*/
     cursor: url('[[pix:format_grid|fa-hand-o-right-f]]'), auto;
 }
@@ -361,13 +369,15 @@ body.jsenabled #gridshadebox_content.hide_content {
 }
 
 @media (max-width: 767px) {
-    div#gridshadebox_overlay {
+    .gridcursor div#gridshadebox_overlay {
         /*rtl:ignore*/
         cursor: url('[[pix:format_grid|fa-times-circle-o-fsm]]'), auto;
     }
-    #gridshadebox_close {
+    .gridcursor #gridshadebox_close {
         /*rtl:ignore*/
         cursor: url('[[pix:format_grid|fa-hand-o-up-fsm]]'), auto;
+    }
+    #gridshadebox_close {
         height: 28px;
         width: 28px;
     }
@@ -384,13 +394,13 @@ body.jsenabled #gridshadebox_content.hide_content {
     .gridshadebox_next_area {
         right: -30px;
     }
-    .gridshadebox_previous_area.ltr,
-    .gridshadebox_next_area.rtl {
+    .gridcursor .gridshadebox_previous_area.ltr,
+    .gridcursor .gridshadebox_next_area.rtl {
         /*rtl:ignore*/
         cursor: url('[[pix:format_grid|fa-hand-o-left-fsm]]'), auto;
     }
-    .gridshadebox_next_area.ltr,
-    .gridshadebox_previous_area.rtl {
+    .gridcursor .gridshadebox_next_area.ltr,
+    .gridcursor .gridshadebox_previous_area.rtl {
         /*rtl:ignore*/
         cursor: url('[[pix:format_grid|fa-hand-o-right-fsm]]'), auto;
     }

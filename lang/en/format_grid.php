@@ -279,3 +279,6 @@ $string['grid:changesectiontitleoptions'] = 'Change or reset the section title o
 $string['greyouthidden'] = 'Grey out unavailable';
 $string['greyouthidden_desc'] = 'In Grid display show unavailable section images in grey and unlinked.';
 $string['greyouthidden_help'] = 'In Grid display show unavailable section images in grey and unlinked.';
+
+$string['custommousepointers'] = 'Use custom mouse pointers';
+$string['custommousepointers_desc'] = 'In Grid use custom mouse pointers.';
