@@ -187,11 +187,25 @@ if ($gfsettings['sectiontitleboxposition'] == 1) { // Inside.
 }
 
 echo '.course-content ul.gridicons li .gridicon_link .tooltip-inner {';
+    echo 'background-color: ';
+    if ($gfsettings['sectiontitlesummarybackgroundcolour'][0] != '#') {
+        echo '#';
+    }
+    echo $gfsettings['sectiontitlesummarybackgroundcolour'].';';
     echo 'color: ';
     if ($gfsettings['sectiontitlesummarytextcolour'][0] != '#') {
         echo '#';
     }
     echo $gfsettings['sectiontitlesummarytextcolour'].';';
+echo '}';
+
+$tooltiparrowposition = $courseformat->get_set_show_section_title_summary_position();
+echo '.course-content ul.gridicons li .gridicon_link .tooltip.'.$tooltiparrowposition.' .tooltip-arrow {';
+    echo 'border-'.$tooltiparrowposition.'-color: ';
+    if ($gfsettings['sectiontitlesummarybackgroundcolour'][0] != '#') {
+        echo '#';
+    }
+    echo $gfsettings['sectiontitlesummarybackgroundcolour'].';';
 echo '}';
 
 echo '.course-content ul.gridicons img.new_activity {';

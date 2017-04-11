@@ -338,6 +338,14 @@ class format_grid extends format_base {
     }
 
     /**
+     * Gets the default section title summary on hover background colour.
+     * @return string Default section title summary on hover background colour.
+     */
+    public static function get_default_section_title_summary_background_colour() {
+        return '#ffc540';
+    }
+
+    /**
      * Gets the displayed image path for storage of the displayed image.
      * @return string The path.
      */
@@ -639,6 +647,10 @@ class format_grid extends format_base {
                     'default' => $defaults['defaultsectiontitlesummarytextcolour'],
                     'type' => PARAM_ALPHANUM
                 ),
+                'sectiontitlesummarybackgroundcolour' => array(
+                    'default' => $defaults['defaultsectiontitlesummarybackgroundcolour'],
+                    'type' => PARAM_ALPHANUM
+                ),
                 'newactivity' => array(
                     'default' => get_config('format_grid', 'defaultnewactivity'),
                     'type' => PARAM_INT
@@ -755,7 +767,7 @@ class format_grid extends format_base {
                     'help_component' => 'format_grid',
                     'element_type' => 'gfcolourpopup',
                     'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultbordercolour'))
+                        array('tabindex' => -1, 'value' => $defaults['defaultbordercolour'])
                     )
                 );
 
@@ -785,7 +797,7 @@ class format_grid extends format_base {
                     'help_component' => 'format_grid',
                     'element_type' => 'gfcolourpopup',
                     'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultimagecontainerbackgroundcolour'))
+                        array('tabindex' => -1, 'value' => $defaults['defaultimagecontainerbackgroundcolour'])
                     )
                 );
 
@@ -795,7 +807,7 @@ class format_grid extends format_base {
                     'help_component' => 'format_grid',
                     'element_type' => 'gfcolourpopup',
                     'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultcurrentselectedsectioncolour'))
+                        array('tabindex' => -1, 'value' => $defaults['defaultcurrentselectedsectioncolour'])
                     )
                 );
 
@@ -805,7 +817,7 @@ class format_grid extends format_base {
                     'help_component' => 'format_grid',
                     'element_type' => 'gfcolourpopup',
                     'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultcurrentselectedimagecontainertextcolour'))
+                        array('tabindex' => -1, 'value' => $defaults['defaultcurrentselectedimagecontainertextcolour'])
                     )
                 );
 
@@ -815,7 +827,7 @@ class format_grid extends format_base {
                     'help_component' => 'format_grid',
                     'element_type' => 'gfcolourpopup',
                     'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultcurrentselectedimagecontainercolour'))
+                        array('tabindex' => -1, 'value' => $defaults['defaultcurrentselectedimagecontainercolour'])
                     )
                 );
             } else {
@@ -914,7 +926,7 @@ class format_grid extends format_base {
                     'help_component' => 'format_grid',
                     'element_type' => 'gfcolourpopup',
                     'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultsectiontitleinsidetitletextcolour'))
+                        array('tabindex' => -1, 'value' => $defaults['defaultsectiontitleinsidetitletextcolour'])
                     )
                 );
                 $courseformatoptionsedit['sectiontitleinsidetitlebackgroundcolour'] = array(
@@ -923,7 +935,7 @@ class format_grid extends format_base {
                     'help_component' => 'format_grid',
                     'element_type' => 'gfcolourpopup',
                     'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultsectiontitleinsidetitlebackgroundcolour'))
+                        array('tabindex' => -1, 'value' => $defaults['defaultsectiontitleinsidetitlebackgroundcolour'])
                     )
                 );
                 $courseformatoptionsedit['showsectiontitlesummary'] = array(
@@ -965,7 +977,16 @@ class format_grid extends format_base {
                     'help_component' => 'format_grid',
                     'element_type' => 'gfcolourpopup',
                     'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => get_config('format_grid', 'defaultsectiontitlesummarytextcolour'))
+                        array('tabindex' => -1, 'value' => $defaults['defaultsectiontitlesummarytextcolour'])
+                    )
+                );
+                $courseformatoptionsedit['sectiontitlesummarybackgroundcolour'] = array(
+                    'label' => new lang_string('sectiontitlesummarybackgroundcolour', 'format_grid'),
+                    'help' => 'sectiontitlesummarybackgroundcolour',
+                    'help_component' => 'format_grid',
+                    'element_type' => 'gfcolourpopup',
+                    'element_attributes' => array(
+                        array('tabindex' => -1, 'value' => $defaults['defaultsectiontitlesummarybackgroundcolour'])
                     )
                 );
             } else {
@@ -996,7 +1017,9 @@ class format_grid extends format_base {
                 $courseformatoptionsedit['sectiontitlesummarymaxlength'] = array(
                     'label' => get_config('format_grid', 'defaultsectiontitlesummarymaxlength'), 'element_type' => 'hidden');
                 $courseformatoptionsedit['sectiontitlesummarytextcolour'] = array(
-                    'label' => get_config('format_grid', 'defaultsectiontitlesummarytextcolour'), 'element_type' => 'hidden');
+                    'label' => $defaults['defaultsectiontitlesummarytextcolour'], 'element_type' => 'hidden');
+                $courseformatoptionsedit['sectiontitlesummarybackgroundcolour'] = array(
+                    'label' => $defaults['defaultsectiontitlesummarybackgroundcolour'], 'element_type' => 'hidden');
             }
 
             $courseformatoptionsedit['newactivity'] = array(
@@ -1076,6 +1099,10 @@ class format_grid extends format_base {
         $defaults['defaultsectiontitlesummarytextcolour'] = get_config('format_grid', 'defaultsectiontitlesummarytextcolour');
         if ($defaults['defaultsectiontitlesummarytextcolour'][0] == '#') {
             $defaults['defaultsectiontitlesummarytextcolour'] = substr($defaults['defaultsectiontitlesummarytextcolour'], 1);
+        }
+        $defaults['defaultsectiontitlesummarybackgroundcolour'] = get_config('format_grid', 'defaultsectiontitlesummarybackgroundcolour');
+        if ($defaults['defaultsectiontitlesummarybackgroundcolour'][0] == '#') {
+            $defaults['defaultsectiontitlesummarybackgroundcolour'] = substr($defaults['defaultsectiontitlesummarybackgroundcolour'], 1);
         }
         return $defaults;
     }
@@ -1256,6 +1283,9 @@ class format_grid extends format_base {
         }
         if ($this->validate_colour($data['sectiontitlesummarytextcolour']) === false) {
             $retr['sectiontitlesummarytextcolour'] = get_string('colourrule', 'format_grid');
+        }
+        if ($this->validate_colour($data['sectiontitlesummarybackgroundcolour']) === false) {
+            $retr['sectiontitlesummarybackgroundcolour'] = get_string('colourrule', 'format_grid');
         }
         return $retr;
     }
@@ -1638,6 +1668,7 @@ class format_grid extends format_base {
             $updatedata['setshowsectiontitlesummaryposition'] = get_config('format_grid', 'defaultsetshowsectiontitlesummaryposition');
             $updatedata['sectiontitlesummarymaxlength'] = get_config('format_grid', 'defaultsectiontitlesummarymaxlength');
             $updatedata['sectiontitlesummarytextcolour'] = get_config('format_grid', 'defaultsectiontitlesummarytextcolour');
+            $updatedata['sectiontitlesummarybackgroundcolour'] = get_config('format_grid', 'defaultsectiontitlesummarybackgroundcolour');
             $updatesectiontitleoptions = true;
         }
         if ($newactivityreset && $resetallifall) {

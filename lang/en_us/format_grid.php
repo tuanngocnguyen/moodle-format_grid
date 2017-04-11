@@ -50,9 +50,13 @@ $string['setcurrentselectedimagecontainertextcolour_help'] = 'Set the current se
 $string['setcurrentselectedimagecontainercolour'] = 'Set the current selected image container color';
 $string['setcurrentselectedimagecontainercolour_help'] = 'Set the current selected image container color in hexidecimal RGB.';
 $string['sectiontitlesummarytextcolour'] = 'Set the section title summary text color on hover';
-$string['sectiontitlesummarytextcolour_help'] = 'Set the the section title summary text color when hovering over the grid box.';
+$string['sectiontitlesummarytextcolour_help'] = 'Set the the section title summary text color when hovering over the section title in the grid box.';
 $string['defaultsectiontitlesummarytextcolour'] = 'Set the section title summary text color on hover';
-$string['defaultsectiontitlesummarytextcolour_desc'] = 'Set the the section title summary text color when hovering over the grid box.';
+$string['defaultsectiontitlesummarytextcolour_desc'] = 'Set the the section title summary text color when hovering over the section title in the grid box.';
+$string['sectiontitlesummarybackgroundcolour'] = 'Set the section title summary background color on hover';
+$string['sectiontitlesummarybackgroundcolour_help'] = 'Set the the section title summary background color when hovering over the section title in the grid box.';
+$string['defaultsectiontitlesummarybackgroundcolour'] = 'Set the section title summary background color on hover';
+$string['defaultsectiontitlesummarybackgroundcolour_desc'] = 'Set the the section title summary background color when hovering over the section title in the grid box.';
 $string['centre'] = 'Center';
 
 // Section title text format options.
