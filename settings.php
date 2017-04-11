@@ -275,6 +275,14 @@ if ($ADMIN->fulltree) {
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
     $settings->add($setting);
 
+    /* Section title title summary opacity on hover. */
+    $name = 'format_grid/defaultsectiontitlesummarybackgroundopacity';
+    $title = get_string('defaultsectiontitlesummarybackgroundopacity', 'format_grid');
+    $description = get_string('defaultsectiontitlesummarybackgroundopacity_desc', 'format_grid');
+    $default = format_grid::get_default_section_title_summary_opacity();
+    $choices = format_grid::get_default_opacities();
+    $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
+
     /* Show new activity notification image - 1 = no, 2 = yes. */
     $name = 'format_grid/defaultnewactivity';
     $title = get_string('defaultnewactivity', 'format_grid');

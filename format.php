@@ -208,6 +208,10 @@ if ($gfsettings['sectiontitlesummarybackgroundcolour'][0] != '#') {
 echo $gfsettings['sectiontitlesummarybackgroundcolour'].';';
 echo '}';
 
+echo '.course-content ul.gridicons li .gridicon_link .image_holder .tooltip {';
+echo 'opacity: '.$gfsettings['sectiontitlesummarybackgroundopacity'].';';
+echo '}';
+
 echo '.course-content ul.gridicons img.new_activity {';
 echo 'margin-top: '.$imageproperties['margin-top'].'px;';
 echo 'margin-left: '.$imageproperties['margin-left'].'px;';

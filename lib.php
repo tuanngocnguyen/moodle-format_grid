@@ -346,6 +346,14 @@ class format_grid extends format_base {
     }
 
     /**
+     * Gets the default opacity for the section title summary on hover.
+     * @return string Opacity of section title summary on hover.
+     */
+    public static function get_default_section_title_summary_opacity() {
+        return '1';
+    }
+
+    /**
      * Gets the displayed image path for storage of the displayed image.
      * @return string The path.
      */
@@ -650,6 +658,10 @@ class format_grid extends format_base {
                 'sectiontitlesummarybackgroundcolour' => array(
                     'default' => $defaults['defaultsectiontitlesummarybackgroundcolour'],
                     'type' => PARAM_ALPHANUM
+                ),
+                'sectiontitlesummarybackgroundopacity' => array(
+                    'default' => get_config('format_grid', 'defaultsectiontitlesummarybackgroundopacity'),
+                    'type' => PARAM_RAW
                 ),
                 'newactivity' => array(
                     'default' => get_config('format_grid', 'defaultnewactivity'),
@@ -989,6 +1001,13 @@ class format_grid extends format_base {
                         array('tabindex' => -1, 'value' => $defaults['defaultsectiontitlesummarybackgroundcolour'])
                     )
                 );
+                $courseformatoptionsedit['sectiontitlesummarybackgroundopacity'] = array(
+                    'label' => new lang_string('sectiontitlesummarybackgroundopacity', 'format_grid'),
+                    'element_type' => 'select',
+                    'element_attributes' => array(self::get_default_opacities()),
+                    'help' => 'sectiontitlesummarybackgroundopacity',
+                    'help_component' => 'format_grid'
+                );
             } else {
                 $courseformatoptionsedit['hidesectiontitle'] = array('label' => get_config('format_grid', 'defaulthidesectiontitle'),
                     'element_type' => 'hidden');
@@ -1020,6 +1039,8 @@ class format_grid extends format_base {
                     'label' => $defaults['defaultsectiontitlesummarytextcolour'], 'element_type' => 'hidden');
                 $courseformatoptionsedit['sectiontitlesummarybackgroundcolour'] = array(
                     'label' => $defaults['defaultsectiontitlesummarybackgroundcolour'], 'element_type' => 'hidden');
+                $courseformatoptionsedit['sectiontitlesummarybackgroundopacity'] = array(
+                    'label' => $defaults['defaultsectiontitlesummarybackgroundopacity'], 'element_type' => 'hidden');
             }
 
             $courseformatoptionsedit['newactivity'] = array(
@@ -1286,6 +1307,9 @@ class format_grid extends format_base {
         }
         if ($this->validate_colour($data['sectiontitlesummarybackgroundcolour']) === false) {
             $retr['sectiontitlesummarybackgroundcolour'] = get_string('colourrule', 'format_grid');
+        }
+        if ($this->validate_opacity($data['sectiontitlesummarybackgroundopacity']) === false) {
+            $retr['sectiontitlesummarybackgroundopacity'] = get_string('opacityrule', 'format_grid');
         }
         return $retr;
     }
@@ -1669,6 +1693,7 @@ class format_grid extends format_base {
             $updatedata['sectiontitlesummarymaxlength'] = get_config('format_grid', 'defaultsectiontitlesummarymaxlength');
             $updatedata['sectiontitlesummarytextcolour'] = get_config('format_grid', 'defaultsectiontitlesummarytextcolour');
             $updatedata['sectiontitlesummarybackgroundcolour'] = get_config('format_grid', 'defaultsectiontitlesummarybackgroundcolour');
+            $updatedata['sectiontitlesummarybackgroundopacity'] = get_config('format_grid', 'defaultsectiontitlesummarybackgroundopacity');
             $updatesectiontitleoptions = true;
         }
         if ($newactivityreset && $resetallifall) {
