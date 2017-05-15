@@ -15,6 +15,7 @@ Version 3.2.1.2
  12. Add section summary hover background opacity setting.
  13. Add ability to turn off custom cursors setting.
  14. Renderer API changes to support Adaptable theme changes.
+ Changes 2-14 gratefully funded by Coventry University UK.
 
 Version 3.2.1.1
   1. Fix '"bordercolour" is set to 0 when creating courses using the "Upload courses" tool' - CONTRIB-6655.
