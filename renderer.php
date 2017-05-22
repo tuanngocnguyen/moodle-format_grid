@@ -683,10 +683,11 @@ class format_grid_renderer extends format_section_renderer_base {
                     !empty($thissection->availableinfo)));
             $showsection = $hascapvishidsect || $sectionvisible;
 
-            // If we should grey it out, flag that here.  Justin 2016/05/14.
-            $sectionunavailable = !$thissection->available;
-            $greyouthidden = $this->settings['greyouthidden'] == 2;
-            $sectiongreyedout = $sectionunavailable && !$hascapvishidsect && $greyouthidden;
+            // If we should grey it out, flag that here.
+            $sectiongreyedout = false;
+            if ((!$showsection) && ($this->settings['greyouthidden'] == 2)) {
+                $sectiongreyedout = !$thissection->uservisible;
+            }
 
             if ($showsection || $sectiongreyedout) {
                 // We now know the value for the grid shade box shown array.
