@@ -768,6 +768,7 @@ class format_grid_renderer extends format_section_renderer_base {
                 $sectiontitleattribues['class'] = $sectiontitleclass;
                 if ($this->settings['showsectiontitlesummary'] == 2) {
                     $summary = strip_tags($thissection->summary);
+                    $summary = str_replace("&nbsp;", ' ', $summary);
                     $summarylen = core_text::strlen($summary);
                     if ($summarylen > 0) {
                         if ($this->settings['sectiontitlesummarymaxlength'] != 0) {
