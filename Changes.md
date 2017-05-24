@@ -17,6 +17,7 @@ Version 3.2.1.2
  14. Renderer API changes to support Adaptable theme changes.
  15. Fix 'Grey out unavailable broken' - #49.
  16. Fix 'Text not correctly escaped in grid popovers' - #52.
+ 17. Add nav drawer click functionality for Boost theme.
  Changes 2-14 gratefully funded by Coventry University UK.
 
 Version 3.2.1.1
