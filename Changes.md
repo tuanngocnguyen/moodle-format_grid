@@ -1,6 +1,7 @@
 History
 =============
 Version 3.2.1.3
+  1. Fix "Error when restoring course" - CONTRIB-6917.
 
 Version 3.2.1.2
   1. Fix unable to use cursor keys to edit section title when editing.
