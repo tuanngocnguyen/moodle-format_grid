@@ -779,7 +779,7 @@ class format_grid extends format_base {
                     'help_component' => 'format_grid',
                     'element_type' => 'gfcolourpopup',
                     'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => $defaults['defaultbordercolour'])
+                        array('value' => $defaults['defaultbordercolour'])
                     )
                 );
 
@@ -809,7 +809,7 @@ class format_grid extends format_base {
                     'help_component' => 'format_grid',
                     'element_type' => 'gfcolourpopup',
                     'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => $defaults['defaultimagecontainerbackgroundcolour'])
+                        array('value' => $defaults['defaultimagecontainerbackgroundcolour'])
                     )
                 );
 
@@ -819,7 +819,7 @@ class format_grid extends format_base {
                     'help_component' => 'format_grid',
                     'element_type' => 'gfcolourpopup',
                     'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => $defaults['defaultcurrentselectedsectioncolour'])
+                        array('value' => $defaults['defaultcurrentselectedsectioncolour'])
                     )
                 );
 
@@ -829,7 +829,7 @@ class format_grid extends format_base {
                     'help_component' => 'format_grid',
                     'element_type' => 'gfcolourpopup',
                     'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => $defaults['defaultcurrentselectedimagecontainertextcolour'])
+                        array('value' => $defaults['defaultcurrentselectedimagecontainertextcolour'])
                     )
                 );
 
@@ -839,7 +839,7 @@ class format_grid extends format_base {
                     'help_component' => 'format_grid',
                     'element_type' => 'gfcolourpopup',
                     'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => $defaults['defaultcurrentselectedimagecontainercolour'])
+                        array('value' => $defaults['defaultcurrentselectedimagecontainercolour'])
                     )
                 );
             } else {
@@ -938,7 +938,7 @@ class format_grid extends format_base {
                     'help_component' => 'format_grid',
                     'element_type' => 'gfcolourpopup',
                     'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => $defaults['defaultsectiontitleinsidetitletextcolour'])
+                        array('value' => $defaults['defaultsectiontitleinsidetitletextcolour'])
                     )
                 );
                 $courseformatoptionsedit['sectiontitleinsidetitlebackgroundcolour'] = array(
@@ -947,7 +947,7 @@ class format_grid extends format_base {
                     'help_component' => 'format_grid',
                     'element_type' => 'gfcolourpopup',
                     'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => $defaults['defaultsectiontitleinsidetitlebackgroundcolour'])
+                        array('value' => $defaults['defaultsectiontitleinsidetitlebackgroundcolour'])
                     )
                 );
                 $courseformatoptionsedit['showsectiontitlesummary'] = array(
@@ -989,7 +989,7 @@ class format_grid extends format_base {
                     'help_component' => 'format_grid',
                     'element_type' => 'gfcolourpopup',
                     'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => $defaults['defaultsectiontitlesummarytextcolour'])
+                        array('value' => $defaults['defaultsectiontitlesummarytextcolour'])
                     )
                 );
                 $courseformatoptionsedit['sectiontitlesummarybackgroundcolour'] = array(
@@ -998,7 +998,7 @@ class format_grid extends format_base {
                     'help_component' => 'format_grid',
                     'element_type' => 'gfcolourpopup',
                     'element_attributes' => array(
-                        array('tabindex' => -1, 'value' => $defaults['defaultsectiontitlesummarybackgroundcolour'])
+                        array('value' => $defaults['defaultsectiontitlesummarybackgroundcolour'])
                     )
                 );
                 $courseformatoptionsedit['sectiontitlesummarybackgroundopacity'] = array(
