@@ -1,5 +1,7 @@
 History
 =============
+Version 3.2.1.3
+
 Version 3.2.1.2
   1. Fix unable to use cursor keys to edit section title when editing.
   2. Fix border colour spilling out of title.
