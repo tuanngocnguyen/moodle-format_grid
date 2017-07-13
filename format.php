@@ -79,8 +79,14 @@ $gfsettings['imagecontainerwidth'], $gfsettings['imagecontainerratio'], $gfsetti
 
 echo '<style type="text/css" media="screen">';
 echo '/* <![CDATA[ */';
-echo '#gridiconcontainer {';
-echo 'text-align: '.$gfsettings['imagecontaineralignment'].';';
+echo '#gridiconcontainer  ul.gridicons {';
+$imagecontaineralignment = $gfsettings['imagecontaineralignment'];
+if ($imagecontaineralignment == 'left') {
+    $imagecontaineralignment = 'flex-start';
+} else if ($imagecontaineralignment == 'right') {
+    $imagecontaineralignment = 'flex-end';
+}
+echo 'justify-content: '.$imagecontaineralignment.';';
 echo '}';
 echo '.course-content ul.gridicons li .icon_content {';
 if ($gfsettings['sectiontitlefontsize']) { // Font size is set.
