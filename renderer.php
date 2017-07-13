@@ -367,7 +367,6 @@ class format_grid_renderer extends format_section_renderer_base {
         }
         echo html_writer::start_tag('div', array('id' => 'gridiconcontainer', 'role' => 'navigation',
             'aria-label' => get_string('gridimagecontainer', 'format_grid')));
-        $sectiontitleclass = 'icon_content';
 
         $gridiconsclass = 'gridicons';
         if ($this->settings['sectiontitleboxposition'] == 1) {
