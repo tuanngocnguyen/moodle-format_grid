@@ -83,17 +83,17 @@ div#gridmiddle-column > ul {
     float: right;
 }
 
-/* @group Topic Icons */
+/* @group Icons */
 #gridiconcontainer {
     height: auto;
     margin: 0 auto;
     padding: 0;
-    text-align: center;
     width: 100%;
 }
 #gridiconcontainer ul.gridicons {
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-start;
     margin: 0 auto;
     padding: 0;
     width: 100%;
