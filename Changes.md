@@ -1,5 +1,8 @@
 History
 =============
+Version 3.3.0.1
+  1. First version for Moodle 3.3.
+
 Version 3.2.1.3
   1. Fix "Error when restoring course" - CONTRIB-6917.
   2. Fix not being able to tab to colour settings.

@@ -19,8 +19,10 @@
  *
  * @package    course/format
  * @subpackage grid
+ * @version    See the value of '$plugin->version' in version.php.
  * @copyright  &copy; 2012 G J Barnard in respect to modifications of standard topics format.
- * @author     G J Barnard - gjbarnard at gmail dot com, about.me/gjbarnard and {@link http://moodle.org/user/profile.php?id=442195}
+ * @author     G J Barnard - {@link http://about.me/gjbarnard} and
+ *                           {@link http://moodle.org/user/profile.php?id=442195}
  * @author     Based on code originally written by Paul Krix and Julian Ridden.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -56,7 +58,7 @@ $string['shadeboxcontent'] = 'Shade box content';
 $string['page-course-view-grid'] = 'Any course main page in the grid format';
 $string['page-course-view-grid-x'] = 'Any course page in the grid format';
 
-// Moodle 2.3 Enhancement.
+$string['addsection'] = 'Add section';
 $string['hidefromothers'] = 'Hide section'; // No longer used kept for legacy versions.
 $string['showfromothers'] = 'Show section'; // No longer used kept for legacy versions.
 $string['currentsection'] = 'This section'; // No longer used kept for legacy versions.
