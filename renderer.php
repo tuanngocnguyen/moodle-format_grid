@@ -337,27 +337,33 @@ class format_grid_renderer extends format_section_renderer_base {
                 default:
                 break;
             }
+            $closeshadebox = get_string('closeshadebox', 'format_grid');
             echo html_writer::tag('img', '', array('id' => 'gridshadebox_close', 'style' => 'display: none;',
+                'alt' => $closeshadebox,
                 'class' => $deviceextra,
                 'src' => $this->output->pix_url('close', 'format_grid'),
                 'role' => 'link',
-                'aria-label' => get_string('closeshadebox', 'format_grid')));
+                'aria-label' => $closeshadebox));
 
             // Only show the arrows if there is more than one box shown.
             if (($course->numsections > 1) || (($course->numsections == 1) && (!$this->topic0attop))) {
+                $previoussection = get_string('previoussection', 'format_grid');
                 echo html_writer::start_tag('div', array('id' => 'gridshadebox_left',
+                    'alt' => $previoussection,
                     'class' => 'gridshadebox_area gridshadebox_left_area',
                     'style' => 'display: none;',
                     'role' => 'link',
-                    'aria-label' => get_string('previoussection', 'format_grid')));
+                    'aria-label' => $previoussection));
                 echo html_writer::tag('img', '', array('class' => 'gridshadebox_arrow gridshadebox_left'.$deviceextra,
                     'src' => $this->output->pix_url('fa-arrow-circle-left-w', 'format_grid')));
                 echo html_writer::end_tag('div');
+                $nextsection = get_string('nextsection', 'format_grid');
                 echo html_writer::start_tag('div', array('id' => 'gridshadebox_right',
+                    'alt' => $nextsection,
                     'class' => 'gridshadebox_area gridshadebox_right_area',
                     'style' => 'display: none;',
                     'role' => 'link',
-                    'aria-label' => get_string('nextsection', 'format_grid')));
+                    'aria-label' => $nextsection));
                 echo html_writer::tag('img', '', array('class' => 'gridshadebox_arrow gridshadebox_right'.$deviceextra,
                     'src' => $this->output->pix_url('fa-arrow-circle-right-w', 'format_grid')));
                 echo html_writer::end_tag('div');
