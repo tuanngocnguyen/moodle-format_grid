@@ -417,11 +417,13 @@ class format_grid_renderer extends format_section_renderer_base {
                 default:
                 break;
             }
+            $closeshadebox = get_string('closeshadebox', 'format_grid');
             echo html_writer::tag('img', '', array('id' => 'gridshadebox_close', 'style' => 'display: none;',
                 'class' => $deviceextra,
                 'src' => $this->output->pix_url('close', 'format_grid'),
                 'role' => 'link',
-                'aria-label' => get_string('closeshadebox', 'format_grid')));
+                'alt' => $closeshadebox,
+                'aria-label' => $closeshadebox));
 
             // Only show the arrows if there is more than one box shown.
             if (($course->numsections > 1) || (($course->numsections == 1) && (!$this->topic0attop))) {
@@ -434,21 +436,33 @@ class format_grid_renderer extends format_section_renderer_base {
                     $nexticon = 'right';
                     $areadir = 'ltr';
                 }
+                $previoussection = get_string('previoussection', 'format_grid');
                 $prev = html_writer::start_tag('div', array('id' => 'gridshadebox_previous',
                     'class' => 'gridshadebox_area gridshadebox_previous_area '.$areadir,
                     'style' => 'display: none;',
                     'role' => 'link',
-                    'aria-label' => get_string('previoussection', 'format_grid')));
+                    'aria-label' => $previoussection)
+                );
                 $prev .= html_writer::tag('img', '', array('class' => 'gridshadebox_arrow gridshadebox_previous'.$deviceextra,
-                    'src' => $this->output->pix_url('fa-arrow-circle-'.$previcon.'-w', 'format_grid')));
+                    'src' => $this->output->pix_url('fa-arrow-circle-'.$previcon.'-w', 'format_grid'),
+                    'alt' => $previoussection,
+                    'aria-label' => $previoussection
+                    )
+                );
                 $prev .= html_writer::end_tag('div');
+                $nextsection = get_string('nextsection', 'format_grid');
                 $next = html_writer::start_tag('div', array('id' => 'gridshadebox_next',
                     'class' => 'gridshadebox_area gridshadebox_next_area '.$areadir,
                     'style' => 'display: none;',
                     'role' => 'link',
-                    'aria-label' => get_string('nextsection', 'format_grid')));
+                    'aria-label' => $nextsection)
+                );
                 $next .= html_writer::tag('img', '', array('class' => 'gridshadebox_arrow gridshadebox_next'.$deviceextra,
-                    'src' => $this->output->pix_url('fa-arrow-circle-'.$nexticon.'-w', 'format_grid')));
+                    'src' => $this->output->pix_url('fa-arrow-circle-'.$nexticon.'-w', 'format_grid'),
+                    'alt' => $nextsection,
+                    'aria-label' => $nextsection
+                    )
+                );
                 $next .= html_writer::end_tag('div');
 
                 if ($rtl) {
