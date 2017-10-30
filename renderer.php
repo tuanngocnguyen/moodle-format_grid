@@ -810,12 +810,12 @@ class format_grid_renderer extends format_section_renderer_base {
                         'id' => 'gridsection-'.$thissection->section,
                         'class' => 'gridicon_link',
                         'role' => 'link',
-						'title' => $summary,
-						'data-original-title' => $summary,
+                        'title' => $summary,
+                        'data-original-title' => $summary,
                         'data-toggle' => 'gridtooltip',
-                        'data-placement'] = $this->courseformat->get_set_show_section_title_summary_position()
-						)
-					);
+                        'data-placement' => $this->courseformat->get_set_show_section_title_summary_position()
+                        )
+                    );
 
                     if ($this->settings['sectiontitleboxposition'] == 2) {
                         echo html_writer::tag('div', $displaysectionname, $sectiontitleattribues);
