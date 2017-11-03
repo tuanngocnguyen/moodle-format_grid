@@ -2,6 +2,7 @@ History
 =============
 Version 3.3.0.2
   1. Ensure overlay of navigation drawer in Boost.
+  2. Fix "WCAG Changes and work to allow tooltip appearance on hover" - #63 - thanks to Pat for this.
 
 Version 3.3.0.1
   1. First version for Moodle 3.3.
