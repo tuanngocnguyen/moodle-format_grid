@@ -2,6 +2,7 @@ History
 =============
 Version 3.2.1.4
   1. Fix colour popup form element not rendering correctly in Boost theme.
+  2. Fix 'No visual feedback of hidden sections' - #58.
 
 Version 3.2.1.3
   1. Fix "Error when restoring course" - CONTRIB-6917.

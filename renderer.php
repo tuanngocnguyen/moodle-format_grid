@@ -640,6 +640,39 @@ class format_grid_renderer extends format_section_renderer_base {
     }
 
     /**
+     * States if the icon is to be greyed out.
+     *
+     * For logic see: section_availability_message().
+     *
+     * @param section_info $section The course_section entry from DB
+     * @param bool $canviewhidden True if user can view hidden sections
+     * @return bool Grey out the section icon, true or false?
+     */
+    protected function section_greyedout($section, $canviewhidden) {
+        global $CFG;
+        $sectiongreyedout = false;
+        if (!$section->visible) {
+            if ($canviewhidden) {
+                $sectiongreyedout = true;
+            }
+        } else if (!$section->uservisible) {
+            if ($section->availableinfo) {
+                // Note: We only get to this function if availableinfo is non-empty,
+                // so there is definitely something to print.
+                $sectiongreyedout = true;
+            }
+        } else if ($canviewhidden && !empty($CFG->enableavailability)) {
+            // Check if there is an availability restriction.
+            $ci = new \core_availability\info_section($section);
+            $fullinfo = $ci->get_full_information();
+            if ($fullinfo) {
+                $sectiongreyedout = true;
+            }
+        }
+        return $sectiongreyedout;
+    }
+
+    /**
      * Makes the grid image containers.
      */
     private function make_block_icon_topics($contextid, $modinfo, $course, $editing, $hascapvishidsect,
@@ -684,8 +717,14 @@ class format_grid_renderer extends format_section_renderer_base {
 
             // If we should grey it out, flag that here.
             $sectiongreyedout = false;
-            if ((!$showsection) && ($this->settings['greyouthidden'] == 2)) {
-                $sectiongreyedout = !$thissection->uservisible;
+            if ($this->settings['greyouthidden'] == 2) {
+                if (!$showsection) {
+                    $sectiongreyedout = !$thissection->uservisible;
+                } else {
+                    $sectiongreyedout = $this->section_greyedout($thissection, $hascapvishidsect);
+                }
+            } else if ($showsection) {
+                $sectiongreyedout = $this->section_greyedout($thissection, $hascapvishidsect);
             }
 
             if ($showsection || $sectiongreyedout) {
