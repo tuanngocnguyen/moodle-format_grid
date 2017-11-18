@@ -2,6 +2,7 @@ History
 =============
 Version 3.4.0.1
   1. First beta version for M3.4.
+  2. Fix 'No visual feedback of hidden sections' - #58.
 
 Version 3.3.0.2
   1. Ensure overlay of navigation drawer in Boost.
