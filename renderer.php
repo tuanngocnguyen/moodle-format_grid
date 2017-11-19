@@ -844,16 +844,16 @@ class format_grid_renderer extends format_section_renderer_base {
                         $this->make_block_icon_topic0_editing($course);
                     }
 
+                    $arialabel = $displaysectionname;
+                    if (!empty($summary)) {
+                        $arialabel .= ': '.$summary;
+                    }
                     echo html_writer::start_tag('a', array(
                         'href' => '#section-'.$thissection->section,
                         'id' => 'gridsection-'.$thissection->section,
                         'class' => 'gridicon_link',
                         'role' => 'link',
-                        'title' => $summary,
-                        'data-original-title' => $summary,
-                        'data-toggle' => 'gridtooltip',
-                        'data-placement' => $this->courseformat->get_set_show_section_title_summary_position()
-                        )
+                        'aria-label' => $arialabel)
                     );
 
                     if ($this->settings['sectiontitleboxposition'] == 2) {
