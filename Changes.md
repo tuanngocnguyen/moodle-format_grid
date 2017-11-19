@@ -6,6 +6,7 @@ Version 3.3.0.2
   3. Fix colour popup form element not rendering correctly in Boost theme.
   4. Fix 'No visual feedback of hidden sections' - #58.
   5. Another attempt at addressing #63 for tooltip accessibility - #60.
+  6. Grid with essential fixed nav - nav bar overlaps the grid section when opened - #64.
 
 Version 3.3.0.1
   1. First version for Moodle 3.3.
