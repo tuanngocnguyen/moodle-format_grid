@@ -825,11 +825,17 @@ class format_grid_renderer extends format_section_renderer_base {
                         $this->make_block_icon_topic0_editing($course);
                     }
 
+                    $arialabel = $displaysectionname;
+                    if (!empty($summary)) {
+                        $arialabel .= ': '.$summary;
+                    }
                     echo html_writer::start_tag('a', array(
                         'href' => '#section-'.$thissection->section,
                         'id' => 'gridsection-'.$thissection->section,
                         'class' => 'gridicon_link',
-                        'role' => 'link'));
+                        'role' => 'link',
+                        'aria-label' => $arialabel)
+                    );
 
                     if ($this->settings['sectiontitleboxposition'] == 2) {
                         echo html_writer::tag('div', $displaysectionname, $sectiontitleattribues);
