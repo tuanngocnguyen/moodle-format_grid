@@ -692,7 +692,7 @@ class format_grid_renderer extends format_section_renderer_base {
                 if ($this->settings['showsectiontitlesummary'] == 2) {
                     $summary = strip_tags($thissection->summary);
                     if (core_text::strlen($summary) > 0) {
-                        $sectiontitleattribues['title'] = strip_tags($thissection->summary);
+                        $sectiontitleattribues['title'] = $summary;
                         $sectiontitleattribues['data-toggle'] = 'gridtooltip';
                         $sectiontitleattribues['data-placement'] = $this->courseformat->get_set_show_section_title_summary_position();
                     }
