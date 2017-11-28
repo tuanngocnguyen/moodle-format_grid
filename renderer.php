@@ -30,7 +30,7 @@ require_once($CFG->dirroot . '/course/format/grid/lib.php');
 
 class format_grid_renderer extends format_section_renderer_base {
 
-    protected $topic0attop; // Boolean to state if section zero is at the top (true) or in the grid (false).
+    protected $section0attop; // Boolean to state if section zero is at the top (true) or in the grid (false).
     protected $courseformat; // Our course format object as defined in lib.php.
     private $settings; // Settings array.
     private $shadeboxshownarray = array(); // Value of 1 = not shown, value of 2 = shown - to reduce ambiguity in JS.
@@ -46,7 +46,7 @@ class format_grid_renderer extends format_section_renderer_base {
         parent::__construct($page, $target);
         $this->courseformat = course_get_format($page->course);
         $this->settings = $this->courseformat->get_settings();
-        $this->topic0attop = $this->courseformat->get_summary_visibility($page->course->id)->showsummary == 1;
+        $this->section0attop = $this->courseformat->is_section0_attop();
 
         /* Since format_grid_renderer::section_edit_controls() only displays the 'Set current section' control when editing
            mode is on we need to be sure that the link 'Turn editing mode on' is available for a user who does not have any
@@ -115,7 +115,9 @@ class format_grid_renderer extends format_section_renderer_base {
 
         $links = array('previous' => '', 'next' => '');
         $back = $sectionno - 1;
-        if (!$this->topic0attop) {
+        if (!$this->section0attop) {
+            $buffer = -1;
+        } else if ($this->settings['setsection0ownpagenogridonesection'] == 2) {
             $buffer = -1;
         } else {
             $buffer = 0;
@@ -165,7 +167,9 @@ class format_grid_renderer extends format_section_renderer_base {
         $sectionmenu[course_get_url($course)->out(false)] = get_string('maincoursepage');
         $modinfo = get_fast_modinfo($course);
         $section = 1;
-        if (!$this->topic0attop) {
+        if (!$this->section0attop) {
+            $section = 0;
+        } else if ($this->settings['setsection0ownpagenogridonesection'] == 2) {
             $section = 0;
         } else {
             $section = 1;
@@ -247,7 +251,7 @@ class format_grid_renderer extends format_section_renderer_base {
      * @param int $displaysection The section number in the course which is being displayed
      */
     public function print_single_section_page($course, $sections, $mods, $modnames, $modnamesused, $displaysection) {
-        if ($this->topic0attop) {
+        if (($this->section0attop) && ($this->settings['setsection0ownpagenogridonesection'] == 1)) {
             return parent::print_single_section_page($course, $sections, $mods, $modnames, $modnamesused, $displaysection);
         } else {
             $modinfo = get_fast_modinfo($course);
@@ -359,8 +363,8 @@ class format_grid_renderer extends format_section_renderer_base {
         $sections = $modinfo->get_section_info_all();
 
         // Start at 1 to skip the summary block or include the summary block if it's in the grid display.
-        if ($this->topic0attop) {
-            $this->topic0attop = $this->make_block_topic0($course, $sections, $modinfo, $editing, $urlpicedit,
+        if ($this->section0attop) {
+            $this->section0attop = $this->make_block_topic0($course, $sections, $modinfo, $editing, $urlpicedit,
                     $streditsummary, false);
             // For the purpose of the grid shade box shown array topic 0 is not shown.
             $this->shadeboxshownarray[0] = 1;
@@ -426,7 +430,7 @@ class format_grid_renderer extends format_section_renderer_base {
                 'aria-label' => $closeshadebox));
 
             // Only show the arrows if there is more than one box shown.
-            if (($course->numsections > 1) || (($course->numsections == 1) && (!$this->topic0attop))) {
+            if (($course->numsections > 1) || (($course->numsections == 1) && (!$this->section0attop))) {
                 if ($rtl) {
                     $previcon = 'right';
                     $nexticon = 'left';
@@ -477,7 +481,7 @@ class format_grid_renderer extends format_section_renderer_base {
             $this->make_block_show_clipboard_if_file_moving($course);
 
             // Print Section 0 with general activities.
-            if (!$this->topic0attop) {
+            if (!$this->section0attop) {
                 $this->make_block_topic0($course, $sections, $modinfo, $editing, $urlpicedit, $streditsummary, false);
             }
 
@@ -594,14 +598,14 @@ class format_grid_renderer extends format_section_renderer_base {
             return false;
         }
 
-        if ($this->topic0attop) {
+        if ($this->section0attop) {
             echo html_writer::start_tag('ul', array('class' => 'gtopics-0'));
         }
 
         $sectionname = $this->courseformat->get_section_name($thissection);
         echo html_writer::start_tag('li', array(
             'id' => 'section-0',
-            'class' => 'section main' . ($this->topic0attop ? '' : ' grid_section hide_section'),
+            'class' => 'section main' . ($this->section0attop ? '' : ' grid_section hide_section'),
             'role' => 'region',
             'aria-label' => $sectionname)
         );
@@ -631,7 +635,7 @@ class format_grid_renderer extends format_section_renderer_base {
         if ($editing) {
             echo $this->courserenderer->course_section_add_cm_control($course, $thissection->section, 0, 0);
 
-            if ($this->topic0attop) {
+            if ($this->section0attop) {
                 $strhidesummary = get_string('hide_summary', 'format_grid');
                 $strhidesummaryalt = get_string('hide_summary_alt', 'format_grid');
 
@@ -647,7 +651,7 @@ class format_grid_renderer extends format_section_renderer_base {
         echo html_writer::end_tag('div');
         echo html_writer::end_tag('li');
 
-        if ($this->topic0attop) {
+        if ($this->section0attop) {
             echo html_writer::end_tag('ul');
         }
         return true;
@@ -720,7 +724,7 @@ class format_grid_renderer extends format_section_renderer_base {
         }
 
         // Start at 1 to skip the summary block or include the summary block if it's in the grid display.
-        for ($section = $this->topic0attop ? 1 : 0; $section <= $course->numsections; $section++) {
+        for ($section = $this->section0attop ? 1 : 0; $section <= $course->numsections; $section++) {
             $thissection = $modinfo->get_section_info($section);
 
             // Check if section is visible to user.
