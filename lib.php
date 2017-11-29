@@ -482,7 +482,8 @@ class format_grid extends format_base {
                 $url->param('section', $sectionno);
             } else if ($sectionno == 0 && $usercoursedisplay == COURSE_DISPLAY_MULTIPAGE && (!$this->section0attop)) {
                 $url->param('section', $sectionno);
-            } else if ($sectionno == 0 && $usercoursedisplay == COURSE_DISPLAY_MULTIPAGE && $this->section0attop && ($this->get_settings()['setsection0ownpagenogridonesection'] == 2)) {
+            } else if ($sectionno == 0 && $usercoursedisplay == COURSE_DISPLAY_MULTIPAGE && $this->section0attop &&
+                   ($this->get_settings()['setsection0ownpagenogridonesection'] == 2)) {
                 $url->param('section', $sectionno);
             } else {
                 $url->set_anchor('section-' . $sectionno);
