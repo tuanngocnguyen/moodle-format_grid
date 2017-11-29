@@ -57,6 +57,7 @@ class format_grid extends format_base {
     private static $sectiontitlefontsizes = array(0 => '0', 12 => '12', 13 => '13', 14 => '14', 15 => '15', 16 => '16',
        17 => '17', 18 => '18', 19 => '19', 20 => '20', 21 => '21', 22 => '22', 23 => '23', 24 => '24');
     private $settings;
+    private $section0attop; // Boolean to state if section zero is at the top (true) or in the grid (false).
 
     /**
      * Creates a new instance of class
@@ -73,6 +74,18 @@ class format_grid extends format_base {
             $courseid = $COURSE->id;  // Save lots of global $COURSE as we will never be the site course.
         }
         parent::__construct($format, $courseid);
+
+        $this->section0attop = $this->get_summary_visibility($courseid)->showsummary == 1;
+    }
+
+    /**
+     * States if section 0 is at the top.
+     *
+     * @param stdClass $section Section object from database or just field course_sections section
+     * @return string The default value for the section name.
+     */
+    public function is_section0_attop() {
+        return $this->section0attop;
     }
 
     /**
@@ -465,10 +478,11 @@ class format_grid extends format_base {
             } else {
                 $usercoursedisplay = $course->coursedisplay;
             }
-            $topic0attop = $this->get_summary_visibility($course->id)->showsummary == 1;
             if ($sectionno != 0 && $usercoursedisplay == COURSE_DISPLAY_MULTIPAGE) {
                 $url->param('section', $sectionno);
-            } else if ($sectionno == 0 && $usercoursedisplay == COURSE_DISPLAY_MULTIPAGE && (!$topic0attop)) {
+            } else if ($sectionno == 0 && $usercoursedisplay == COURSE_DISPLAY_MULTIPAGE && (!$this->section0attop)) {
+                $url->param('section', $sectionno);
+            } else if ($sectionno == 0 && $usercoursedisplay == COURSE_DISPLAY_MULTIPAGE && $this->section0attop && ($this->get_settings()['setsection0ownpagenogridonesection'] == 2)) {
                 $url->param('section', $sectionno);
             } else {
                 $url->set_anchor('section-' . $sectionno);
