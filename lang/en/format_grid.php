@@ -280,6 +280,9 @@ $string['resetimagecontainernavigation_help'] = 'Resets the image container navi
 $string['resetallimagecontainernavigation'] = 'Image container navigations';
 $string['resetallimagecontainernavigation_help'] = 'Resets the image container navigation to the default value for all courses so it will be the same as a course the first time it is in the Grid format.';
 
+// Context menu.
+$string['openinnewwindow'] = 'Open in new window';
+
 // Capabilities.
 $string['grid:changeimagecontaineralignment'] = 'Change or reset the image container alignment';
 $string['grid:changeimagecontainernavigation'] = 'Change or reset the image container navigation';

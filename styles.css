@@ -498,3 +498,20 @@ body.jsenabled #gridshadebox_content.hide_content {
     opacity: 0.7;
 }
 /* @end */
+
+/* Grid context menu */
+#gridcontextmenu {
+    display: none;
+    left: 0;
+    position: fixed;
+    top: 0;
+    z-index: 4;
+}
+
+#gridcontextmenu ul {
+    background-color: #fff;
+    border: 1px solid #222;
+    list-style-type: none;
+    margin: 0;
+    padding: 4px;
+}
