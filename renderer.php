@@ -391,23 +391,6 @@ class format_grid_renderer extends format_section_renderer_base {
         $this->make_block_icon_topics($coursecontext->id, $modinfo, $course, $editing, $hascapvishidsect, $urlpicedit);
         echo html_writer::end_tag('ul');
 
-        $sectionredirect = null;
-        if ($course->coursedisplay == COURSE_DISPLAY_MULTIPAGE) {
-            // Get the redirect URL prefix for keyboard control with the 'Show one section per page' layout.
-            $sectionredirect = $this->courseformat->get_view_url(null)->out(true);
-        }
-
-        if ($this->settings['coursedisplay'] == COURSE_DISPLAY_MULTIPAGE) {
-            // Main page of 'One section per page'.
-            echo html_writer::start_tag('div', array('id' => 'gridcontextmenu'));
-            echo html_writer::start_tag('ul');
-            echo html_writer::tag('li', get_string('openinnewwindow', 'format_grid'), array('id' => 'gridnewpage', 'role' => 'link'));
-            echo html_writer::end_tag('ul');
-            echo html_writer::end_tag('div');
-
-            //$this->page->requires->js_call_amd('format_grid/contextmenu', 'init', array('data' => array('sectionredirect' => $sectionredirect)));
-        }
-
         echo html_writer::end_tag('div');
 
         $rtl = right_to_left();
@@ -521,6 +504,12 @@ class format_grid_renderer extends format_section_renderer_base {
             echo html_writer::tag('div', '&nbsp;', array('class' => 'clearer'));
         }
         echo html_writer::end_tag('div');
+
+        $sectionredirect = null;
+        if ($course->coursedisplay == COURSE_DISPLAY_MULTIPAGE) {
+            // Get the redirect URL prefix for keyboard control with the 'Show one section per page' layout.
+            $sectionredirect = $this->courseformat->get_view_url(null)->out(true);
+        }
 
         // Initialise the shade box functionality:...
         $PAGE->requires->js_init_call('M.format_grid.init', array(

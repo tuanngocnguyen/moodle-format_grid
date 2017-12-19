@@ -246,11 +246,6 @@ if ($sectionparam != -1) {
 if ($sectionparam != -1) {
     $renderer->print_single_section_page($course, null, null, null, null, $displaysection);
 } else {
-    /*if ($gfsettings['coursedisplay'] == COURSE_DISPLAY_MULTIPAGE) {
-        // Main page of 'One section per page'.
-        global $PAGE;
-        $PAGE->requires->js_call_amd('format_grid/contextmenu', 'init');
-    }*/
     $renderer->print_multiple_section_page($course, null, null, null, null);
 }
 
