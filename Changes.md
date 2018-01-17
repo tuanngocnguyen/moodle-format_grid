@@ -1,6 +1,7 @@
 History
 =============
 Version 3.2.1.5
+  1. Add the ability to 'Open in new tab' when the 'Course layout' is 'One section per page'.  Gratefully funded by Coventry University UK.
 
 Version 3.2.1.4
   1. Fix colour popup form element not rendering correctly in Boost theme.
