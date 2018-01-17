@@ -1,6 +1,7 @@
 History
 =============
 Version 3.4.0.2
+  1. Add the ability to 'Open in new tab' when the 'Course layout' is 'One section per page'.  Gratefully funded by Coventry University UK.
 
 Version 3.4.0.1
   1. First beta version for M3.4.
