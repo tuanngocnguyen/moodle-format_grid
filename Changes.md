@@ -1,5 +1,8 @@
 History
 =============
+Version 3.3.0.4
+  1. Fix double entry for a course in the format_grid_summary when restoring.
+
 Version 3.3.0.3
   1. Add the ability to 'Open in new tab' when the 'Course layout' is 'One section per page'.  Gratefully funded by Coventry University UK.
 
