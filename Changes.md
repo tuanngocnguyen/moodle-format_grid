@@ -1,6 +1,7 @@
 History
 =============
 Version 3.3.0.5
+ 1. Fix incorrect help for 'sectiontitleboxinsideposition' setting.
 
 Version 3.3.0.4
   1. Fix double entry for a course in the format_grid_summary when restoring.
