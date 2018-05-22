@@ -698,7 +698,6 @@ class format_grid_renderer extends format_section_renderer_base {
             $fullinfo = $ci->get_full_information();
             $information = '';
             if ($fullinfo && (!$ci->is_available($information))) {
-            //if ($fullinfo) {
                 $sectiongreyedout = true;
                 $information = '';
             }
