@@ -1,5 +1,7 @@
 History
 =============
+Version 3.3.0.5
+
 Version 3.3.0.4
   1. Fix double entry for a course in the format_grid_summary when restoring.
   2. Fix logic of showing grid boxes depending on if it is visible against the grey out setting and course 'Hidden sections' option.
