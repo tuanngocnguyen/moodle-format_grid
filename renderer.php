@@ -680,24 +680,32 @@ class format_grid_renderer extends format_section_renderer_base {
     protected function section_greyedout($course, $section, $canviewhidden) {
         global $CFG;
         $sectiongreyedout = false;
+				error_log('section_greyedout: '.$section->section);
         if (!$section->visible) {
             if ($canviewhidden) {
                 $sectiongreyedout = true;
+				error_log('canviewhidden');
             } else if (!$course->hiddensections) { // Hidden sections in collapsed form.
                 $sectiongreyedout = true;
+				error_log('hiddensections');
             }
         } else if (!$section->uservisible) {
             if (($section->availableinfo) && ((!$course->hiddensections) || ($canviewhidden))) { // Hidden sections in collapsed form.
                 // Note: We only get to this function if availableinfo is non-empty,
                 // so there is definitely something to print.
                 $sectiongreyedout = true;
+				error_log('!uservisible');
             }
         } else if ($canviewhidden && !empty($CFG->enableavailability)) {
             // Check if there is an availability restriction.
             $ci = new \core_availability\info_section($section);
             $fullinfo = $ci->get_full_information();
-            if ($fullinfo) {
+            $information = '';
+            if ($fullinfo && (!$ci->is_available($information))) {
+            //if ($fullinfo) {
                 $sectiongreyedout = true;
+                $information = '';
+				error_log('fullinfo: '.print_r($fullinfo, true).' - '.print_r($ci->is_available($information), true));
             }
         }
         return $sectiongreyedout;
@@ -1101,6 +1109,7 @@ class format_grid_renderer extends format_section_renderer_base {
 
             echo html_writer::start_tag('div', array('class' => 'content'));
             if ($hascapvishidsect || ($thissection->visible && $thissection->available)) {
+				error_log($thissection->section.': hascapvishidsect: '.$hascapvishidsect.' - thissection->visible: '.$thissection->visible.' - thissection->available: '.$thissection->available);
                 // If visible.
                 echo $this->output->heading($title, 3, 'sectionname');
 
@@ -1122,6 +1131,7 @@ class format_grid_renderer extends format_section_renderer_base {
                 echo $this->courserenderer->course_section_cm_list($course, $thissection, 0);
                 echo $this->courserenderer->course_section_add_cm_control($course, $thissection->section, 0);
             } else {
+				error_log($thissection->section.': else');
                 echo html_writer::tag('h2', $this->get_title($thissection));
                 echo html_writer::tag('p', get_string('hidden_topic', 'format_grid'));
 
