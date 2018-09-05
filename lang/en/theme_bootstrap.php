@@ -28,6 +28,7 @@ $string['fullscreen'] = 'Full screen';
 $string['closefullscreen'] = 'Close full screen';
 $string['togglenav'] = 'Toggle navigation';
 
+
 $string['choosereadme'] = '
 <div class="clearfix"><div class="theme_screenshot"><h2>Bootstrap Base</h2>
 <img class=img-polaroid src="bootstrap/pix/screenshot.jpg" />
@@ -71,3 +72,4 @@ on the Moodle tracker</p>
 <li><a href="http://theming.sonsbeekmedia.nl/">Theme testing playground </a></li>
 </ul>';
 
+$string['privacy:metadata'] = 'Bootstrap theme does not store any personal data.';
