@@ -26,6 +26,33 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+function theme_bootstrap_set_cookie_login(){
+    global $frm;
+    global $user;
+
+    if (isset($_POST['domain'])) {
+        setcookie("ltu_domain", clean_param($_POST['domain'], PARAM_TEXT), time()+(60*60*24*365));
+        // We may redisplay the page and that will require the cookie set to display the correct name.
+        $_COOKIE['ltu_domain'] = clean_param($_POST['domain'], PARAM_TEXT);
+
+        if (empty($_POST)) {
+            $frm = false;
+        } else {
+            $frm =  (object)fix_utf8($_POST);
+        }
+
+        if ($frm) {
+            if (!isset($frm->domain) || strpos($frm->username, '@') !== false || $frm->domain === '' || $frm->domain === '_self') {
+                // The username already has an @ in it, just process as is.  We expect they are using something like Respondus.
+                $fullusername = trim(core_text::strtolower($frm->username));
+            } else {
+                $fullusername = trim(core_text::strtolower($frm->username.$frm->domain));
+            }
+
+            $frm->username = $fullusername;
+        }
+    }
+}
 
 function bootstrap_grid($hassidepre, $hassidepost) {
 

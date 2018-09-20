@@ -73,3 +73,8 @@ on the Moodle tracker</p>
 </ul>';
 
 $string['privacy:metadata'] = 'Bootstrap theme does not store any personal data.';
+
+$string['copyright'] = 'Copyright';
+$string['copyright:desc'] = 'Copyright Description.';
+$string['importantnotice'] = 'Important Notice.';
+$string['importantnotice:desc'] = 'Important Notice Description.';

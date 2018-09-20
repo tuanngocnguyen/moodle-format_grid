@@ -56,7 +56,7 @@ echo $OUTPUT->doctype() ?>
             <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
         </ul>
     </div>
-    
+
     </div>
 </nav>
 <header class="moodleheader">

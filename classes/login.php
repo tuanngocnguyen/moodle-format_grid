@@ -25,31 +25,22 @@ class login extends \core_auth\output\login
         {
             $this->$key = $value;
         }
-
         // Domains.
         $this->domains = [];
         $ltudomains = local_ltu_domains_generate_domains();
         foreach($ltudomains as $domain => $name) {
-            array_push($this->domains, array('domain' => $domain, "name" => $name));
+            $selected = isset($_COOKIE['ltu_domain']) && $_COOKIE['ltu_domain'] == $domain ? 'selected' : '';
+            array_push($this->domains, array('domain' => $domain,
+                "name" => $name,
+                "selected"  => $selected
+            ));
         }
-
-        // TODO: Get Copyright content from settings/Configuration
-        $this->copyright = "<div class=\"statement-div\">
-                                    <p>Commonwealth of Australia</p>
-                                    <p><i>Copyright Act 1968</i></p>
-                                    <h3>Warning<br/></h3>
-                                    <p>This material has been reproduced and communicated to you by or on behalf of La Trobe University under Section 113P of the <i>Copyright Act 1968</i> (the <i><b>Act</b></i>).</p>
-                                    <p>The material in this communication may be subject to copyright<br>
-                                    under the Act. Any further copying or communication of this material<br>
-                                    by you may be the subject of copyright protection under the Act.</p>
-                                    <p>Do not remove this notice.</p>
-                                    </div>
-                                ";
-        // TODO: Get Important Notice content from settings/Configuration
-        $this->importantnotice = "Academic Integrity
-            At La Trobe, academic integrity is taken very seriously. 
-            The University is responsible for awarding credit for honestly conducted work. 
-            You also have responsibilities and understanding these will help you to succeed in your studies.";
+        //
+        $theme = \theme_config::load('bootstrap');
+        // Copyright.
+        $this->copyright = $theme->settings->copyright;
+        // Important Notice.
+        $this->importantnotice = $theme->settings->importantnotice;
     }
 
     public function export_for_template(\renderer_base $output) {
@@ -61,5 +52,14 @@ class login extends \core_auth\output\login
         $data->importantnotice = $this->importantnotice;
         $data->domains = $this->domains;
         return $data;
+    }
+
+    public static function user_loggedin($event) {
+//        $data = (object)$event;
+//        if (isset($_POST['domain'])) {
+//            setcookie("ltu_domain", clean_param($_POST['domain'], PARAM_TEXT), time()+(60*60*24*365));
+//            // We may redisplay the page and that will require the cookie set to display the correct name.
+//            $_COOKIE['ltu_domain'] = clean_param($_POST['domain'], PARAM_TEXT);
+//        }
     }
 }
