@@ -124,6 +124,15 @@
                     <input id="anchor" type="hidden" name="anchor" value="">
                     <script>document.getElementById('anchor').value = location.hash;</script>
 
+                   <div style="margin-bottom:10px;">
+                        <label for="domain">Please select your institutional login:</label>
+                        <select name=domain >
+                            {{#domains}}
+                                <option value={{domain}}> {{name}} </option>
+                            {{/domains}}
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="username">
                             {{^canloginbyemail}}
@@ -188,7 +197,7 @@
                 {{/hasidentityproviders}}
             </div>
         </div>
-    
+
     </div>
 
     {{#hasinstructions}}
@@ -210,8 +219,37 @@
             </div>
         </div>
     </div>
-
     {{/hasinstructions}}
+
+    {{#hascopyright}}
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-block signupbox">
+                <div class="card-title">
+                    <h2>Copyright</h2>
+                </div>
+                <div>
+                {{{copyright}}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/hascopyright}}
+
+    {{#hasimportantnotice}}
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-block signupbox">
+                <div class="card-title">
+                    <h2>Important Notices</h2>
+                </div>
+                <div>
+                {{{importantnotice}}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/hasimportantnotice}}
 
 </div>
 

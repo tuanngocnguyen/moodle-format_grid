@@ -256,4 +256,12 @@ class theme_bootstrap_core_renderer extends core_renderer {
         }
         return parent::box($contents, $classes, $id, $attributes);
     }
+
+    public function render_login(\core_auth\output\login $form) {
+        $login_form = new theme_bootstrap\login($form);
+        $context = $login_form->export_for_template($this);
+        $context->cookieshelpiconformatted = $this->help_icon('cookiesenabled');
+        $context->errorformatted = $this->error_text($context->error);
+        return $this->render_from_template('core/login', $context);
+    }
 }
